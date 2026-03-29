@@ -65,4 +65,16 @@
 
 ---
 
-*最終更新: 2026-03-29 | v0.1（骨格）*
+## 📚 参考文献
+
+主要な法令原文へのリンクは [参考文献・外部リンク](reference/links.md) を参照。
+
+| 法令 | リンク |
+|------|--------|
+| 電気設備技術基準（省令） | [e-Gov](https://laws.e-gov.go.jp/law/409M50000400052) |
+| 電気事業法 | [e-Gov](https://laws.e-gov.go.jp/law/339AC0000000170) |
+| 過去問題・解答 | [試験センター](https://www.shiken.or.jp/answer/index_list.php) |
+
+---
+
+*管理者: Furutachi | 最終更新: 2026-03-29 | v0.2*
