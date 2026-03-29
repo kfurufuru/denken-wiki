@@ -71,9 +71,21 @@
 
 | 法令 | リンク |
 |------|--------|
-| 電気設備技術基準（省令） | [e-Gov](https://laws.e-gov.go.jp/law/409M50000400052) |
-| 電気事業法 | [e-Gov](https://laws.e-gov.go.jp/law/339AC0000000170) |
-| 過去問題・解答 | [試験センター](https://www.shiken.or.jp/answer/index_list.php) |
+| 電気設備技術基準（省令） | [e-Gov検索](https://laws.e-gov.go.jp/) で「電気設備に関する技術基準」を検索 |
+| 電気事業法 | [e-Gov](https://laws.e-gov.go.jp/document?lawid=339AC0000000170) |
+| 第三種 過去問題・解答 | [試験センター](https://www.shiken.or.jp/chief/third/qa/) |
+
+---
+
+## 関連システム
+
+本Wikiは学習システムの「知識ベース」層です。全体の関係は [システムマップ](reference/system-map.md) を参照。
+
+| システム | 役割 | リンク |
+|---------|------|--------|
+| **denken-wiki**（本サイト） | 条文×過去問 知識リファレンス | ここ |
+| **denken3-study** | 過去問の進捗管理・達成率 | [ダッシュボード](https://kfurufuru.github.io/denken3-study/) |
+| **テスト記録** | バグマップ・習熟度トラッキング | [テスト記録](https://kfurufuru.github.io/denken3-study/quiz.html) |
 
 ---
 
