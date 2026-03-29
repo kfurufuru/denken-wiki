@@ -139,6 +139,11 @@ nav:
   - リファレンス:
     - reference/index.md
     - 頻出数値一覧: reference/numbers.md
+    - 電圧区分早見表: reference/voltage-zones.md
+    - 接地工事種別比較表: reference/grounding-comparison.md
+    - 工事の種類と施設場所の対応表: reference/wiring-methods.md
+    - 保護装置の動作時間まとめ: reference/protection-timing.md
+    - 分散型電源の連系区分早見表: reference/distributed-power-zones.md
     - 用語集（ツールチップ定義）: reference/glossary.md
     - 法体系の全体構造: reference/hourei-taikei.md
     - 絵文字マーカー凡例: reference/emoji-legend.md
