@@ -8,6 +8,7 @@ copyright: "&copy; 2026 Furutachi — 個人学習用"
 
 theme:
   name: material
+  custom_dir: overrides
   language: ja
   palette:
     - scheme: default
