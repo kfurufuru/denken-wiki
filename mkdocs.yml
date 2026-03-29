@@ -61,6 +61,10 @@ markdown_extensions:
       emoji_generator: !!python/name:material.extensions.emoji.to_svg
   - toc:
       permalink: true
+  - abbr
+  - pymdownx.snippets:
+      auto_append:
+        - includes/abbreviations.md
 
 extra_css:
   - stylesheets/custom.css
@@ -135,6 +139,7 @@ nav:
   - リファレンス:
     - reference/index.md
     - 頻出数値一覧: reference/numbers.md
+    - 用語集（ツールチップ定義）: reference/glossary.md
     - 法体系の全体構造: reference/hourei-taikei.md
     - 絵文字マーカー凡例: reference/emoji-legend.md
     - 参考文献・外部リンク: reference/links.md
