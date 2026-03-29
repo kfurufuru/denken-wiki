@@ -95,10 +95,36 @@ nav:
     - articles/index.md
     - 電気設備技術基準:
       - articles/kijun/index.md
+      - 第10条（接地）: articles/kijun/10.md
+      - 第11条（接地の方法）: articles/kijun/11.md
+      - 第14条（過電流保護）: articles/kijun/14.md
+      - 第15条（地絡保護）: articles/kijun/15.md
+      - 第56条（配線の感電防止）: articles/kijun/56.md
+      - 第58条（低圧電路の絶縁）: articles/kijun/58.md
     - 電技解釈:
       - articles/kaishaku/index.md
+      - 第14条（電路の絶縁）: articles/kaishaku/14.md
+      - 第15条（高圧電路の絶縁性能）: articles/kaishaku/15.md
+      - 第16条（機械器具等の絶縁）: articles/kaishaku/16.md
+      - 第17条（A種接地工事）: articles/kaishaku/17.md
+      - 第18条（B種接地工事）: articles/kaishaku/18.md
+      - 第19条（C種・D種接地工事）: articles/kaishaku/19.md
+      - 第29条（金属製外箱の接地）: articles/kaishaku/29.md
+      - 第33条（過電流保護対策）: articles/kaishaku/33.md
+      - 第36条（地絡保護対策）: articles/kaishaku/36.md
+      - 第37条（避雷器等の施設）: articles/kaishaku/37.md
+      - 第68条（低圧架空電線の高さ）: articles/kaishaku/68.md
+      - 第75条（高圧架空電線の高さ）: articles/kaishaku/75.md
+      - 第156条（低圧屋内配線の工事種類）: articles/kaishaku/156.md
+      - 第175条（粉じん危険場所）: articles/kaishaku/175.md
+      - 第220条（分散型電源の系統連系）: articles/kaishaku/220.md
     - 電気事業法:
       - articles/jigyoho/index.md
+      - 第38条（事業用電気工作物の定義）: articles/jigyoho/38.md
+      - 第39条（技術基準適合義務）: articles/jigyoho/39.md
+      - 第42条（保安規程）: articles/jigyoho/42.md
+      - 第43条（主任技術者）: articles/jigyoho/43.md
+      - 第48条（工事計画の届出）: articles/jigyoho/48.md
     - その他法令:
       - articles/other/index.md
   - 過去問マッピング:
@@ -113,3 +139,4 @@ nav:
     - 絵文字マーカー凡例: reference/emoji-legend.md
     - 参考文献・外部リンク: reference/links.md
     - 学習システム全体マップ: reference/system-map.md
+    - バージョニング基準: reference/versioning.md
