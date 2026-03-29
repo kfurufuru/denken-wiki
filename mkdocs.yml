@@ -43,6 +43,13 @@ theme:
 plugins:
   - search:
       lang: ja
+  - macros:
+      module_name: main
+      include_yaml:
+        - _data/kakomon.yml
+
+exclude_docs: |
+  _data/
 
 markdown_extensions:
   - admonition
