@@ -1,0 +1,94 @@
+site_name: "電気設備技術Wiki"
+site_description: "電験3種 法規 - 条文×過去問クロスリファレンス"
+site_url: ""
+
+theme:
+  name: material
+  language: ja
+  palette:
+    - scheme: default
+      primary: indigo
+      accent: amber
+      toggle:
+        icon: material/brightness-7
+        name: ダークモードに切り替え
+    - scheme: slate
+      primary: indigo
+      accent: amber
+      toggle:
+        icon: material/brightness-4
+        name: ライトモードに切り替え
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - content.tabs.link
+    - toc.follow
+  icon:
+    repo: fontawesome/brands/github
+
+plugins:
+  - search:
+      lang: ja
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - tables
+  - attr_list
+  - md_in_html
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - toc:
+      permalink: true
+
+extra:
+  social: []
+
+nav:
+  - Home: index.md
+  - テーマ別:
+    - themes/index.md
+    - 接地工事: themes/setsuchi.md
+    - 絶縁性能・耐圧試験: themes/zetsuen.md
+    - 架空電線路: themes/kachiku-densen.md
+    - 地中電線路: themes/chichuu-densen.md
+    - 保護装置（過電流・地絡）: themes/hogo-sochi.md
+    - 分散型電源・系統連系: themes/bunsan-dengen.md
+    - 特殊場所の施設: themes/tokushu-basho.md
+    - 配線工事・屋内配線: themes/haisen-koji.md
+    - 電線・ケーブルの選定: themes/densen-cable.md
+    - 支持物・架空電線路の強度: themes/shijimono.md
+    - 発変電所の施設: themes/hatsuhendenjo.md
+    - 電気使用場所の施設: themes/shiyo-basho.md
+    - 用語の定義: themes/yogo-teigi.md
+    - 電気事業法の体系: themes/jigyoho-taikei.md
+    - 電気施設管理: themes/shisetsu-kanri.md
+    - 電気主任技術者の職務: themes/shunin-gijutsusha.md
+  - 条文別:
+    - articles/index.md
+    - 電気設備技術基準:
+      - articles/kijun/index.md
+    - 電技解釈:
+      - articles/kaishaku/index.md
+    - 電気事業法:
+      - articles/jigyoho/index.md
+    - その他法令:
+      - articles/other/index.md
+  - 過去問マッピング:
+    - kakomon/index.md
+    - 年度別一覧: kakomon/by-year.md
+    - 分野別一覧: kakomon/by-field.md
+    - 出題頻度ランキング: kakomon/ranking.md
+  - リファレンス:
+    - reference/index.md
+    - 頻出数値一覧: reference/numbers.md
+    - 法体系の全体構造: reference/hourei-taikei.md
+    - 絵文字マーカー凡例: reference/emoji-legend.md
