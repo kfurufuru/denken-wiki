@@ -144,6 +144,7 @@ nav:
     - 年度別一覧: kakomon/by-year.md
     - 分野別一覧: kakomon/by-field.md
     - 出題頻度ランキング: kakomon/ranking.md
+    - 再出題ランキング: kakomon/reuse-ranking.md
   - リファレンス:
     - reference/index.md
     - 頻出数値一覧: reference/numbers.md
