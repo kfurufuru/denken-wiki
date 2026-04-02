@@ -1,0 +1,58 @@
+/* テーブルの交互色 */
+.md-typeset table:not([class]) tbody tr:nth-child(even) {
+  background-color: var(--md-default-bg-color--lighter, rgba(0, 0, 0, 0.03));
+}
+[data-md-color-scheme="slate"] .md-typeset table:not([class]) tbody tr:nth-child(even) {
+  background-color: rgba(255, 255, 255, 0.04);
+}
+
+/* テーブルヘッダー強調 */
+.md-typeset table:not([class]) thead {
+  background-color: var(--md-primary-fg-color);
+  color: var(--md-primary-bg-color);
+}
+.md-typeset table:not([class]) thead a {
+  color: var(--md-primary-bg-color);
+}
+
+/* ステータスバッジ風 */
+.md-typeset td:first-child,
+.md-typeset th:first-child {
+  white-space: nowrap;
+}
+
+/* 法体系ピラミッドのpre装飾 */
+.md-typeset pre:has(code) {
+  border-left: 3px solid var(--md-primary-fg-color);
+}
+
+/* 5秒暗記ブロックの強調 */
+.md-typeset blockquote strong {
+  color: var(--md-accent-fg-color);
+}
+
+/* フッター著作権表示 */
+.md-copyright {
+  font-size: 0.65rem;
+}
+
+/* スマホでのテーブル横スクロール */
+.md-typeset__scrollwrap {
+  overflow-x: auto;
+}
+
+/* admonitionのカスタム: 落とし穴 */
+.md-typeset .admonition.warning,
+.md-typeset details.warning {
+  border-left-width: 4px;
+}
+
+/* ナビゲーションタブの太字化 */
+.md-tabs__link--active {
+  font-weight: 700;
+}
+
+/* トップページのダッシュボード表示 */
+.md-typeset h3 + table {
+  margin-top: 0.4em;
+}
