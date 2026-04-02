@@ -28,6 +28,8 @@ jobs:
           python-version: '3.x'
       - run: pip install mkdocs-material mkdocs-macros-plugin
       - run: mkdocs build
+        env:
+          PYTHONUTF8: "1"
       - uses: actions/upload-pages-artifact@v3
         with:
           path: site
