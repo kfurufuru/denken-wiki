@@ -163,6 +163,20 @@ nav:
     - 分野別一覧: kakomon/by-field.md
     - 出題頻度ランキング: kakomon/ranking.md
     - 再出題ランキング: kakomon/reuse-ranking.md
+    - 年度別解説:
+      - 令和5年（2023）: kakomon/R05.md
+      - 令和4年（2022）: kakomon/R04.md
+      - 令和3年（2021）: kakomon/R03.md
+      - 令和2年（2020）: kakomon/R02.md
+      - 令和元年（2019）: kakomon/R01.md
+      - 平成30年（2018）: kakomon/H30.md
+      - 平成29年（2017）: kakomon/H29.md
+      - 平成28年（2016）: kakomon/H28.md
+      - 平成27年（2015）: kakomon/H27.md
+      - 平成26年（2014）: kakomon/H26.md
+      - 平成25年（2013）: kakomon/H25.md
+      - 平成24年（2012）: kakomon/H24.md
+      - 平成23年（2011）: kakomon/H23.md
   - リファレンス:
     - reference/index.md
     - 頻出数値一覧: reference/numbers.md
