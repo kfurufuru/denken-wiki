@@ -1,0 +1,420 @@
+problems:
+  # H23 (平成23年)
+  - year: H23
+    theme: shunin-gijutsusha
+  - year: H23
+    theme: jigyoho-taikei
+  - year: H23
+    theme: jigyoho-taikei
+  - year: H23
+    theme: densen-cable
+  - year: H23
+    theme: hatsuhendenjo
+  - year: H23
+    theme: bunsan-dengen
+  - year: H23
+    theme: kachiku-densen
+  - year: H23
+    theme: tokushu-basho
+  - year: H23
+    theme: haisen-koji
+  - year: H23
+    theme: shisetsu-kanri
+  - year: H23
+    theme: shisetsu-kanri
+  - year: H23
+    theme: shisetsu-kanri
+  - year: H23
+    theme: shisetsu-kanri
+
+  # H24 (平成24年)
+  - year: H24
+    theme: jigyoho-taikei
+  - year: H24
+    theme: jigyoho-taikei
+  - year: H24
+    theme: jigyoho-taikei
+  - year: H24
+    theme: jigyoho-taikei
+  - year: H24
+    theme: zetsuen
+  - year: H24
+    theme: setsuchi
+  - year: H24
+    theme: kachiku-densen
+  - year: H24
+    theme: kachiku-densen
+  - year: H24
+    theme: haisen-koji
+  - year: H24
+    theme: setsuchi
+  - year: H24
+    theme: zetsuen
+  - year: H24
+    theme: shisetsu-kanri
+  - year: H24
+    theme: shisetsu-kanri
+
+  # H25 (平成25年)
+  - year: H25
+    theme: shunin-gijutsusha
+  - year: H25
+    theme: jigyoho-taikei
+  - year: H25
+    theme: haisen-koji
+  - year: H25
+    theme: setsuchi
+  - year: H25
+    theme: hogo-sochi
+  - year: H25
+    theme: hogo-sochi
+  - year: H25
+    theme: chichuu-densen
+  - year: H25
+    theme: shiyo-basho
+  - year: H25
+    theme: yogo-teigi
+  - year: H25
+    theme: shisetsu-kanri
+  - year: H25
+    theme: shisetsu-kanri
+  - year: H25
+    theme: shisetsu-kanri
+  - year: H25
+    theme: setsuchi
+
+  # H26 (平成26年)
+  - year: H26
+    theme: jigyoho-taikei
+  - year: H26
+    theme: jigyoho-taikei
+  - year: H26
+    theme: jigyoho-taikei
+  - year: H26
+    theme: jigyoho-taikei
+  - year: H26
+    theme: jigyoho-taikei
+  - year: H26
+    theme: zetsuen
+  - year: H26
+    theme: yogo-teigi
+  - year: H26
+    theme: shisetsu-kanri
+  - year: H26
+    theme: kachiku-densen
+  - year: H26
+    theme: hogo-sochi
+  - year: H26
+    theme: shijimono
+  - year: H26
+    theme: shisetsu-kanri
+  - year: H26
+    theme: shisetsu-kanri
+
+  # H27 (平成27年)
+  - year: H27
+    theme: jigyoho-taikei
+  - year: H27
+    theme: jigyoho-taikei
+  - year: H27
+    theme: yogo-teigi
+  - year: H27
+    theme: hogo-sochi
+  - year: H27
+    theme: setsuchi
+  - year: H27
+    theme: hatsuhendenjo
+  - year: H27
+    theme: kachiku-densen
+  - year: H27
+    theme: tokushu-basho
+  - year: H27
+    theme: bunsan-dengen
+  - year: H27
+    theme: shisetsu-kanri
+  - year: H27
+    theme: shisetsu-kanri
+  - year: H27
+    theme: shisetsu-kanri
+  - year: H27
+    theme: shisetsu-kanri
+
+  # H28 (平成28年)
+  - year: H28
+    theme: jigyoho-taikei
+  - year: H28
+    theme: setsuchi
+  - year: H28
+    theme: hogo-sochi
+  - year: H28
+    theme: haisen-koji
+  - year: H28
+    theme: hogo-sochi
+  - year: H28
+    theme: zetsuen
+  - year: H28
+    theme: kachiku-densen
+  - year: H28
+    theme: chichuu-densen
+  - year: H28
+    theme: haisen-koji
+  - year: H28
+    theme: jigyoho-taikei
+  - year: H28
+    theme: hogo-sochi
+  - year: H28
+    theme: zetsuen
+  - year: H28
+    theme: shisetsu-kanri
+
+  # H29 (平成29年)
+  - year: H29
+    theme: jigyoho-taikei
+  - year: H29
+    theme: jigyoho-taikei
+  - year: H29
+    theme: jigyoho-taikei
+  - year: H29
+    theme: hogo-sochi
+  - year: H29
+    theme: jigyoho-taikei
+  - year: H29
+    theme: yogo-teigi
+  - year: H29
+    theme: haisen-koji
+  - year: H29
+    theme: kachiku-densen
+  - year: H29
+    theme: bunsan-dengen
+  - year: H29
+    theme: jigyoho-taikei
+  - year: H29
+    theme: haisen-koji
+  - year: H29
+    theme: shisetsu-kanri
+  - year: H29
+    theme: shisetsu-kanri
+
+  # H30 (平成30年)
+  - year: H30
+    theme: jigyoho-taikei
+  - year: H30
+    theme: jigyoho-taikei
+  - year: H30
+    theme: chichuu-densen
+  - year: H30
+    theme: hogo-sochi
+  - year: H30
+    theme: setsuchi
+  - year: H30
+    theme: hatsuhendenjo
+  - year: H30
+    theme: shijimono
+  - year: H30
+    theme: hogo-sochi
+  - year: H30
+    theme: bunsan-dengen
+  - year: H30
+    theme: shisetsu-kanri
+  - year: H30
+    theme: shijimono
+  - year: H30
+    theme: shisetsu-kanri
+  - year: H30
+    theme: shisetsu-kanri
+
+  # R01 (令和元年)
+  - year: R01
+    theme: jigyoho-taikei
+  - year: R01
+    theme: jigyoho-taikei
+  - year: R01
+    theme: jigyoho-taikei
+  - year: R01
+    theme: shijimono
+  - year: R01
+    theme: haisen-koji
+  - year: R01
+    theme: setsuchi
+  - year: R01
+    theme: hatsuhendenjo
+  - year: R01
+    theme: kachiku-densen
+  - year: R01
+    theme: bunsan-dengen
+  - year: R01
+    theme: shisetsu-kanri
+  - year: R01
+    theme: haisen-koji
+  - year: R01
+    theme: shisetsu-kanri
+  - year: R01
+    theme: setsuchi
+
+  # R02 (令和2年)
+  - year: R02
+    theme: jigyoho-taikei
+  - year: R02
+    theme: jigyoho-taikei
+  - year: R02
+    theme: zetsuen
+  - year: R02
+    theme: kachiku-densen
+  - year: R02
+    theme: chichuu-densen
+  - year: R02
+    theme: haisen-koji
+  - year: R02
+    theme: yogo-teigi
+  - year: R02
+    theme: tokushu-basho
+  - year: R02
+    theme: haisen-koji
+  - year: R02
+    theme: bunsan-dengen
+  - year: R02
+    theme: shisetsu-kanri
+  - year: R02
+    theme: zetsuen
+  - year: R02
+    theme: shisetsu-kanri
+
+  # R03 (令和3年)
+  - year: R03
+    theme: jigyoho-taikei
+  - year: R03
+    theme: jigyoho-taikei
+  - year: R03
+    theme: yogo-teigi
+  - year: R03
+    theme: hogo-sochi
+  - year: R03
+    theme: hogo-sochi
+  - year: R03
+    theme: kachiku-densen
+  - year: R03
+    theme: tokushu-basho
+  - year: R03
+    theme: shiyo-basho
+  - year: R03
+    theme: bunsan-dengen
+  - year: R03
+    theme: shisetsu-kanri
+  - year: R03
+    theme: shisetsu-kanri
+  - year: R03
+    theme: zetsuen
+  - year: R03
+    theme: shisetsu-kanri
+
+  # R04上 (令和4年上期)
+  - year: R04上
+    theme: jigyoho-taikei
+  - year: R04上
+    theme: jigyoho-taikei
+  - year: R04上
+    theme: setsuchi
+  - year: R04上
+    theme: kachiku-densen
+  - year: R04上
+    theme: yogo-teigi
+  - year: R04上
+    theme: kachiku-densen
+  - year: R04上
+    theme: tokushu-basho
+  - year: R04上
+    theme: haisen-koji
+  - year: R04上
+    theme: jigyoho-taikei
+  - year: R04上
+    theme: hogo-sochi
+  - year: R04上
+    theme: zetsuen
+  - year: R04上
+    theme: shisetsu-kanri
+  - year: R04上
+    theme: shisetsu-kanri
+
+  # R04下 (令和4年下期)
+  - year: R04下
+    theme: jigyoho-taikei
+  - year: R04下
+    theme: jigyoho-taikei
+  - year: R04下
+    theme: hogo-sochi
+  - year: R04下
+    theme: jigyoho-taikei
+  - year: R04下
+    theme: kachiku-densen
+  - year: R04下
+    theme: chichuu-densen
+  - year: R04下
+    theme: haisen-koji
+  - year: R04下
+    theme: bunsan-dengen
+  - year: R04下
+    theme: shisetsu-kanri
+  - year: R04下
+    theme: jigyoho-taikei
+  - year: R04下
+    theme: shijimono
+  - year: R04下
+    theme: shisetsu-kanri
+  - year: R04下
+    theme: shisetsu-kanri
+
+  # R05上 (令和5年上期)
+  - year: R05上
+    theme: shunin-gijutsusha
+  - year: R05上
+    theme: jigyoho-taikei
+  - year: R05上
+    theme: hogo-sochi
+  - year: R05上
+    theme: zetsuen
+  - year: R05上
+    theme: shijimono
+  - year: R05上
+    theme: chichuu-densen
+  - year: R05上
+    theme: bunsan-dengen
+  - year: R05上
+    theme: haisen-koji
+  - year: R05上
+    theme: shiyo-basho
+  - year: R05上
+    theme: shisetsu-kanri
+  - year: R05上
+    theme: shisetsu-kanri
+  - year: R05上
+    theme: setsuchi
+  - year: R05上
+    theme: shijimono
+
+  # R05下 (令和5年下期)
+  - year: R05下
+    theme: jigyoho-taikei
+  - year: R05下
+    theme: jigyoho-taikei
+  - year: R05下
+    theme: jigyoho-taikei
+  - year: R05下
+    theme: hatsuhendenjo
+  - year: R05下
+    theme: chichuu-densen
+  - year: R05下
+    theme: shijimono
+  - year: R05下
+    theme: bunsan-dengen
+  - year: R05下
+    theme: tokushu-basho
+  - year: R05下
+    theme: haisen-koji
+  - year: R05下
+    theme: shisetsu-kanri
+  - year: R05下
+    theme: setsuchi
+  - year: R05下
+    theme: shisetsu-kanri
+  - year: R05下
+    theme: shisetsu-kanri
