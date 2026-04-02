@@ -139,11 +139,22 @@ nav:
       - 第220条（分散型電源の系統連系）: articles/kaishaku/220.md
     - 電気事業法:
       - articles/jigyoho/index.md
+      - 第2条（定義）: articles/jigyoho/2.md
       - 第38条（事業用電気工作物の定義）: articles/jigyoho/38.md
       - 第39条（技術基準適合義務）: articles/jigyoho/39.md
+      - 第40条（技術基準適合命令）: articles/jigyoho/40.md
       - 第42条（保安規程）: articles/jigyoho/42.md
-      - 第43条（主任技術者）: articles/jigyoho/43.md
+      - 第43条（主任技術者の選任）: articles/jigyoho/43.md
+      - 第44条（主任技術者免状）: articles/jigyoho/44.md
+      - 第47条（工事計画・事前届出）: articles/jigyoho/47.md
       - 第48条（工事計画の届出）: articles/jigyoho/48.md
+      - 第49条（使用前検査）: articles/jigyoho/49.md
+      - 第51条（使用前安全管理検査）: articles/jigyoho/51.md
+      - 第52条（溶接事業者検査）: articles/jigyoho/52.md
+      - 第55条（定期安全管理検査）: articles/jigyoho/55.md
+      - 第56条（技術基準適合命令・一般用）: articles/jigyoho/56.md
+      - 第57条（調査の義務）: articles/jigyoho/57.md
+      - 第106条（報告の徴収）: articles/jigyoho/106.md
     - その他法令:
       - articles/other/index.md
   - 過去問マッピング:
