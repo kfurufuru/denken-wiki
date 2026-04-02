@@ -85,6 +85,13 @@ extra:
 
 nav:
   - Home: index.md
+  - 理論（Risky攻略）:
+    - theory/index.md
+    - 磁界: theory/jikai.md
+    - 電磁誘導: theory/denjiyudo.md
+    - 静電容量: theory/seidenyoryo.md
+    - 電位・電界・磁界（ローレンツ力）: theory/deni-denkai-jikai.md
+    - 電界・磁界・電位（性質対比）: theory/denkai-jikai-deni.md
   - テーマ別:
     - themes/index.md
     - 接地工事: themes/setsuchi.md
