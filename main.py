@@ -52,7 +52,7 @@ def define_env(env):
     @env.macro
     def theme_year_table():
         """出題頻度サマリ表（H25〜R5）を生成"""
-        problems = env.variables.get("kakomon", {}).get("problems", [])
+        problems = env.variables.get("problems", [])
 
         col_labels = [c[0] for c in DISPLAY_COLS]
         header = "| テーマ | " + " | ".join(col_labels) + " | 計 |"
@@ -80,7 +80,7 @@ def define_env(env):
     @env.macro
     def theme_ranking_table():
         """テーマ別出題頻度ランキング表を生成"""
-        problems = env.variables.get("kakomon", {}).get("problems", [])
+        problems = env.variables.get("problems", [])
 
         counts = []
         for slug, name in THEMES:
