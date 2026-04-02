@@ -23,19 +23,22 @@ THEMES = [
     ("shunin-gijutsusha", "電気主任技術者の職務"),
 ]
 
-# サマリ表の列定義: (表示ラベル, 対応する year コードのリスト)
+# サマリ表の列定義: (表示ラベル, 対応する year コードのリスト) ※新しい年が左
 DISPLAY_COLS = [
-    ("H25", ["H25"]),
-    ("H26", ["H26"]),
-    ("H27", ["H27"]),
-    ("H28", ["H28"]),
-    ("H29", ["H29"]),
-    ("H30", ["H30"]),
-    ("R1",  ["R01"]),
-    ("R2",  ["R02"]),
-    ("R3",  ["R03"]),
-    ("R4",  ["R04上", "R04下"]),
+    ("R8",  ["R08上", "R08下"]),
+    ("R7",  ["R07上", "R07下"]),
+    ("R6",  ["R06上", "R06下"]),
     ("R5",  ["R05上", "R05下"]),
+    ("R4",  ["R04上", "R04下"]),
+    ("R3",  ["R03"]),
+    ("R2",  ["R02"]),
+    ("R1",  ["R01"]),
+    ("H30", ["H30"]),
+    ("H29", ["H29"]),
+    ("H28", ["H28"]),
+    ("H27", ["H27"]),
+    ("H26", ["H26"]),
+    ("H25", ["H25"]),
 ]
 
 # 星評価の閾値（H23〜R05下：195問ベース）
@@ -55,8 +58,8 @@ def define_env(env):
         problems = env.variables.get("problems", [])
 
         col_labels = [c[0] for c in DISPLAY_COLS]
-        header = "| テーマ | " + " | ".join(col_labels) + " | 計 |"
-        sep    = "|--------|" + "-----|" * len(DISPLAY_COLS) + "----|"
+        header = "| テーマ | 計 | " + " | ".join(col_labels) + " |"
+        sep    = "|--------|:--:|" + "-----|" * len(DISPLAY_COLS)
 
         rows = [header, sep]
         for slug, name in THEMES:
@@ -72,7 +75,7 @@ def define_env(env):
                     cells.append("○")
                 else:
                     cells.append("")
-            row = f"| [{name}](../themes/{slug}.md) | " + " | ".join(cells) + f" | **{count}** |"
+            row = f"| [{name}](../themes/{slug}.md) | **{count}** | " + " | ".join(cells) + " |"
             rows.append(row)
 
         return "\n".join(rows)
