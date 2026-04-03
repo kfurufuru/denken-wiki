@@ -164,6 +164,8 @@ nav:
     - 出題頻度ランキング: kakomon/ranking.md
     - 再出題ランキング: kakomon/reuse-ranking.md
     - 年度別解説:
+      - 令和7年（2025）: kakomon/R07.md
+      - 令和6年（2024）: kakomon/R06.md
       - 令和5年（2023）: kakomon/R05.md
       - 令和4年（2022）: kakomon/R04.md
       - 令和3年（2021）: kakomon/R03.md
