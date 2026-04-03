@@ -41,12 +41,12 @@ DISPLAY_COLS = [
     ("H25", ["H25"]),
 ]
 
-# 星評価の閾値（H23〜R05下：195問ベース）
+# 星評価の閾値（H23〜R07下：247問ベース）
 def get_stars(count):
-    if count >= 20: return "★★★★★"
-    if count >= 12: return "★★★★☆"
-    if count >= 7:  return "★★★☆☆"
-    if count >= 3:  return "★★☆☆☆"
+    if count >= 25: return "★★★★★"
+    if count >= 15: return "★★★★☆"
+    if count >= 9:  return "★★★☆☆"
+    if count >= 4:  return "★★☆☆☆"
     return "★☆☆☆☆"
 
 
