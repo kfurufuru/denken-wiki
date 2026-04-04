@@ -92,6 +92,7 @@ nav:
     - 静電容量: theory/seidenyoryo.md
     - 電位・電界・磁界（ローレンツ力）: theory/deni-denkai-jikai.md
     - 電界・磁界・電位（性質対比）: theory/denkai-jikai-deni.md
+    - NPN・PNPトランジスタ: theory/transistor.md
   - テーマ別:
     - themes/index.md
     - 接地工事: themes/setsuchi.md
@@ -110,6 +111,9 @@ nav:
     - 電気事業法の体系: themes/jigyoho-taikei.md
     - 電気施設管理: themes/shisetsu-kanri.md
     - 電気主任技術者の職務: themes/shunin-gijutsusha.md
+    - 需要率・負荷率・不等率: themes/juyoritsu-fukaritsu.md
+    - 保護協調: themes/hogo-kyocho.md
+    - 安全靴・漏電・静電気: themes/anzen-rouden-seidenki.md
   - 条文別:
     - articles/index.md
     - 電気設備技術基準:
