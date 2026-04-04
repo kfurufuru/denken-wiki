@@ -1,4 +1,144 @@
 problems:
+  # H18 (平成18年)
+  - year: H18
+    theme: jigyoho-taikei
+  - year: H18
+    theme: jigyoho-taikei
+  - year: H18
+    theme: chichuu-densen
+  - year: H18
+    theme: hatsuhendenjo
+  - year: H18
+    theme: haisen-koji
+  - year: H18
+    theme: bunsan-dengen
+  - year: H18
+    theme: shiyo-basho
+  - year: H18
+    theme: haisen-koji
+  - year: H18
+    theme: shisetsu-kanri
+  - year: H18
+    theme: shisetsu-kanri
+  - year: H18
+    theme: setsuchi
+  - year: H18
+    theme: shisetsu-kanri
+  - year: H18
+    theme: shisetsu-kanri
+
+  # H19 (平成19年)
+  - year: H19
+    theme: jigyoho-taikei
+  - year: H19
+    theme: jigyoho-taikei
+  - year: H19
+    theme: jigyoho-taikei
+  - year: H19
+    theme: zetsuen
+  - year: H19
+    theme: hatsuhendenjo
+  - year: H19
+    theme: hatsuhendenjo
+  - year: H19
+    theme: hogo-sochi
+  - year: H19
+    theme: kachiku-densen
+  - year: H19
+    theme: haisen-koji
+  - year: H19
+    theme: shisetsu-kanri
+  - year: H19
+    theme: zetsuen
+  - year: H19
+    theme: shisetsu-kanri
+  - year: H19
+    theme: shisetsu-kanri
+
+  # H20 (平成20年)
+  - year: H20
+    theme: jigyoho-taikei
+  - year: H20
+    theme: jigyoho-taikei
+  - year: H20
+    theme: jigyoho-taikei
+  - year: H20
+    theme: jigyoho-taikei
+  - year: H20
+    theme: jigyoho-taikei
+  - year: H20
+    theme: hatsuhendenjo
+  - year: H20
+    theme: zetsuen
+  - year: H20
+    theme: jigyoho-taikei
+  - year: H20
+    theme: setsuchi
+  - year: H20
+    theme: hogo-sochi
+  - year: H20
+    theme: shisetsu-kanri
+  - year: H20
+    theme: shisetsu-kanri
+  - year: H20
+    theme: shisetsu-kanri
+
+  # H21 (平成21年)
+  - year: H21
+    theme: jigyoho-taikei
+  - year: H21
+    theme: jigyoho-taikei
+  - year: H21
+    theme: jigyoho-taikei
+  - year: H21
+    theme: jigyoho-taikei
+  - year: H21
+    theme: hogo-sochi
+  - year: H21
+    theme: hatsuhendenjo
+  - year: H21
+    theme: yogo-teigi
+  - year: H21
+    theme: bunsan-dengen
+  - year: H21
+    theme: shisetsu-kanri
+  - year: H21
+    theme: jigyoho-taikei
+  - year: H21
+    theme: shisetsu-kanri
+  - year: H21
+    theme: kachiku-densen
+  - year: H21
+    theme: haisen-koji
+
+  # H22 (平成22年)
+  - year: H22
+    theme: jigyoho-taikei
+  - year: H22
+    theme: jigyoho-taikei
+  - year: H22
+    theme: jigyoho-taikei
+  - year: H22
+    theme: haisen-koji
+  - year: H22
+    theme: hogo-sochi
+  - year: H22
+    theme: haisen-koji
+  - year: H22
+    theme: chichuu-densen
+  - year: H22
+    theme: zetsuen
+  - year: H22
+    theme: haisen-koji
+  - year: H22
+    theme: shisetsu-kanri
+  - year: H22
+    theme: shisetsu-kanri
+  - year: H22
+    theme: setsuchi
+  - year: H22
+    theme: kachiku-densen
+
   # H23 (平成23年)
   - year: H23
     theme: shunin-gijutsusha

@@ -20,13 +20,13 @@
 
 ### 出題頻度 TOP5 テーマ
 
-| 順位 | テーマ | 11年間の出題数 | 頻出度 |
+| 順位 | テーマ | 20年間の出題数 | 頻出度 |
 |------|--------|---------------|--------|
-| 1 | [接地工事](themes/setsuchi.md) | 8回 | ★★★★★ |
-| 2 | [絶縁性能・耐圧試験](themes/zetsuen.md) | 7回 | ★★★★★ |
-| 3 | [架空電線路](themes/kachiku-densen.md) | 7回 | ★★★★★ |
-| 4 | [分散型電源・系統連系](themes/bunsan-dengen.md) | 6回 | ★★★★☆ |
-| 5 | [保護装置（過電流・地絡）](themes/hogo-sochi.md) | 6回 | ★★★★☆ |
+| 1 | [電気事業法体系](themes/jigyoho-taikei.md) | 60回 | ★★★★★ |
+| 2 | [電気施設管理](themes/shisetsu-kanri.md) | 53回 | ★★★★★ |
+| 3 | [配線工事](themes/haisen-koji.md) | 22回 | ★★★★★ |
+| 4 | [保護装置（過電流・地絡）](themes/hogo-sochi.md) | 19回 | ★★★★★ |
+| 5 | [架空電線路](themes/kachiku-densen.md) | 16回 | ★★★★★ |
 
 ### クイックアクセス
 

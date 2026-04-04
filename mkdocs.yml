@@ -114,6 +114,8 @@ nav:
     - 需要率・負荷率・不等率: themes/juyoritsu-fukaritsu.md
     - 保護協調: themes/hogo-kyocho.md
     - 安全靴・漏電・静電気: themes/anzen-rouden-seidenki.md
+    - 電気火災: themes/denki-kasai.md
+    - PCB機器の取り扱い: themes/pcb-kiki.md
   - 条文別:
     - articles/index.md
     - 電気設備技術基準:
