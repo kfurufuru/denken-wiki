@@ -186,6 +186,7 @@ nav:
   - リファレンス:
     - reference/index.md
     - 頻出数値一覧: reference/numbers.md
+    - B問題 計算テンプレート集: reference/b-mondai-template.md
     - 電圧区分早見表: reference/voltage-zones.md
     - 接地工事種別比較表: reference/grounding-comparison.md
     - 工事の種類と施設場所の対応表: reference/wiring-methods.md
