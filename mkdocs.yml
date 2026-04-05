@@ -1,5 +1,5 @@
-site_name: "電験３種 法規Wiki"
-site_description: "電験３種 法規 — 条文×過去問クロスリファレンス"
+site_name: "電験3種 法規Wiki"
+site_description: "電験3種 法規 — 条文×過去問クロスリファレンス"
 site_url: "https://kfurufuru.github.io/denken-wiki/"
 site_author: "Furutachi"
 repo_url: "https://github.com/kfurufuru/denken-wiki"
@@ -54,7 +54,11 @@ exclude_docs: |
 markdown_extensions:
   - admonition
   - pymdownx.details
-  - pymdownx.superfences
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
   - pymdownx.tabbed:
       alternate_style: true
   - pymdownx.critic
@@ -76,6 +80,9 @@ markdown_extensions:
 
 extra_css:
   - stylesheets/custom.css
+
+extra_javascript:
+  - https://unpkg.com/mermaid@10/dist/mermaid.min.js
 
 extra:
   social:
@@ -196,7 +203,6 @@ nav:
     - 分散型電源の連系区分早見表: reference/distributed-power-zones.md
     - 用語集（ツールチップ定義）: reference/glossary.md
     - 法体系の全体構造: reference/hourei-taikei.md
-    - 絵文字マーカー凡例: reference/emoji-legend.md
     - 参考文献・外部リンク: reference/links.md
     - 学習システム全体マップ: reference/system-map.md
     - バージョニング基準: reference/versioning.md
