@@ -43,6 +43,224 @@ theme:
 plugins:
   - search:
       lang: ja
+      separator: '[\s\-\.]+'
+  - macros:
+      module_name: main
+      include_yaml:
+        - _data/kakomon.yml
+
+exclude_docs: |
+  _data/
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.critic
+  - pymdownx.mark
+  - tables
+  - attr_list
+  - md_in_html
+  - def_list
+  - footnotes
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - toc:
+      permalink: true
+  - abbr
+  - pymdownx.snippets:
+      auto_append:
+        - includes/abbreviations.md
+
+extra_css:
+  - stylesheets/custom.css
+
+extra_javascript:
+  - https://unpkg.com/mermaid@10/dist/mermaid.min.js
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/kfurufuru/denken-wiki
+      name: GitHub リポジトリ
+
+nav:
+  - Home: index.md
+  - 理論（Risky攻略）:
+    - theory/index.md
+    - 磁界: theory/jikai.md
+    - 電磁誘導: theory/denjiyudo.md
+    - 静電容量: theory/seidenyoryo.md
+    - 電位・電界・磁界（ローレンツ力）: theory/deni-denkai-jikai.md
+    - 電界・磁界・電位（性質対比）: theory/denkai-jikai-deni.md
+    - NPN・PNPトランジスタ: theory/transistor.md
+  - テーマ別:
+    - themes/index.md
+    - 接地工事: themes/setsuchi.md
+    - 絶縁性能・耐圧試験: themes/zetsuen.md
+    - 架空電線路: themes/kachiku-densen.md
+    - 地中電線路: themes/chichuu-densen.md
+    - 保護装置（過電流・地絡）: themes/hogo-sochi.md
+    - 分散型電源・系統連系: themes/bunsan-dengen.md
+    - 特殊場所の施設: themes/tokushu-basho.md
+    - 配線工事・屋内配線: themes/haisen-koji.md
+    - 電線・ケーブルの選定: themes/densen-cable.md
+    - 支持物・架空電線路の強度: themes/shijimono.md
+    - 発変電所の施設: themes/hatsuhendenjo.md
+    - 電気使用場所の施設: themes/shiyo-basho.md
+    - 用語の定義: themes/yogo-teigi.md
+    - 電気事業法の体系: themes/jigyoho-taikei.md
+    - 電気施設管理: themes/shisetsu-kanri.md
+    - 電気主任技術者の職務: themes/shunin-gijutsusha.md
+    - 需要率・負荷率・不等率: themes/juyoritsu-fukaritsu.md
+    - 保護協調: themes/hogo-kyocho.md
+    - 安全靴・漏電・静電気: themes/anzen-rouden-seidenki.md
+    - 電気火災: themes/denki-kasai.md
+    - 電気工事士の作業範囲: themes/denki-koji-shi.md
+    - 電気用品安全法（PSE）: themes/pse-anzen-ho.md
+    - 電気工事業者の登録: themes/denki-koji-gyo.md
+    - PCB機器の取り扱い: themes/pcb-kiki.md
+  - 条文別:
+    - articles/index.md
+    - 電気設備技術基準:
+      - articles/kijun/index.md
+      - 第10条（接地）: articles/kijun/10.md
+      - 第11条（接地の方法）: articles/kijun/11.md
+      - 第14条（過電流保護）: articles/kijun/14.md
+      - 第15条（地絡保護）: articles/kijun/15.md
+      - 第56条（配線の感電防止）: articles/kijun/56.md
+      - 第58条（低圧電路の絶縁）: articles/kijun/58.md
+    - 電技解釈:
+      - articles/kaishaku/index.md
+      - 第14条（電路の絶縁）: articles/kaishaku/14.md
+      - 第15条（高圧電路の絶縁性能）: articles/kaishaku/15.md
+      - 第16条（機械器具等の絶縁）: articles/kaishaku/16.md
+      - 第17条（A種接地工事）: articles/kaishaku/17.md
+      - 第18条（B種接地工事）: articles/kaishaku/18.md
+      - 第19条（C種・D種接地工事）: articles/kaishaku/19.md
+      - 第29条（金属製外箱の接地）: articles/kaishaku/29.md
+      - 第33条（過電流保護対策）: articles/kaishaku/33.md
+      - 第36条（地絡保護対策）: articles/kaishaku/36.md
+      - 第37条（避雷器等の施設）: articles/kaishaku/37.md
+      - 第68条（低圧架空電線の高さ）: articles/kaishaku/68.md
+      - 第75条（高圧架空電線の高さ）: articles/kaishaku/75.md
+      - 第156条（低圧屋内配線の工事種類）: articles/kaishaku/156.md
+      - 第175条（粉じん危険場所）: articles/kaishaku/175.md
+      - 第220条（分散型電源の系統連系）: articles/kaishaku/220.md
+    - 電気事業法:
+      - articles/jigyoho/index.md
+      - 第2条（定義）: articles/jigyoho/2.md
+      - 第38条（事業用電気工作物の定義）: articles/jigyoho/38.md
+      - 第39条（技術基準適合義務）: articles/jigyoho/39.md
+      - 第40条（技術基準適合命令）: articles/jigyoho/40.md
+      - 第42条（保安規程）: articles/jigyoho/42.md
+      - 第43条（主任技術者の選任）: articles/jigyoho/43.md
+      - 第44条（主任技術者免状）: articles/jigyoho/44.md
+      - 第47条（工事計画・事前届出）: articles/jigyoho/47.md
+      - 第48条（工事計画の届出）: articles/jigyoho/48.md
+      - 第49条（使用前検査）: articles/jigyoho/49.md
+      - 第51条（使用前安全管理検査）: articles/jigyoho/51.md
+      - 第52条（溶接事業者検査）: articles/jigyoho/52.md
+      - 第55条（定期安全管理検査）: articles/jigyoho/55.md
+      - 第56条（技術基準適合命令・一般用）: articles/jigyoho/56.md
+      - 第57条（調査の義務）: articles/jigyoho/57.md
+      - 第106条（報告の徴収）: articles/jigyoho/106.md
+    - その他法令:
+      - articles/other/index.md
+  - 過去問マッピング:
+    - kakomon/index.md
+    - 年度別一覧: kakomon/by-year.md
+    - 分野別一覧: kakomon/by-field.md
+    - 出題頻度ランキング: kakomon/ranking.md
+    - 再出題ランキング: kakomon/reuse-ranking.md
+    - 年度別解説:
+      - 令和7年（2025）: kakomon/R07.md
+      - 令和6年（2024）: kakomon/R06.md
+      - 令和5年（2023）: kakomon/R05.md
+      - 令和4年（2022）: kakomon/R04.md
+      - 令和3年（2021）: kakomon/R03.md
+      - 令和2年（2020）: kakomon/R02.md
+      - 令和元年（2019）: kakomon/R01.md
+      - 平成30年（2018）: kakomon/H30.md
+      - 平成29年（2017）: kakomon/H29.md
+      - 平成28年（2016）: kakomon/H28.md
+      - 平成27年（2015）: kakomon/H27.md
+      - 平成26年（2014）: kakomon/H26.md
+      - 平成25年（2013）: kakomon/H25.md
+      - 平成24年（2012）: kakomon/H24.md
+      - 平成23年（2011）: kakomon/H23.md
+  - 攻略戦略:
+    - strategy/index.md
+    - 法令マスタ: strategy/hourei-master.md
+    - B問題メソッド化: strategy/b-mondai-method.md
+    - 弱点ログ: strategy/jakuten-log.md
+  - リファレンス:
+    - reference/index.md
+    - 頻出数値一覧: reference/numbers.md
+    - B問題 計算テンプレート集: reference/b-mondai-template.md
+    - 電圧区分早見表: reference/voltage-zones.md
+    - 接地工事種別比較表: reference/grounding-comparison.md
+    - 工事の種類と施設場所の対応表: reference/wiring-methods.md
+    - 保護装置の動作時間まとめ: reference/protection-timing.md
+    - 分散型電源の連系区分早見表: reference/distributed-power-zones.md
+    - 用語集（ツールチップ定義）: reference/glossary.md
+    - 法体系の全体構造: reference/hourei-taikei.md
+    - 参考文献・外部リンク: reference/links.md
+    - 学習システム全体マップ: reference/system-map.md
+    - バージョニング基準: reference/versioning.md
+    - 用語索引（五十音順）: reference/glossary-index.md
+site_name: "電験3種 法規Wiki"
+site_description: "電験3種 法規 — 条文×過去問クロスリファレンス"
+site_url: "https://kfurufuru.github.io/denken-wiki/"
+site_author: "Furutachi"
+repo_url: "https://github.com/kfurufuru/denken-wiki"
+repo_name: "denken-wiki"
+copyright: "&copy; 2026 Furutachi — 個人学習用"
+
+theme:
+  name: material
+  custom_dir: overrides
+  language: ja
+  palette:
+    - scheme: default
+      primary: teal
+      accent: deep orange
+      toggle:
+        icon: material/brightness-7
+        name: ダークモードに切り替え
+    - scheme: slate
+      primary: teal
+      accent: deep orange
+      toggle:
+        icon: material/brightness-4
+        name: ライトモードに切り替え
+  features:
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.sections
+    - navigation.indexes
+    - navigation.top
+    - navigation.instant
+    - navigation.instant.progress
+    - search.suggest
+    - search.highlight
+    - search.share
+    - content.tabs.link
+    - content.tooltips
+    - toc.follow
+  icon:
+    repo: fontawesome/brands/github
+
+plugins:
+  - search:
+      lang: ja
   - macros:
       module_name: main
       include_yaml:
