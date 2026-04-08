@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block scripts %}{{ super() }}
+{% block announce %}
 <script>
 (function(){
   var p=new URLSearchParams(location.search);
@@ -8,9 +8,6 @@
   window._portalBack=function(){var h=sessionStorage.getItem('_ph');history.go(h?parseInt(h)-history.length-1:-1);};
 })();
 </script>
-{% endblock %}
-
-{% block announce %}
   <div style="display:flex; gap:8px; align-items:center; justify-content:center; flex-wrap:wrap; padding:2px 0;">
     <button onclick="_portalBack()" style="font-weight:600; color:#fff; background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.2); border-radius:4px; padding:2px 10px; font-size:0.82rem; cursor:pointer;" onmouseover="this.style.background='rgba(255,255,255,0.2)'" onmouseout="this.style.background='rgba(255,255,255,0.08)'">← ポータル</button>
     <span style="color:rgba(255,255,255,0.3);">|</span>
