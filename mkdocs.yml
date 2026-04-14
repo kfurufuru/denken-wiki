@@ -95,6 +95,9 @@ nav:
   - Home: index.md
   - 理論（Risky攻略）:
     - theory/index.md
+    - 直流回路（テブナン・ミルマン・Δ-Y）: theory/dc-circuit.md
+    - 交流回路（ベクトル・共振・力率）: theory/ac-circuit.md
+    - 三相交流（Y-Δ・√3・三相電力）: theory/sansou-kouryuu.md
     - 磁界: theory/jikai.md
     - 電磁誘導: theory/denjiyudo.md
     - 静電容量: theory/seidenyoryo.md
@@ -312,6 +315,9 @@ nav:
   - Home: index.md
   - 理論（Risky攻略）:
     - theory/index.md
+    - 直流回路（テブナン・ミルマン・Δ-Y）: theory/dc-circuit.md
+    - 交流回路（ベクトル・共振・力率）: theory/ac-circuit.md
+    - 三相交流（Y-Δ・√3・三相電力）: theory/sansou-kouryuu.md
     - 磁界: theory/jikai.md
     - 電磁誘導: theory/denjiyudo.md
     - 静電容量: theory/seidenyoryo.md
