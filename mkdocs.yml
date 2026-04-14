@@ -203,7 +203,11 @@ nav:
     - strategy/index.md
     - 法令マスタ: strategy/hourei-master.md
     - B問題メソッド化: strategy/b-mondai-method.md
+    - B問題得点戦略: strategy/b-mondai-strategy.md
     - 弱点ログ: strategy/jakuten-log.md
+    - 語呂合わせ・暗記術: strategy/goroawase.md
+    - 引っかけパターン集: strategy/trap-patterns.md
+    - 直前3日チェックリスト: strategy/last-3days-checklist.md
   - リファレンス:
     - reference/index.md
     - 頻出数値一覧: reference/numbers.md
