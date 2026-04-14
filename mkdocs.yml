@@ -98,6 +98,9 @@ nav:
     - 直流回路（テブナン・ミルマン・Δ-Y）: theory/dc-circuit.md
     - 交流回路（ベクトル・共振・力率）: theory/ac-circuit.md
     - 三相交流（Y-Δ・√3・三相電力）: theory/sansou-kouryuu.md
+    - 過渡現象（RC・RL・時定数）: theory/transient.md
+    - 電気計測（倍率器・分流器・ブリッジ）: theory/measurement.md
+    - 電子回路（FET・オペアンプ・整流）: theory/electronics.md
     - 磁界: theory/jikai.md
     - 電磁誘導: theory/denjiyudo.md
     - 静電容量: theory/seidenyoryo.md
@@ -321,6 +324,9 @@ nav:
     - 直流回路（テブナン・ミルマン・Δ-Y）: theory/dc-circuit.md
     - 交流回路（ベクトル・共振・力率）: theory/ac-circuit.md
     - 三相交流（Y-Δ・√3・三相電力）: theory/sansou-kouryuu.md
+    - 過渡現象（RC・RL・時定数）: theory/transient.md
+    - 電気計測（倍率器・分流器・ブリッジ）: theory/measurement.md
+    - 電子回路（FET・オペアンプ・整流）: theory/electronics.md
     - 磁界: theory/jikai.md
     - 電磁誘導: theory/denjiyudo.md
     - 静電容量: theory/seidenyoryo.md
