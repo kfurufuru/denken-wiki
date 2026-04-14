@@ -186,6 +186,7 @@ nav:
     - 分野別一覧: kakomon/by-field.md
     - 出題頻度ランキング: kakomon/ranking.md
     - 再出題ランキング: kakomon/reuse-ranking.md
+    - 出題波予測（周期性分析）: kakomon/wave-analysis.md
     - 年度別解説:
       - 令和7年（2025）: kakomon/R07.md
       - 令和6年（2024）: kakomon/R06.md
@@ -213,6 +214,7 @@ nav:
   - リファレンス:
     - reference/index.md
     - 頻出数値一覧: reference/numbers.md
+    - 類題横断（数値・キーワード横串）: reference/cross-reference.md
     - B問題 計算テンプレート集: reference/b-mondai-template.md
     - 電圧区分早見表: reference/voltage-zones.md
     - 接地工事種別比較表: reference/grounding-comparison.md
@@ -412,6 +414,7 @@ nav:
     - 分野別一覧: kakomon/by-field.md
     - 出題頻度ランキング: kakomon/ranking.md
     - 再出題ランキング: kakomon/reuse-ranking.md
+    - 出題波予測（周期性分析）: kakomon/wave-analysis.md
     - 年度別解説:
       - 令和7年（2025）: kakomon/R07.md
       - 令和6年（2024）: kakomon/R06.md
@@ -431,6 +434,7 @@ nav:
   - リファレンス:
     - reference/index.md
     - 頻出数値一覧: reference/numbers.md
+    - 類題横断（数値・キーワード横串）: reference/cross-reference.md
     - B問題 計算テンプレート集: reference/b-mondai-template.md
     - 電圧区分早見表: reference/voltage-zones.md
     - 接地工事種別比較表: reference/grounding-comparison.md
