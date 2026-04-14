@@ -197,7 +197,6 @@
 
 ## 関連ページ
 
-- [語呂合わせ・暗記術](goroawase.md) — 数値暗記の語呂
 - [引っかけパターン集](trap-patterns.md) — 引っかけの最終確認
 - [B問題得点戦略](b-mondai-strategy.md) — 時間配分の詳細
 - [頻出数値一覧](../reference/numbers.md) — 完全版数値リスト
