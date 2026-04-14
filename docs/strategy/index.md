@@ -55,7 +55,7 @@
 
 ### Phase 4: 仕上げ（試験直前1週間）
 
-- 頻出数値を語呂で総復習 → [語呂合わせ・暗記術](goroawase.md)
+- 頻出数値を因果理解で総復習 → [頻出数値一覧](../reference/numbers.md)
 - 引っかけパターンを一通り確認 → [引っかけパターン集](trap-patterns.md)
 - 過去問3年分の時間計測演習 → [B問題得点戦略](b-mondai-strategy.md)
 - 試験3日前からのカウントダウン → [直前3日チェックリスト](last-3days-checklist.md)
