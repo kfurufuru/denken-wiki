@@ -103,6 +103,7 @@ nav:
     - 電子回路（FET・オペアンプ・整流）: theory/electronics.md
     - 自己・相互インダクタンス（変圧器基礎）: theory/inductance.md
     - pn接合・ダイオード（半導体基礎）: theory/diode.md
+    - 論理回路（ゲート・ブール代数・FF）: theory/logic-circuit.md
     - 磁界: theory/jikai.md
     - 電磁誘導: theory/denjiyudo.md
     - 静電容量: theory/seidenyoryo.md
@@ -333,6 +334,7 @@ nav:
     - 電子回路（FET・オペアンプ・整流）: theory/electronics.md
     - 自己・相互インダクタンス（変圧器基礎）: theory/inductance.md
     - pn接合・ダイオード（半導体基礎）: theory/diode.md
+    - 論理回路（ゲート・ブール代数・FF）: theory/logic-circuit.md
     - 磁界: theory/jikai.md
     - 電磁誘導: theory/denjiyudo.md
     - 静電容量: theory/seidenyoryo.md
