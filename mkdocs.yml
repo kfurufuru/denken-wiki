@@ -188,6 +188,22 @@ nav:
       - 第106条（報告の徴収）: articles/jigyoho/106.md
     - その他法令:
       - articles/other/index.md
+      - 電気工事士法:
+        - 第1条（目的）: articles/other/koji-shi-1.md
+        - 第2条（定義・軽微な工事）: articles/other/koji-shi-2.md
+        - 第3条（電気工事士の資格）: articles/other/koji-shi-3.md
+        - 第5条（電気工事士の義務）: articles/other/koji-shi-5.md
+      - 電気用品安全法:
+        - 第2条（定義）: articles/other/pse-2.md
+        - 第8条（基準適合義務）: articles/other/pse-8.md
+        - 第10条（PSEマーク表示）: articles/other/pse-10.md
+        - 第27条（販売の制限）: articles/other/pse-27.md
+        - 第28条（使用の制限）: articles/other/pse-28.md
+      - 電気関係報告規則:
+        - 第1条（目的）: articles/other/jiko-1.md
+        - 第3条（事故報告）: articles/other/jiko-3.md
+        - 第4条（公害防止届出）: articles/other/jiko-4.md
+        - 第5条（自家用電気工作物の報告）: articles/other/jiko-5.md
   - 過去問マッピング:
     - kakomon/index.md
     - 年度別一覧: kakomon/by-year.md
@@ -235,3 +251,5 @@ nav:
     - 学習システム全体マップ: reference/system-map.md
     - バージョニング基準: reference/versioning.md
     - 用語索引（五十音順）: reference/glossary-index.md
+    - 罰則・罰金比較表: reference/penalties.md
+    - 届出・申請期限一覧: reference/deadlines.md
