@@ -145,29 +145,67 @@ nav:
     - articles/index.md
     - 電気設備技術基準:
       - articles/kijun/index.md
+      - 第1条（用語の定義）: articles/kijun/1.md
+      - 第2条（電圧の種別）: articles/kijun/2.md
+      - 第4条（感電・火災等の防止）: articles/kijun/4.md
+      - 第5条（電路の絶縁）: articles/kijun/5.md
+      - 第6条（電線等の断線防止）: articles/kijun/6.md
+      - 第7条（電線の接続）: articles/kijun/7.md
+      - 第8条（機械器具の熱的強度）: articles/kijun/8.md
+      - 第9条（高圧・特高機器の危険防止）: articles/kijun/9.md
       - 第10条（接地）: articles/kijun/10.md
       - 第11条（接地の方法）: articles/kijun/11.md
       - 第14条（過電流保護）: articles/kijun/14.md
       - 第15条（地絡保護）: articles/kijun/15.md
+      - 第20条（発電所等への立入防止）: articles/kijun/20.md
+      - 第21条（支持物の昇塔防止）: articles/kijun/21.md
+      - 第32条（支持物の倒壊防止）: articles/kijun/32.md
       - 第56条（配線の感電防止）: articles/kijun/56.md
+      - 第57条（配線の使用電線）: articles/kijun/57.md
       - 第58条（低圧電路の絶縁）: articles/kijun/58.md
+      - 第59条（機械器具の感電等防止）: articles/kijun/59.md
+      - 第63条（低圧幹線の過電流保護）: articles/kijun/63.md
+      - 第64条（使用場所の地絡保護）: articles/kijun/64.md
     - 電技解釈:
       - articles/kaishaku/index.md
+      - 第1条（用語の定義）: articles/kaishaku/1.md
+      - 第10条（電気設備の接地）: articles/kaishaku/10.md
       - 第14条（電路の絶縁）: articles/kaishaku/14.md
       - 第15条（高圧電路の絶縁性能）: articles/kaishaku/15.md
       - 第16条（機械器具等の絶縁）: articles/kaishaku/16.md
       - 第17条（A種接地工事）: articles/kaishaku/17.md
       - 第18条（B種接地工事）: articles/kaishaku/18.md
       - 第19条（C種・D種接地工事）: articles/kaishaku/19.md
+      - 第22条（電磁誘導障害の防止）: articles/kaishaku/22.md
       - 第29条（金属製外箱の接地）: articles/kaishaku/29.md
       - 第33条（過電流保護対策）: articles/kaishaku/33.md
       - 第36条（地絡保護対策）: articles/kaishaku/36.md
       - 第37条（避雷器等の施設）: articles/kaishaku/37.md
-      - 第68条（低圧架空電線の高さ）: articles/kaishaku/68.md
+      - 第38条（発変電所等の避雷器）: articles/kaishaku/38.md
+      - 第59条（支持物の強度）: articles/kaishaku/59.md
+      - 第65条（架空電線の高さ）: articles/kaishaku/65.md
+      - 第68条（低圧架空電線の施設）: articles/kaishaku/68.md
+      - 第71条（高圧架空電線の施設）: articles/kaishaku/71.md
       - 第75条（高圧架空電線の高さ）: articles/kaishaku/75.md
-      - 第156条（低圧屋内配線の工事種類）: articles/kaishaku/156.md
+      - 第79条（架空電線と建造物の離隔）: articles/kaishaku/79.md
+      - 第81条（架空電線路相互の離隔）: articles/kaishaku/81.md
+      - 第120条（地中電線路の施設）: articles/kaishaku/120.md
+      - 第133条（電力保安通信設備）: articles/kaishaku/133.md
+      - 第143条（引込線の施設）: articles/kaishaku/143.md
+      - 第147条（引込口の施設）: articles/kaishaku/147.md
+      - 第148条（低圧幹線の施設）: articles/kaishaku/148.md
+      - 第149条（施設場所による工事の種類）: articles/kaishaku/149.md
+      - 第156条（合成樹脂管工事）: articles/kaishaku/156.md
+      - 第159条（金属管工事）: articles/kaishaku/159.md
+      - 第164条（ケーブル工事）: articles/kaishaku/164.md
       - 第175条（粉じん危険場所）: articles/kaishaku/175.md
-      - 第220条（分散型電源の系統連系）: articles/kaishaku/220.md
+      - 第176条（可燃性ガス危険場所）: articles/kaishaku/176.md
+      - 第200条（小勢力回路）: articles/kaishaku/200.md
+      - 第220条（直流流出防止変圧器）: articles/kaishaku/220.md
+      - 第222条（低圧連系の施設要件）: articles/kaishaku/222.md
+      - 第227条（高圧連系の施設要件）: articles/kaishaku/227.md
+      - 第229条（逆潮流の制限）: articles/kaishaku/229.md
+      - 第232条（単独運転の防止）: articles/kaishaku/232.md
     - 電気事業法:
       - articles/jigyoho/index.md
       - 第2条（定義）: articles/jigyoho/2.md
