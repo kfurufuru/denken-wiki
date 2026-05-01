@@ -1,0 +1,23 @@
+name: Quality Check
+
+on:
+  pull_request:
+    paths:
+      - 'docs/**'
+      - 'wiki_check.py'
+  push:
+    branches: [master]
+    paths:
+      - 'docs/**'
+      - 'wiki_check.py'
+
+jobs:
+  wiki-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Run wiki_check.py
+        run: python wiki_check.py docs/
