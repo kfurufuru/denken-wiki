@@ -203,7 +203,7 @@ Q. 次のうち、電気工事士が工事中に使用してはいけないも�
 
 - [電気工事士法の体系](../../themes/denki-koji-shi.md) — 第5条の背景・他条文との関係
 - [第3条 資格](koji-shi-3.md) — 「何ができるか」の定義（第5条は「どう遵守するか」）
-- [電気設備技術基準](../../themes/denki-gigyutsu-kijun.md) — 第5条で参照される基準書
+- 電気設備技術基準 — 第5条で参照される基準書 <!-- [要確認]: themes/denki-gigyutsu-kijun.md は未作成 -->
 - [罰則比較表](../../reference/penalties.md) — 各条文の罰則一覧
 
 ---
