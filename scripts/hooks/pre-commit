@@ -1,0 +1,41 @@
+#!/bin/sh
+# 電験Wiki pre-commit フック
+# - audit_frequency.py: 出題頻度の整合性（NG件あればブロック）
+# - check_kakomon_consistency.py: 過去問テーブルとby-field.mdの整合性（警告のみ）
+
+set -e
+REPO_ROOT="$(git rev-parse --show-toplevel)"
+cd "$REPO_ROOT"
+
+# kijun配下またはby-field.mdが変更されたときだけ実行（高速化）
+CHANGED=$(git diff --cached --name-only)
+NEED_CHECK=$(echo "$CHANGED" | grep -E '^(docs/articles/kijun/|docs/kakomon/by-field\.md|scripts/audit_frequency\.py|scripts/check_kakomon_consistency\.py)' || true)
+
+if [ -z "$NEED_CHECK" ]; then
+    exit 0
+fi
+
+echo "🔍 [pre-commit] 過去問・出題頻度の整合性をチェック中..."
+
+# 1. 出題頻度監査（不整合あればブロック）
+FREQ_RESULT=$(python scripts/audit_frequency.py 2>&1)
+FREQ_ISSUES=$(echo "$FREQ_RESULT" | grep -oE "頻度不整合: [0-9]+件" | grep -oE "[0-9]+" || echo "0")
+
+if [ "$FREQ_ISSUES" -gt "0" ]; then
+    echo "❌ [pre-commit] 出題頻度に $FREQ_ISSUES 件の不整合があります。"
+    echo "$FREQ_RESULT" | tail -20
+    echo ""
+    echo "→ 修正してから再commitしてください。緊急時は --no-verify でスキップ可能。"
+    exit 1
+fi
+
+# 2. 過去問整合性（警告のみ・ブロックしない）
+KAKO_RESULT=$(python scripts/check_kakomon_consistency.py 2>&1)
+KAKO_ISSUES=$(echo "$KAKO_RESULT" | grep -oE "不整合 [0-9]+ 件" | grep -oE "[0-9]+" | head -1 || echo "0")
+
+if [ "$KAKO_ISSUES" -gt "0" ]; then
+    echo "⚠️  [pre-commit] 過去問整合性に $KAKO_ISSUES 件の不整合（警告のみ、commit続行）"
+fi
+
+echo "✅ [pre-commit] チェック完了"
+exit 0
