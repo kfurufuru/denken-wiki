@@ -30,8 +30,12 @@ def expected_stars(n):
 
 def parse_page(path):
     text = path.read_text(encoding="utf-8")
-    # 出題頻度
-    m = re.search(r"\*\*出題頻度\*\*[:：]\s*(.+)", text)
+    # 出題頻度（行頭・非インデントの standalone 行を優先。
+    # linter追加の `!!! abstract` 内の絵文字行は4スペース字下げのため除外）
+    m = re.search(r"^\*\*出題頻度\*\*[:：]\s*(.+)", text, re.MULTILINE)
+    if not m:
+        # フォールバック: インデントを許容して最初の出題頻度行を読む
+        m = re.search(r"\*\*出題頻度\*\*[:：]\s*(.+)", text)
     freq_line = m.group(1) if m else ""
     # 星の数
     stars_m = re.search(r"(★+☆*)", freq_line)
@@ -67,6 +71,12 @@ def main():
         exp = expected_stars(d["actual"])
         within = d["low"] <= d["actual"] <= d["high"]
         stars_ok = d["stars"] == exp
+        # 「省令§N直接の出題なし」と明示されたページは、過去問実績テーブルに
+        # 関連条文（解釈§17等）の問題が並ぶため、件数照合を免除する
+        if "出題なし" in d["freq_line"]:
+            within = True
+            stars_ok = True
+            exp = d["stars"] if d["stars"] else exp
         verdict = "OK" if (within and stars_ok) else "NG"
         if not within or not stars_ok:
             issues.append((p.name, d, exp))
