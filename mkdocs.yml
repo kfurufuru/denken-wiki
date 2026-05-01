@@ -69,6 +69,9 @@ markdown_extensions:
   - pymdownx.snippets:
       auto_append:
         - includes/abbreviations.md
+  - pymdownx.tasklist:
+      custom_checkbox: true
+      clickable_checkbox: true
 
 extra_css:
   - stylesheets/custom.css
@@ -76,6 +79,7 @@ extra_css:
 extra_javascript:
   - https://unpkg.com/mermaid@10/dist/mermaid.min.js
   - javascripts/theme-filter.js
+  - javascripts/task-checkbox.js
 
 extra:
   social:
