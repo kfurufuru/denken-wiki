@@ -1,60 +1,91 @@
 # テーマ一覧
 
-> 電験3種 法規の出題範囲を **16テーマ** に分類。出題頻度順に整理。
+電気設備技術基準をテーマ別に整理しました。学習したいテーマを選択してください。
 
----
+<div class="theme-search-wrap">
+<svg class="theme-search-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+<input class="theme-search" type="text" id="theme-search-input" placeholder="テーマ名やキーワードを検索...">
+</div>
 
-## 超頻出（★★★★★）
+<div class="theme-grid" id="theme-grid">
+<a class="theme-card" href="setsuchi/">
+<div class="theme-icon-wrap">⏚</div>
+<div class="theme-card-body">
+<h3>接地工事</h3>
+<p>接地の種類、接地抵抗値、接地線の施設方法などをまとめています。</p>
+<div class="theme-card-footer">
+<span>📄 条文: 第19条〜第28条</span>
+<span class="theme-kakomon-link">過去問を見る (128)</span>
+</div>
+</div>
+<span class="theme-card-chevron">›</span>
+</a>
+<a class="theme-card" href="zetsuen/">
+<div class="theme-icon-wrap">⚡</div>
+<div class="theme-card-body">
+<h3>絶縁性能・耐圧試験</h3>
+<p>絶縁性能の確保、絶縁抵抗測定、耐圧試験の方法などをまとめています。</p>
+<div class="theme-card-footer">
+<span>📄 条文: 第29条〜第35条</span>
+<span class="theme-kakomon-link">過去問を見る (96)</span>
+</div>
+</div>
+<span class="theme-card-chevron">›</span>
+</a>
+<a class="theme-card" href="kachiku-densen/">
+<div class="theme-icon-wrap">✚</div>
+<div class="theme-card-body">
+<h3>架空電線路</h3>
+<p>支持物の設置、離隔距離、導線の種類・太さなどをまとめています。</p>
+<div class="theme-card-footer">
+<span>📄 条文: 第36条〜第60条</span>
+<span class="theme-kakomon-link">過去問を見る (125)</span>
+</div>
+</div>
+<span class="theme-card-chevron">›</span>
+</a>
+<a class="theme-card" href="chichuu-densen/">
+<div class="theme-icon-wrap">◎</div>
+<div class="theme-card-body">
+<h3>地中電線路</h3>
+<p>ケーブルの施設方法、埋設深さ、防護管などをまとめています。</p>
+<div class="theme-card-footer">
+<span>📄 条文: 第61条〜第66条</span>
+<span class="theme-kakomon-link">過去問を見る (74)</span>
+</div>
+</div>
+<span class="theme-card-chevron">›</span>
+</a>
+<a class="theme-card" href="hogo-sochi/">
+<div class="theme-icon-wrap">🛡</div>
+<div class="theme-card-body">
+<h3>保護装置</h3>
+<p>過電流遮断器、漏電遮断器、継電器の施設などをまとめています。</p>
+<div class="theme-card-footer">
+<span>📄 条文: 第67条〜第76条</span>
+<span class="theme-kakomon-link">過去問を見る (132)</span>
+</div>
+</div>
+<span class="theme-card-chevron">›</span>
+</a>
+<a class="theme-card" href="kosakubutsu-bunrui/">
+<div class="theme-icon-wrap">⊞</div>
+<div class="theme-card-body">
+<h3>電気工作物の分類</h3>
+<p>電気工作物の定義、事業用電気工作物、一般用電気工作物の分類をまとめています。</p>
+<div class="theme-card-footer">
+<span>📄 条文: 第1条〜第3条</span>
+<span class="theme-kakomon-link">過去問を見る (47)</span>
+</div>
+</div>
+<span class="theme-card-chevron">›</span>
+</a>
+</div>
 
-毎年〜隔年で出題。最優先で押さえる。
-
-| テーマ | 主な条文・キーワード | 頻出度 | 概要 |
-|--------|---------------------|--------|------|
-| [接地工事](setsuchi.md) | 省令11条, 解釈17〜19条 | ★★★★★ | A/B/C/D種接地の抵抗値・施工条件・省略条件。数値問題の定番 |
-| [絶縁性能・耐圧試験](zetsuen.md) | 省令5条,58条, 解釈14〜16条 | ★★★★★ | 絶縁抵抗値・耐電圧試験の基準。対地電圧別の数値が頻出 |
-| [架空電線路](kachiku-densen.md) | 解釈68〜109条 | ★★★★★ | 電線の高さ・離隔距離・強度計算。数値の暗記量が多い |
-| [電気事業法の体系](jigyoho-taikei.md) | 事業法38〜57条 | ★★★★★ | 事業用電気工作物の技術基準適合義務・保安規程・主任技術者制度 |
-| [電気施設管理](shisetsu-kanri.md) | 報告規則, 施設管理全般 | ★★★★★ | 需要率・負荷率・力率改善・電力損失計算。計算問題で出題 |
-
----
-
-## 頻出（★★★★☆）
-
-2〜3年に1回出題。確実に得点源にしたい。
-
-| テーマ | 主な条文・キーワード | 頻出度 | 概要 |
-|--------|---------------------|--------|------|
-| [分散型電源・系統連系](bunsan-dengen.md) | 解釈220〜232条 | ★★★★☆ | 太陽光・風力等の連系要件。逆潮流・単独運転防止・保護協調 |
-| [保護装置（過電流・地絡）](hogo-sochi.md) | 省令14〜15条, 解釈33〜42条 | ★★★★☆ | 過電流遮断器・地絡遮断器の設置条件・動作時間・省略条件 |
-| [配線工事](haisen-koji.md) | 解釈156〜192条 | ★★★★☆ | 低圧屋内配線の工事方法・電線の選定・施設条件 |
-| [電気使用場所](shiyo-basho.md) | 省令56〜78条, 解釈143〜200条 | ★★★★☆ | 住宅の対地電圧150V制限・引込線・幹線・分岐回路の設計 |
-
----
-
-## 標準（★★★☆☆）
-
-3〜5年に1回出題。基本概念を理解しておけば対応可能。
-
-| テーマ | 主な条文・キーワード | 頻出度 | 概要 |
-|--------|---------------------|--------|------|
-| [支持物・基礎](shijimono.md) | 解釈59〜67条 | ★★★☆☆ | 電柱・鉄塔の種類・強度計算・風圧荷重の安全率 |
-| [発変電所](hatsuhendenjo.md) | 省令9〜13条, 解釈22〜52条 | ★★★☆☆ | 発電所・変電所のさく・へいの施設・機器配置・保護装置 |
-| [地中電線路](chichuu-densen.md) | 解釈120〜142条 | ★★★☆☆ | 地中ケーブルの埋設深さ・管路方式・暗きょ方式 |
-| [特殊場所](tokushu-basho.md) | 解釈175〜192条 | ★★★☆☆ | 粉じん危険場所・可燃性ガス場所・火薬庫の施設制限 |
-| [電線・ケーブル](densen-cable.md) | 解釈3〜12条 | ★★★☆☆ | 電線の種類（IV,VVF,CV等）・許容電流・ケーブルの選定 |
-| [用語の定義](yogo-teigi.md) | 省令1〜2条, 解釈1〜2条 | ★★★☆☆ | 電圧区分（低圧/高圧/特別高圧）・電路・電気工作物の定義 |
-| [電気工作物の分類](kosakubutsu-bunrui.md) | 事業法第38条, 施行規則第48条 | ★★★☆☆ | 一般用/自家用/電気事業用の判定基準・小出力発電設備・主任技術者不要の条件 |
-| [電気主任技術者](shunin-gijutsusha.md) | 事業法43〜44条 | ★★★☆☆ | 選任義務・資格種別ごとの範囲・外部委託制度 |
-
----
-
-## テーマ横断の学習ポイント
-
-- **数値問題**: 接地工事・絶縁性能・架空電線路 の3テーマで全体の4割を占める
-- **計算問題**: 電気施設管理（需要率・負荷率）は毎年B問題で出題
-- **制度問題**: 電気事業法の体系は穴埋め形式で出題されやすい
-- **近年の傾向**: 分散型電源（太陽光・蓄電池）の出題が増加傾向
-
----
-
-*最終更新: 2026-03-30 | v1.0（全16テーマ完全版達成）*
+<div class="theme-tip-banner">
+<div class="theme-tip-text">
+<div class="theme-tip-title">⭐ テーマの学習方法</div>
+各テーマの「条文」「解説」「関連条文」「過去問へのリンク」を活用して、理解を深めましょう。
+</div>
+<a class="theme-tip-btn" href="../strategies/">学習ガイドを見る →</a>
+</div>

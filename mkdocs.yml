@@ -12,16 +12,16 @@ theme:
   language: ja
   palette:
     - scheme: default
-      primary: teal
-      accent: deep orange
+      primary: custom
+      accent: custom
       toggle:
-        icon: material/brightness-7
+        icon: material/brightness-4
         name: ダークモードに切り替え
     - scheme: slate
       primary: teal
       accent: deep orange
       toggle:
-        icon: material/brightness-4
+        icon: material/brightness-7
         name: ライトモードに切り替え
   features:
     - navigation.tabs
@@ -84,6 +84,7 @@ extra_css:
 
 extra_javascript:
   - https://unpkg.com/mermaid@10/dist/mermaid.min.js
+  - javascripts/theme-filter.js
 
 extra:
   social:
