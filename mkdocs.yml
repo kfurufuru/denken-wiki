@@ -14,15 +14,6 @@ theme:
     - scheme: default
       primary: custom
       accent: custom
-      toggle:
-        icon: material/brightness-4
-        name: ダークモードに切り替え
-    - scheme: slate
-      primary: teal
-      accent: deep orange
-      toggle:
-        icon: material/brightness-7
-        name: ライトモードに切り替え
   features:
     - navigation.tabs
     - navigation.tabs.sticky

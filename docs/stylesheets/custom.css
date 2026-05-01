@@ -59,31 +59,31 @@
 
 /* ===== Light Theme Color Variables ===== */
 [data-md-color-scheme="default"] {
-  --md-primary-fg-color:        #2F6F73;
-  --md-primary-fg-color--light: #4A8C90;
-  --md-primary-fg-color--dark:  #1F4F52;
+  --md-primary-fg-color:        #2E8B8E;
+  --md-primary-fg-color--light: #5BB8BB;
+  --md-primary-fg-color--dark:  #1F6568;
   --md-primary-bg-color:        #FFFFFF;
-  --md-accent-fg-color:         #3B6EA8;
-  --md-default-bg-color:        #F7F5EF;
-  --md-default-fg-color:        #1F2933;
-  --md-typeset-a-color:         #3B6EA8;
-  --md-code-bg-color:           #FFFFFF;
-  --color-bg:        #F7F5EF;
+  --md-accent-fg-color:         #3A7FC0;
+  --md-default-bg-color:        #F8F8F6;
+  --md-default-fg-color:        #2C3A45;
+  --md-typeset-a-color:         #2B6CB0;
+  --md-code-bg-color:           #F4F4F2;
+  --color-bg:        #F8F8F6;
   --color-surface:   #FFFFFF;
-  --color-text:      #1F2933;
-  --color-muted:     #5F6B7A;
-  --color-primary:   #2F6F73;
-  --color-link:      #3B6EA8;
-  --color-highlight: #FFF3B0;
-  --color-border:    #E5E1D8;
+  --color-text:      #2C3A45;
+  --color-muted:     #637080;
+  --color-primary:   #2E8B8E;
+  --color-link:      #2B6CB0;
+  --color-highlight: #FFF9C4;
+  --color-border:    #E4E2D9;
 }
 
-[data-md-color-scheme="default"] .md-header { background-color: #2F6F73 !important; }
-[data-md-color-scheme="default"] .md-tabs   { background-color: #2F6F73 !important; }
+[data-md-color-scheme="default"] .md-header { background-color: #2E8B8E !important; }
+[data-md-color-scheme="default"] .md-tabs   { background-color: #2E8B8E !important; }
 
 [data-md-color-scheme="default"] .md-main__inner,
 [data-md-color-scheme="default"] .md-content {
-  background-color: #F7F5EF;
+  background-color: #F8F8F6;
 }
 
 /* ===== Theme Card Grid ===== */
