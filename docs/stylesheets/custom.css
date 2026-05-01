@@ -295,3 +295,14 @@
   border-radius: 999px;
   margin: 0.3rem 0 0.5rem;
 }
+
+/* TOC sidebar — compact & readable for long Japanese headings */
+.md-sidebar--secondary .md-nav__link {
+  font-size: 0.75rem;
+  padding: 0.3rem 0.6rem;
+  word-break: break-word;
+  line-height: 1.4;
+}
+.md-sidebar--secondary .md-nav__list {
+  line-height: 1.3;
+}
