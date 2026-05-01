@@ -1,3 +1,5 @@
+localStorage.removeItem('/denken-wiki/.__palette');
+
 document.addEventListener('DOMContentLoaded', function () {
   var input = document.getElementById('theme-search-input');
   if (!input) return;
