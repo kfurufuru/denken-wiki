@@ -377,89 +377,204 @@ flowchart TD
 
 ---
 
-### 7-2. 調整池式：1日の貯水と運用
+### 7-2. 調整池式：1日の貯水と放流サイクル
 
 対応過去問: 調整池水力発電所の運転管理🔁／調整池式水力発電所の貯水量・発電電力🔁／調整池式水力発電の発電電力量と流量🔁
 
-#### なぜ出る？
+#### まず絵で理解：1日の流量と貯水量
 
-調整池で1日の流量を平準化し、ピーク時間に多めに発電する運用。需要の山谷に合わせる**ピーク追従運転**の基本パターン。
+河川は **1日中ほぼ一定の流量** で流れ込む（雨が降らない限り）。しかし電力需要は昼ピーク・夜オフピークで大きく変動する。**調整池はこのギャップを吸収するバッファ**。オフピーク時に溜めて、ピーク時に一気に放流する。
 
-#### 解法テンプレート
+<div>
+<svg viewBox="0 0 720 360" xmlns="http://www.w3.org/2000/svg" style="max-width:720px;width:100%;height:auto;">
+  <!-- 上段：流量グラフ -->
+  <text x="360" y="20" text-anchor="middle" font-size="13" fill="#0d47a1" font-weight="bold">上段：放流量の時間変化（ピーク時に一気に放流）</text>
+  <line x1="80" y1="140" x2="660" y2="140" stroke="#333" stroke-width="2"/>
+  <line x1="80" y1="40" x2="80" y2="140" stroke="#333" stroke-width="2"/>
+  <text x="360" y="158" text-anchor="middle" font-size="11" fill="#333">時刻</text>
+  <text x="40" y="90" text-anchor="middle" font-size="11" fill="#333" transform="rotate(-90 40 90)">流量 [m³/s]</text>
+  <!-- 横軸目盛 -->
+  <line x1="80" y1="140" x2="80" y2="143" stroke="#333"/><text x="80" y="155" text-anchor="middle" font-size="10">0時</text>
+  <line x1="280" y1="140" x2="280" y2="143" stroke="#333"/><text x="280" y="155" text-anchor="middle" font-size="10">9時</text>
+  <line x1="350" y1="140" x2="350" y2="143" stroke="#333"/><text x="350" y="155" text-anchor="middle" font-size="10">12時</text>
+  <line x1="420" y1="140" x2="420" y2="143" stroke="#333"/><text x="420" y="155" text-anchor="middle" font-size="10">15時</text>
+  <line x1="660" y1="140" x2="660" y2="143" stroke="#333"/><text x="660" y="155" text-anchor="middle" font-size="10">24時</text>
+  <!-- 河川流入量 Q_in（一定線） -->
+  <line x1="80" y1="115" x2="660" y2="115" stroke="#1976d2" stroke-width="2" stroke-dasharray="4 3"/>
+  <text x="666" y="119" font-size="11" fill="#1976d2" font-weight="bold">Q_in</text>
+  <text x="666" y="131" font-size="9" fill="#1976d2">河川流入量</text>
+  <!-- ピーク放流量 Q_peak（9時〜15時） -->
+  <rect x="280" y="60" width="140" height="80" fill="#ffcdd2" stroke="#c62828" stroke-width="2"/>
+  <text x="350" y="55" text-anchor="middle" font-size="11" fill="#c62828" font-weight="bold">Q_peak（ピーク放流）</text>
+  <line x1="80" y1="60" x2="660" y2="60" stroke="#c62828" stroke-width="1" stroke-dasharray="2 2" opacity="0.4"/>
+  <text x="666" y="64" font-size="11" fill="#c62828" font-weight="bold">Q_peak</text>
+  <!-- オフピーク放流量（少量、または0） -->
+  <line x1="80" y1="135" x2="280" y2="135" stroke="#9e9e9e" stroke-width="2"/>
+  <line x1="420" y1="135" x2="660" y2="135" stroke="#9e9e9e" stroke-width="2"/>
+  <text x="180" y="125" text-anchor="middle" font-size="10" fill="#616161">オフピーク（貯水中）</text>
+  <text x="540" y="125" text-anchor="middle" font-size="10" fill="#616161">オフピーク（貯水中）</text>
+
+  <!-- 下段：貯水量グラフ -->
+  <text x="360" y="195" text-anchor="middle" font-size="13" fill="#1b5e20" font-weight="bold">下段：調整池の貯水量（オフピークで溜め、ピークで放出）</text>
+  <line x1="80" y1="320" x2="660" y2="320" stroke="#333" stroke-width="2"/>
+  <line x1="80" y1="220" x2="80" y2="320" stroke="#333" stroke-width="2"/>
+  <text x="360" y="338" text-anchor="middle" font-size="11" fill="#333">時刻</text>
+  <text x="40" y="270" text-anchor="middle" font-size="11" fill="#333" transform="rotate(-90 40 270)">貯水量 V [m³]</text>
+  <!-- 貯水量曲線：0〜9時 上昇、9〜15時 急落、15〜24時 上昇 -->
+  <line x1="80" y1="290" x2="280" y2="245" stroke="#2e7d32" stroke-width="3"/>
+  <line x1="280" y1="245" x2="420" y2="305" stroke="#2e7d32" stroke-width="3"/>
+  <line x1="420" y1="305" x2="660" y2="260" stroke="#2e7d32" stroke-width="3"/>
+  <!-- ピーク区間ハイライト -->
+  <rect x="280" y="220" width="140" height="100" fill="#fff3e0" opacity="0.4"/>
+  <text x="350" y="240" text-anchor="middle" font-size="10" fill="#bf360c">ピーク時に消費</text>
+  <!-- 必要容量V矢印 -->
+  <line x1="285" y1="245" x2="285" y2="305" stroke="#ef6c00" stroke-width="1.5" marker-end="url(#arrDown)" marker-start="url(#arrUp)"/>
+  <text x="265" y="280" text-anchor="end" font-size="11" fill="#bf360c" font-weight="bold">必要容量V</text>
+  <defs>
+    <marker id="arrUp" viewBox="0 0 10 10" refX="5" refY="1" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,10 L5,0 L10,10 z" fill="#ef6c00"/></marker>
+  </defs>
+</svg>
+</div>
+
+**この絵で押さえるべき3点**:
+
+1. **流入量 Q_in は1日中一定**（青破線）。河川は人間の都合では変わらない。
+2. **放流量はピーク時間（昼9〜15時）に Q_peak で大きく、オフピークは小さい**（赤い箱）。需要追従。
+3. **必要な調整池容量 V** は「ピーク時に流入だけでは足りない分」＝（Q_peak − Q_in）× ピーク時間 × 3600。オフピーク時間に溜める量と等しい（保存則）。
+
+#### 用語の翻訳辞書
+
+| 用語 | 何を意味するか | 試験での読み方 |
+|---|---|---|
+| **河川流入量 Q_in** | 1日中ほぼ一定で池に流れ込む量 | 1日平均流量と同じ |
+| **ピーク放流量 Q_peak** | 需要のピーク時間帯に放流する量 | Q_peak > Q_in が前提 |
+| **ピーク時間 t_peak** | 高出力で発電する時間（典型 3〜6時間） | オフピークは 24 − t_peak |
+| **必要調整池容量 V** | ピーク放流をまかなうために溜めておく必要のある水量 | (Q_peak − Q_in) × t_peak × 3600 [m³] |
+
+#### Step（3つに圧縮）
 
 ```
-【Step 1】問題文から抽出
-  ├─ 河川流入量 Q_in [m³/s]（1日平均）
-  ├─ ピーク時間 t_peak [h]、オフピーク時間 t_off [h]（合計24h）
-  ├─ ピーク時放流量 Q_peak [m³/s]
-  ├─ 有効落差 H [m]、総合効率 η
-  └─ 必要な調整池容量 V [m³]（求める対象）
+【Step 1】1日の流入総量と放流総量を確認（保存則）
+  V_in_total = Q_in × 86400 [m³]  （1日に流れ込む水量）
+  V_out_total = Q_peak × t_peak × 3600 + Q_off × t_off × 3600
+  ※ 保存則: V_in_total = V_out_total（池の水位が1日で同じに戻る場合）
 
-【Step 2】1日の総流入量を計算（秒換算）
-  V_in_total = Q_in × 86400 [m³]
-  ※ 86400 = 24 × 3600
+【Step 2】必要調整池容量
+  V = (Q_peak − Q_in) × t_peak × 3600  [m³]
+  ※ ピーク時に「流入で足りない分」だけ池から取り出す
+  ※ オフピークでこの量が再度溜まる
 
-【Step 3】ピーク時の総放流量を計算
-  V_peak = Q_peak × t_peak × 3600 [m³]
-
-【Step 4】調整池に必要な容量
-  V_pool ≥ V_peak − Q_in × t_peak × 3600
-        = (Q_peak − Q_in) × t_peak × 3600 [m³]
-  ※ オフピークに溜める量と等しい
-
-【Step 5】ピーク時発電出力
+【Step 3】ピーク時発電出力
   P_peak [kW] = 9.8 × Q_peak × H × η
 ```
 
 !!! warning "最頻出ミス"
-    **時間と秒の単位混在**。流量 [m³/s] × 時間 [h] では次元が合わない。必ず時間を秒（×3600）に直してから掛ける。
+    **時間と秒の混在**。流量 [m³/s] × 時間 [h] では次元が合わない。t_peak が「3時間」なら必ず ×3600 で秒に直してから掛ける。
 
-!!! note "実務の背景"
-    調整池容量は「ピーク時の余分流量 × ピーク時間」で決まる。需要のピークが昼の3時間なら、その3時間分の余剰流量を夜間に溜める必要がある。
+!!! tip "速解テクニック"
+    保存則「1日の流入＝1日の放流」を最初に書く。問題文で Q_peak または Q_off が抜けていてもこの式で出せる。
 
 ---
 
-### 7-3. 揚水式：総合効率と所要電力量
+### 7-3. 揚水式：昼夜の電力サイクルと総合効率
 
 対応過去問: 系統に接続する水力発電所の運用 タイプ
 
-#### なぜ出る？
+#### まず絵で理解：揚水発電所は系統の蓄電池
 
-夜間の余剰電力で水を汲み上げ、昼のピークで発電する**蓄電池の代わり**。発電時とポンプ時で効率が異なるため、総合効率の理解が必須。
+夜間（オフピーク）：原子力・石炭火力などのベースロード電源が**余る**。この余剰電力でポンプを回して下池の水を上池へ汲み上げる。  
+昼（ピーク）：電力需要が大きい。汲み上げた水を落として発電し、不足分を補う。
 
-#### 解法テンプレート
+**夜の安い電気 → 昼の高い電気** に変換する装置。系統運用の経済性を支える。
+
+<div>
+<svg viewBox="0 0 720 320" xmlns="http://www.w3.org/2000/svg" style="max-width:720px;width:100%;height:auto;">
+  <defs>
+    <marker id="arrPump" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#1976d2"/></marker>
+    <marker id="arrGen" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#c62828"/></marker>
+  </defs>
+  <!-- タイトル -->
+  <text x="360" y="18" text-anchor="middle" font-size="14" fill="#0d47a1" font-weight="bold">系統需要と揚水発電所の動作（24時間サイクル）</text>
+  <!-- 系統需要曲線 -->
+  <line x1="80" y1="240" x2="660" y2="240" stroke="#333" stroke-width="2"/>
+  <line x1="80" y1="40" x2="80" y2="240" stroke="#333" stroke-width="2"/>
+  <text x="360" y="262" text-anchor="middle" font-size="11" fill="#333">時刻</text>
+  <text x="40" y="140" text-anchor="middle" font-size="11" fill="#333" transform="rotate(-90 40 140)">系統需要 [kW]</text>
+  <!-- 横軸目盛 -->
+  <line x1="80" y1="240" x2="80" y2="243" stroke="#333"/><text x="80" y="255" text-anchor="middle" font-size="10">0時</text>
+  <line x1="220" y1="240" x2="220" y2="243" stroke="#333"/><text x="220" y="255" text-anchor="middle" font-size="10">6時</text>
+  <line x1="360" y1="240" x2="360" y2="243" stroke="#333"/><text x="360" y="255" text-anchor="middle" font-size="10">12時</text>
+  <line x1="500" y1="240" x2="500" y2="243" stroke="#333"/><text x="500" y="255" text-anchor="middle" font-size="10">18時</text>
+  <line x1="660" y1="240" x2="660" y2="243" stroke="#333"/><text x="660" y="255" text-anchor="middle" font-size="10">24時</text>
+  <!-- 系統需要曲線（昼ピーク・夜谷） -->
+  <path d="M 80 220 Q 150 230, 220 215 Q 290 130, 360 90 Q 430 100, 500 110 Q 580 200, 660 215" fill="none" stroke="#0d47a1" stroke-width="2.5"/>
+  <!-- ベースロード水平線 -->
+  <line x1="80" y1="180" x2="660" y2="180" stroke="#666" stroke-width="1.5" stroke-dasharray="4 3"/>
+  <text x="666" y="184" font-size="10" fill="#666">ベースロード</text>
+  <!-- 夜（揚水）区間ハイライト -->
+  <rect x="80" y="180" width="170" height="60" fill="#bbdefb" opacity="0.5"/>
+  <text x="165" y="208" text-anchor="middle" font-size="11" fill="#0d47a1" font-weight="bold">夜：余剰電力</text>
+  <text x="165" y="222" text-anchor="middle" font-size="10" fill="#0d47a1">→ 揚水（W_p消費）</text>
+  <!-- 昼（発電）区間ハイライト -->
+  <rect x="290" y="40" width="170" height="140" fill="#ffcdd2" opacity="0.5"/>
+  <text x="375" y="60" text-anchor="middle" font-size="11" fill="#c62828" font-weight="bold">昼：需要ピーク</text>
+  <text x="375" y="74" text-anchor="middle" font-size="10" fill="#c62828">→ 発電（W_g供給）</text>
+  <!-- 矢印（夜揚水→昼発電） -->
+  <path d="M 165 175 Q 250 130, 375 130" fill="none" stroke="#666" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#arrGen)"/>
+  <text x="280" y="120" text-anchor="middle" font-size="10" fill="#666">エネルギー時刻シフト</text>
+  <!-- 下部：効率の関係式 -->
+  <line x1="80" y1="285" x2="660" y2="285" stroke="#999" stroke-width="0.5"/>
+  <text x="360" y="305" text-anchor="middle" font-size="13" fill="#0d47a1" font-weight="bold">η_total = W_g / W_p = (H_g × η_g × η_p) / H_p ≈ 0.65〜0.75</text>
+</svg>
+</div>
+
+**この絵で押さえるべき3点**:
+
+1. **夜の余剰電力 W_p で揚水**（青箱）→ 水のポテンシャルエネルギーに変換して上池に蓄える
+2. **昼のピーク需要に W_g で発電**（赤箱）→ 上池の水を落として電気に戻す
+3. **W_g < W_p**（往復で必ず損失）。比率が **総合効率 η_total ≈ 0.65〜0.75**（蓄電池でいう充放電効率）
+
+#### 用語の翻訳辞書（H_g と H_p の使い分けが命）
+
+| 用語 | 何を意味するか | 注意 |
+|---|---|---|
+| **有効落差 H_g** | 発電時、水が落下する有効な高さ | 上池-下池の差から **管路損失を引く**。「使える落差」 |
+| **全揚程 H_p** | 揚水時、ポンプが水を持ち上げる総高さ | 上池-下池の差に **管路損失を足す**。「実際に必要な持ち上げ高さ」 |
+| **発電効率 η_g** | 水の運動E → 電気E の変換効率 | 水車効率 × 発電機効率 |
+| **ポンプ効率 η_p** | 電気E → 水のポテンシャルE の変換効率 | ポンプ効率 × 電動機効率 |
+| **揚水総合効率 η_total** | 同水量を循環させたときの W_g / W_p | (H_g × η_g × η_p) / H_p |
+
+**H_g < H_p が必ず成立**（管路損失は引く・足すの両方で効くため）。
+
+#### なぜポンプ時の効率は「分母」なのか
+
+- 発電時：水のエネルギー × η_g = 電気エネルギー → **電気側は η_g 倍に減る**（η_g を掛ける）
+- 揚水時：必要な仕事 / η_p = 電気の入力 → **電気側は 1/η_p 倍に増える**（η_p で割る）
+
+「**得る側に掛ける、消費する側で割る**」が普遍ルール。揚水でも発電でも同じ。
+
+#### Step（3つに圧縮）
 
 ```
-【Step 1】問題文から抽出
-  ├─ 発電時の有効落差 H_g [m]、ポンプ時の全揚程 H_p [m]
-  │   ※ H_p ≥ H_g（管路損失で揚水時のほうが大きい）
-  ├─ 発電時総合効率 η_g（= 水車 × 発電機）
-  ├─ ポンプ時総合効率 η_p（= ポンプ × 電動機）
-  ├─ 発電電力量 W_g [kWh] または発電時間 t_g [h] と出力 P_g [kW]
-  └─ 揚水量 V [m³] または揚水時間 t_p [h]
-
-【Step 2】発電電力量を計算（発電時）
+【Step 1】発電時の電力量
   P_g [kW] = 9.8 × Q_g × H_g × η_g
   W_g [kWh] = P_g × t_g
 
-【Step 3】揚水所要電力量を計算（ポンプ時）
+【Step 2】揚水時の所要電力量（同じ水量を循環）
   P_p [kW] = 9.8 × Q_p × H_p ÷ η_p
   W_p [kWh] = P_p × t_p
-  ※ ポンプは電気を機械に変えるので η は分母
+  ※ ポンプは消費側なので η_p は分母
 
-【Step 4】揚水総合効率
+【Step 3】総合効率
   η_total = W_g ÷ W_p
-          = (Q_g × H_g × η_g × t_g) ÷ (Q_p × H_p ÷ η_p × t_p)
-
-  同水量を循環させる場合（Q_g × t_g = Q_p × t_p = V/3600）:
-  η_total = (H_g × η_g × η_p) ÷ H_p
+  同水量循環時: η_total = (H_g × η_g × η_p) / H_p
 ```
 
 !!! warning "最頻出ミス"
-    **H_g と H_p の混同**。発電時は有効落差（管路損失を引く）、揚水時は実揚程（管路損失を足す）。同じ「落差」と書かれていても物理的に別物。問題文で「発電時◯◯m、揚水時◯◯m」と分けて与えられたら必ず使い分ける。
+    **H_g と H_p の混同**。問題文で「発電時 H_g = 〇〇 m、揚水時 H_p = 〇〇 m」と分けて与えられたら必ず使い分ける。**H_g に η_p を掛けて η_g を割る** など、効率の対応も間違えない。
 
 !!! tip "速解テクニック"
-    揚水総合効率の典型値は **0.65〜0.75**。0.5以下や0.9以上は計算ミスの可能性大。
+    総合効率 0.65〜0.75 は「夜の電気 1.5 kWh 使って、昼に 1 kWh 取り戻す」イメージ。0.5 以下や 0.9 以上が出たら計算ミス。
 
 ---
 
