@@ -67,27 +67,49 @@ def build_admonition(n: int) -> str:
 H1_RE = re.compile(r"^# [^#].*$", re.M)
 
 
+# 手書きの standalone「**出題頻度**: ...」行を検出
+# - h1直後の行頭から始まるもの（インデント無し）が対象
+# - メタブロック内の `    - **出題頻度**: ...` は4スペース字下げのため対象外
+# - フォーマット多様（"N回/14年 ★..."、"N〜M回/14年"、"高 ★..."、"R01, H30(N回) ★..."、
+#   "1回/22年 ★..." など）に対応するため、行頭 `**出題頻度**` 全体を貪欲削除
+HANDWRITTEN_FREQ_RE = re.compile(
+    r"^\*\*出題頻度\*\*[:：][^\n]*\n", re.MULTILINE
+)
+
+
 def inject_into_article(path: Path, n: int) -> tuple[bool, str]:
-    """条文 Markdown に admonition を注入する。
+    """条文 Markdown に admonition を注入し、手書きの出題頻度行があれば削除する。
     戻り値: (変更したか, 理由)
     """
     text = path.read_text(encoding="utf-8")
-    if "試験対策メタ" in text:
-        return False, "skip:already-has-meta"
-    m = H1_RE.search(text)
-    if not m:
-        return False, "skip:no-h1"
+    original_text = text
+    actions = []
 
-    h1_end = m.end()
-    # h1 の直後が空行であることを期待。スキップして最初の本文行直前に挿入。
-    # 戦略: h1 直後 → 空行 → 注入ブロック → 空行 → 既存続き
-    insert = "\n\n" + build_admonition(n) + "\n"
-    new_text = text[:h1_end] + insert + text[h1_end:]
-    # 空行の重複を防ぐ: もし既存テキストの直後がすでに "\n\n" 始まりなら "\n" を1つ削る
-    # シンプルに正規化: "\n{3,}" -> "\n\n"
-    new_text = re.sub(r"\n{3,}", "\n\n", new_text)
-    path.write_text(new_text, encoding="utf-8")
-    return True, "injected"
+    # 1. 手書きの「**出題頻度**: N回/14年 ★...」行を削除（矛盾の温床）
+    text_after_strip = HANDWRITTEN_FREQ_RE.sub("", text)
+    if text_after_strip != text:
+        text = text_after_strip
+        actions.append("stripped-handwritten-freq")
+
+    # 2. メタ未注入なら admonition を注入
+    if "試験対策メタ" not in text:
+        m = H1_RE.search(text)
+        if m:
+            h1_end = m.end()
+            insert = "\n\n" + build_admonition(n) + "\n"
+            text = text[:h1_end] + insert + text[h1_end:]
+            actions.append("injected-meta")
+        else:
+            if not actions:
+                return False, "skip:no-h1"
+
+    # 3. 空行の重複を整理
+    text = re.sub(r"\n{3,}", "\n\n", text)
+
+    if text != original_text:
+        path.write_text(text, encoding="utf-8")
+        return True, "+".join(actions) if actions else "normalized"
+    return False, "skip:already-has-meta"
 
 
 def update_index(counts: dict[Path, int]) -> int:
