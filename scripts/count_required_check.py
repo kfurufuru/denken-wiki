@@ -92,11 +92,64 @@ def report(results, total):
         print(f"| {rel} | {len(entries)} |")
 
 
+def export_tasks(results, out_path: Path):
+    """人手必須カテゴリのみ抽出して朝のタスクリスト形式で出力"""
+    AUTO_OK = {"リンク先未作成"}
+    by_category = defaultdict(list)  # category -> [(file, line_no, line)]
+    for path, entries in results.items():
+        for line_no, line, cat in entries:
+            if cat in AUTO_OK:
+                continue
+            by_category[cat].append((path, line_no, line))
+
+    total_manual = sum(len(v) for v in by_category.values())
+
+    lines = [
+        "---",
+        "date: 2026-05-03",
+        "type: morning-tasks",
+        "title: denken-wiki [要確認]フラグ朝タスクリスト",
+        "---",
+        "",
+        "# denken-wiki [要確認]フラグ朝タスクリスト",
+        "",
+        f"**人手対応必須: {total_manual}件**（リンク先未作成カテゴリは除外）",
+        "",
+        "出典: `python scripts/count_required_check.py` 実行結果",
+        "",
+        "## 優先順位",
+        "",
+        "1. **条文原文**（eGov公式照合）— wiki信頼性の核心",
+        "2. **条番号**（2013年改正マッピング）— wiki誤誘導防止",
+        "3. **数値**（地域別規定含む）— 試験対策の正確性",
+        "4. **その他** — 個別判断",
+        "",
+    ]
+
+    # カテゴリ別に出力（優先順位順）
+    priority = ["条文原文", "条番号", "数値", "地域別規定", "その他"]
+    for cat in priority:
+        if cat not in by_category:
+            continue
+        lines.append(f"## {cat}（{len(by_category[cat])}件）")
+        lines.append("")
+        for path, line_no, line in sorted(by_category[cat]):
+            rel = path.relative_to(path.parents[2]) if len(path.parents) >= 3 else path.name
+            short = line[:80] + ("..." if len(line) > 80 else "")
+            lines.append(f"- [ ] `{rel}:{line_no}` — {short}")
+        lines.append("")
+
+    out_path.write_text("\n".join(lines), encoding="utf-8")
+    print(f"\n✅ {total_manual}件の朝タスクを {out_path} に出力", file=sys.stderr)
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--root", default="docs/articles", help="走査ルート")
     ap.add_argument("--threshold", type=int, default=None,
                     help="件数がこの値を超えたら exit 1")
+    ap.add_argument("--export", type=str, default=None,
+                    help="人手必須項目をMarkdownタスクリストとして出力するパス")
     args = ap.parse_args()
 
     root = Path(args.root)
@@ -106,6 +159,9 @@ def main():
 
     results, total = scan(root)
     report(results, total)
+
+    if args.export:
+        export_tasks(results, Path(args.export))
 
     if args.threshold is not None and total > args.threshold:
         print(f"\n❌ {total}件 > 閾値{args.threshold}件", file=sys.stderr)
