@@ -33,9 +33,11 @@ def parse_page(path):
     # 出題頻度（行頭・非インデントの standalone 行を優先。
     # linter追加の `!!! abstract` 内の絵文字行は4スペース字下げのため除外）
     m = re.search(r"^\*\*出題頻度\*\*[:：]\s*(.+)", text, re.MULTILINE)
+    auto_meta_only = False
     if not m:
-        # フォールバック: インデントを許容して最初の出題頻度行を読む
+        # フォールバック: インデントを許容して最初の出題頻度行を読む（=自動注入メタのみ）
         m = re.search(r"\*\*出題頻度\*\*[:：]\s*(.+)", text)
+        auto_meta_only = True
     freq_line = m.group(1) if m else ""
     # 星の数
     stars_m = re.search(r"(★+☆*)", freq_line)
@@ -58,7 +60,7 @@ def parse_page(path):
                 cols = [c for c in line.split("|") if c.strip()]
                 if cols and re.match(r"^[HR]\d", cols[0].strip()):
                     actual += 1
-    return {"freq_line": freq_line, "stars": stars, "low": low, "high": high, "actual": actual}
+    return {"freq_line": freq_line, "stars": stars, "low": low, "high": high, "actual": actual, "auto_meta_only": auto_meta_only}
 
 def main():
     pages = sorted(KIJUN.glob("*.md"))
@@ -77,6 +79,10 @@ def main():
             within = True
             stars_ok = True
             exp = d["stars"] if d["stars"] else exp
+        # 自動注入メタのみのページは ★ ではなく 🔥 表記なので星照合を免除（件数のみ照合）
+        if d["auto_meta_only"]:
+            stars_ok = True
+            exp = d["stars"] if d["stars"] else "(自動メタ)"
         verdict = "OK" if (within and stars_ok) else "NG"
         if not within or not stars_ok:
             issues.append((p.name, d, exp))
