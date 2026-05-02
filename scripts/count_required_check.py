@@ -1,0 +1,116 @@
+#!/usr/bin/env python3
+"""
+[要確認]フラグ集計レポート
+
+denken-wiki 全条文ファイルから `[要確認]` フラグを抽出し、
+- ファイル別件数
+- 内容カテゴリ（条文原文 / 数値 / 条番号 / リンク先 / その他）
+- 全体サマリ
+を出力する。
+
+使い方:
+  python scripts/count_required_check.py
+
+CI連携時:
+  python scripts/count_required_check.py --threshold 30
+  → 件数が threshold を超えたら exit code 1
+"""
+import re
+import sys
+import io
+import argparse
+from pathlib import Path
+from collections import defaultdict
+
+# Windows コンソール対策
+if sys.stdout.encoding != "utf-8":
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8")
+
+# カテゴリ判定キーワード
+CATEGORIES = {
+    "条文原文": ["e-Gov公式の本文", "e-Gov", "eGov", "本文をここに転記"],
+    "条番号": ["条番号", "§", "解釈第", "省令第", "kakomon.yml", "kaishaku"],
+    "数値": ["数値", "Ω", "kV", "%", "MΩ", "回/14年"],
+    "リンク先未作成": ["は未作成", "未作成", "作成予定"],
+    "地域別規定": ["地域別", "北日本", "凍結"],
+}
+
+
+def categorize(line: str) -> str:
+    """[要確認]フラグの内容を5カテゴリに分類"""
+    for cat, keywords in CATEGORIES.items():
+        if any(kw in line for kw in keywords):
+            return cat
+    return "その他"
+
+
+def scan(root: Path):
+    """全 .md ファイルから [要確認] を抽出"""
+    results = defaultdict(list)  # file_path -> [(line_no, line, category), ...]
+    total = 0
+    for md_path in root.rglob("*.md"):
+        if "site/" in str(md_path) or ".claude/" in str(md_path):
+            continue
+        try:
+            with open(md_path, encoding="utf-8") as f:
+                for i, line in enumerate(f, 1):
+                    if "[要確認" in line:
+                        cat = categorize(line)
+                        results[md_path].append((i, line.strip(), cat))
+                        total += 1
+        except Exception as e:
+            print(f"WARN: {md_path}: {e}", file=sys.stderr)
+    return results, total
+
+
+def report(results, total):
+    """レポート出力"""
+    print(f"# [要確認]フラグ集計レポート")
+    print(f"\n**全件数: {total}件**\n")
+
+    # カテゴリ別集計
+    cat_count = defaultdict(int)
+    for entries in results.values():
+        for _, _, cat in entries:
+            cat_count[cat] += 1
+
+    print("## カテゴリ別内訳\n")
+    print("| カテゴリ | 件数 | 自動解消可否 |")
+    print("|---------|------|------------|")
+    auto_ok = {"リンク先未作成"}  # 放置可
+    for cat in sorted(cat_count.keys(), key=lambda k: -cat_count[k]):
+        marker = "✅放置可" if cat in auto_ok else "❌人手必須"
+        print(f"| {cat} | {cat_count[cat]} | {marker} |")
+
+    # ファイル別トップ
+    print("\n## ファイル別件数（多い順 トップ10）\n")
+    sorted_files = sorted(results.items(), key=lambda kv: -len(kv[1]))[:10]
+    print("| ファイル | 件数 |")
+    print("|---------|------|")
+    for path, entries in sorted_files:
+        rel = path.relative_to(path.parents[2]) if len(path.parents) >= 3 else path.name
+        print(f"| {rel} | {len(entries)} |")
+
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--root", default="docs/articles", help="走査ルート")
+    ap.add_argument("--threshold", type=int, default=None,
+                    help="件数がこの値を超えたら exit 1")
+    args = ap.parse_args()
+
+    root = Path(args.root)
+    if not root.exists():
+        print(f"ERROR: {root} not found", file=sys.stderr)
+        sys.exit(2)
+
+    results, total = scan(root)
+    report(results, total)
+
+    if args.threshold is not None and total > args.threshold:
+        print(f"\n❌ {total}件 > 閾値{args.threshold}件", file=sys.stderr)
+        sys.exit(1)
+
+
+if __name__ == "__main__":
+    main()
