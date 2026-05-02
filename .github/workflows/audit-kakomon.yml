@@ -92,6 +92,16 @@ jobs:
             --body "$BODY" \
             --label audit
 
+      - name: Auto-close stale audit issues (mismatch解消確認)
+        if: steps.filter.outputs.real_count == '0'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh issue list --label audit --state open --json number --jq '.[].number' | while read n; do
+            [ -z "$n" ] && continue
+            gh issue close "$n" --comment "監査再実行で不一致解消を確認（$(date -u +%Y-%m-%d) auto-audit）"
+          done
+
       - name: Upload artifacts
         if: always()
         uses: actions/upload-artifact@v4
