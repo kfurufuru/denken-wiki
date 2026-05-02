@@ -1506,10 +1506,10 @@ problems:
   - year: "R06下"
     year_label: "令和6年下期（2024年）"
     num: 7
-    topic: "分散型電源における再閉路時の事故防止"
+    topic: "高圧又は特別高圧連系における再閉路時の事故防止"
     theme: "bunsan-dengen"
     form: "穴埋"
-    article: "解釈§227"
+    article: "解釈§224"
   - year: "R06下"
     year_label: "令和6年下期（2024年）"
     num: 8
@@ -1601,7 +1601,7 @@ problems:
     topic: "高圧連系時の系統連系用保護装置"
     theme: "bunsan-dengen"
     form: "穴埋"
-    article: "解釈§227"
+    article: "解釈§229"
   - year: "R07上"
     year_label: "令和7年上期（2025年）"
     num: 8

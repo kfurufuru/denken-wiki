@@ -1,0 +1,101 @@
+name: Audit kakomon.yml
+
+on:
+  schedule:
+    # 月初 9:00 JST = 0:00 UTC
+    - cron: '0 0 1 * *'
+  workflow_dispatch:
+    # 手動実行も可
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install deps
+        run: pip install pyyaml
+
+      - name: Run external audit
+        id: audit
+        run: |
+          mkdir -p inbox
+          python scripts/audit_kakomon.py --all --delay 1.5 \
+            --json inbox/audit-mismatches.json || true
+          echo "mismatch_count=$(python -c "import json; print(len(json.load(open('inbox/audit-mismatches.json'))))")" >> $GITHUB_OUTPUT
+
+      - name: Filter cache-known mismatches (real bugs only)
+        id: filter
+        run: |
+          python <<'PY' >> $GITHUB_OUTPUT
+          import json, yaml, os
+          mis = json.load(open('inbox/audit-mismatches.json'))
+          try:
+              cache = yaml.safe_load(open('_data/denken-ou-cache.yml',encoding='utf-8')) or {}
+              verified = (cache.get('verified') or {})
+          except FileNotFoundError:
+              verified = {}
+          # キャッシュに登録済みエントリで不一致が出たもの = 法令改正/誤編集の確証
+          real = [m for m in mis if f"{m['year']}-{m['num']}" in verified]
+          # キャッシュ未登録は HTML 簡易パース誤検出の可能性大 → 別レポート
+          unverified = [m for m in mis if f"{m['year']}-{m['num']}" not in verified]
+          json.dump(real, open('inbox/audit-real-issues.json','w'), ensure_ascii=False, indent=2)
+          json.dump(unverified, open('inbox/audit-unverified.json','w'), ensure_ascii=False, indent=2)
+          print(f"real_count={len(real)}")
+          print(f"unverified_count={len(unverified)}")
+          PY
+
+      - name: Ensure audit label exists
+        if: steps.filter.outputs.real_count != '0'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh label create audit --color B60205 --description "kakomon.yml 監査検出" 2>/dev/null || true
+
+      - name: Create issue on real mismatch
+        if: steps.filter.outputs.real_count != '0'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          BODY=$(python <<'PY'
+          import json
+          mis = json.load(open('inbox/audit-real-issues.json'))
+          lines = ["## kakomon.yml 監査で検証済みエントリに不一致を検出", ""]
+          lines.append("外部一次ソース（denken-ou.com）と `_data/denken-ou-cache.yml` の検証済みエントリで不整合が発生。")
+          lines.append("**法令改正または誤編集の可能性**。手動レビューが必要。")
+          lines.append("")
+          lines.append("### 不一致一覧")
+          lines.append("")
+          for m in mis:
+              lines.append(f"- **{m['year']}問{m['num']}**: {m['topic']}")
+              lines.append(f"    - 記録: `{m['recorded']}`")
+              lines.append(f"    - denken-ou: 第{m['denken_ou_article_num']}条")
+              lines.append(f"    - URL: {m['url']}")
+          lines.append("")
+          lines.append("### 対処")
+          lines.append("1. URL を開いて手動確認")
+          lines.append("2. 真に誤登録なら kakomon.yml を修正")
+          lines.append("3. 法令改正なら関連条文ページも更新したうえで `python scripts/audit_kakomon.py --all --cache _data/denken-ou-cache.yml` でキャッシュ再生成")
+          print("\n".join(lines))
+          PY
+          )
+          gh issue create \
+            --title "[audit] kakomon.yml 監査不一致 ${{ steps.filter.outputs.real_count }}件" \
+            --body "$BODY" \
+            --label audit
+
+      - name: Upload artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: audit-results
+          path: inbox/audit-*.json
+          retention-days: 90
