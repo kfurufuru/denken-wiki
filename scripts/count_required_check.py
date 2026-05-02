@@ -37,7 +37,13 @@ CATEGORIES = {
 
 
 def categorize(line: str) -> str:
-    """[要確認]フラグの内容を5カテゴリに分類"""
+    """[要確認]フラグの内容を5カテゴリに分類
+
+    優先判定: HTMLコメント形式 `<!-- [要確認]: ... -->` は
+    放置可（リンク先未作成）として扱う（書式判定が最優先）
+    """
+    if "<!--" in line and "[要確認" in line and "-->" in line:
+        return "リンク先未作成"
     for cat, keywords in CATEGORIES.items():
         if any(kw in line for kw in keywords):
             return cat
