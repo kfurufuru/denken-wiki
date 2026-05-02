@@ -138,6 +138,11 @@ def stay_wire_tension(wind_load: float, span: float, height: float, angle: float
 
 ---
 
+!!! info "Pattern 8 以外の計算（水力発電など）"
+    水力発電（流込式・調整池・揚水）は **9.8QHη + 期間積算** の単純構造で関数化する意味が薄いため、本ページにはパターン化しない。R07上期問11ほか過去5回以上の出題実績あり、解法は [B問題計算テンプレート集 §7 水力発電](../reference/b-mondai-template.md) を直接参照のこと。
+
+---
+
 ## 因果関係モデル（全体マップ）
 
 ```mermaid
