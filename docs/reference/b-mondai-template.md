@@ -604,6 +604,154 @@ flowchart TD
 
 ---
 
+## 8. 太陽電池発電所（自家消費＋系統連系）
+
+### なぜ出る？
+
+電気施設管理カテゴリで再出題🔁が3件以上の頻出論点。R07上期問13（太陽電池発電所を設置した需要設備の電力需給）ほか過去複数回出題。再生可能エネルギー普及で出題頻度がさらに増す傾向。
+
+### まず絵で理解：1日の発電と消費の重ね合わせ
+
+太陽電池の発電曲線は **昼に山を持つ三角形（または台形）** 。一方、施設の消費は **時間帯ごとの階段状**。両者を24時間軸で重ね合わせると、**3つの領域**が見える：
+
+<div>
+<svg viewBox="0 0 720 360" xmlns="http://www.w3.org/2000/svg" style="max-width:720px;width:100%;height:auto;">
+  <defs>
+    <pattern id="selfUse" patternUnits="userSpaceOnUse" width="6" height="6"><rect width="6" height="6" fill="#c8e6c9"/><line x1="0" y1="0" x2="6" y2="6" stroke="#2e7d32" stroke-width="0.5"/></pattern>
+    <pattern id="exportArea" patternUnits="userSpaceOnUse" width="6" height="6"><rect width="6" height="6" fill="#bbdefb"/><line x1="0" y1="0" x2="6" y2="6" stroke="#1565c0" stroke-width="0.5"/></pattern>
+    <pattern id="importArea" patternUnits="userSpaceOnUse" width="6" height="6"><rect width="6" height="6" fill="#eeeeee"/><line x1="0" y1="6" x2="6" y2="0" stroke="#757575" stroke-width="0.5"/></pattern>
+  </defs>
+  <!-- タイトル -->
+  <text x="360" y="20" text-anchor="middle" font-size="14" fill="#0d47a1" font-weight="bold">太陽電池発電と消費の重ね合わせ（R07上期問13ベース）</text>
+  <!-- 軸 -->
+  <line x1="80" y1="290" x2="680" y2="290" stroke="#333" stroke-width="2"/>
+  <line x1="80" y1="40" x2="80" y2="290" stroke="#333" stroke-width="2"/>
+  <text x="380" y="320" text-anchor="middle" font-size="12" fill="#333">時刻 [h]</text>
+  <text x="40" y="170" text-anchor="middle" font-size="12" fill="#333" transform="rotate(-90 40 170)">電力 [kW]</text>
+  <!-- 横軸目盛 -->
+  <line x1="80" y1="290" x2="80" y2="293" stroke="#333"/><text x="80" y="307" text-anchor="middle" font-size="10">0</text>
+  <line x1="155" y1="290" x2="155" y2="293" stroke="#333"/><text x="155" y="307" text-anchor="middle" font-size="10">6</text>
+  <line x1="205" y1="290" x2="205" y2="293" stroke="#333"/><text x="205" y="307" text-anchor="middle" font-size="10">10</text>
+  <line x1="230" y1="290" x2="230" y2="293" stroke="#333"/><text x="230" y="307" text-anchor="middle" font-size="10">12</text>
+  <line x1="318" y1="290" x2="318" y2="293" stroke="#333"/><text x="318" y="307" text-anchor="middle" font-size="10">17</text>
+  <line x1="380" y1="290" x2="380" y2="293" stroke="#333"/><text x="380" y="307" text-anchor="middle" font-size="10">21</text>
+  <line x1="430" y1="290" x2="430" y2="293" stroke="#333"/><text x="430" y="307" text-anchor="middle" font-size="10">24</text>
+  <!-- 縦軸目盛 -->
+  <line x1="77" y1="290" x2="80" y2="290" stroke="#333"/><text x="73" y="294" text-anchor="end" font-size="10">0</text>
+  <line x1="77" y1="250" x2="80" y2="250" stroke="#333"/><text x="73" y="254" text-anchor="end" font-size="10">100</text>
+  <line x1="77" y1="170" x2="80" y2="170" stroke="#333"/><text x="73" y="174" text-anchor="end" font-size="10">300</text>
+  <line x1="77" y1="130" x2="80" y2="130" stroke="#333"/><text x="73" y="134" text-anchor="end" font-size="10">400</text>
+  <line x1="77" y1="50" x2="80" y2="50" stroke="#333"/><text x="73" y="54" text-anchor="end" font-size="10">600</text>
+  <!-- ===== 領域塗り（背景に） ===== -->
+  <!-- 自家消費領域 = min(発電, 消費) の下側 -->
+  <!-- 0-7時: 発電0、消費100、自家消費=0 -->
+  <!-- 7時(P=100,L=100) 〜 10時(P=400,L=100): 自家消費 = 消費(100)上限、つまり矩形(7-10, 0-100) -->
+  <polygon points="167.5,290 167.5,250 205,250 205,290" fill="url(#selfUse)"/>
+  <!-- 10-12時: 発電(400→600), 消費300、自家消費=300（消費上限） -->
+  <polygon points="205,290 205,170 230,170 230,290" fill="url(#selfUse)"/>
+  <!-- 12-15時: 発電(600→300), 消費300、自家消費=min(P,L) → 12-15は P>=300なので自家消費=300 -->
+  <polygon points="230,290 230,170 268,170 268,290" fill="url(#selfUse)"/>
+  <!-- 15-17時: 発電(300→200), 消費300、自家消費=発電（P側） -->
+  <polygon points="268,290 268,170 318,210 318,290" fill="url(#selfUse)"/>
+  <!-- 17-18時: 発電(200→0), 消費400、自家消費=発電 -->
+  <polygon points="318,290 318,210 343,290" fill="url(#selfUse)"/>
+  <!-- 系統送電領域（青）= 発電>消費 の上部 -->
+  <!-- 7-10時: 発電(100→400), 消費100、送電=P-100 -->
+  <polygon points="167.5,250 205,130 205,250" fill="url(#exportArea)"/>
+  <!-- 10-12時: 発電(400→600), 消費300、送電=P-300 -->
+  <polygon points="205,130 230,50 230,170 205,170" fill="url(#exportArea)"/>
+  <!-- 12-15時: 発電(600→300), 消費300、送電=P-300 -->
+  <polygon points="230,50 268,170 230,170" fill="url(#exportArea)"/>
+  <!-- 系統購入領域（灰）= 消費>発電 の差分 -->
+  <!-- 0-7時: 消費100、発電0 -->
+  <polygon points="80,290 80,250 167.5,250 167.5,290" fill="url(#importArea)"/>
+  <!-- 7-10時: 消費100、発電>100 → 購入なし -->
+  <!-- 10時付近: 消費が100→300にジャンプ。発電400なのでまだ送電 -->
+  <!-- 15-17時: 消費300、発電(300→200) → 購入=300-P -->
+  <polygon points="268,170 318,170 318,210" fill="url(#importArea)"/>
+  <!-- 17-18時: 消費400、発電(200→0) → 購入=400-P -->
+  <polygon points="318,130 343,130 343,290 318,290 318,210" fill="url(#importArea)"/>
+  <!-- 18-21時: 消費400、発電0 → 購入=400 -->
+  <polygon points="343,130 380,130 380,290 343,290" fill="url(#importArea)"/>
+  <!-- 21-24時: 消費100、発電0 → 購入=100 -->
+  <polygon points="380,250 430,250 430,290 380,290" fill="url(#importArea)"/>
+  <!-- ===== 曲線本体 ===== -->
+  <!-- 発電曲線（三角形：6-12-18時） -->
+  <polyline points="80,290 155,290 230,50 343,290 430,290" fill="none" stroke="#0d47a1" stroke-width="2.5"/>
+  <text x="240" y="42" font-size="12" fill="#0d47a1" font-weight="bold">発電 P(t)</text>
+  <!-- 消費曲線（階段状） -->
+  <polyline points="80,250 205,250 205,170 318,170 318,130 380,130 380,250 430,250" fill="none" stroke="#c62828" stroke-width="2.5"/>
+  <text x="335" y="125" font-size="12" fill="#c62828" font-weight="bold">消費 L(t)</text>
+  <!-- 凡例 -->
+  <rect x="475" y="50" width="200" height="120" fill="#fafafa" stroke="#999" stroke-width="0.5"/>
+  <rect x="485" y="60" width="14" height="14" fill="url(#selfUse)"/>
+  <text x="505" y="72" font-size="11" fill="#1b5e20" font-weight="bold">自家消費</text>
+  <text x="505" y="84" font-size="9" fill="#1b5e20">min(P, L) の積分</text>
+  <rect x="485" y="95" width="14" height="14" fill="url(#exportArea)"/>
+  <text x="505" y="107" font-size="11" fill="#0d47a1" font-weight="bold">系統送電</text>
+  <text x="505" y="119" font-size="9" fill="#0d47a1">max(P−L, 0) の積分</text>
+  <rect x="485" y="130" width="14" height="14" fill="url(#importArea)"/>
+  <text x="505" y="142" font-size="11" fill="#424242" font-weight="bold">系統購入</text>
+  <text x="505" y="154" font-size="9" fill="#424242">max(L−P, 0) の積分</text>
+</svg>
+</div>
+
+**この絵で押さえるべき3点**:
+
+1. **発電曲線（青）** は太陽の高度に従い昼に山を持つ三角形（晴天理想）。雨天は台形・低め。
+2. **消費曲線（赤）** は施設の利用パターンで階段状。ショッピングセンターなら開店から閉店までが高負荷。
+3. **3領域** がすべて。
+   - 緑（重なり下部）= **自家消費**：発電を施設で直接使う
+   - 青（発電>消費の上）= **系統送電**：余った電力を売る（売電）
+   - 灰（消費>発電の上）= **系統購入**：足りない電力を買う
+
+### 用語の翻訳辞書（問題文を読み解くカギ）
+
+| 用語 | 何を意味するか | 試験での読み方 |
+|---|---|---|
+| **パネル出力 P_max** | 太陽電池が最大に発電できる定格出力 | 三角形/台形の頂点の値 |
+| **発電曲線 P(t)** | 時刻ごとの発電出力 | 「6時に立ち上がり12時で最大、18時に0」が典型 |
+| **日負荷曲線 L(t)** | 時刻ごとの消費電力 | 階段状で時間帯別に与えられる |
+| **自家消費** | 発電のうち施設で使った量 | 緑領域の面積＝min(P,L) の積分 |
+| **系統送電（売電）** | 発電のうち電力会社に売った量 | 青領域の面積＝max(P−L, 0) の積分 |
+| **系統購入（買電）** | 消費のうち電力会社から買った量 | 灰領域の面積＝max(L−P, 0) の積分 |
+| **自給率** | 消費のうち自家発電で賄えた比率 | 自家消費 ÷ 総消費 [%] |
+
+**保存則**: 総発電 = 自家消費 + 系統送電／総消費 = 自家消費 + 系統購入。**問題文で値が抜けていてもこの式で出せる**。
+
+### Step（3つに圧縮）
+
+```
+【Step 1】発電曲線と消費曲線を時刻区間で表化
+  ├─ 発電・消費の値が変わる「時刻区間」に分割（典型 4〜8区間）
+  └─ 各区間で P(t) と L(t) を確認
+
+【Step 2】発電 vs 消費の交点を特定し、領域分けして面積計算
+  ├─ 発電>消費の区間: 系統送電 = ∫(P−L)dt（台形面積の和）
+  ├─ 消費>発電の区間: 系統購入 = ∫(L−P)dt
+  └─ 重なり下部: 自家消費 = ∫min(P,L)dt
+  ※ 発電曲線が直線なら方程式 P(t) = L(t) で交点時刻を求める
+
+【Step 3】保存則チェック＋自給率
+  発電量 = 自家消費 + 系統送電  ← 検算用
+  消費量 = 自家消費 + 系統購入  ← 検算用
+  自給率 = 自家消費 ÷ 総消費 × 100  [%]
+```
+
+!!! warning "最頻出ミス"
+    **発電曲線と消費曲線の交点（送電開始/終了時刻）の見落とし**。発電が直線なら方程式で交点を求める（例: P(t)=100(t−6) と L=100 の交点 → t=7時）。グラフだけで目分量で読むと境界時刻を1時間ずらして送電量計算を全部間違える。
+
+!!! tip "速解テクニック"
+    **保存則で検算**: (総発電)−(系統送電) と (総消費)−(系統購入) は両方とも自家消費に等しい。両者の値が一致しなければ計算ミス。R07上期問13なら 3600−1300 = 5000−2700 = 2300 で確認できる。
+
+!!! note "R07上期問13の鍵"
+    発電が三角形（6時0、12時600kW、18時0）なら傾きは ±100 [kW/h]。消費の階段（100→300→400）との交点は方程式で：
+    - 100(t−6) = 100 → **t=7時**（送電開始）
+    - 100(18−t) = 300 → **t=15時**（送電終了）
+    - 100(18−t) = 200 ← 17時に消費が400に上がる前の参考。送電期間は7〜15時の8時間。
+
+---
+
 ## 横断チェックリスト
 
 解答後に確認する共通ミス防止リスト:
