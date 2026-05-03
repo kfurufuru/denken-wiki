@@ -752,6 +752,149 @@ flowchart TD
 
 ---
 
+## 9. 接地工事と接地抵抗値（B種・D種）
+
+### なぜ出る？
+
+法規B問題の **過去30年で最頻出論点（8回以上・🔁多数）**。R06上期問13・H30問13・H22問10ほか、ほぼ毎回出題される。電気主任技術者の最重要実務（安全基準）と直結し、解釈第17条・18条の数値暗記＋並列回路計算の混合論点。
+
+### まず絵で理解：混触事故時の電流経路
+
+高圧側で1線地絡が起きると、変圧器の混触で低圧側の電位が上昇する。**B種接地は変圧器中性点を低抵抗で大地に落として、電位上昇を抑える**。さらに **D種接地は機器外箱を接地して、漏電時の感電を防ぐ**。下の絵で電流経路を追う。
+
+<div>
+<svg viewBox="0 0 720 360" xmlns="http://www.w3.org/2000/svg" style="max-width:720px;width:100%;height:auto;">
+  <defs>
+    <marker id="arrCur" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#c62828"/></marker>
+  </defs>
+  <!-- タイトル -->
+  <text x="360" y="20" text-anchor="middle" font-size="14" fill="#0d47a1" font-weight="bold">混触事故時の電流経路（赤=地絡電流の流れ）</text>
+  <!-- 高圧電路（左上） -->
+  <line x1="60" y1="60" x2="200" y2="60" stroke="#0d47a1" stroke-width="2.5"/>
+  <line x1="60" y1="80" x2="200" y2="80" stroke="#0d47a1" stroke-width="2.5"/>
+  <text x="50" y="64" text-anchor="end" font-size="11" fill="#0d47a1">高圧</text>
+  <text x="50" y="84" text-anchor="end" font-size="11" fill="#0d47a1">電路</text>
+  <!-- 1線地絡発生点 -->
+  <circle cx="170" cy="60" r="5" fill="#c62828"/>
+  <text x="180" y="55" font-size="11" fill="#c62828" font-weight="bold">1線地絡発生</text>
+  <text x="180" y="48" font-size="10" fill="#c62828">Ig = 5A</text>
+  <!-- 変圧器（中央） -->
+  <rect x="200" y="50" width="80" height="100" fill="#fff3e0" stroke="#ef6c00" stroke-width="2"/>
+  <text x="240" y="80" text-anchor="middle" font-size="11" fill="#bf360c">変圧器</text>
+  <text x="240" y="100" text-anchor="middle" font-size="10" fill="#bf360c">高圧↓低圧</text>
+  <text x="240" y="115" text-anchor="middle" font-size="9" fill="#c62828">混触</text>
+  <!-- 低圧電路 -->
+  <line x1="280" y1="100" x2="500" y2="100" stroke="#1976d2" stroke-width="2.5"/>
+  <line x1="280" y1="120" x2="500" y2="120" stroke="#1976d2" stroke-width="2.5"/>
+  <text x="390" y="92" text-anchor="middle" font-size="11" fill="#1976d2">低圧電路 100V</text>
+  <!-- 中性点（B種接地） -->
+  <circle cx="280" cy="130" r="3" fill="#1b5e20"/>
+  <line x1="280" y1="130" x2="280" y2="200" stroke="#1b5e20" stroke-width="2"/>
+  <rect x="265" y="200" width="30" height="40" fill="#e8f5e9" stroke="#1b5e20" stroke-width="2"/>
+  <text x="280" y="220" text-anchor="middle" font-size="10" fill="#1b5e20" font-weight="bold">R_B</text>
+  <text x="280" y="234" text-anchor="middle" font-size="9" fill="#1b5e20">B種</text>
+  <!-- 機器（負荷） -->
+  <rect x="500" y="80" width="80" height="60" fill="#fafafa" stroke="#333" stroke-width="2"/>
+  <text x="540" y="105" text-anchor="middle" font-size="11">機器</text>
+  <text x="540" y="120" text-anchor="middle" font-size="10">（外箱）</text>
+  <!-- 漏電想定点 -->
+  <circle cx="580" cy="110" r="4" fill="#c62828"/>
+  <text x="595" y="105" font-size="10" fill="#c62828">漏電</text>
+  <!-- D種接地（機器外箱から） -->
+  <line x1="580" y1="140" x2="580" y2="200" stroke="#1b5e20" stroke-width="2"/>
+  <rect x="565" y="200" width="30" height="40" fill="#e8f5e9" stroke="#1b5e20" stroke-width="2"/>
+  <text x="580" y="220" text-anchor="middle" font-size="10" fill="#1b5e20" font-weight="bold">R_D</text>
+  <text x="580" y="234" text-anchor="middle" font-size="9" fill="#1b5e20">D種</text>
+  <!-- 人体（D種に並列） -->
+  <line x1="630" y1="140" x2="630" y2="200" stroke="#666" stroke-width="2" stroke-dasharray="3 2"/>
+  <line x1="580" y1="140" x2="630" y2="140" stroke="#666" stroke-width="1" stroke-dasharray="2 2"/>
+  <rect x="615" y="200" width="30" height="40" fill="#f5f5f5" stroke="#666" stroke-width="1.5"/>
+  <text x="630" y="220" text-anchor="middle" font-size="10" fill="#424242">R_h</text>
+  <text x="630" y="234" text-anchor="middle" font-size="9" fill="#424242">人体</text>
+  <text x="630" y="248" text-anchor="middle" font-size="8" fill="#424242">6000Ω</text>
+  <!-- 大地 -->
+  <line x1="100" y1="260" x2="700" y2="260" stroke="#5d4037" stroke-width="3"/>
+  <line x1="100" y1="260" x2="120" y2="270" stroke="#5d4037" stroke-width="1"/>
+  <line x1="140" y1="260" x2="160" y2="270" stroke="#5d4037" stroke-width="1"/>
+  <line x1="180" y1="260" x2="200" y2="270" stroke="#5d4037" stroke-width="1"/>
+  <line x1="220" y1="260" x2="240" y2="270" stroke="#5d4037" stroke-width="1"/>
+  <line x1="260" y1="260" x2="280" y2="270" stroke="#5d4037" stroke-width="1"/>
+  <line x1="500" y1="260" x2="520" y2="270" stroke="#5d4037" stroke-width="1"/>
+  <line x1="540" y1="260" x2="560" y2="270" stroke="#5d4037" stroke-width="1"/>
+  <line x1="580" y1="260" x2="600" y2="270" stroke="#5d4037" stroke-width="1"/>
+  <line x1="620" y1="260" x2="640" y2="270" stroke="#5d4037" stroke-width="1"/>
+  <line x1="660" y1="260" x2="680" y2="270" stroke="#5d4037" stroke-width="1"/>
+  <text x="400" y="280" text-anchor="middle" font-size="11" fill="#5d4037">大地</text>
+  <!-- 地絡電流の流れ（赤矢印） -->
+  <path d="M 170 60 L 240 60 L 240 90" fill="none" stroke="#c62828" stroke-width="1.5" marker-end="url(#arrCur)"/>
+  <path d="M 280 130 L 280 240" fill="none" stroke="#c62828" stroke-width="1.5" stroke-dasharray="3 3" marker-end="url(#arrCur)"/>
+  <text x="295" y="180" font-size="10" fill="#c62828">混触</text>
+  <text x="295" y="192" font-size="10" fill="#c62828">による</text>
+  <text x="295" y="204" font-size="10" fill="#c62828">地絡電流</text>
+  <!-- 注釈 -->
+  <text x="360" y="320" text-anchor="middle" font-size="11" fill="#0d47a1" font-weight="bold">B種：混触時の対地電圧を制限／D種：漏電時の感電を防止</text>
+  <text x="360" y="338" text-anchor="middle" font-size="10" fill="#666">人体は外箱に触ったときD種に並列に接続される（接地電位×並列回路で人体電圧が決まる）</text>
+</svg>
+</div>
+
+**この絵で押さえるべき3点**:
+
+1. **B種接地（R_B）** は変圧器中性点と大地を結ぶ。混触時に低圧側の対地電圧が上がりすぎないよう **電位を引き下げる** 役割。
+2. **D種接地（R_D）** は機器外箱と大地を結ぶ。漏電時に外箱の電位を抑え、**人が触っても感電しない** ようにする。
+3. **人体は外箱に触ったとき D種に並列**。並列合成抵抗で人体に分圧される電圧を 60V 以下に抑えるのが設計目標。
+
+### 用語の翻訳辞書
+
+| 用語 | 何を意味するか | 試験での読み方 |
+|---|---|---|
+| **B種接地 R_B** | 変圧器低圧側中性点の接地 | 混触対策。基準は 150/Ig（緩和あり） |
+| **D種接地 R_D** | 300V以下の低圧機器外箱の接地 | 感電防止。基準は 100Ω以下（緩和あり） |
+| **1線地絡電流 Ig** | 高圧側で1線が大地に短絡した時の電流 | 問題文で与えられる（5A・10Aなど） |
+| **混触** | 高圧と低圧が誤って接触する故障 | B種接地が緩和する対象 |
+| **自動遮断時間** | 地絡から遮断までの時間 | 短いほど R_B の許容値が **緩和** される |
+| **許容触電電圧 V_safe** | 人体が触れても安全な電圧 | V_safe = R_h × I_safe（典型 60V） |
+
+### 数値早見表（電技解釈第17条・18条）
+
+| 接地種別 | 基準抵抗値 | 自動遮断による緩和 |
+|---|---|---|
+| **A種** | 10 Ω以下 | 高圧用（特高機器外箱・避雷器など） |
+| **B種** | 150 / Ig [Ω] | 1秒以内遮断 → **600 / Ig**、1〜2秒以内 → 300 / Ig |
+| **C種** | 10 Ω以下 | 0.5秒以内遮断で 500 Ω |
+| **D種** | 100 Ω以下 | 0.5秒以内遮断で 500 Ω |
+
+**緩和の理屈**: 速く遮断できれば対地電圧の継続時間が短いから、抵抗値を上げてもよい（短時間なら多少電位が上がっても感電しない）。
+
+### Step（3つに圧縮）
+
+```
+【Step 1】B種接地抵抗 R_B
+  ├─ 自動遮断時間を確認 → 基準値 600/Ig（1秒以内）か 150/Ig（緩和なし）か
+  ├─ 問題文の特殊条件（「許容値の1/3に維持」など）を反映
+  └─ R_B = 基準値 × 緩和係数
+
+【Step 2】許容触電電圧 V_safe を計算
+  V_safe [V] = 人体抵抗 R_h × 許容流過電流 I_safe
+  例: R_h=6000Ω, I_safe=10mA → V_safe = 60V
+
+【Step 3】D種接地抵抗 R_D の上限
+  並列回路解析: R_D || R_h を含む分圧式から外箱電圧 V_外箱 ≦ V_safe を解く
+  V_外箱 = V_電源 × (R_D||R_h) ÷ (R_D||R_h + R_B)  ≦ V_safe
+  → R_D の上限を導出
+```
+
+!!! warning "最頻出ミス"
+    **遮断時間の段階を見落とす**。1秒以内・1〜2秒以内・2秒超で R_B の許容値が3段階に変わる。問題文に「0.8秒以内に自動遮断」とあれば 600/Ig、無記載なら 150/Ig。さらに「許容値の1/3に維持」のような追加条件があれば最後に掛ける。
+
+!!! tip "速解テクニック"
+    **R_B = 600/Ig** を最初に書く（典型的に最頻）。問題文に「○倍に維持」と書かれていればそれを掛ける。並列回路は「分圧で V_外箱 を出して V_safe と比較」の単純構造。
+
+!!! note "R06上期問13の鍵"
+    Ig=5A、0.8秒以内自動遮断 → 基準 = 600/5 = 120Ω。「許容値の1/3に維持」→ R_B = 120 × 1/3 = **40Ω**。  
+    人体: V_safe = 6000 × 0.01 = 60V。並列回路で V_外箱 = 100 × X/(X+40) ≦ 60、X = R_D × 6000/(R_D + 6000) → 計算結果 R_D ≦ 60.6Ω → **60Ω**。
+
+---
+
 ## 横断チェックリスト
 
 解答後に確認する共通ミス防止リスト:
