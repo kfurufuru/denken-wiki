@@ -157,8 +157,10 @@ nav:
       - 第11条（接地の方法）: articles/kijun/11.md
       - 第14条（過電流保護）: articles/kijun/14.md
       - 第15条（地絡保護）: articles/kijun/15.md
-      - 第20条（発電所等への立入防止）: articles/kijun/20.md
-      - 第21条（支持物の昇塔防止）: articles/kijun/21.md
+      - 第20条（電線路等の感電又は火災の防止）: articles/kijun/20.md
+      - 第21条（架空電線及び地中電線の感電の防止）: articles/kijun/21.md
+      - 第23条（発電所等への立入防止）: articles/kijun/23.md
+      - 第24条（支持物の昇塔防止）: articles/kijun/24.md
       - 第32条（支持物の倒壊防止）: articles/kijun/32.md
       - 第56条（配線の感電防止）: articles/kijun/56.md
       - 第57条（配線の使用電線）: articles/kijun/57.md
