@@ -76,6 +76,7 @@ markdown_extensions:
       clickable_checkbox: true
 
 extra_css:
+  - stylesheets/design-tokens.css
   - stylesheets/custom.css
 
 extra_javascript:
