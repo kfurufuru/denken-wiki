@@ -3,6 +3,7 @@
 # - audit_frequency.py: 出題頻度の整合性（kijun/のみ・NG件あればブロック）
 # - check_frequency_consistency.py: メタ自動値と手書き値の矛盾（全89ファイル・NG件あればブロック）
 # - check_kakomon_consistency.py: 過去問テーブルとby-field.mdの整合性（警告のみ）
+# - audit_titles.py: kijun/ H1 と省令公式条見出しの整合性（NG件あればブロック・R6機械化）
 
 set -e
 REPO_ROOT="$(git rev-parse --show-toplevel)"
@@ -10,7 +11,7 @@ cd "$REPO_ROOT"
 
 # 条文記事配下またはby-field.mdが変更されたときだけ実行（高速化）
 CHANGED=$(git diff --cached --name-only)
-NEED_CHECK=$(echo "$CHANGED" | grep -E '^(docs/articles/(kijun|kaishaku|jigyoho|other)/|docs/kakomon/by-field\.md|scripts/(audit_frequency|check_frequency_consistency|check_kakomon_consistency)\.py)' || true)
+NEED_CHECK=$(echo "$CHANGED" | grep -E '^(docs/articles/(kijun|kaishaku|jigyoho|other)/|docs/kakomon/by-field\.md|scripts/(audit_frequency|check_frequency_consistency|check_kakomon_consistency|audit_titles)\.py)' || true)
 
 if [ -z "$NEED_CHECK" ]; then
     exit 0
@@ -49,6 +50,25 @@ KAKO_ISSUES=$(echo "$KAKO_RESULT" | grep -oE "不整合 [0-9]+ 件" | grep -oE "
 
 if [ "$KAKO_ISSUES" -gt "0" ]; then
     echo "⚠️  [pre-commit] 過去問整合性に $KAKO_ISSUES 件の不整合（警告のみ、commit続行）"
+fi
+
+# 4. H1 タイトル ↔ 省令公式条見出しの整合性（R6 機械化・staged のみ高速化・NG件あればブロック）
+NEED_TITLES_CHECK=$(echo "$CHANGED" | grep -E '^docs/articles/kijun/.+\.md$' || true)
+if [ -n "$NEED_TITLES_CHECK" ]; then
+    set +e
+    TITLES_RESULT=$(python scripts/audit_titles.py --staged --strict 2>&1)
+    TITLES_EXIT=$?
+    set -e
+    if [ "$TITLES_EXIT" -ne "0" ]; then
+        echo "❌ [pre-commit] kijun/ の H1 が省令公式条見出しと不一致です（R6 違反）。"
+        echo "$TITLES_RESULT" | tail -15
+        echo ""
+        echo "→ 公式条見出しに合わせて修正してください。"
+        echo "  確認: python scripts/audit_titles.py"
+        echo "  一次ソース: e-Gov 法令検索 API 409M50000400052"
+        echo "  緊急時は --no-verify でスキップ可能（非推奨）。"
+        exit 1
+    fi
 fi
 
 echo "✅ [pre-commit] チェック完了"
