@@ -64,7 +64,13 @@
     } catch (e) { /* */ }
   }
 
-  function buildButtons(itemHash, itemTitle, itemType) {
+  function applyStatusClass(rootEl, status) {
+    if (!rootEl) return;
+    STATUSES.forEach(function (s) { rootEl.classList.remove('sc-status-' + s.key); });
+    if (status) rootEl.classList.add('sc-status-' + status);
+  }
+
+  function buildButtons(itemHash, itemTitle, itemType, rootEl) {
     const wrap = document.createElement('div');
     wrap.className = 'self-check-buttons';
     wrap.setAttribute('data-item-hash', itemHash);
@@ -76,6 +82,7 @@
 
     const stored = getStored(itemHash);
     const currentStatus = stored ? stored.status : null;
+    applyStatusClass(rootEl, currentStatus);
 
     STATUSES.forEach(function (s) {
       const btn = document.createElement('button');
@@ -92,6 +99,7 @@
         if (wasActive) {
           clearStored(itemHash);
           updateTimestamp(wrap, null);
+          applyStatusClass(rootEl, null);
         } else {
           btn.classList.add('active');
           const payload = {
@@ -104,6 +112,7 @@
           };
           setStored(itemHash, payload);
           updateTimestamp(wrap, payload.updatedAt);
+          applyStatusClass(rootEl, s.key);
         }
       });
 
@@ -144,7 +153,7 @@
       if (!/セルフチェック/.test(summaryText)) return;
 
       const hash = djb2Hash('selfcheck::' + summaryText);
-      const buttons = buildButtons(hash, summaryText, 'selfcheck');
+      const buttons = buildButtons(hash, summaryText, 'selfcheck', el);
       el.appendChild(buttons);
     });
   }
@@ -160,7 +169,7 @@
       if (!/問題/.test(titleText)) return;
 
       const hash = djb2Hash('kakomon::' + titleText);
-      const buttons = buildButtons(hash, titleText, 'kakomon');
+      const buttons = buildButtons(hash, titleText, 'kakomon', el);
       el.appendChild(buttons);
     });
   }

@@ -597,3 +597,82 @@
   .self-check-btn { padding: 0.28rem 0.55rem; font-size: 0.72rem; }
   .self-check-ts { width: 100%; margin-left: 0; margin-top: 0.3rem; }
 }
+
+/* ============================================================
+   理解度ステータス — 閉じた状態でも視覚的に分かるように
+   sc-status-{understood|vague|review|wrong} を <details> または
+   <div.admonition.abstract> に付与（self-check.js）
+   ============================================================ */
+
+/* 共通: 状態バッジ（summary・admonition-titleの末尾に表示） */
+details.question[class*="sc-status-"] > summary::after,
+.admonition.abstract[class*="sc-status-"] > .admonition-title::after {
+  display: inline-block;
+  margin-left: 0.5rem;
+  padding: 0.05rem 0.55rem;
+  color: #fff;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  vertical-align: middle;
+  line-height: 1.5;
+  letter-spacing: 0.02em;
+}
+
+/* 理解した = 緑 */
+details.question.sc-status-understood,
+.admonition.abstract.sc-status-understood {
+  border-left-color: #22c55e !important;
+}
+details.question.sc-status-understood > summary::after,
+.admonition.abstract.sc-status-understood > .admonition-title::after {
+  content: "✓ 理解した";
+  background: #22c55e;
+}
+
+/* うる覚え = 黄 */
+details.question.sc-status-vague,
+.admonition.abstract.sc-status-vague {
+  border-left-color: #f59e0b !important;
+}
+details.question.sc-status-vague > summary::after,
+.admonition.abstract.sc-status-vague > .admonition-title::after {
+  content: "? うる覚え";
+  background: #f59e0b;
+}
+
+/* 要確認 = オレンジ */
+details.question.sc-status-review,
+.admonition.abstract.sc-status-review {
+  border-left-color: #f97316 !important;
+}
+details.question.sc-status-review > summary::after,
+.admonition.abstract.sc-status-review > .admonition-title::after {
+  content: "! 要確認";
+  background: #f97316;
+}
+
+/* 間違えた = 赤 */
+details.question.sc-status-wrong,
+.admonition.abstract.sc-status-wrong {
+  border-left-color: #dc2626 !important;
+}
+details.question.sc-status-wrong > summary::after,
+.admonition.abstract.sc-status-wrong > .admonition-title::after {
+  content: "✗ 間違えた";
+  background: #dc2626;
+}
+
+/* 閉じている時の summary 背景にも色を薄く反映 */
+details.question.sc-status-understood:not([open]) > summary { background: rgba(34, 197, 94, 0.08); }
+details.question.sc-status-vague:not([open]) > summary      { background: rgba(245, 158, 11, 0.10); }
+details.question.sc-status-review:not([open]) > summary     { background: rgba(249, 115, 22, 0.10); }
+details.question.sc-status-wrong:not([open]) > summary      { background: rgba(220, 38, 38, 0.08); }
+
+@media (max-width: 600px) {
+  details.question[class*="sc-status-"] > summary::after,
+  .admonition.abstract[class*="sc-status-"] > .admonition-title::after {
+    font-size: 0.62rem;
+    padding: 0.05rem 0.45rem;
+  }
+}
