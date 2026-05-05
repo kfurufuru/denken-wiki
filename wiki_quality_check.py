@@ -338,13 +338,43 @@ def _score_i02(content: str) -> tuple:
     return (0, "数値検証ラベルなし")
 
 
-def _score_i03(content: str) -> tuple:
-    """I03 法改正対応 (6点)"""
+def _score_i03(content: str, path: Path) -> tuple:
+    """I03 法改正対応 (6点) — Sprint 2 修正: kakomon.yml 最新年度ベース判定
+
+    判定（優先順）:
+    - 改正注意ブロック明記 → 6点
+    - 「改正対象外」「改正記録なし」明記 → 6点
+    - 最新出題が R04 以降（改正リスク低） → 6点（対象外扱い）
+    - 最新出題が H 始まり（古い）かつ改正注記なし → 0点（C03 capと整合）
+    - meta 推定不可 → 6点（対象外扱い）
+    """
+    # 明示的な改正注記は最優先
     if re.search(r"📌\s*改正注意", content):
         return (6, "改正注意ブロックあり")
     if re.search(r"改正対象外|改正記録なし", content):
         return (6, "改正対象外明記")
-    return (0, "改正注記なし")
+
+    meta = get_kakomon_meta(path)
+    latest = meta.get("latest_year") or ""
+
+    # 最新出題が R04 以降なら改正リスク低（対象外扱い）
+    if latest.startswith("R"):
+        try:
+            ynum = int(re.sub(r"[^\d]", "", latest) or "0")
+            if ynum >= 4:
+                return (6, f"最新出題{latest}（R04+） 対象外扱い")
+            else:
+                # R01-R03 は中間 → 改正注記なしなら 0点
+                return (0, f"最新出題{latest}（R03以前）+改正注記なし")
+        except ValueError:
+            pass
+
+    # H 始まり = 古い → 0点（C03 cap と整合）
+    if latest.startswith("H"):
+        return (0, f"最新出題{latest}（H・古い）+改正注記なし")
+
+    # meta 推定不可（条文未登録など）→ 対象外
+    return (6, "出題実績推定不可 対象外扱い")
 
 
 def _score_i04(content: str) -> tuple:
@@ -433,14 +463,39 @@ def _score_i08(content: str) -> tuple:
     return (0, "なし")
 
 
-def _score_i09(content: str) -> tuple:
-    """I09 過去問リンク (5点)"""
-    cnt = len(re.findall(r"denken-ou\.com", content))
-    if cnt >= 3:
-        return (5, f"{cnt}件")
-    if cnt >= 1:
-        return (3, f"{cnt}件")
-    return (0, "リンクなし")
+def _score_i09(content: str, path: Path) -> tuple:
+    """I09 過去問実績連携 (5点) — Sprint 2 修正: kakomon.yml 登録ベース
+
+    旧称「過去問リンク」→ 新称「過去問実績連携」
+    判定（優先順）:
+    - kakomon.yml registered ≥ 5件 → 5点
+    - kakomon.yml registered ≥ 1件 → 3点
+    - kakomon.yml registered = 0件（出題実績なし） → 5点（対象外扱い）
+    - meta 推定不可（条番号取得失敗など） → 5点（対象外扱い）
+    - 補助加点: denken-ou.com URL があれば +1（上限5）
+    """
+    meta = get_kakomon_meta(path)
+    url_cnt = len(re.findall(r"denken-ou\.com", content))
+
+    # meta 推定不可（"target" キーすらない）→ 対象外
+    if not meta.get("target"):
+        score = 5
+        return (score, f"meta推定不可 対象外扱い (URL{url_cnt}件)")
+
+    registered = meta.get("registered", 0)
+
+    if registered == 0:
+        return (5, f"出題実績なし条文 対象外扱い (URL{url_cnt}件)")
+    if registered >= 5:
+        base = 5
+        return (base, f"kakomon登録{registered}件 (URL{url_cnt}件)")
+    if registered >= 1:
+        # 補助加点: URL があれば +1（上限5）
+        base = 3
+        if url_cnt >= 1:
+            base = min(base + 1, 5)
+        return (base, f"kakomon登録{registered}件 (URL{url_cnt}件)")
+    return (0, f"kakomon登録なし URL{url_cnt}件")
 
 
 def _score_i10(content: str) -> tuple:
@@ -477,21 +532,37 @@ def _score_i12(content: str) -> tuple:
 
 
 def _score_i13(content: str) -> tuple:
-    """I13 3列翻訳テーブル (5点)"""
-    # 3列以上テーブル: |...|...|...|形式の検出
-    has_3col_keywords = (
-        bool(re.search(r"日常語", content))
-        and bool(re.search(r"法規表現", content))
-        and bool(re.search(r"試験での意味", content))
-    )
-    if has_3col_keywords:
-        return (5, "3列翻訳テーブルあり")
-    has_2col = (
-        bool(re.search(r"日常語", content)) and bool(re.search(r"法規表現", content))
-    )
-    if has_2col:
-        return (2, "2列のみ")
-    return (0, "翻訳テーブルなし")
+    """I13 3列翻訳テーブル (5点) — Sprint 2 修正: 類義語拡張
+
+    列名候補（OR判定）:
+    - 列1（日常語系）: 日常語 / 日常表現 / 言い換え / 俗称 / 読み
+    - 列2（法規系）: 法規表現 / 条文表現 / 正式名称 / 条文上の語
+    - 列3（試験系）: 試験での意味 / 試験対策 / 混同注意 / ひっかけ / 正答
+
+    判定:
+    - 列1+列2+列3 全て検出 → 5点
+    - 列1+列2 または 列2+列3 → 3点
+    - 1列のみ → 0点
+    """
+    col1_keywords = ["日常語", "日常表現", "言い換え", "俗称", "読み"]
+    col2_keywords = ["法規表現", "条文表現", "正式名称", "条文上の語"]
+    col3_keywords = ["試験での意味", "試験対策", "混同注意", "ひっかけ", "正答"]
+
+    has_col1 = any(kw in content for kw in col1_keywords)
+    has_col2 = any(kw in content for kw in col2_keywords)
+    has_col3 = any(kw in content for kw in col3_keywords)
+
+    cnt = sum([has_col1, has_col2, has_col3])
+    detail = f"日常={has_col1} 法規={has_col2} 試験={has_col3}"
+
+    if has_col1 and has_col2 and has_col3:
+        return (5, f"3列翻訳テーブル {detail}")
+    # 隣接2列パターン: 列1+列2 または 列2+列3
+    if (has_col1 and has_col2) or (has_col2 and has_col3):
+        return (3, f"2列翻訳 {detail}")
+    if cnt == 1:
+        return (0, f"1列のみ {detail}")
+    return (0, f"翻訳テーブルなし {detail}")
 
 
 def _score_i14(content: str) -> tuple:
@@ -549,13 +620,30 @@ def _score_i16(content: str) -> tuple:
 
 
 def _score_i17(content: str) -> tuple:
-    """I17 重要度・頻出度表示 (4点)"""
+    """I17 重要度・頻出度表示 (4点) — Sprint 2 修正: bold形式・テーブル形式・必須文言も検出
+
+    検出パターン:
+    - 明示形式: `重要度: A` / `重要度：S`
+    - bold形式: `**重要度**: A` / `**重要度** A`
+    - テーブル形式: `| 重要度 | A |`
+    - 必須文言: 「重要必須」「頻出必須」
+    """
     has_fire = "🔥" in content
-    has_rank = bool(re.search(r"重要度[:：]\s*[SABC]", content))
+    has_rank_plain = bool(re.search(r"重要度[:：]\s*[SABC]", content))
+    has_rank_bold = bool(re.search(r"\*\*重要度\*\*\s*[:：]?\s*[SABC]", content))
+    has_rank_table = bool(re.search(r"\|\s*重要度\s*\|\s*[SABC]\s*\|", content))
+    has_must = bool(re.search(r"重要必須|頻出必須", content))
+
+    has_rank = has_rank_plain or has_rank_bold or has_rank_table or has_must
+    detail = (
+        f"🔥={has_fire} plain={has_rank_plain} bold={has_rank_bold} "
+        f"table={has_rank_table} must={has_must}"
+    )
+
     if has_fire and has_rank:
-        return (4, "🔥+重要度ランク")
+        return (4, f"🔥+重要度ランク ({detail})")
     if has_fire or has_rank:
-        return (2, f"🔥={has_fire} rank={has_rank}")
+        return (2, detail)
     return (0, "なし")
 
 
@@ -635,13 +723,13 @@ def score_v3(path: Path) -> dict:
     items = {}
     items["I01"] = _score_i01(content, path) + (V3_ITEM_MAX["I01"],)
     items["I02"] = _score_i02(content) + (V3_ITEM_MAX["I02"],)
-    items["I03"] = _score_i03(content) + (V3_ITEM_MAX["I03"],)
+    items["I03"] = _score_i03(content, path) + (V3_ITEM_MAX["I03"],)
     items["I04"] = _score_i04(content) + (V3_ITEM_MAX["I04"],)
     items["I05"] = _score_i05(content) + (V3_ITEM_MAX["I05"],)
     items["I06"] = _score_i06(content) + (V3_ITEM_MAX["I06"],)
     items["I07"] = _score_i07(content) + (V3_ITEM_MAX["I07"],)
     items["I08"] = _score_i08(content) + (V3_ITEM_MAX["I08"],)
-    items["I09"] = _score_i09(content) + (V3_ITEM_MAX["I09"],)
+    items["I09"] = _score_i09(content, path) + (V3_ITEM_MAX["I09"],)
     items["I10"] = _score_i10(content) + (V3_ITEM_MAX["I10"],)
     items["I11"] = _score_i11(content) + (V3_ITEM_MAX["I11"],)
     items["I12"] = _score_i12(content) + (V3_ITEM_MAX["I12"],)
@@ -721,7 +809,7 @@ def print_score_v3(result: dict):
         "I01": "条文番号3階層", "I02": "数値基準正確", "I03": "法改正対応",
         "I04": "例外条件省略しない", "I05": "出典版数記載",
         "I06": "出題形式再現", "I07": "ひっかけ説明", "I08": "年度横断照合",
-        "I09": "過去問リンク", "I10": "改変過去問明記", "I11": "サイト学習ルート",
+        "I09": "過去問実績連携", "I10": "改変過去問明記", "I11": "サイト学習ルート",
         "I12": "初学者要約", "I13": "3列翻訳テーブル", "I14": "視覚要素適切",
         "I15": "実務イメージ", "I16": "暗記tip", "I17": "重要度頻出度", "I18": "確認問題",
     }
