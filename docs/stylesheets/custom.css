@@ -74,6 +74,13 @@
   background-color: var(--color-bg);
 }
 
+/* ===== Wide Content Area =====
+   デフォルトの 61rem は表組みが多いwikiには窮屈。
+   PC表示でのみ中央エリアを拡張（モバイルは従来通り）。 */
+@media screen and (min-width: 76.25em) {
+  .md-grid { max-width: 85rem; }
+}
+
 /* ===== Theme Card Grid ===== */
 .theme-grid {
   display: grid;
