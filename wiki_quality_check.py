@@ -1043,11 +1043,15 @@ def main():
     parser.add_argument("--rank", action="store_true", help="全ページをランキング表示")
     parser.add_argument("--top", type=int, help="ランキング上位N件のみ")
     parser.add_argument("--check-reference", action="store_true", help="リファレンス更新候補を検出")
+    parser.add_argument("--check-items", action="store_true",
+                        help="条文項番バリデーション（article-structure.json 照合）")
     parser.add_argument("--v3", action="store_true", help="v3.1スコアラを使用（3軸18項目+cap）")
     args = parser.parse_args()
 
     if args.check_reference:
         check_reference()
+    elif args.check_items:
+        cmd_check_items()
     elif args.rank and args.v3:
         rank_all_v3(args.top)
     elif args.rank:
