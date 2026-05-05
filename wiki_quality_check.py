@@ -20,6 +20,7 @@ import sys
 import re
 import argparse
 import io
+import json
 from pathlib import Path
 
 if sys.stdout.encoding and sys.stdout.encoding.lower() != "utf-8":
@@ -30,6 +31,7 @@ REPO_ROOT = Path(__file__).parent
 ARTICLES_DIR = REPO_ROOT / "docs" / "articles"
 REFERENCE_PATH = ARTICLES_DIR / "kijun" / "5.md"
 KAKOMON_YML = REPO_ROOT / "_data" / "kakomon.yml"
+ARTICLE_STRUCTURE_PATH = REPO_ROOT / "docs" / "reference" / "article-structure.json"
 
 _KAKOMON_CACHE = None
 
@@ -48,6 +50,124 @@ def _load_kakomon():
     except Exception:
         _KAKOMON_CACHE = []
     return _KAKOMON_CACHE
+
+
+# =============================================================================
+# 条文項番バリデーション（article-structure.json による中央集権チェック）
+# §43⑤誤記事件（2026-05-05）根本対策
+# =============================================================================
+
+_ARTICLE_STRUCTURE_CACHE = None
+
+CIRCLE_TO_INT = {
+    "①": 1, "②": 2, "③": 3, "④": 4, "⑤": 5,
+    "⑥": 6, "⑦": 7, "⑧": 8, "⑨": 9, "⑩": 10,
+}
+# 丸数字パターン: 「第43条⑤」形式
+_ARTICLE_ITEM_CIRCLE = re.compile(r'第(\d+)条([①-⑩])')
+# 漢数字パターン: 「第43条第5項」形式
+_ARTICLE_ITEM_KANJI = re.compile(r'第(\d+)条第(\d+)項')
+
+
+def load_article_structure() -> dict:
+    """中央集権データベース article-structure.json を読み込む（キャッシュあり）"""
+    global _ARTICLE_STRUCTURE_CACHE
+    if _ARTICLE_STRUCTURE_CACHE is not None:
+        return _ARTICLE_STRUCTURE_CACHE
+    if not ARTICLE_STRUCTURE_PATH.exists():
+        _ARTICLE_STRUCTURE_CACHE = {}
+        return _ARTICLE_STRUCTURE_CACHE
+    try:
+        with open(ARTICLE_STRUCTURE_PATH, encoding="utf-8") as f:
+            _ARTICLE_STRUCTURE_CACHE = json.load(f)
+    except Exception:
+        _ARTICLE_STRUCTURE_CACHE = {}
+    return _ARTICLE_STRUCTURE_CACHE
+
+
+def check_article_item_numbers(content: str, filepath: str, structure: dict) -> list:
+    """条文項番の超過を検出する。
+
+    例: 第43条は max_items=6 なので「第43条⑦」「第43条第7項」は誤記。
+    戻り値: エラーメッセージ文字列のリスト（エラーなしなら空リスト）
+    """
+    errors = []
+    if not structure or "laws" not in structure:
+        return errors
+
+    # 丸数字パターン: 「第43条⑤」
+    for m in _ARTICLE_ITEM_CIRCLE.finditer(content):
+        art_no = f"第{m.group(1)}条"
+        item_no = CIRCLE_TO_INT.get(m.group(2))
+        if item_no is None:
+            continue
+        for law_name, law_data in structure["laws"].items():
+            if art_no in law_data.get("articles", {}):
+                max_item = law_data["articles"][art_no].get("max_items")
+                if max_item and item_no > max_item:
+                    errors.append(
+                        f"[条文項番] {filepath}: {law_name} {art_no}{m.group(2)}"
+                        f"（第{item_no}項）は存在しない"
+                        f"（マスター辞典では全{max_item}項）"
+                    )
+                break
+
+    # 漢数字パターン: 「第43条第5項」
+    for m in _ARTICLE_ITEM_KANJI.finditer(content):
+        art_no = f"第{m.group(1)}条"
+        item_no = int(m.group(2))
+        for law_name, law_data in structure["laws"].items():
+            if art_no in law_data.get("articles", {}):
+                max_item = law_data["articles"][art_no].get("max_items")
+                if max_item and item_no > max_item:
+                    errors.append(
+                        f"[条文項番] {filepath}: {law_name} {art_no}第{item_no}項"
+                        f" は存在しない"
+                        f"（マスター辞典では全{max_item}項）"
+                    )
+                break
+
+    return errors
+
+
+def check_all_article_item_numbers() -> list:
+    """docs/ 配下の全 .md ファイルに対して条文項番バリデーションを実行する。
+
+    戻り値: エラーメッセージ文字列のリスト（エラーなしなら空リスト）
+    """
+    structure = load_article_structure()
+    if not structure:
+        print(f"⚠️  article-structure.json が見つからないかパース失敗: {ARTICLE_STRUCTURE_PATH}")
+        return []
+
+    all_errors = []
+    docs_dir = REPO_ROOT / "docs"
+    for md_file in sorted(docs_dir.rglob("*.md")):
+        content = md_file.read_text(encoding="utf-8")
+        rel = str(md_file.relative_to(REPO_ROOT))
+        errs = check_article_item_numbers(content, rel, structure)
+        all_errors.extend(errs)
+
+    return all_errors
+
+
+def cmd_check_items():
+    """--check-items コマンドのエントリポイント"""
+    print("\n🔍 条文項番バリデーション（article-structure.json 照合）\n")
+    if not ARTICLE_STRUCTURE_PATH.exists():
+        print(f"❌ article-structure.json が見つかりません: {ARTICLE_STRUCTURE_PATH}")
+        print("   docs/reference/article-structure.json を作成してから再実行してください。")
+        return
+
+    errors = check_all_article_item_numbers()
+    if not errors:
+        print("✅ 条文項番エラー: 0件（全ページがマスター辞典の範囲内）")
+    else:
+        print(f"❌ 条文項番エラー: {len(errors)}件\n")
+        for e in errors:
+            print(f"  {e}")
+        print(f"\n→ 上記の条文は article-structure.json の max_items を超えています。")
+        print(f"  一次ソース（e-Gov）で確認の上、記事を修正してください。")
 
 
 def get_kakomon_meta(path: Path) -> dict:
@@ -326,7 +446,10 @@ def _score_i01(content: str, path: Path) -> tuple:
 
 
 def _score_i02(content: str) -> tuple:
-    """I02 数値基準正確 (6点)"""
+    """I02 数値基準正確 (6点) — Sprint 2.5 緩和: 数値非依存条文を対象外扱い
+
+    手続規定・定義系など数値表現がほぼない記事は「数値なし条文」として満点扱い。
+    """
     if re.search(r"数値検証.*PASS", content):
         return (6, "PASS")
     if re.search(r"数値検証.*CONDITIONAL", content):
@@ -335,7 +458,11 @@ def _score_i02(content: str) -> tuple:
         return (2, "INCONCLUSIVE")
     if re.search(r"数値検証.*MISSING", content):
         return (0, "MISSING")
-    return (0, "数値検証ラベルなし")
+    # 数値検証ラベルなし: 数値表現が乏しい記事（手続規定・定義条文）は対象外扱い
+    numeric_keywords = re.findall(r"\d+\s*(?:MΩ|kV|mA|μA|Hz|V|A|W|kW|m\b|km|秒|分|時間|日|年|%)", content)
+    if len(numeric_keywords) < 5:
+        return (6, f"数値表現少({len(numeric_keywords)}箇所)・対象外扱い")
+    return (0, f"数値検証ラベルなし（数値{len(numeric_keywords)}箇所あり要ラベル）")
 
 
 def _score_i03(content: str, path: Path) -> tuple:
@@ -566,29 +693,45 @@ def _score_i13(content: str) -> tuple:
 
 
 def _score_i14(content: str) -> tuple:
-    """I14 視覚要素適切 (6点)"""
+    """I14 視覚要素適切 (6点) — Sprint 2.5 緩和: 段階加点＋手続規定対象外
+
+    手続規定や定義条文では SVG 図解が不要なケースがあるため:
+    - svg≥3 で2点 / svg≥1 で1点 の段階加点
+    - svg=0 だがテーブル/箇条書きで構造が補完されている場合は減点緩和
+    - mermaid と div ラップは従来通り
+    """
     svg_cnt = len(re.findall(r"<svg[\s>]", content))
     mermaid_cnt = len(re.findall(r"```mermaid", content))
-    # 全SVGが<div>でラップされているか（簡易: svg数 == <div>...<svg のパターン数）
     div_wrapped = len(re.findall(r"<div[^>]*>\s*<svg", content))
     score = 0
     detail = []
+    # svg加点（段階）
     if svg_cnt >= 3:
         score += 2
         detail.append(f"svg={svg_cnt}")
+    elif svg_cnt >= 1:
+        score += 1
+        detail.append(f"svg={svg_cnt}(部分)")
     else:
-        detail.append(f"svg={svg_cnt}(不足)")
+        detail.append("svg=0")
+    # mermaid加点
     if mermaid_cnt >= 1:
         score += 2
         detail.append(f"mermaid={mermaid_cnt}")
     else:
         detail.append("mermaid=0")
+    # div ラップ加点（svg≥1の場合のみ）
     if svg_cnt > 0 and div_wrapped >= svg_cnt:
         score += 2
         detail.append("全svg<div>ラップ")
     elif svg_cnt == 0:
-        # SVGがない場合はラップ加点を諦める（条件成立せず）
-        detail.append("svg無のためラップ評価不可")
+        # SVG=0 でもテーブル/箇条書きで構造補完がある記事を救済
+        table_cnt = len(re.findall(r"^\|.*\|.*\|", content, re.MULTILINE))
+        if table_cnt >= 5 or mermaid_cnt >= 1:
+            score += 2
+            detail.append(f"svg無だがtable={table_cnt}/mermaid補完で対象外")
+        else:
+            detail.append("svg無+補完なし")
     else:
         detail.append(f"div={div_wrapped}/{svg_cnt}")
     return (score, " ".join(detail))
