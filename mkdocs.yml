@@ -83,6 +83,7 @@ extra_javascript:
   - https://unpkg.com/mermaid@10/dist/mermaid.min.js
   - javascripts/theme-filter.js
   - javascripts/task-checkbox.js
+  - javascripts/self-check.js
 
 extra:
   social:
