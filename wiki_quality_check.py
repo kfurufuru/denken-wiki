@@ -266,23 +266,532 @@ def check_reference():
     print(f"\n→ CLAUDE.md の「条文解説ページの品質基準」行を最上位ページに書き換えてください。")
 
 
+# =============================================================================
+# v3.1 品質スコアラ（3軸 / 18項目 / 重大欠陥cap）
+# =============================================================================
+
+V3_AXES = {
+    "正確性": {
+        "max": 32,
+        "items": ["I01", "I02", "I03", "I04", "I05"],
+    },
+    "試験得点直結度": {
+        "max": 35,
+        "items": ["I06", "I07", "I08", "I09", "I10", "I11"],
+    },
+    "学習継続性": {
+        "max": 33,
+        "items": ["I12", "I13", "I14", "I15", "I16", "I17", "I18"],
+    },
+}
+
+V3_ITEM_MAX = {
+    "I01": 6, "I02": 6, "I03": 6, "I04": 7, "I05": 7,
+    "I06": 6, "I07": 7, "I08": 5, "I09": 5, "I10": 5, "I11": 7,
+    "I12": 5, "I13": 5, "I14": 6, "I15": 4, "I16": 4, "I17": 4, "I18": 5,
+}
+
+# 合計が100点になることを保証
+assert sum(V3_ITEM_MAX.values()) == 100, \
+    f"V3項目合計が100でない: {sum(V3_ITEM_MAX.values())}"
+assert sum(a["max"] for a in V3_AXES.values()) == 100, \
+    f"V3軸合計が100でない: {sum(a['max'] for a in V3_AXES.values())}"
+
+
+def _score_i01(content: str, path: Path) -> tuple:
+    """I01 条文番号3階層正確 (6点)"""
+    meta = get_kakomon_meta(path)
+    target = meta.get("target", "")
+    has_clause = bool(re.search(r"第\s*\d+\s*項", content))
+    has_item = bool(re.search(r"第\s*\d+\s*号", content))
+
+    if not target:
+        # 条番号推定不可の場合は階層加点のみ
+        score = 0
+        if has_clause:
+            score += 2
+        if has_item:
+            score += 2
+        return (min(score, 6), f"target未推定 / 項={has_clause} 号={has_item}")
+
+    # 条が記事内に明示されているかチェック
+    stem_num = re.sub(r"[^\d]", "", path.stem)
+    has_article = bool(re.search(rf"第\s*{stem_num}\s*条", content)) or stem_num in content
+    score = 2 if has_article else 0
+    if has_clause:
+        score += 2
+    if has_item:
+        score += 2
+    return (min(score, 6), f"target={target} 条={has_article} 項={has_clause} 号={has_item}")
+
+
+def _score_i02(content: str) -> tuple:
+    """I02 数値基準正確 (6点)"""
+    if re.search(r"数値検証.*PASS", content):
+        return (6, "PASS")
+    if re.search(r"数値検証.*CONDITIONAL", content):
+        return (4, "CONDITIONAL")
+    if re.search(r"数値検証.*INCONCLUSIVE", content):
+        return (2, "INCONCLUSIVE")
+    if re.search(r"数値検証.*MISSING", content):
+        return (0, "MISSING")
+    return (0, "数値検証ラベルなし")
+
+
+def _score_i03(content: str) -> tuple:
+    """I03 法改正対応 (6点)"""
+    if re.search(r"📌\s*改正注意", content):
+        return (6, "改正注意ブロックあり")
+    if re.search(r"改正対象外|改正記録なし", content):
+        return (6, "改正対象外明記")
+    return (0, "改正注記なし")
+
+
+def _score_i04(content: str) -> tuple:
+    """I04 例外条件省略しない (7点)"""
+    has_kagiri = bool(re.search(r"この限りでない", content))
+    has_warning = bool(re.search(r"!!!\s*warning", content))
+    has_unconditional_note = bool(re.search(r"無条件ではない", content))
+
+    if not has_kagiri:
+        # 「この限りでない」が無い記事は満点扱い（該当外）
+        return (7, "例外文言なし（対象外）")
+    if has_kagiri and has_warning and has_unconditional_note:
+        return (7, "例外+warning+無条件否定すべて明示")
+    if has_kagiri and has_warning:
+        return (7, "例外+warning 明示")
+    if has_kagiri and has_unconditional_note:
+        return (4, "例外+無条件否定のみ（warning欠如）")
+    return (2, "「この限りでない」のみ説明不足")
+
+
+def _score_i05(content: str) -> tuple:
+    """I05 出典版数記載 (7点)"""
+    if re.search(r"令和\s*\d+\s*年.*版", content):
+        return (7, "令和X年版 明記")
+    if re.search(r"e-Gov.*\d{4}", content):
+        return (7, "e-Gov版数明記")
+    if re.search(r"lawid=", content):
+        return (7, "lawid記載")
+    if re.search(r"version.*\d+", content, re.IGNORECASE):
+        return (7, "version明記")
+    if re.search(r"最終確認:?\s*\d{4}-\d{2}-\d{2}", content):
+        return (3, "最終確認日のみ")
+    return (0, "出典版数なし")
+
+
+def _score_i06(content: str) -> tuple:
+    """I06 出題形式再現 (6点)"""
+    has_section = bool(re.search(r"##.*試験で問われること", content))
+    has_question = bool(re.search(r"\?\?\?\s*question", content))
+    if has_section and has_question:
+        return (6, "セクション+question両方")
+    if has_section or has_question:
+        return (3, f"section={has_section} question={has_question}")
+    return (0, "両方なし")
+
+
+def _score_i07(content: str) -> tuple:
+    """I07 ひっかけ説明 (7点)"""
+    has_table = bool(re.search(r"まぎらわしい選択肢", content))
+    has_x_o = bool(re.search(r"❌", content) and re.search(r"✅", content))
+    has_red = "🔴" in content
+    has_yellow = "🟡" in content
+    has_green = "🟢" in content
+    all_severity = has_red and has_yellow and has_green
+    cnt = sum([has_table, has_x_o, all_severity])
+    if cnt == 3:
+        return (7, "table+❌✅+🔴🟡🟢")
+    if cnt == 2:
+        return (5, f"table={has_table} x/o={has_x_o} severity={all_severity}")
+    if cnt == 1:
+        return (2, f"table={has_table} x/o={has_x_o} severity={all_severity}")
+    return (0, "全要素なし")
+
+
+def _score_i08(content: str) -> tuple:
+    """I08 年度横断照合 (5点)"""
+    has_r08 = bool(re.search(r"R0?8.*予測|R8.*予測", content))
+    has_year_range = bool(re.search(r"H\d+.*R\d+", content))
+    if has_r08 and has_year_range:
+        return (5, "R8予測+年度範囲")
+    if has_r08 or has_year_range:
+        return (2, f"r8={has_r08} range={has_year_range}")
+    return (0, "なし")
+
+
+def _score_i09(content: str) -> tuple:
+    """I09 過去問リンク (5点)"""
+    cnt = len(re.findall(r"denken-ou\.com", content))
+    if cnt >= 3:
+        return (5, f"{cnt}件")
+    if cnt >= 1:
+        return (3, f"{cnt}件")
+    return (0, "リンクなし")
+
+
+def _score_i10(content: str) -> tuple:
+    """I10 改変過去問明記 (5点)"""
+    cnt = len(re.findall(r"denken-ou\.com", content))
+    if cnt == 0:
+        # 過去問URL自体ない記事は項目除外（満点扱い）
+        return (5, "URL0件のため対象外")
+    has_note = bool(re.search(r"改変なし|改変あり", content))
+    if has_note:
+        return (5, "改変明記あり")
+    return (0, f"URL{cnt}件あるが改変明記なし")
+
+
+def _score_i11(content: str) -> tuple:
+    """I11 サイト学習ルート (7点)"""
+    nav_links = len(re.findall(r"\[[^\]]+\]\(\.\.\/\.\.\/[^)]+\)", content))
+    has_keyword = bool(re.search(r"risky\.md|index\.md|攻略戦略", content))
+    if nav_links >= 2 or (has_keyword and nav_links >= 1):
+        return (7, f"nav={nav_links} keyword={has_keyword}")
+    if nav_links >= 1 or has_keyword:
+        return (4, f"nav={nav_links} keyword={has_keyword}")
+    return (0, "なし")
+
+
+def _score_i12(content: str) -> tuple:
+    """I12 初学者要約 (5点)"""
+    has_5sec = bool(re.search(r"5秒で思い出す", content))
+    has_overview = bool(re.search(r"全体像", content))
+    has_tab = bool(re.search(r'===\s*"🌳"', content))
+    if has_5sec or has_overview or has_tab:
+        return (5, f"5秒={has_5sec} 全体像={has_overview} 🌳tab={has_tab}")
+    return (0, "なし")
+
+
+def _score_i13(content: str) -> tuple:
+    """I13 3列翻訳テーブル (5点)"""
+    # 3列以上テーブル: |...|...|...|形式の検出
+    has_3col_keywords = (
+        bool(re.search(r"日常語", content))
+        and bool(re.search(r"法規表現", content))
+        and bool(re.search(r"試験での意味", content))
+    )
+    if has_3col_keywords:
+        return (5, "3列翻訳テーブルあり")
+    has_2col = (
+        bool(re.search(r"日常語", content)) and bool(re.search(r"法規表現", content))
+    )
+    if has_2col:
+        return (2, "2列のみ")
+    return (0, "翻訳テーブルなし")
+
+
+def _score_i14(content: str) -> tuple:
+    """I14 視覚要素適切 (6点)"""
+    svg_cnt = len(re.findall(r"<svg[\s>]", content))
+    mermaid_cnt = len(re.findall(r"```mermaid", content))
+    # 全SVGが<div>でラップされているか（簡易: svg数 == <div>...<svg のパターン数）
+    div_wrapped = len(re.findall(r"<div[^>]*>\s*<svg", content))
+    score = 0
+    detail = []
+    if svg_cnt >= 3:
+        score += 2
+        detail.append(f"svg={svg_cnt}")
+    else:
+        detail.append(f"svg={svg_cnt}(不足)")
+    if mermaid_cnt >= 1:
+        score += 2
+        detail.append(f"mermaid={mermaid_cnt}")
+    else:
+        detail.append("mermaid=0")
+    if svg_cnt > 0 and div_wrapped >= svg_cnt:
+        score += 2
+        detail.append("全svg<div>ラップ")
+    elif svg_cnt == 0:
+        # SVGがない場合はラップ加点を諦める（条件成立せず）
+        detail.append("svg無のためラップ評価不可")
+    else:
+        detail.append(f"div={div_wrapped}/{svg_cnt}")
+    return (score, " ".join(detail))
+
+
+def _score_i15(content: str) -> tuple:
+    """I15 実務イメージ (4点)"""
+    keywords = ["実務", "現場", "施工", "設計"]
+    cnt = sum(len(re.findall(kw, content)) for kw in keywords)
+    if cnt >= 5:
+        return (4, f"{cnt}箇所")
+    if cnt >= 2:
+        return (2, f"{cnt}箇所")
+    return (0, f"{cnt}箇所")
+
+
+def _score_i16(content: str) -> tuple:
+    """I16 暗記tip (4点)"""
+    if re.search(r'!!!\s*tip\s*"💡\s*暗記', content):
+        return (4, "tip 💡暗記")
+    if re.search(r'!!!\s*abstract\s*"💡', content):
+        return (4, "abstract 💡")
+    if re.search(r"\*\*暗記の核心\*\*", content):
+        return (4, "暗記の核心")
+    return (0, "なし")
+
+
+def _score_i17(content: str) -> tuple:
+    """I17 重要度・頻出度表示 (4点)"""
+    has_fire = "🔥" in content
+    has_rank = bool(re.search(r"重要度[:：]\s*[SABC]", content))
+    if has_fire and has_rank:
+        return (4, "🔥+重要度ランク")
+    if has_fire or has_rank:
+        return (2, f"🔥={has_fire} rank={has_rank}")
+    return (0, "なし")
+
+
+def _score_i18(content: str) -> tuple:
+    """I18 確認問題 (5点)"""
+    has_abstract = bool(re.search(r"!!!\s*abstract", content))
+    has_success = bool(re.search(r"\?\?\?\s*success", content))
+    if has_abstract and has_success:
+        return (5, "abstract+success")
+    if has_abstract or has_success:
+        return (2, f"abstract={has_abstract} success={has_success}")
+    return (0, "なし")
+
+
+def _check_caps_v3(content: str, path: Path, items: dict) -> list:
+    """重大欠陥cap発火検査"""
+    caps = []
+
+    # C01: I01 が満点未満（条文番号3階層が一致しない）
+    if items["I01"][0] < V3_ITEM_MAX["I01"]:
+        caps.append(("C01", 69, "条文番号3階層不一致 or kakomon.yml未一致"))
+
+    # C02: 数値検証MISSING
+    if re.search(r"数値検証.*MISSING", content):
+        caps.append(("C02", 69, "数値検証MISSING"))
+
+    # C03: kakomon.yml最新がH始まりかつ改正注記なし
+    meta = get_kakomon_meta(path)
+    latest = meta.get("latest_year") or ""
+    if latest.startswith("H") and not re.search(r"📌\s*改正注意|改正対象外|改正記録なし", content):
+        caps.append(("C03", 69, f"最新出題{latest}（古い）+改正注記なし"))
+
+    # C04: 「この限りでない」あるが warning なし
+    if re.search(r"この限りでない", content) and not re.search(r"!!!\s*warning", content):
+        caps.append(("C04", 79, "この限りでない+warning欠如"))
+
+    # C05: 出典版数なし（I05が0点）
+    if items["I05"][0] == 0:
+        caps.append(("C05", 89, "出典版数記載なし"))
+
+    # C06: クロスレビューキーワードなし+数値テーブル3個以上
+    table_count = len(re.findall(r"^\|.*\|.*\|", content, re.MULTILINE))
+    has_review = bool(re.search(r"R5|クロスレビュー|並列エージェント", content))
+    if not has_review and table_count >= 3:
+        caps.append(("C06", 69, f"R5照合未済+数値テーブル{table_count}個"))
+
+    return caps
+
+
+def _classify_verdict(score: int) -> str:
+    if score >= 90:
+        return "S"
+    if score >= 80:
+        return "A"
+    if score >= 70:
+        return "B"
+    if score >= 60:
+        return "C"
+    return "D"
+
+
+def score_v3(path: Path) -> dict:
+    """v3.1 3軸18項目スコアリング"""
+    if not path.exists():
+        return {"path": str(path), "error": "File not found", "score": 0}
+
+    content = path.read_text(encoding="utf-8")
+
+    items = {}
+    items["I01"] = _score_i01(content, path) + (V3_ITEM_MAX["I01"],)
+    items["I02"] = _score_i02(content) + (V3_ITEM_MAX["I02"],)
+    items["I03"] = _score_i03(content) + (V3_ITEM_MAX["I03"],)
+    items["I04"] = _score_i04(content) + (V3_ITEM_MAX["I04"],)
+    items["I05"] = _score_i05(content) + (V3_ITEM_MAX["I05"],)
+    items["I06"] = _score_i06(content) + (V3_ITEM_MAX["I06"],)
+    items["I07"] = _score_i07(content) + (V3_ITEM_MAX["I07"],)
+    items["I08"] = _score_i08(content) + (V3_ITEM_MAX["I08"],)
+    items["I09"] = _score_i09(content) + (V3_ITEM_MAX["I09"],)
+    items["I10"] = _score_i10(content) + (V3_ITEM_MAX["I10"],)
+    items["I11"] = _score_i11(content) + (V3_ITEM_MAX["I11"],)
+    items["I12"] = _score_i12(content) + (V3_ITEM_MAX["I12"],)
+    items["I13"] = _score_i13(content) + (V3_ITEM_MAX["I13"],)
+    items["I14"] = _score_i14(content) + (V3_ITEM_MAX["I14"],)
+    items["I15"] = _score_i15(content) + (V3_ITEM_MAX["I15"],)
+    items["I16"] = _score_i16(content) + (V3_ITEM_MAX["I16"],)
+    items["I17"] = _score_i17(content) + (V3_ITEM_MAX["I17"],)
+    items["I18"] = _score_i18(content) + (V3_ITEM_MAX["I18"],)
+
+    # 統一フォーマット: (got, max, detail)
+    items_norm = {k: (v[0], v[2], v[1]) for k, v in items.items()}
+
+    # 軸別集計
+    axis_scores = {}
+    for axis_name, conf in V3_AXES.items():
+        got = sum(items_norm[i][0] for i in conf["items"])
+        axis_scores[axis_name] = (got, conf["max"])
+
+    raw_total = sum(s[0] for s in axis_scores.values())
+
+    # cap適用
+    caps = _check_caps_v3(content, path, items_norm)
+    if caps:
+        max_after_caps = min(c[1] for c in caps)
+        final_score = min(raw_total, max_after_caps)
+    else:
+        max_after_caps = 100
+        final_score = raw_total
+
+    # タイブレーカー情報
+    s_score = axis_scores["正確性"][0]
+    version_match = re.search(r"令和\s*(\d+)\s*年", content)
+    version_date = version_match.group(0) if version_match else ""
+    update_match = re.search(r"最終確認:?\s*(\d{4}-\d{2}-\d{2})", content)
+    update_date = update_match.group(1) if update_match else ""
+
+    return {
+        "path": str(path.relative_to(REPO_ROOT)) if path.is_relative_to(REPO_ROOT) else str(path),
+        "score": final_score,
+        "raw_score": raw_total,
+        "axis_scores": axis_scores,
+        "items": items_norm,
+        "caps_triggered": [c[0] for c in caps],
+        "caps_detail": caps,
+        "max_after_caps": max_after_caps,
+        "verdict": _classify_verdict(final_score),
+        "tiebreakers": {
+            "s_score": s_score,
+            "version_date": version_date,
+            "update_date": update_date,
+        },
+        "lines": len(content.splitlines()),
+        "kakomon_meta": get_kakomon_meta(path),
+    }
+
+
+def print_score_v3(result: dict):
+    if "error" in result:
+        print(f"❌ {result['path']}: {result['error']}")
+        return
+
+    print(f"\n📄 {result['path']} ({result['lines']}行)")
+    print(f"🎯 v3.1総合スコア: {result['score']}/100  →  Verdict: {result['verdict']}")
+    if result["raw_score"] != result["score"]:
+        print(f"   （cap適用前: {result['raw_score']}/100, cap上限: {result['max_after_caps']}）")
+
+    # 3軸バー
+    print(f"\n[3軸内訳]")
+    for axis_name, (got, max_pts) in result["axis_scores"].items():
+        bar = "█" * int(got / max_pts * 20) + "░" * (20 - int(got / max_pts * 20))
+        print(f"  {axis_name:12s} {bar} {got:3d}/{max_pts:3d}")
+
+    # 18項目バー
+    print(f"\n[18項目詳細]")
+    item_labels = {
+        "I01": "条文番号3階層", "I02": "数値基準正確", "I03": "法改正対応",
+        "I04": "例外条件省略しない", "I05": "出典版数記載",
+        "I06": "出題形式再現", "I07": "ひっかけ説明", "I08": "年度横断照合",
+        "I09": "過去問リンク", "I10": "改変過去問明記", "I11": "サイト学習ルート",
+        "I12": "初学者要約", "I13": "3列翻訳テーブル", "I14": "視覚要素適切",
+        "I15": "実務イメージ", "I16": "暗記tip", "I17": "重要度頻出度", "I18": "確認問題",
+    }
+    for item_id in sorted(result["items"].keys()):
+        got, max_pts, detail = result["items"][item_id]
+        bar_len = int(got / max_pts * 10) if max_pts > 0 else 0
+        bar = "█" * bar_len + "░" * (10 - bar_len)
+        label = item_labels.get(item_id, "")
+        print(f"  {item_id} {label:18s} {bar} {got}/{max_pts}  {detail}")
+
+    # cap発火
+    if result["caps_triggered"]:
+        print(f"\n[⚠️ 重大欠陥cap発火]")
+        for cap_id, cap_max, cap_detail in result["caps_detail"]:
+            print(f"  {cap_id}: max={cap_max}  {cap_detail}")
+        print(f"  → 最終cap上限: {result['max_after_caps']}")
+    else:
+        print(f"\n[✅ cap発火なし]")
+
+    # タイブレーカー
+    tb = result["tiebreakers"]
+    print(f"\n[タイブレーカー情報] S軸={tb['s_score']}/32, 版数={tb['version_date'] or '-'}, 更新日={tb['update_date'] or '-'}")
+
+
+def rank_all_v3(top_n: int = None):
+    """v3.1 全ページランキング（verdict別グルーピング）"""
+    results = []
+    for md_file in ARTICLES_DIR.rglob("*.md"):
+        if md_file.name == "index.md":
+            continue
+        results.append(score_v3(md_file))
+
+    # ソート: スコア降順 → S軸降順 → 版数 → 更新日
+    def _sort_key(r):
+        if "error" in r:
+            return (-1, 0, "", "")
+        tb = r.get("tiebreakers", {})
+        return (
+            -r.get("score", 0),
+            -tb.get("s_score", 0),
+            tb.get("version_date", ""),
+            tb.get("update_date", ""),
+        )
+    results.sort(key=_sort_key)
+
+    if top_n:
+        results = results[:top_n]
+
+    # verdict別グルーピング
+    groups = {"S": [], "A": [], "B": [], "C": [], "D": []}
+    for r in results:
+        if "error" in r:
+            continue
+        groups[r["verdict"]].append(r)
+
+    print(f"\n🏆 v3.1 品質ランキング（{len(results)}件）\n")
+    for verdict in ["S", "A", "B", "C", "D"]:
+        bucket = groups[verdict]
+        if not bucket:
+            continue
+        emoji = {"S": "🌟", "A": "🥇", "B": "🥈", "C": "🥉", "D": "📉"}[verdict]
+        print(f"\n{emoji} {verdict}ランク ({len(bucket)}件)")
+        print(f"{'順位':<4}{'スコア':<8}{'S軸':<6}{'cap':<14}{'パス'}")
+        print("-" * 80)
+        for i, r in enumerate(bucket, 1):
+            cap_str = ",".join(r["caps_triggered"]) if r["caps_triggered"] else "-"
+            s_axis = r["tiebreakers"]["s_score"]
+            print(f"{i:<4}{r['score']:<8}{s_axis:<6}{cap_str:<14}{r['path']}")
+    return results
+
+
 def main():
     parser = argparse.ArgumentParser(description="denken-wiki 品質チェッカー")
     parser.add_argument("path", nargs="?", help="記事のパス（相対 or 絶対）")
     parser.add_argument("--rank", action="store_true", help="全ページをランキング表示")
     parser.add_argument("--top", type=int, help="ランキング上位N件のみ")
     parser.add_argument("--check-reference", action="store_true", help="リファレンス更新候補を検出")
+    parser.add_argument("--v3", action="store_true", help="v3.1スコアラを使用（3軸18項目+cap）")
     args = parser.parse_args()
 
     if args.check_reference:
         check_reference()
+    elif args.rank and args.v3:
+        rank_all_v3(args.top)
     elif args.rank:
         rank_all(args.top)
     elif args.path:
         path = Path(args.path)
         if not path.is_absolute():
             path = REPO_ROOT / path
-        print_score(score_article(path))
+        if args.v3:
+            print_score_v3(score_v3(path))
+        else:
+            print_score(score_article(path))
     else:
         parser.print_help()
 
