@@ -381,8 +381,11 @@ def _score_i05(content: str) -> tuple:
 
 
 def _score_i06(content: str) -> tuple:
-    """I06 出題形式再現 (6点)"""
-    has_section = bool(re.search(r"##.*試験で問われること", content))
+    """I06 出題形式再現 (6点) — Sprint 1.1 拡張: セクション名類義語
+
+    検出対象セクション名: 試験で問われること / 頻出ひっかけ / 落とし穴 / 出題パターン
+    """
+    has_section = bool(re.search(r"##.*(試験で問われること|頻出ひっかけ|落とし穴|出題パターン)", content))
     has_question = bool(re.search(r"\?\?\?\s*question", content))
     if has_section and has_question:
         return (6, "セクション+question両方")
@@ -410,9 +413,19 @@ def _score_i07(content: str) -> tuple:
 
 
 def _score_i08(content: str) -> tuple:
-    """I08 年度横断照合 (5点)"""
+    r"""I08 年度横断照合 (5点) — Sprint 1.1 拡張: 過去問テーブルのH/R混在も範囲扱い
+
+    範囲記載の検出:
+    - 同一行 H\d+...R\d+
+    - 過去問テーブルや本文に「過去N年」「H\d+」「R\d+」両方の言及
+    """
     has_r08 = bool(re.search(r"R0?8.*予測|R8.*予測", content))
-    has_year_range = bool(re.search(r"H\d+.*R\d+", content))
+    has_year_range = bool(re.search(r"H\d+.*R\d+|過去\s*\d+\s*年", content))
+    # 過去問テーブルでH年度とR年度が両方ある場合も範囲とみなす
+    has_h = bool(re.search(r"H\d+", content))
+    has_r = bool(re.search(r"R\d+", content))
+    if not has_year_range and has_h and has_r:
+        has_year_range = True
     if has_r08 and has_year_range:
         return (5, "R8予測+年度範囲")
     if has_r08 or has_year_range:
@@ -522,11 +535,14 @@ def _score_i15(content: str) -> tuple:
 
 
 def _score_i16(content: str) -> tuple:
-    """I16 暗記tip (4点)"""
-    if re.search(r'!!!\s*tip\s*"💡\s*暗記', content):
-        return (4, "tip 💡暗記")
-    if re.search(r'!!!\s*abstract\s*"💡', content):
-        return (4, "abstract 💡")
+    """I16 暗記tip (4点) — Sprint 1.1 拡張: 類義語キーワードを追加
+
+    検出対象: !!! tip "💡|暗記|核心|ポイント|コツ" のいずれか / **暗記の核心**
+    """
+    if re.search(r'!!!\s*tip\s*"(💡|暗記|核心|ポイント|コツ)', content):
+        return (4, "tip 暗記/核心/ポイント/コツ")
+    if re.search(r'!!!\s*abstract\s*"(💡|暗記|核心)', content):
+        return (4, "abstract 暗記系")
     if re.search(r"\*\*暗記の核心\*\*", content):
         return (4, "暗記の核心")
     return (0, "なし")
