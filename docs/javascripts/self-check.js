@@ -67,7 +67,20 @@
   function applyStatusClass(rootEl, status) {
     if (!rootEl) return;
     STATUSES.forEach(function (s) { rootEl.classList.remove('sc-status-' + s.key); });
-    if (status) rootEl.classList.add('sc-status-' + status);
+    const existingBadge = rootEl.querySelector(':scope > summary > .sc-summary-badge, :scope > .admonition-title > .sc-summary-badge, :scope > p.admonition-title > .sc-summary-badge');
+    if (existingBadge) existingBadge.remove();
+    if (!status) return;
+    rootEl.classList.add('sc-status-' + status);
+    const titleEl = rootEl.matches('details')
+      ? rootEl.querySelector(':scope > summary')
+      : rootEl.querySelector(':scope > .admonition-title, :scope > p.admonition-title');
+    if (!titleEl) return;
+    const def = STATUSES.find(function (s) { return s.key === status; });
+    if (!def) return;
+    const badge = document.createElement('span');
+    badge.className = 'sc-summary-badge sc-summary-badge-' + status;
+    badge.textContent = def.icon + ' ' + def.label;
+    titleEl.appendChild(badge);
   }
 
   function buildButtons(itemHash, itemTitle, itemType, rootEl) {
