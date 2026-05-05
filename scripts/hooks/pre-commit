@@ -4,6 +4,7 @@
 # - check_frequency_consistency.py: メタ自動値と手書き値の矛盾（全89ファイル・NG件あればブロック）
 # - check_kakomon_consistency.py: 過去問テーブルとby-field.mdの整合性（警告のみ）
 # - audit_titles.py: kijun/ H1 と省令公式条見出しの整合性（NG件あればブロック・R6機械化）
+# - check_law_citations.py: 法令引用整合性（電気事業法第N条＋認可/届出/対象 の検証・NG件あればブロック）
 
 set -e
 REPO_ROOT="$(git rev-parse --show-toplevel)"
@@ -67,6 +68,26 @@ if [ -n "$NEED_TITLES_CHECK" ]; then
         echo "  確認: python scripts/audit_titles.py"
         echo "  一次ソース: e-Gov 法令検索 API 409M50000400052"
         echo "  緊急時は --no-verify でスキップ可能（非推奨）。"
+        exit 1
+    fi
+fi
+
+# 5. 法令引用整合性（変更された .md ファイルのみ高速化・NG件あればブロック）
+NEED_LAW_CHECK=$(echo "$CHANGED" | grep -E '^docs/.+\.md$' || true)
+if [ -n "$NEED_LAW_CHECK" ]; then
+    set +e
+    # staged のファイルだけを対象に検査
+    STAGED_MD_FILES=$(echo "$CHANGED" | grep -E '^docs/.+\.md$' | tr '\n' ' ')
+    LAW_RESULT=$(python scripts/check_law_citations.py $STAGED_MD_FILES 2>&1)
+    LAW_EXIT=$?
+    set -e
+    if [ "$LAW_EXIT" -ne "0" ]; then
+        echo "❌ [pre-commit] 法令引用に不整合があります。"
+        echo "$LAW_RESULT" | tail -20
+        echo ""
+        echo "→ _data/law_articles.yml と照合して修正してください。"
+        echo "  一次ソース: e-Gov 法令検索 (https://laws.e-gov.go.jp/)"
+        echo "  緊急時は --no-verify でスキップ可能。"
         exit 1
     fi
 fi
