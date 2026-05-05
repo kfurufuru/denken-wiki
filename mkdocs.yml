@@ -248,6 +248,8 @@ nav:
         - 第3条（事故報告）: articles/other/jiko-3.md
         - 第4条（公害防止届出）: articles/other/jiko-4.md
         - 第5条（自家用電気工作物の報告）: articles/other/jiko-5.md
+    - 発電用風力設備技術基準:
+      - 第5条（風車の安全な状態の確保）: articles/furyoku/5.md
   - 過去問マッピング:
     - kakomon/index.md
     - 年度別一覧: kakomon/by-year.md
