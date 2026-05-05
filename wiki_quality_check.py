@@ -555,12 +555,24 @@ def _score_i18(content: str) -> tuple:
 
 
 def _check_caps_v3(content: str, path: Path, items: dict) -> list:
-    """重大欠陥cap発火検査"""
+    """重大欠陥cap発火検査
+
+    Sprint 1 修正（2026-05-05・AI社員諮問結果反映）:
+    - C01: 「条/項/号3階層」→「条番号自体が一致」のみで判定（条文構造的に項/号がない記事を救済）
+    - C06: 完全削除（「R5/クロスレビュー/並列エージェント」は法規記事に書く慣例なしと江間証言で確定）
+    """
     caps = []
 
-    # C01: I01 が満点未満（条文番号3階層が一致しない）
-    if items["I01"][0] < V3_ITEM_MAX["I01"]:
-        caps.append(("C01", 69, "条文番号3階層不一致 or kakomon.yml未一致"))
+    # C01: 条番号自体が一致しない（path stem の条番号が記事内に現れない）
+    stem_num = re.sub(r"[^\d]", "", path.stem)
+    if stem_num:
+        # path 由来の条番号が記事内 (h1 や条文原文セクション) に明示的に現れるか
+        article_present = bool(re.search(rf"第\s*{stem_num}\s*条", content))
+        # kakomon.yml ターゲットも併用（記事番号が登録されているか）
+        meta = get_kakomon_meta(path)
+        kakomon_ok = meta.get("registered", 0) > 0 or meta.get("target") == ""  # 登録あり or 推定不可
+        if not article_present and not kakomon_ok:
+            caps.append(("C01", 69, f"条番号{stem_num}が記事内に未明示+kakomon登録なし"))
 
     # C02: 数値検証MISSING
     if re.search(r"数値検証.*MISSING", content):
@@ -580,11 +592,7 @@ def _check_caps_v3(content: str, path: Path, items: dict) -> list:
     if items["I05"][0] == 0:
         caps.append(("C05", 89, "出典版数記載なし"))
 
-    # C06: クロスレビューキーワードなし+数値テーブル3個以上
-    table_count = len(re.findall(r"^\|.*\|.*\|", content, re.MULTILINE))
-    has_review = bool(re.search(r"R5|クロスレビュー|並列エージェント", content))
-    if not has_review and table_count >= 3:
-        caps.append(("C06", 69, f"R5照合未済+数値テーブル{table_count}個"))
+    # C06: 削除（Sprint 1で廃止 — 法規記事に書く慣例なし）
 
     return caps
 
@@ -720,6 +728,19 @@ def print_score_v3(result: dict):
     # タイブレーカー
     tb = result["tiebreakers"]
     print(f"\n[タイブレーカー情報] S軸={tb['s_score']}/32, 版数={tb['version_date'] or '-'}, 更新日={tb['update_date'] or '-'}")
+
+    # 改善ナビ: 不足項目TOP3（早川条件・Sprint 1 追加）
+    deficits = []
+    for item_id, (got, max_pts, detail) in result["items"].items():
+        deficit = max_pts - got
+        if deficit > 0:
+            label = item_labels.get(item_id, "")
+            deficits.append((deficit, item_id, label, got, max_pts, detail))
+    deficits.sort(key=lambda x: -x[0])  # 不足が大きい順
+    if deficits:
+        print(f"\n[💡 改善ナビ: 不足項目TOP3（次にここを直すと点が伸びる）]")
+        for deficit, item_id, label, got, max_pts, detail in deficits[:3]:
+            print(f"  {item_id} {label:18s} +{deficit}点見込み  現在{got}/{max_pts}  ({detail})")
 
 
 def rank_all_v3(top_n: int = None):
