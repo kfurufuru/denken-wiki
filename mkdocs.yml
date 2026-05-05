@@ -281,22 +281,26 @@ nav:
     - 再出題傾向と最適学習戦略: strategy/reissue-patterns-and-regulations.md
   - リファレンス:
     - reference/index.md
-    - 頻出数値一覧: reference/numbers.md
-    - 類題横断（数値・キーワード横串）: reference/cross-reference.md
-    - B問題 計算テンプレート集: reference/b-mondai-template.md
-    - 電圧区分早見表: reference/voltage-zones.md
-    - 接地工事種別比較表: reference/grounding-comparison.md
-    - 工事の種類と施設場所の対応表: reference/wiring-methods.md
-    - 保護装置の動作時間まとめ: reference/protection-timing.md
-    - 分散型電源の連系区分早見表: reference/distributed-power-zones.md
-    - 用語の使い分け（決め手集）: reference/term-usage.md
-    - 用語集（ツールチップ定義）: reference/glossary.md
-    - 法体系の全体構造: reference/hourei-taikei.md
-    - 参考文献・外部リンク: reference/links.md
-    - 学習システム全体マップ: reference/system-map.md
-    - バージョニング基準: reference/versioning.md
-    - 用語索引（五十音順）: reference/glossary-index.md
-    - 罰則・罰金比較表: reference/penalties.md
-    - 届出・申請期限一覧: reference/deadlines.md
-    - 旧→現行 条番号マッピング: reference/article-number-mapping.md
-    - 新規記事作成チェックリスト: reference/article-creation-checklist.md
+    - 📊 条文中の数値・分類:
+      - 電圧区分早見表: reference/voltage-zones.md
+      - 接地工事種別比較表: reference/grounding-comparison.md
+      - 工事の種類と施設場所の対応表: reference/wiring-methods.md
+      - 保護装置の動作時間まとめ: reference/protection-timing.md
+      - 分散型電源の連系区分早見表: reference/distributed-power-zones.md
+      - 罰則・罰金比較表: reference/penalties.md
+      - 届出・申請期限一覧: reference/deadlines.md
+      - 頻出数値一覧: reference/numbers.md
+      - 類題横断（数値・キーワード横串）: reference/cross-reference.md
+      - B問題 計算テンプレート集: reference/b-mondai-template.md
+    - 🔖 用語・索引:
+      - 用語の使い分け（決め手集）: reference/term-usage.md
+      - 用語集（ツールチップ定義）: reference/glossary.md
+      - 用語索引（五十音順）: reference/glossary-index.md
+    - ⚖️ 法令体系:
+      - 法体系の全体構造: reference/hourei-taikei.md
+      - 旧→現行 条番号マッピング: reference/article-number-mapping.md
+    - 🛠️ 制作プロセス:
+      - 参考文献・外部リンク: reference/links.md
+      - 学習システム全体マップ: reference/system-map.md
+      - バージョニング基準: reference/versioning.md
+      - 新規記事作成チェックリスト: reference/article-creation-checklist.md
