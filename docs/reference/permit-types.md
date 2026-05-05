@@ -210,6 +210,7 @@ graph TD
 
 ## 参照クロスリンク
 
+- [報告先・届出先 早見マップ](reporting-destinations.md)（宛先軸・どこに送るかで逆引き）
 - [届出・申請期限一覧](deadlines.md)（数値・期限の確定リスト）
 - [罰則・罰金比較表](penalties.md)（届出義務違反の罰則）
 - [法体系の全体構造](hourei-taikei.md)（法律→政令→省令の階層）
