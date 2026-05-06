@@ -237,12 +237,12 @@ REQUIRED_SECTIONS = [
 V24_NEIGHBOR_CLUSTER_PATTERN = r"##\s*★?\s*0\.?\s*(隣接条文クラスタマップ|論点クラスタマップ)"
 
 V24_CONDITIONAL_SECTIONS = {
-    "exclude_physical_form": (r"##\s*★?\s*\d*\.?\s*(施設形態|電路形態|物理イメージ)", "施設形態別物理イメージ"),
-    "exclude_keyword_physics": (r"##\s*★?\s*\d*\.?\s*(核心キーワード|アーク放電の物理|物理メカニズム)", "核心キーワード物理解説"),
-    "exclude_branch_table": (r"##\s*★?\s*\d*\.?\s*A/?B\s*\d*層?暗記表", "A/B 2層暗記表"),
-    "exclude_derived_problems": (r"##\s*★?\s*\d*\.?\s*派生問題群", "派生問題群"),
-    "exclude_5_perspectives": (r"##\s*★?\s*\d*\.?\s*試験で問われる5切り口", "試験5切り口"),
-    "exclude_practice_scene": (r"##\s*★?\s*\d*\.?\s*実務シーン", "実務シーン"),
+    "exclude_physical_form": (r"#{2,3}.*(施設形態|電路形態|物理イメージ)", "施設形態別物理イメージ"),
+    "exclude_keyword_physics": (r"#{2,3}.*(核心キーワード|アーク放電の物理|物理メカニズム)", "核心キーワード物理解説"),
+    "exclude_branch_table": (r"#{2,3}.*A/?B\s*\d*層?暗記表", "A/B 2層暗記表"),
+    "exclude_derived_problems": (r"#{2,3}.*派生問題群", "派生問題群"),
+    "exclude_5_perspectives": (r"#{2,3}.*試験で問われる5切り口", "試験5切り口"),
+    "exclude_practice_scene": (r"#{2,3}.*実務シーン", "実務シーン"),
 }
 
 
