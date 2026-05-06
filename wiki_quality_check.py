@@ -6,7 +6,7 @@
   python wiki_quality_check.py --rank --top 5          # 上位5件のみ
   python wiki_quality_check.py --check-reference       # 現リファレンス(kijun/5)を上回るページ検出
 
-スコア基準（100点満点）:
+スコア基準（v2.3 = 100点満点 / v2.4 = 110点満点）:
   必須セクション (40点): 10セクション x 4点
   図解 (15点): SVG or Mermaid 各5点 + 第2図解で+5点
   セルフチェック分散 (10点): 3箇所以上で満点
@@ -14,6 +14,8 @@
   穴埋め過去問 (10点): !!! abstract + ??? success
   最終チェック (10点): - [ ] チェックボックス3項目以上
   バージョン管理 (5点): フッターに最終確認日 + vX.Y
+  ★0 隣接条文クラスタマップ (v2.4のみ +10点): 必須昇格
+  条件付きセクション不整合 (v2.4のみ): 採用宣言ありで実装なし → -3点/件
 """
 
 import sys
@@ -227,6 +229,42 @@ REQUIRED_SECTIONS = [
 ]
 
 
+# ============================================================
+# v2.4 テンプレート対応（2026-05-06 追加）
+# ============================================================
+
+V24_NEIGHBOR_CLUSTER_PATTERN = r"##.*★\s*0\.?\s*(隣接条文クラスタマップ|論点クラスタマップ)"
+
+V24_CONDITIONAL_SECTIONS = {
+    "exclude_physical_form": (r"##.*★\s*\d*\.?\s*(施設形態|電路形態|物理イメージ)", "★6 施設形態別物理イメージ"),
+    "exclude_keyword_physics": (r"##.*★\s*\d*\.?\s*(核心キーワード|アーク放電の物理|物理メカニズム)", "★7 核心キーワード物理解説"),
+    "exclude_branch_table": (r"##.*★\s*\d*\.?\s*A/?B\s*\d*層?暗記表", "★11 A/B 2層暗記表"),
+    "exclude_derived_problems": (r"##.*★\s*\d*\.?\s*派生問題群", "★14 派生問題群"),
+    "exclude_5_perspectives": (r"##.*★\s*\d*\.?\s*試験で問われる5切り口", "★15 試験5切り口"),
+    "exclude_practice_scene": (r"##.*★\s*\d*\.?\s*実務シーン", "★17 実務シーン"),
+}
+
+
+def parse_template_metadata(content: str) -> tuple:
+    """YAMLフロントマターから template_version と diagnostic を抽出。
+
+    Returns:
+        (version: str|None, diagnostic: dict)
+    """
+    fm_match = re.match(r"^---\n(.*?)\n---\n", content, re.DOTALL)
+    if not fm_match:
+        return None, {}
+    fm_content = fm_match.group(1)
+    version_match = re.search(r"template_version:\s*([\d.]+)", fm_content)
+    version = version_match.group(1) if version_match else None
+    diag = {}
+    for key in V24_CONDITIONAL_SECTIONS.keys():
+        m = re.search(rf"{key}:\s*(true|false)", fm_content, re.IGNORECASE)
+        if m:
+            diag[key] = m.group(1).lower() == "true"
+    return version, diag
+
+
 def score_article(path: Path) -> dict:
     """記事の品質スコアを計算"""
     if not path.exists():
@@ -234,6 +272,10 @@ def score_article(path: Path) -> dict:
 
     content = path.read_text(encoding="utf-8")
     breakdown = {}
+
+    # v2.4 メタ宣言の検出（バックワードコンパチ：v2.3以前は従来評価）
+    template_version, diagnostic = parse_template_metadata(content)
+    is_v24 = template_version == "2.4"
 
     # 1. 必須セクション (40点)
     section_score = 0
@@ -295,11 +337,36 @@ def score_article(path: Path) -> dict:
     version_score = (5 if has_version and has_date else 2 if has_version or has_date else 0)
     breakdown["バージョン管理"] = (version_score, 5, f"version={has_version}, date={has_date}")
 
+    # 8. v2.4 拡張: ★0 隣接条文クラスタマップ (10点・必須昇格)
+    v24_extra_max = 0
+    if is_v24:
+        has_neighbor = bool(re.search(V24_NEIGHBOR_CLUSTER_PATTERN, content))
+        neighbor_score = 10 if has_neighbor else 0
+        breakdown["★0 隣接条文クラスタマップ"] = (neighbor_score, 10, f"v2.4必須・存在={has_neighbor}")
+        v24_extra_max += 10
+
+        # 9. v2.4 拡張: 条件付きセクション整合性チェック（採用宣言と実装の一致）
+        for diag_key, (pattern, section_name) in V24_CONDITIONAL_SECTIONS.items():
+            excluded = diagnostic.get(diag_key, False)
+            has_section = bool(re.search(pattern, content))
+            if excluded:
+                # 不採用宣言・実装あり → 警告のみ（本質スコアには影響しない）
+                if has_section:
+                    breakdown[f"⚠️ {section_name}"] = (0, 0, "不採用宣言だが実装あり（要確認）")
+            else:
+                # 採用宣言・実装なし → 減点 -3点
+                if not has_section:
+                    breakdown[f"❌ {section_name}"] = (-3, 0, "採用宣言ありだが実装なし")
+
     total = sum(s[0] for s in breakdown.values())
+    max_total = 100 + v24_extra_max
 
     return {
         "path": str(path.relative_to(REPO_ROOT)) if path.is_relative_to(REPO_ROOT) else str(path),
         "score": total,
+        "max_score": max_total,
+        "template_version": template_version,
+        "is_v24": is_v24,
         "lines": len(content.splitlines()),
         "breakdown": breakdown,
         "kakomon_meta": get_kakomon_meta(path),
@@ -310,12 +377,24 @@ def print_score(result: dict):
     if "error" in result:
         print(f"❌ {result['path']}: {result['error']}")
         return
-    print(f"\n📄 {result['path']} ({result['lines']}行)")
-    print(f"🎯 総合スコア: {result['score']}/100")
+    max_score = result.get("max_score", 100)
+    version_label = ""
+    if result.get("is_v24"):
+        version_label = " [v2.4]"
+    elif result.get("template_version"):
+        version_label = f" [v{result['template_version']}]"
+    print(f"\n📄 {result['path']} ({result['lines']}行){version_label}")
+    print(f"🎯 総合スコア: {result['score']}/{max_score}")
     print(f"\n内訳:")
     for category, (got, max_pts, detail) in result["breakdown"].items():
-        bar = "█" * int(got / max_pts * 10) + "░" * (10 - int(got / max_pts * 10))
-        print(f"  {category:20s} {bar} {got:3d}/{max_pts:3d}  {detail}")
+        # 0除算回避
+        if max_pts > 0:
+            ratio = max(0, got) / max_pts
+            bar = "█" * int(ratio * 10) + "░" * (10 - int(ratio * 10))
+            print(f"  {category:30s} {bar} {got:+3d}/{max_pts:3d}  {detail}")
+        else:
+            # 警告・減点項目（max=0）
+            print(f"  {category:30s} {'─'*10} {got:+3d}        {detail}")
 
     # kakomon.yml 登録メタを表示（採点外の参考情報）
     meta = result.get("kakomon_meta") or {}
