@@ -243,6 +243,8 @@ V24_CONDITIONAL_SECTIONS = {
     "exclude_derived_problems": (r"#{2,3}.*派生問題群", "派生問題群"),
     "exclude_5_perspectives": (r"#{2,3}.*試験で問われる5切り口", "試験5切り口"),
     "exclude_practice_scene": (r"#{2,3}.*実務シーン", "実務シーン"),
+    # v2.4.3 新規: 条文別暗記マップ（複数条文の役割分担を1表で可視化）
+    "exclude_memorization_map": (r"#{2,3}.*(条文別暗記マップ|覚えること)", "条文別暗記マップ"),
 }
 
 
