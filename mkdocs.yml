@@ -311,6 +311,7 @@ nav:
       - 法体系の全体構造: reference/hourei-taikei.md
       - 旧→現行 条番号マッピング: reference/article-number-mapping.md
       - 条文項番マスター辞典: reference/article-structure.md
+      - 法令改正一覧: reference/hourei-kaisei.md
     - 🛠️ 制作プロセス:
       - 参考文献・外部リンク: reference/links.md
       - 学習システム全体マップ: reference/system-map.md
