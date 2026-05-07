@@ -32,8 +32,9 @@
 
     if (activePattern !== null) {
       const meta = resultEl.querySelector('.md-search-result__meta');
-      if (meta) {
-        const next = `${visible} 件（絞り込み中 / 全 ${items.length} 件）`;
+      const cat = CATS.find(c => c.pattern === activePattern);
+      if (meta && cat) {
+        const next = `「${cat.label}」で絞り込み中`;
         if (meta.textContent !== next) meta.textContent = next;
       }
     }
