@@ -645,3 +645,44 @@ details.question.sc-status-wrong:not([open]) > summary      { background: rgba(2
     padding: 0.05rem 0.45rem;
   }
 }
+
+/* ============================================================
+   検索結果セクション絞り込みチップ（search-filter.js と連動）
+   ============================================================ */
+.sf-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  padding: 6px 16px;
+  border-bottom: 1px solid var(--md-default-fg-color--lightest);
+}
+
+.sf-chip {
+  padding: 2px 10px;
+  border: 1px solid var(--md-default-fg-color--lighter);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--md-default-fg-color--light);
+  font-size: 0.68rem;
+  font-family: inherit;
+  cursor: pointer;
+  line-height: 1.6;
+  white-space: nowrap;
+  transition: background 0.1s, color 0.1s, border-color 0.1s;
+}
+
+.sf-chip:hover {
+  border-color: var(--md-primary-fg-color);
+  color: var(--md-primary-fg-color);
+}
+
+.sf-chip--on {
+  background: var(--md-primary-fg-color);
+  border-color: var(--md-primary-fg-color);
+  color: var(--md-primary-bg-color);
+}
+
+.sf-chip--on:hover {
+  background: var(--md-primary-fg-color);
+  color: var(--md-primary-bg-color);
+}

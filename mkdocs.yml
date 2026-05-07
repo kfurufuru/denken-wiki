@@ -84,6 +84,7 @@ extra_javascript:
   - javascripts/theme-filter.js
   - javascripts/task-checkbox.js
   - javascripts/self-check.js
+  - javascripts/search-filter.js
 
 extra:
   social:
