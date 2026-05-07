@@ -85,6 +85,7 @@ extra_javascript:
   - javascripts/task-checkbox.js
   - javascripts/self-check.js
   - javascripts/search-filter.js
+  - javascripts/chatgpt-prompt.js
 
 extra:
   social:
