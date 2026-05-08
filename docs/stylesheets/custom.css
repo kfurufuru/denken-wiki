@@ -849,6 +849,54 @@ details.question.sc-status-wrong:not([open]) > summary      { background: rgba(2
   color: var(--gray-500, #637080);
 }
 
+/* ── モード切替タブ ─────────────────────────────── */
+.chatgpt-box__tabs {
+  display: flex;
+  gap: 0.25rem;
+  margin: 0 0 0.6rem;
+  border-bottom: 1px solid var(--gray-300, #C9CDD3);
+  flex-wrap: wrap;
+}
+.chatgpt-box__tab {
+  padding: 0.4rem 0.85rem;
+  background: transparent;
+  border: 1px solid transparent;
+  border-bottom: none;
+  border-radius: var(--radius-sm, 4px) var(--radius-sm, 4px) 0 0;
+  color: var(--gray-600, #4B5563);
+  font-size: var(--text-sm, 0.875rem);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+  margin-bottom: -1px;
+}
+.chatgpt-box__tab:hover {
+  background: var(--primary-50, #E8F4F4);
+  color: var(--primary-700, #1F6568);
+}
+.chatgpt-box__tab.is-active {
+  background: var(--md-default-bg-color, #fff);
+  border-color: var(--gray-300, #C9CDD3);
+  color: var(--primary-700, #1F6568);
+  cursor: default;
+}
+.chatgpt-box__tab.is-active:hover {
+  background: var(--md-default-bg-color, #fff);
+}
+
+/* スマホ：タブを横スクロール可に */
+@media (max-width: 480px) {
+  .chatgpt-box__tabs {
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    -webkit-overflow-scrolling: touch;
+  }
+  .chatgpt-box__tab {
+    flex: 0 0 auto;
+    white-space: nowrap;
+  }
+}
+
 /* ============================================================
    Ω等のシンボル文字の字形安定化
    Google Fonts (Noto Sans JP) が読み込めない場合のフォールバック
@@ -863,4 +911,87 @@ details.question.sc-status-wrong:not([open]) > summary      { background: rgba(2
 /* Greek 大文字（Ω π Σ Δ 等）と数学記号は確実な等幅・等高表示に */
 .md-typeset {
   font-feature-settings: "palt" 1;  /* プロポーショナル詰め組み */
+}
+
+/* ============================================================
+   admonition 枠内の表の見やすさ改善（穴埋めチャレンジ等）
+   !!! abstract / !!! warning / !!! note 等の枠内に Markdown 表を
+   書いた時、padding 不足や横スクロール非対応で詰まって見える問題を解決
+   ============================================================ */
+
+/* admonition 内の表全体のレイアウト */
+.md-typeset .admonition table,
+.md-typeset details table {
+  width: 100%;
+  margin: 0.6rem 0 0.8rem 0;
+  font-size: 0.82rem;
+  table-layout: auto;
+  border-collapse: collapse;
+  background: var(--md-default-bg-color, #fff);
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+
+/* セルの padding を確保（詰まりを解消） */
+.md-typeset .admonition table th,
+.md-typeset .admonition table td,
+.md-typeset details table th,
+.md-typeset details table td {
+  padding: 0.5rem 0.75rem;
+  line-height: 1.55;
+  vertical-align: middle;
+  border: 1px solid var(--md-default-fg-color--lightest, rgba(0,0,0,0.1));
+}
+
+/* ヘッダ行の視認性向上 */
+.md-typeset .admonition table th,
+.md-typeset details table th {
+  background: var(--md-default-fg-color--lightest, rgba(0,0,0,0.04));
+  font-weight: 700;
+  text-align: left;
+}
+
+/* ストライプ行で視線誘導 */
+.md-typeset .admonition table tbody tr:nth-child(even),
+.md-typeset details table tbody tr:nth-child(even) {
+  background: rgba(0,0,0,0.02);
+}
+
+/* 横スクロール対応（モバイル） */
+@media (max-width: 700px) {
+  .md-typeset .admonition table,
+  .md-typeset details table {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    white-space: nowrap;
+    font-size: 0.78rem;
+  }
+  .md-typeset .admonition table th,
+  .md-typeset .admonition table td,
+  .md-typeset details table th,
+  .md-typeset details table td {
+    padding: 0.4rem 0.55rem;
+  }
+}
+
+/* 黄マーカー（==）と <mark> タグの可読性 */
+.md-typeset .admonition mark,
+.md-typeset details mark {
+  background: rgba(255, 235, 59, 0.55);
+  padding: 0.06em 0.22em;
+  border-radius: 3px;
+  font-weight: 700;
+}
+
+/* abstract 系（穴埋め問題）の admonition 全体に少し余裕を */
+.md-typeset .admonition.abstract,
+.md-typeset details.abstract {
+  padding-bottom: 0.3rem;
+}
+
+.md-typeset .admonition.abstract > .admonition-title,
+.md-typeset details.abstract > summary {
+  font-size: 0.95rem;
 }
