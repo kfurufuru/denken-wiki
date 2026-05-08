@@ -180,9 +180,9 @@ nav:
       - 第14条（電路の絶縁）: articles/kaishaku/14.md
       - 第15条（高圧電路の絶縁性能）: articles/kaishaku/15.md
       - 第16条（機械器具等の絶縁）: articles/kaishaku/16.md
-      - 第17条（A種接地工事）: articles/kaishaku/17.md
-      - 第18条（B種接地工事）: articles/kaishaku/18.md
-      - 第19条（C種・D種接地工事）: articles/kaishaku/19.md
+      - 第17条（接地工事の種類及び施設方法）: articles/kaishaku/17.md
+      - 第18条（工作物の金属体を利用した接地工事）: articles/kaishaku/18.md
+      - 第19条（保安上又は機能上必要な場合における電路の接地）: articles/kaishaku/19.md
       - 第21条（高圧の機械器具の施設）: articles/kaishaku/21.md
       - 第22条（特別高圧の機械器具の施設）: articles/kaishaku/22.md
       - 第29条（金属製外箱の接地）: articles/kaishaku/29.md
