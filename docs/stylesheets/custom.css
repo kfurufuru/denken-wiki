@@ -599,6 +599,53 @@
 }
 
 /* ============================================================
+   穴埋め過去問チャレンジ — メモ機能
+   self-check.js が itemType='kakomon' にのみ追加する
+   ============================================================ */
+
+.self-check-memo {
+  margin: 0.2rem 0 0.6rem 0;
+  padding: 0 0.7rem;
+}
+
+.self-check-memo-input {
+  width: 100%;
+  min-height: 2.6em;
+  padding: 0.5rem 0.7rem;
+  border: 1px solid var(--md-default-fg-color--lightest, rgba(0,0,0,0.18));
+  border-radius: 6px;
+  background: var(--md-default-bg-color, #fff);
+  color: var(--md-default-fg-color, #333);
+  font-family: inherit;
+  font-size: 0.78rem;
+  line-height: 1.5;
+  resize: vertical;
+  box-sizing: border-box;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.self-check-memo-input::placeholder {
+  color: var(--md-default-fg-color--light, #999);
+  opacity: 0.7;
+}
+
+.self-check-memo-input:focus {
+  outline: none;
+  border-color: #f59e0b;
+  box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.18);
+}
+
+.self-check-memo-input:not(:placeholder-shown) {
+  background: rgba(245, 158, 11, 0.04);
+  border-color: rgba(245, 158, 11, 0.4);
+}
+
+@media (max-width: 600px) {
+  .self-check-memo { padding: 0 0.5rem; }
+  .self-check-memo-input { font-size: 0.78rem; min-height: 3em; padding: 0.45rem 0.55rem; }
+}
+
+/* ============================================================
    理解度ステータス — 閉じた状態でも視覚的に分かるように
    sc-status-{understood|vague|review|wrong} を <details> または
    <div.admonition.abstract> に付与（self-check.js）

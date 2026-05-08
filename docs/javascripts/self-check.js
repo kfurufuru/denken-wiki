@@ -7,21 +7,43 @@
  *
  * localStorage 共有:
  *   キー: denken_check::<articleSlug>::<itemHash>
- *   値:   JSON { status, updatedAt, articleUrl, articleTitle, itemTitle, itemType }
+ *   値:   JSON { status, updatedAt, articleUrl, articleTitle, itemTitle, itemType, memo }
  *
  * status: "understood" | "vague" | "review" | "wrong"
+ *   - selfcheck (4ボタン): understood / vague / review / wrong
+ *   - kakomon  (3ボタン): understood / vague / wrong  ※ 既存 'review' は vague として表示
+ *
+ * memo: kakomon ブロックのみ。textarea 入力を debounce で保存（status と独立）。
  */
 (function () {
   'use strict';
 
   const STORAGE_PREFIX = 'denken_check::';
 
-  const STATUSES = [
+  const STATUSES_SELFCHECK = [
     { key: 'understood', label: '理解した', color: '#22c55e', icon: '✓' },
     { key: 'vague',      label: 'うる覚え', color: '#f59e0b', icon: '?' },
     { key: 'review',     label: '要確認',   color: '#f97316', icon: '!' },
     { key: 'wrong',      label: '間違えた', color: '#dc2626', icon: '✗' }
   ];
+
+  const STATUSES_KAKOMON = [
+    { key: 'understood', label: '理解した', color: '#22c55e', icon: '〇' },
+    { key: 'vague',      label: '曖昧',     color: '#f59e0b', icon: '△' },
+    { key: 'wrong',      label: '間違えた', color: '#dc2626', icon: '×' }
+  ];
+
+  // バッジ表示用に全 status key を網羅した配列（class 削除や検索用）
+  const ALL_STATUSES = [
+    { key: 'understood', label: '理解した', color: '#22c55e', icon: '✓' },
+    { key: 'vague',      label: '曖昧',     color: '#f59e0b', icon: '?' },
+    { key: 'review',     label: '要確認',   color: '#f97316', icon: '!' },
+    { key: 'wrong',      label: '間違えた', color: '#dc2626', icon: '✗' }
+  ];
+
+  function statusesFor(itemType) {
+    return itemType === 'kakomon' ? STATUSES_KAKOMON : STATUSES_SELFCHECK;
+  }
 
   function djb2Hash(str) {
     let hash = 5381;
@@ -64,21 +86,40 @@
     } catch (e) { /* */ }
   }
 
-  function applyStatusClass(rootEl, status) {
+  // ボタンを取り消した時、memo は残す
+  function clearStatusOnly(itemHash) {
+    try {
+      const cur = getStored(itemHash);
+      if (cur && cur.memo) {
+        cur.status = null;
+        cur.updatedAt = new Date().toISOString();
+        setStored(itemHash, cur);
+      } else {
+        localStorage.removeItem(STORAGE_PREFIX + articleSlug() + '::' + itemHash);
+      }
+    } catch (e) { /* */ }
+  }
+
+  function applyStatusClass(rootEl, status, itemType) {
     if (!rootEl) return;
-    STATUSES.forEach(function (s) { rootEl.classList.remove('sc-status-' + s.key); });
+    ALL_STATUSES.forEach(function (s) { rootEl.classList.remove('sc-status-' + s.key); });
     const existingBadge = rootEl.querySelector(':scope > summary > .sc-summary-badge, :scope > .admonition-title > .sc-summary-badge, :scope > p.admonition-title > .sc-summary-badge');
     if (existingBadge) existingBadge.remove();
     if (!status) return;
-    rootEl.classList.add('sc-status-' + status);
+
+    // kakomon なのに review 状態だった場合は vague として表示（後方互換）
+    let displayStatus = status;
+    if (itemType === 'kakomon' && status === 'review') displayStatus = 'vague';
+
+    rootEl.classList.add('sc-status-' + displayStatus);
     const titleEl = rootEl.matches('details')
       ? rootEl.querySelector(':scope > summary')
       : rootEl.querySelector(':scope > .admonition-title, :scope > p.admonition-title');
     if (!titleEl) return;
-    const def = STATUSES.find(function (s) { return s.key === status; });
+    const def = ALL_STATUSES.find(function (s) { return s.key === displayStatus; });
     if (!def) return;
     const badge = document.createElement('span');
-    badge.className = 'sc-summary-badge sc-summary-badge-' + status;
+    badge.className = 'sc-summary-badge sc-summary-badge-' + displayStatus;
     badge.textContent = def.icon + ' ' + def.label;
     titleEl.appendChild(badge);
   }
@@ -95,9 +136,11 @@
 
     const stored = getStored(itemHash);
     const currentStatus = stored ? stored.status : null;
-    applyStatusClass(rootEl, currentStatus);
+    applyStatusClass(rootEl, currentStatus, itemType);
 
-    STATUSES.forEach(function (s) {
+    const statuses = statusesFor(itemType);
+
+    statuses.forEach(function (s) {
       const btn = document.createElement('button');
       btn.type = 'button';
       btn.className = 'self-check-btn';
@@ -110,22 +153,24 @@
         const wasActive = btn.classList.contains('active');
         wrap.querySelectorAll('.self-check-btn').forEach(function (b) { b.classList.remove('active'); });
         if (wasActive) {
-          clearStored(itemHash);
+          clearStatusOnly(itemHash);
           updateTimestamp(wrap, null);
-          applyStatusClass(rootEl, null);
+          applyStatusClass(rootEl, null, itemType);
         } else {
           btn.classList.add('active');
+          const existing = getStored(itemHash) || {};
           const payload = {
             status: s.key,
             updatedAt: new Date().toISOString(),
             articleUrl: location.origin + location.pathname + location.hash,
             articleTitle: articleTitle(),
             itemTitle: itemTitle.slice(0, 200),
-            itemType: itemType
+            itemType: itemType,
+            memo: existing.memo || ''
           };
           setStored(itemHash, payload);
           updateTimestamp(wrap, payload.updatedAt);
-          applyStatusClass(rootEl, s.key);
+          applyStatusClass(rootEl, s.key, itemType);
         }
       });
 
@@ -138,6 +183,44 @@
     if (stored && stored.updatedAt) updateTimestamp(wrap, stored.updatedAt);
 
     return wrap;
+  }
+
+  function buildMemo(itemHash, rootEl) {
+    const memoWrap = document.createElement('div');
+    memoWrap.className = 'self-check-memo';
+    memoWrap.setAttribute('data-item-hash', itemHash);
+
+    const textarea = document.createElement('textarea');
+    textarea.className = 'self-check-memo-input';
+    textarea.rows = 2;
+    textarea.placeholder = 'メモ：気付き・間違えた理由・暗記補助など';
+
+    // 既存メモを取得
+    const stored = getStored(itemHash);
+    if (stored && stored.memo) {
+      textarea.value = stored.memo;
+    }
+
+    // 入力変化を debounce で保存（500ms）
+    let timer = null;
+    textarea.addEventListener('input', function () {
+      clearTimeout(timer);
+      timer = setTimeout(function () {
+        const cur = getStored(itemHash) || {
+          status: null,
+          articleUrl: location.origin + location.pathname + location.hash,
+          articleTitle: articleTitle(),
+          itemTitle: '',
+          itemType: 'kakomon'
+        };
+        cur.memo = textarea.value;
+        cur.updatedAt = new Date().toISOString();
+        setStored(itemHash, cur);
+      }, 500);
+    });
+
+    memoWrap.appendChild(textarea);
+    return memoWrap;
   }
 
   function updateTimestamp(wrap, iso) {
@@ -184,6 +267,8 @@
       const hash = djb2Hash('kakomon::' + titleText);
       const buttons = buildButtons(hash, titleText, 'kakomon', el);
       el.appendChild(buttons);
+      const memo = buildMemo(hash, el);
+      el.appendChild(memo);
     });
   }
 
