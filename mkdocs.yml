@@ -10,6 +10,9 @@ theme:
   name: material
   custom_dir: overrides
   language: ja
+  font:
+    text: Noto Sans JP
+    code: Roboto Mono
   palette:
     - scheme: default
       primary: custom

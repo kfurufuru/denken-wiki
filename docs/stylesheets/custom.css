@@ -848,3 +848,19 @@ details.question.sc-status-wrong:not([open]) > summary      { background: rgba(2
   font-size: var(--text-xs, 0.78rem);
   color: var(--gray-500, #637080);
 }
+
+/* ============================================================
+   Ω等のシンボル文字の字形安定化
+   Google Fonts (Noto Sans JP) が読み込めない場合のフォールバック
+   ============================================================ */
+.md-typeset,
+.md-typeset table,
+.md-typeset code,
+.md-typeset .admonition {
+  font-family: "Noto Sans JP", "Noto Sans CJK JP", "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Yu Gothic UI", "Yu Gothic", "Meiryo", system-ui, sans-serif;
+}
+
+/* Greek 大文字（Ω π Σ Δ 等）と数学記号は確実な等幅・等高表示に */
+.md-typeset {
+  font-feature-settings: "palt" 1;  /* プロポーショナル詰め組み */
+}
