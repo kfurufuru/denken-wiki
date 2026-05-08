@@ -1269,7 +1269,7 @@ problems:
     topic: "B種接地工事の抵抗値及び常時流れる電流"
     theme: "setsuchi"
     form: "計算"
-    article: "解釈§18"
+    article: "解釈§17"
   - year: "R05上"
     year_label: "令和5年上期（2023年）"
     num: 13
@@ -1353,7 +1353,7 @@ problems:
     topic: "需要設備付近で発生した1線地絡事故（計算）"
     theme: "setsuchi"
     form: "計算"
-    article: "解釈§18"
+    article: "解釈§17"
   - year: "R05下"
     year_label: "令和5年下期（2023年）"
     num: 12
