@@ -14,6 +14,21 @@
 
   var SITE_NAME = '電験3種 法規Wiki';
   var CHATGPT_URL = 'https://chat.openai.com/';
+  var CSS_VERSION = '20260509b'; // CSS変更時に bump → ブラウザCSSキャッシュ強制更新
+
+  // ブラウザがcustom.cssを古いまま掴んでいる対策：
+  // <link rel="stylesheet" href="...custom.css"> に ?v=CSS_VERSION を1度だけ付与して再フェッチ
+  function bustCssCache() {
+    var marker = '__chatgptPromptCssBusted_' + CSS_VERSION;
+    if (window[marker]) return;
+    window[marker] = true;
+    document.querySelectorAll('link[rel="stylesheet"]').forEach(function (link) {
+      if (!link.href || link.href.indexOf('custom.css') === -1) return;
+      var base = link.href.split('?')[0];
+      link.href = base + '?v=' + CSS_VERSION;
+    });
+  }
+  bustCssCache();
 
   function isArticlePage() {
     return window.location.pathname.includes('/articles/');
