@@ -1,7 +1,8 @@
 /**
- * chatgpt-prompt.js — 条文ページにChatGPT誘導ボックスを注入（3モード独立ボックス）
+ * chatgpt-prompt.js — 条文ページ・テーマページにChatGPT誘導ボックスを注入（3モード独立ボックス）
  *
- * 対象: URL に /articles/ を含むページ（kijun / kaishaku / jigyoho）
+ * 対象: URL に /articles/ または /themes/ を含むページ
+ *       （kijun / kaishaku / jigyoho 条文 + テーマ集約ページ）
  * モード（各モード独立した <details> ボックスとして並ぶ。閉じたまま判別できる）:
  *   1) 🤖 ChatGPTに質問する          — 自由質問用
  *   2) 🔍 ChatGPTで公開前レビュー    — 4観点厳しめレビュー（優先度A/B/C・一括修正指示文まで生成）
@@ -31,7 +32,8 @@
   bustCssCache();
 
   function isArticlePage() {
-    return window.location.pathname.includes('/articles/');
+    var p = window.location.pathname;
+    return p.includes('/articles/') || p.includes('/themes/');
   }
 
   function getPageTitle() {
