@@ -242,7 +242,7 @@ hide:
 
 ### 電気関係報告規則 — 4件
 
-- [第1条（目的）](other/jiko-1/) — C
+- [第1条（定義）](other/jiko-1/) — C
 - [第3条（事故報告）](other/jiko-3/) 🔥🔥🔥 A
 - [第4条（公害報告）](other/jiko-4/) — C
 - [第5条（届出）](other/jiko-5/) — C
