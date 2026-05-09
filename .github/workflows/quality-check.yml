@@ -5,11 +5,13 @@ on:
     paths:
       - 'docs/**'
       - 'wiki_check.py'
+      - '.github/workflows/quality-check.yml'
   push:
     branches: [master]
     paths:
       - 'docs/**'
       - 'wiki_check.py'
+      - '.github/workflows/quality-check.yml'
 
 jobs:
   wiki-check:
