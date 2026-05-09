@@ -14,7 +14,7 @@
 
   var SITE_NAME = '電験3種 法規Wiki';
   var CHATGPT_URL = 'https://chat.openai.com/';
-  var CSS_VERSION = '20260509c'; // CSS変更時に bump → ブラウザCSSキャッシュ強制更新
+  var CSS_VERSION = '20260509d'; // CSS変更時に bump → ブラウザCSSキャッシュ強制更新
 
   // ブラウザがcustom.cssを古いまま掴んでいる対策：
   // <link rel="stylesheet" href="...custom.css"> に ?v=CSS_VERSION を1度だけ付与して再フェッチ

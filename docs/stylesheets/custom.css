@@ -885,17 +885,19 @@ details.question.sc-status-wrong:not([open]) > summary      { background: rgba(2
   border-bottom: none;
 }
 
-/* サマリ：透明背景 + 左ボーダー（モード別アクセント） + ホバーで薄塗り */
-.chatgpt-prompts .chatgpt-box__summary {
-  background: transparent;
+/* サマリ：透明背景 + 左ボーダー（モード別アクセント） + ホバーで薄塗り
+ * !important: MkDocs Material のデフォルト .md-typeset details > summary 背景
+ * （rgba(68,138,255,0.1) 青みがかった色）が透けるのを防ぐ */
+.md-typeset .chatgpt-prompts .chatgpt-box__summary {
+  background: transparent !important;
   color: var(--gray-800, #1f2937);
   font-weight: 600;
   padding: 0.55rem 1rem 0.55rem 0.85rem;
   border-left: 3px solid transparent;
   transition: background 0.12s, border-left-color 0.12s;
 }
-.chatgpt-prompts .chatgpt-box__summary:hover {
-  background: #f9fafb;
+.md-typeset .chatgpt-prompts .chatgpt-box__summary:hover {
+  background: #f9fafb !important;
 }
 .chatgpt-prompts .chatgpt-box__summary::after {
   color: var(--gray-500, #6b7280);
