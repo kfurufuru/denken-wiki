@@ -21,3 +21,21 @@ jobs:
           python-version: '3.11'
       - name: Run wiki_check.py
         run: python wiki_check.py docs/
+      - name: MathJax block math sanity (arithmatex blank-line check)
+        run: |
+          set -e
+          LEAKS=$(find docs -name "*.md" -print0 | xargs -0 awk '
+            depth==0 && /^[[:space:]]*\$\$[[:space:]]*$/ {
+              if (prev != "" && prev !~ /^\s*$/ && prev !~ /^\s*\$\$/)
+                print FILENAME":"NR": "prev;
+              depth=1; next
+            }
+            /^[[:space:]]*\$\$[[:space:]]*$/ { depth=0 }
+            { prev=$0 }
+          ')
+          if [ -n "$LEAKS" ]; then
+            echo "::error::pymdownx.arithmatex requires a blank line before block \$\$. Found:"
+            echo "$LEAKS"
+            exit 1
+          fi
+          echo "OK: all \$\$ blocks have proper blank-line separation"
