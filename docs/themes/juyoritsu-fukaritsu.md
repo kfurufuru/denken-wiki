@@ -100,6 +100,28 @@ $$
 \text{需要率} = \frac{210}{350} = 0.6 \quad (60\%)
 $$
 
+### 図解：設備容量と最大需要電力の関係
+
+<div><svg viewBox="0 0 600 320" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto">
+  <text x="300" y="22" text-anchor="middle" font-size="16" font-weight="bold">需要率＝最大需要電力÷設備容量</text>
+  <text x="300" y="45" text-anchor="middle" font-size="14" fill="#cc3300">需要率 = 210 ÷ 350 = 0.6（60%）</text>
+  <line x1="80" y1="280" x2="540" y2="280" stroke="#333" stroke-width="2"/>
+  <line x1="80" y1="65" x2="80" y2="280" stroke="#333" stroke-width="2"/>
+  <text x="70" y="80" text-anchor="end" font-size="11" fill="#333">[kW]</text>
+  <rect x="160" y="80" width="100" height="200" fill="#cce5ff" stroke="#0066cc" stroke-width="2"/>
+  <text x="210" y="105" text-anchor="middle" font-size="13" fill="#003366" font-weight="bold">350</text>
+  <text x="210" y="300" text-anchor="middle" font-size="13">設備容量</text>
+  <text x="210" y="316" text-anchor="middle" font-size="11" fill="#666">（定格の合計）</text>
+  <rect x="380" y="160" width="100" height="120" fill="#ffe5cc" stroke="#cc6600" stroke-width="2"/>
+  <text x="430" y="185" text-anchor="middle" font-size="13" fill="#663300" font-weight="bold">210</text>
+  <text x="430" y="300" text-anchor="middle" font-size="13">最大需要電力</text>
+  <text x="430" y="316" text-anchor="middle" font-size="11" fill="#666">（実際の同時最大）</text>
+  <line x1="265" y1="80" x2="375" y2="160" stroke="#999" stroke-width="1" stroke-dasharray="3,2"/>
+  <line x1="265" y1="280" x2="375" y2="280" stroke="#999" stroke-width="1" stroke-dasharray="3,2"/>
+  <text x="320" y="125" text-anchor="middle" font-size="11" fill="#666">同時に</text>
+  <text x="320" y="140" text-anchor="middle" font-size="11" fill="#666">使われない分</text>
+</svg></div>
+
 ---
 
 ## 2. 負荷率（Load Factor）
@@ -143,6 +165,32 @@ $$
 $$
 \text{負荷率} = \frac{250}{500} = 0.5 \quad (50\%)
 $$
+
+### 図解：1日の負荷曲線と平均・最大
+
+<div><svg viewBox="0 0 600 340" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto">
+  <text x="300" y="22" text-anchor="middle" font-size="16" font-weight="bold">負荷率＝平均需要電力÷最大需要電力</text>
+  <text x="300" y="45" text-anchor="middle" font-size="14" fill="#cc3300">負荷率 = 250 ÷ 500 = 0.5（50%）</text>
+  <line x1="60" y1="270" x2="560" y2="270" stroke="#333" stroke-width="2"/>
+  <line x1="60" y1="60" x2="60" y2="270" stroke="#333" stroke-width="2"/>
+  <text x="60" y="290" text-anchor="middle" font-size="11">0</text>
+  <text x="160" y="290" text-anchor="middle" font-size="11">6</text>
+  <text x="260" y="290" text-anchor="middle" font-size="11">12</text>
+  <text x="360" y="290" text-anchor="middle" font-size="11">18</text>
+  <text x="460" y="290" text-anchor="middle" font-size="11">24</text>
+  <text x="540" y="290" text-anchor="middle" font-size="11">[h]</text>
+  <text x="50" y="265" text-anchor="end" font-size="11">0</text>
+  <text x="50" y="170" text-anchor="end" font-size="11">250</text>
+  <text x="50" y="80" text-anchor="end" font-size="11">500</text>
+  <text x="50" y="55" text-anchor="end" font-size="11">[kW]</text>
+  <polyline points="60,250 110,240 160,210 210,160 260,110 285,90 310,95 360,140 410,180 460,210 510,235 560,255" fill="none" stroke="#0066cc" stroke-width="2.5"/>
+  <text x="320" y="115" font-size="12" fill="#0066cc">負荷曲線</text>
+  <line x1="60" y1="80" x2="560" y2="80" stroke="#cc3300" stroke-width="1.5" stroke-dasharray="6,3"/>
+  <text x="500" y="73" font-size="13" fill="#cc3300">最大 500kW</text>
+  <line x1="60" y1="170" x2="560" y2="170" stroke="#009933" stroke-width="1.5" stroke-dasharray="6,3"/>
+  <text x="500" y="163" font-size="13" fill="#009933">平均 250kW</text>
+  <text x="120" y="320" font-size="12" fill="#666">※ 平均 = 1日総使用電力量(6,000kWh) ÷ 24h = 250kW</text>
+</svg></div>
 
 ---
 
@@ -196,6 +244,36 @@ $$
 $$
 \text{不等率} = \frac{700}{500} = 1.4
 $$
+
+### 図解：ピークがずれるから合成最大は小さくなる
+
+<div><svg viewBox="0 0 600 380" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto">
+  <text x="300" y="22" text-anchor="middle" font-size="16" font-weight="bold">不等率＝各最大の合計÷合成最大</text>
+  <text x="300" y="45" text-anchor="middle" font-size="13" fill="#333">3世帯のピークがずれる → 合成最大は単純合計より小さい</text>
+  <line x1="60" y1="310" x2="560" y2="310" stroke="#333" stroke-width="2"/>
+  <line x1="60" y1="65" x2="60" y2="310" stroke="#333" stroke-width="2"/>
+  <text x="60" y="330" text-anchor="middle" font-size="11">0</text>
+  <text x="160" y="330" text-anchor="middle" font-size="11">朝</text>
+  <text x="260" y="330" text-anchor="middle" font-size="11">昼</text>
+  <text x="380" y="330" text-anchor="middle" font-size="11">夕</text>
+  <text x="480" y="330" text-anchor="middle" font-size="11">夜</text>
+  <text x="540" y="330" text-anchor="middle" font-size="11">[時]</text>
+  <text x="50" y="310" text-anchor="end" font-size="11">0</text>
+  <text x="50" y="220" text-anchor="end" font-size="11">5</text>
+  <text x="50" y="155" text-anchor="end" font-size="11">8</text>
+  <text x="50" y="60" text-anchor="end" font-size="11">[kW]</text>
+  <polyline points="60,300 100,290 140,250 180,260 220,295 260,305 300,308 340,308 380,308 420,308 460,308 500,308 540,308" fill="none" stroke="#0066cc" stroke-width="2"/>
+  <text x="155" y="245" font-size="11" fill="#0066cc">C家 朝(3kW)</text>
+  <polyline points="60,308 100,308 140,300 180,290 220,260 260,235 300,235 340,260 380,295 420,305 460,308 500,308 540,308" fill="none" stroke="#cc6600" stroke-width="2"/>
+  <text x="270" y="225" font-size="11" fill="#cc6600">B家 昼(4kW)</text>
+  <polyline points="60,308 100,308 140,308 180,308 220,305 260,290 300,275 340,250 380,220 420,205 460,220 500,260 540,290" fill="none" stroke="#cc0033" stroke-width="2"/>
+  <text x="430" y="195" font-size="11" fill="#cc0033">A家 夜(5kW)</text>
+  <line x1="60" y1="155" x2="560" y2="155" stroke="#009933" stroke-width="2" stroke-dasharray="6,3"/>
+  <text x="490" y="148" font-size="13" fill="#009933" font-weight="bold">合成最大 8kW</text>
+  <line x1="60" y1="68" x2="560" y2="68" stroke="#999" stroke-width="1.5" stroke-dasharray="3,3"/>
+  <text x="490" y="62" font-size="11" fill="#666">単純合計 12kW</text>
+  <text x="300" y="365" text-anchor="middle" font-size="14" fill="#333" font-weight="bold">不等率 = 12 ÷ 8 = 1.5（≧1）</text>
+</svg></div>
 
 ---
 
@@ -265,6 +343,73 @@ $$
     全需要家を一括した『各最大需要電力の合計』を `設備容量 × 需要率` として扱える場合、
     または各需要家の需要率が共通の場合に限る。
     複数需要家で需要率が異なる場合は、必ず Σ で個別に足してから不等率で割る。
+
+---
+
+## 🔍 負荷率 vs 総合負荷率（最重要・混同注意）
+
+> 試験で「総合負荷率」と聞かれたら、**単独需要家の負荷率を平均しても答えにならない**。分母・分子の組み立て方が違う。
+
+### 図解：単独の負荷率と合成後の総合負荷率の比較
+
+<div><svg viewBox="0 0 600 500" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto">
+  <text x="300" y="22" text-anchor="middle" font-size="16" font-weight="bold">負荷率と総合負荷率は『分母』『分子』が違う</text>
+  <text x="155" y="60" text-anchor="middle" font-size="14" font-weight="bold" fill="#0066cc">単独需要家Aの負荷率</text>
+  <line x1="40" y1="220" x2="270" y2="220" stroke="#333" stroke-width="1.5"/>
+  <line x1="40" y1="80" x2="40" y2="220" stroke="#333" stroke-width="1.5"/>
+  <text x="40" y="237" text-anchor="middle" font-size="10">0</text>
+  <text x="270" y="237" text-anchor="middle" font-size="10">24[h]</text>
+  <polyline points="40,205 70,190 100,160 130,120 155,100 180,115 210,145 240,180 270,200" fill="none" stroke="#0066cc" stroke-width="2.5"/>
+  <line x1="40" y1="100" x2="270" y2="100" stroke="#cc3300" stroke-width="1.2" stroke-dasharray="4,2"/>
+  <text x="155" y="95" text-anchor="middle" font-size="11" fill="#cc3300">A最大 500</text>
+  <line x1="40" y1="160" x2="270" y2="160" stroke="#009933" stroke-width="1.2" stroke-dasharray="4,2"/>
+  <text x="155" y="175" text-anchor="middle" font-size="11" fill="#009933">A平均 250</text>
+  <text x="155" y="265" text-anchor="middle" font-size="13">A負荷率＝A平均÷A最大</text>
+  <text x="155" y="285" text-anchor="middle" font-size="13" font-weight="bold" fill="#0066cc">＝ 250 ÷ 500 ＝ 0.5</text>
+  <text x="445" y="60" text-anchor="middle" font-size="14" font-weight="bold" fill="#cc6600">A+B 合成の総合負荷率</text>
+  <line x1="320" y1="220" x2="570" y2="220" stroke="#333" stroke-width="1.5"/>
+  <line x1="320" y1="80" x2="320" y2="220" stroke="#333" stroke-width="1.5"/>
+  <text x="320" y="237" text-anchor="middle" font-size="10">0</text>
+  <text x="570" y="237" text-anchor="middle" font-size="10">24[h]</text>
+  <polyline points="320,210 350,200 380,185 410,165 435,155 460,165 490,180 520,200 550,210" fill="none" stroke="#0066cc" stroke-width="1.4" stroke-dasharray="3,2"/>
+  <text x="380" y="195" font-size="10" fill="#0066cc">A</text>
+  <polyline points="320,210 350,210 380,205 410,190 435,170 460,150 490,120 515,105 545,135" fill="none" stroke="#cc6600" stroke-width="1.4" stroke-dasharray="3,2"/>
+  <text x="495" y="115" font-size="10" fill="#cc6600">B</text>
+  <polyline points="320,205 350,195 380,170 410,140 435,115 460,100 490,85 515,90 550,160" fill="none" stroke="#cc0033" stroke-width="2.5"/>
+  <text x="510" y="80" font-size="11" fill="#cc0033" font-weight="bold">合成</text>
+  <line x1="320" y1="85" x2="570" y2="85" stroke="#cc3300" stroke-width="1.2" stroke-dasharray="4,2"/>
+  <text x="445" y="80" text-anchor="middle" font-size="11" fill="#cc3300">合成最大 800</text>
+  <line x1="320" y1="155" x2="570" y2="155" stroke="#009933" stroke-width="1.2" stroke-dasharray="4,2"/>
+  <text x="445" y="170" text-anchor="middle" font-size="11" fill="#009933">合成平均 480</text>
+  <text x="445" y="265" text-anchor="middle" font-size="13">総合負荷率＝合成平均÷合成最大</text>
+  <text x="445" y="285" text-anchor="middle" font-size="13" font-weight="bold" fill="#cc6600">＝ 480 ÷ 800 ＝ 0.6</text>
+  <rect x="30" y="320" width="540" height="170" fill="#fff5e6" stroke="#cc6600" stroke-width="2" rx="4"/>
+  <text x="300" y="345" text-anchor="middle" font-size="14" font-weight="bold" fill="#cc3300">⚠ 総合負荷率の落とし穴</text>
+  <text x="50" y="372" font-size="13" fill="#cc3300">✕ 各需要家の負荷率を単純平均する → 総合負荷率にはならない</text>
+  <text x="50" y="395" font-size="13" fill="#cc3300">✕ 分母を「各最大の合計」(A500+B500=1000)にする → 不等率で割っていない</text>
+  <text x="50" y="425" font-size="13" fill="#009933">○ 分母 = 合成最大需要電力（同時最大）= 800</text>
+  <text x="50" y="448" font-size="13" fill="#009933">○ 分子 = 合成平均電力 =（A使用電力量＋B使用電力量）÷ 期間時間</text>
+  <text x="50" y="473" font-size="12" fill="#666">　　 ＝（5,040+6,480）kWh ÷ 24h = 480kW（例）</text>
+</svg></div>
+
+### 一覧で押さえる：負荷率 vs 総合負荷率
+
+| 観点 | **負荷率**（単独需要家） | **総合負荷率**（複数需要家を合算） |
+|------|------------------------|----------------------------------|
+| 分子 | その需要家の **平均需要電力** | **合成平均電力**（全需要家の使用電力量の合計÷期間） |
+| 分母 | その需要家の **最大需要電力** | **合成最大需要電力**（同時最大／不等率で割って出す方） |
+| 値の範囲 | 0 〜 1 | 0 〜 1 |
+| よくある誤り | — | ✕ 分母に「各最大の和」を使う／✕ 各負荷率を平均する |
+
+!!! danger "総合負荷率の3大ミス"
+    1. **各需要家の負荷率を単純平均する** → 別物。再計算してはいけない
+    2. **分母に「各最大需要電力の合計」を使う** → 不等率で割る前の値。同時最大ではない
+    3. **分子に「各最大需要電力の平均」を使う** → 平均電力ではない（最大の平均は意味のある量ではない）
+
+!!! tip "覚え方：『総合』のときは分子も分母も "合成"（同時）"
+    - 単独 → 平均 ÷ 最大
+    - 総合 → **合成平均 ÷ 合成最大**
+    - 「総合」とつくと、上下とも複数需要家を **同時** で見たときの値に置き換わる
 
 ---
 
@@ -425,4 +570,4 @@ $$
 
 ---
 
-*最終確認: 2026-05-09 | ステータス: v1.2（試験対策の正確性強化・公式集約・不等率説明・変圧器容量式・出題予測表現の見直し）| [バージョニング基準](../reference/versioning.md)*
+*最終確認: 2026-05-09 | ステータス: v1.3（SVG図解4枚追加・負荷率 vs 総合負荷率の比較セクション新設）| [バージョニング基準](../reference/versioning.md)*
