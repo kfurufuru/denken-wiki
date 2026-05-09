@@ -435,11 +435,13 @@
 
 !!! tip "Ig（1線地絡電流）の計算（こう長から求める）"
     高圧側が非接地系（中性点非接地・デルタ結線）の場合:
+
     $$
     I_g = \frac{1 \text{ (高圧電路の線路こう長 [km])}}{V_h \text{ [kV]}} \times I_{base}
     $$
     
     または簡易式（試験での典型）:
+
     $$
     I_g = \frac{\text{こう長 [km]} \times \text{係数}}{V / \sqrt{3}}
     $$
@@ -455,17 +457,20 @@
 **解法手順**:
 
 1. **Ig（高圧側1線地絡電流）を計算**
-   $$
-   I_g = \frac{1 \text{ (または計算式)}}{\cdots} \approx \cdots \text{ A}
-   $$
+
+    $$
+    I_g = \frac{1 \text{ (または計算式)}}{\cdots} \approx \cdots \text{ A}
+    $$
 
 2. **遮断時間の条件を確認** → 接地抵抗値の上限を選択
 
 3. **常時流れる電流（充電電流）** = 三相の静電容量による充電電流。対地静電容量 C と電圧から:
-   $$
-   I_{const} = \sqrt{3} \times V_{phase} \times \omega C \times \text{こう長}
-   $$
-   または問題文で与えられた値を使用。
+
+    $$
+    I_{const} = \sqrt{3} \times V_{phase} \times \omega C \times \text{こう長}
+    $$
+
+    または問題文で与えられた値を使用。
 
 !!! warning "「常時流れる電流」はIgと別物"
     - **Ig**: 1線地絡事故が起きたときに流れる地絡電流（B種接地抵抗値の計算に使う）
