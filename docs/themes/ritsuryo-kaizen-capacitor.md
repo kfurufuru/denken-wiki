@@ -88,6 +88,7 @@ S² = P² + Q²
 | 力率 | cos θ1（低い）| cos θ2（高い）|
 
 コンデンサが補償する無効電力:
+
 $$
 Q_c = Q_1 - Q_2 = P\tan\theta_1 - P\tan\theta_2 = P(\tan\theta_1 - \tan\theta_2) \quad [\text{kvar}]
 $$
