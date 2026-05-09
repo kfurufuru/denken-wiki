@@ -48,6 +48,9 @@ plugins:
 exclude_docs: |
   _data/
 
+hooks:
+  - hooks/inject_hoki.py
+
 markdown_extensions:
   - admonition
   - pymdownx.details
