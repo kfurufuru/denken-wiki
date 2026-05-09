@@ -849,61 +849,88 @@ details.question.sc-status-wrong:not([open]) > summary      { background: rgba(2
   color: var(--gray-500, #637080);
 }
 
-/* ── 3モード独立ボックスのコンテナ ─────────────── */
+/* ── ChatGPTプロンプト 統一カード ───────────────── */
 .chatgpt-prompts {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
   margin-top: var(--space-6, 2rem);
+  border: 1px solid var(--gray-300, #d4d4d8);
+  border-radius: var(--radius-md, 8px);
+  overflow: hidden;
+  background: var(--md-default-bg-color, #fff);
 }
-.chatgpt-prompts .chatgpt-box {
-  margin-top: 0;
+.chatgpt-prompts__header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.55rem 1rem;
+  background: linear-gradient(180deg, #f9fafb 0%, #f3f4f6 100%);
+  border-bottom: 1px solid var(--gray-200, #e5e7eb);
+  font-size: var(--text-sm, 0.875rem);
+  font-weight: 600;
+  color: var(--gray-700, #374151);
+  letter-spacing: 0.01em;
+}
+.chatgpt-prompts__header-icon {
+  font-size: 1rem;
 }
 
-/* ── モード別カラー（薄背景 + 左ボーダー + 濃文字） ───── */
-/* 共通: サマリは薄背景に統一して読みやすく */
+/* コンテナ内のボックスは枠なし・行間隔ゼロ・水平divider で区切る */
+.chatgpt-prompts .chatgpt-box {
+  margin: 0;
+  border: none;
+  border-bottom: 1px solid var(--gray-200, #e5e7eb);
+  border-radius: 0;
+  background: transparent;
+}
+.chatgpt-prompts .chatgpt-box:last-child {
+  border-bottom: none;
+}
+
+/* サマリ：透明背景 + 左ボーダー（モード別アクセント） + ホバーで薄塗り */
 .chatgpt-prompts .chatgpt-box__summary {
-  color: #1f2937;
-  border-left: 4px solid transparent;
+  background: transparent;
+  color: var(--gray-800, #1f2937);
+  font-weight: 600;
+  padding: 0.55rem 1rem 0.55rem 0.85rem;
+  border-left: 3px solid transparent;
+  transition: background 0.12s, border-left-color 0.12s;
+}
+.chatgpt-prompts .chatgpt-box__summary:hover {
+  background: #f9fafb;
 }
 .chatgpt-prompts .chatgpt-box__summary::after {
-  color: #6b7280;
+  color: var(--gray-500, #6b7280);
+  opacity: 0.6;
 }
 
-/* 1) 質問：薄ティール */
-.chatgpt-box--question {
-  border-color: #b7e0e1;
-}
+/* モード別アクセント（左ボーダー色 + ホバー時はやや薄塗り） */
 .chatgpt-box--question .chatgpt-box__summary {
-  background: #ecf7f7;
   border-left-color: var(--primary-500, #2E8B8E);
 }
 .chatgpt-box--question .chatgpt-box__summary:hover {
-  background: #d8eded;
-}
-
-/* 2) 公開前レビュー：薄アンバー */
-.chatgpt-box--review {
-  border-color: #f0d4a3;
+  background: #ecf7f7;
 }
 .chatgpt-box--review .chatgpt-box__summary {
-  background: #fdf6e6;
   border-left-color: #d97706;
 }
 .chatgpt-box--review .chatgpt-box__summary:hover {
-  background: #f8ebcd;
-}
-
-/* 3) 修正版チェック：薄ミント */
-.chatgpt-box--recheck {
-  border-color: #b7e1c5;
+  background: #fdf6e6;
 }
 .chatgpt-box--recheck .chatgpt-box__summary {
-  background: #edf8f1;
   border-left-color: #16a34a;
 }
 .chatgpt-box--recheck .chatgpt-box__summary:hover {
-  background: #d8efe0;
+  background: #edf8f1;
+}
+
+/* ボックス本体（展開時）：罫線統一、左パディング揃え */
+.chatgpt-prompts .chatgpt-box__body {
+  padding: 0.6rem 1rem 0.85rem;
+  border-top: 1px solid var(--gray-100, #f3f4f6);
+}
+
+/* 古いスタイル残骸対策：containerに含まれない単独 .chatgpt-box は非表示 */
+.md-typeset .chatgpt-box:not(:where(.chatgpt-prompts .chatgpt-box)) {
+  display: none !important;
 }
 
 /* ============================================================

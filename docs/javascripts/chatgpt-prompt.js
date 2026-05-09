@@ -14,7 +14,7 @@
 
   var SITE_NAME = '電験3種 法規Wiki';
   var CHATGPT_URL = 'https://chat.openai.com/';
-  var CSS_VERSION = '20260509b'; // CSS変更時に bump → ブラウザCSSキャッシュ強制更新
+  var CSS_VERSION = '20260509c'; // CSS変更時に bump → ブラウザCSSキャッシュ強制更新
 
   // ブラウザがcustom.cssを古いまま掴んでいる対策：
   // <link rel="stylesheet" href="...custom.css"> に ?v=CSS_VERSION を1度だけ付与して再フェッチ
@@ -46,7 +46,7 @@
   var MODES = [
     {
       key: 'question',
-      label: '🤖 ChatGPTに質問する（プロンプト生成）',
+      label: '🤖 質問する',
       hint: '記事内容について自由に質問する用途。質問文を末尾に追記して送信。',
       build: function (title, url) {
         return [
@@ -63,7 +63,7 @@
     },
     {
       key: 'review',
-      label: '🔍 ChatGPTで公開前レビュー（プロンプト生成）',
+      label: '🔍 公開前レビュー',
       hint: '法令正確性・出題対策・初学者・UIの4観点で総合レビュー。優先度A/B/Cと Claude Code への一括修正指示文まで生成。',
       build: function (title, url) {
         return [
@@ -154,7 +154,7 @@
     },
     {
       key: 'recheck',
-      label: '✅ ChatGPTで修正版チェック（プロンプト生成）',
+      label: '✅ 修正版チェック',
       hint: 'Claude Code 修正後の再レビュー用（簡易版）。残課題の優先度A/B・追加修正指示文まで生成。',
       build: function (title, url) {
         return [
@@ -285,6 +285,11 @@
   function createPromptsContainer(title, url) {
     var container = document.createElement('div');
     container.className = 'chatgpt-prompts';
+
+    var header = document.createElement('div');
+    header.className = 'chatgpt-prompts__header';
+    header.innerHTML = '<span class="chatgpt-prompts__header-icon">🤖</span><span class="chatgpt-prompts__header-text">この記事を ChatGPT で使う</span>';
+    container.appendChild(header);
 
     MODES.forEach(function (mode) {
       container.appendChild(createSingleBox(mode, title, url));
