@@ -58,6 +58,12 @@ SIMP_TO_JP = {
 EXCLUDE_DIRS = {"_data", "site", "overrides", "includes", ".git"}
 
 
+def _strip_code_spans(line: str) -> str:
+    """インラインコードスパン（`...`）を非空白プレースホルダに置換し、リンタの誤検知を防ぐ。
+    空白で埋めると `[`x`](y)` のリンクが「空ラベル」と誤検知されるため X 埋めにする。"""
+    return re.sub(r"`[^`]*`", lambda m: "X" * len(m.group(0)), line)
+
+
 def check_file(path: Path):
     issues = []
     try:
@@ -66,7 +72,16 @@ def check_file(path: Path):
         return [(path, 0, "?", f"読込失敗: {e}")]
 
     lines = text.splitlines()
+    in_fence = False
     for lineno, line in enumerate(lines, 1):
+        # コードフェンス（``` または ~~~）内はリンタ対象外
+        if re.match(r"^\s*(```|~~~)", line):
+            in_fence = not in_fence
+            continue
+        if in_fence:
+            continue
+        # インラインコードスパン内の文字列は誤検知の元なので空白化
+        line = _strip_code_spans(line)
         for m in SECTION_PATTERN.finditer(line):
             issues.append((path, lineno, "§", f"§{m.group(1)} → 「第{m.group(1)}条」を推奨"))
         for ch in line:
