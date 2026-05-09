@@ -849,52 +849,49 @@ details.question.sc-status-wrong:not([open]) > summary      { background: rgba(2
   color: var(--gray-500, #637080);
 }
 
-/* ── モード切替タブ ─────────────────────────────── */
-.chatgpt-box__tabs {
+/* ── 3モード独立ボックスのコンテナ ─────────────── */
+.chatgpt-prompts {
   display: flex;
-  gap: 0.25rem;
-  margin: 0 0 0.6rem;
-  border-bottom: 1px solid var(--gray-300, #C9CDD3);
-  flex-wrap: wrap;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin-top: var(--space-6, 2rem);
 }
-.chatgpt-box__tab {
-  padding: 0.4rem 0.85rem;
-  background: transparent;
-  border: 1px solid transparent;
-  border-bottom: none;
-  border-radius: var(--radius-sm, 4px) var(--radius-sm, 4px) 0 0;
-  color: var(--gray-600, #4B5563);
-  font-size: var(--text-sm, 0.875rem);
-  font-weight: 600;
-  cursor: pointer;
-  transition: background 0.15s, color 0.15s, border-color 0.15s;
-  margin-bottom: -1px;
-}
-.chatgpt-box__tab:hover {
-  background: var(--primary-50, #E8F4F4);
-  color: var(--primary-700, #1F6568);
-}
-.chatgpt-box__tab.is-active {
-  background: var(--md-default-bg-color, #fff);
-  border-color: var(--gray-300, #C9CDD3);
-  color: var(--primary-700, #1F6568);
-  cursor: default;
-}
-.chatgpt-box__tab.is-active:hover {
-  background: var(--md-default-bg-color, #fff);
+.chatgpt-prompts .chatgpt-box {
+  margin-top: 0;
 }
 
-/* スマホ：タブを横スクロール可に */
-@media (max-width: 480px) {
-  .chatgpt-box__tabs {
-    overflow-x: auto;
-    flex-wrap: nowrap;
-    -webkit-overflow-scrolling: touch;
-  }
-  .chatgpt-box__tab {
-    flex: 0 0 auto;
-    white-space: nowrap;
-  }
+/* ── モード別カラー（閉じた状態でも見分け可） ───── */
+/* 1) 質問：従来カラー（ティール） */
+.chatgpt-box--question .chatgpt-box__summary {
+  background: var(--primary-500, #2E8B8E);
+}
+.chatgpt-box--question .chatgpt-box__summary:hover {
+  background: var(--primary-700, #1F6568);
+}
+.chatgpt-box--question {
+  border-color: var(--primary-300, #5BB8BB);
+}
+
+/* 2) 公開前レビュー：レビュー＝注視のオレンジ */
+.chatgpt-box--review .chatgpt-box__summary {
+  background: #d97706;
+}
+.chatgpt-box--review .chatgpt-box__summary:hover {
+  background: #a35a05;
+}
+.chatgpt-box--review {
+  border-color: #f5b35c;
+}
+
+/* 3) 修正版チェック：再確認＝OKの濃い緑 */
+.chatgpt-box--recheck .chatgpt-box__summary {
+  background: #16a34a;
+}
+.chatgpt-box--recheck .chatgpt-box__summary:hover {
+  background: #0f7a37;
+}
+.chatgpt-box--recheck {
+  border-color: #6ed089;
 }
 
 /* ============================================================

@@ -1,12 +1,12 @@
 /**
- * chatgpt-prompt.js — 条文ページにChatGPT誘導ボックスを注入（3モードタブ式）
+ * chatgpt-prompt.js — 条文ページにChatGPT誘導ボックスを注入（3モード独立ボックス）
  *
  * 対象: URL に /articles/ を含むページ（kijun / kaishaku / jigyoho）
- * モード:
- *   1) 質問              — 既存の自由質問用プロンプト
- *   2) 公開前レビュー    — 法令・出題対策・初学者・UI の4観点で厳しく総合レビュー
- *   3) 修正版チェック    — Claude Code 修正後の再レビュー（簡易版）
- * 動作: .md-typeset の末尾に <div class="chatgpt-box"> を追加
+ * モード（各モード独立した <details> ボックスとして並ぶ。閉じたまま判別できる）:
+ *   1) 🤖 ChatGPTに質問する          — 自由質問用
+ *   2) 🔍 ChatGPTで公開前レビュー    — 4観点厳しめレビュー（優先度A/B/C・一括修正指示文まで生成）
+ *   3) ✅ ChatGPTで修正版チェック    — Claude Code 修正後の再レビュー（簡易版）
+ * 動作: .md-typeset の末尾に <div class="chatgpt-prompts"> を追加
  *       MkDocs Material の SPA ナビゲーション（document$）に対応
  */
 (function () {
@@ -26,12 +26,12 @@
   }
 
   // ─────────────────────────────────────
-  // モード定義（key, label, builder）
+  // モード定義（各モード独立ボックス）
   // ─────────────────────────────────────
   var MODES = [
     {
       key: 'question',
-      label: '質問',
+      label: '🤖 ChatGPTに質問する（プロンプト生成）',
       hint: '記事内容について自由に質問する用途。質問文を末尾に追記して送信。',
       build: function (title, url) {
         return [
@@ -48,8 +48,8 @@
     },
     {
       key: 'review',
-      label: '公開前レビュー',
-      hint: '法令正確性・出題対策・初学者・UIの4観点で総合レビュー。修正案・優先度・一括修正指示文まで生成。',
+      label: '🔍 ChatGPTで公開前レビュー（プロンプト生成）',
+      hint: '法令正確性・出題対策・初学者・UIの4観点で総合レビュー。優先度A/B/Cと Claude Code への一括修正指示文まで生成。',
       build: function (title, url) {
         return [
           '以下の記事を、電験3種・法規の学習ページとして公開前レビューしてください。',
@@ -139,8 +139,8 @@
     },
     {
       key: 'recheck',
-      label: '修正版チェック',
-      hint: 'Claude Code 修正後の再レビュー用（簡易版）。優先度A/B・残課題・追加修正指示文を生成。',
+      label: '✅ ChatGPTで修正版チェック（プロンプト生成）',
+      hint: 'Claude Code 修正後の再レビュー用（簡易版）。残課題の優先度A/B・追加修正指示文まで生成。',
       build: function (title, url) {
         return [
           '以下の記事は、Claude Codeで修正した後の版です。',
@@ -192,48 +192,35 @@
     }
   ];
 
-  function createBox(title, url) {
-    var activeIdx = 0;
+  // ─────────────────────────────────────
+  // 単一ボックスを生成
+  // ─────────────────────────────────────
+  function createSingleBox(mode, title, url) {
+    var promptText = mode.build(title, url);
 
     var box = document.createElement('div');
-    box.className = 'chatgpt-box';
+    box.className = 'chatgpt-box chatgpt-box--' + mode.key;
+    box.setAttribute('data-mode', mode.key);
 
     var details = document.createElement('details');
     details.className = 'chatgpt-box__details';
 
     var summary = document.createElement('summary');
     summary.className = 'chatgpt-box__summary';
-    summary.innerHTML = '<span class="chatgpt-box__icon">🤖</span> この記事をChatGPTに渡す（プロンプト生成）';
+    summary.textContent = mode.label;
 
     var body = document.createElement('div');
     body.className = 'chatgpt-box__body';
 
-    // ── タブナビ ──────────────────────
-    var tabs = document.createElement('div');
-    tabs.className = 'chatgpt-box__tabs';
-    tabs.setAttribute('role', 'tablist');
-
-    var tabBtns = MODES.map(function (m, i) {
-      var btn = document.createElement('button');
-      btn.type = 'button';
-      btn.className = 'chatgpt-box__tab' + (i === 0 ? ' is-active' : '');
-      btn.setAttribute('role', 'tab');
-      btn.setAttribute('data-mode', m.key);
-      btn.textContent = m.label;
-      tabs.appendChild(btn);
-      return btn;
-    });
-
-    // ── 内容 ──────────────────────────
     var textarea = document.createElement('textarea');
     textarea.className = 'chatgpt-box__textarea';
     textarea.readOnly = true;
-    textarea.rows = 8;
-    textarea.value = MODES[activeIdx].build(title, url);
+    textarea.rows = mode.key === 'question' ? 7 : 12;
+    textarea.value = promptText;
 
     var hint = document.createElement('p');
     hint.className = 'chatgpt-box__hint';
-    hint.textContent = MODES[activeIdx].hint;
+    hint.textContent = mode.hint;
 
     var actions = document.createElement('div');
     actions.className = 'chatgpt-box__actions';
@@ -268,22 +255,6 @@
     actions.appendChild(copyBtn);
     actions.appendChild(openLink);
 
-    // ── タブ切替動作 ───────────────────
-    function switchTo(i) {
-      activeIdx = i;
-      tabBtns.forEach(function (b, j) {
-        b.classList.toggle('is-active', j === i);
-      });
-      textarea.value = MODES[i].build(title, url);
-      hint.textContent = MODES[i].hint;
-    }
-
-    tabBtns.forEach(function (b, i) {
-      b.addEventListener('click', function () { switchTo(i); });
-    });
-
-    // 組み立て
-    body.appendChild(tabs);
     body.appendChild(textarea);
     body.appendChild(hint);
     body.appendChild(actions);
@@ -293,16 +264,36 @@
     return box;
   }
 
+  // ─────────────────────────────────────
+  // 全モードのコンテナを生成
+  // ─────────────────────────────────────
+  function createPromptsContainer(title, url) {
+    var container = document.createElement('div');
+    container.className = 'chatgpt-prompts';
+
+    MODES.forEach(function (mode) {
+      container.appendChild(createSingleBox(mode, title, url));
+    });
+
+    return container;
+  }
+
   function inject() {
     if (!isArticlePage()) return;
-    if (document.querySelector('.chatgpt-box')) return;
+    if (document.querySelector('.chatgpt-prompts')) return;
+
+    // 旧バージョン（単独 .chatgpt-box）が残っていたら除去（移行対策）
+    var stale = document.querySelectorAll('.chatgpt-box');
+    if (stale.length === 1 && !stale[0].closest('.chatgpt-prompts')) {
+      stale[0].remove();
+    }
 
     var typeset = document.querySelector('article .md-typeset, .md-content .md-typeset');
     if (!typeset) return;
 
     var title = getPageTitle();
     var url = window.location.href;
-    typeset.appendChild(createBox(title, url));
+    typeset.appendChild(createPromptsContainer(title, url));
   }
 
   if (typeof window.document$ !== 'undefined' && typeof window.document$.subscribe === 'function') {
