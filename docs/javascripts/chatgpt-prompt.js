@@ -14,7 +14,7 @@
 
   var SITE_NAME = '電験3種 法規Wiki';
   var CHATGPT_URL = 'https://chat.openai.com/';
-  var CSS_VERSION = '20260509d'; // CSS変更時に bump → ブラウザCSSキャッシュ強制更新
+  var CSS_VERSION = '20260509e'; // CSS変更時に bump → ブラウザCSSキャッシュ強制更新
 
   // ブラウザがcustom.cssを古いまま掴んでいる対策：
   // <link rel="stylesheet" href="...custom.css"> に ?v=CSS_VERSION を1度だけ付与して再フェッチ
@@ -210,6 +210,14 @@
   // ─────────────────────────────────────
   // 単一ボックスを生成
   // ─────────────────────────────────────
+  // モード別の左ボーダー色（CSS だけでは MkDocs Material のデフォルト
+  // .md-typeset summary の background が打ち消せないため、インラインで強制）
+  var MODE_ACCENT = {
+    question: '#2E8B8E',
+    review:   '#d97706',
+    recheck:  '#16a34a'
+  };
+
   function createSingleBox(mode, title, url) {
     var promptText = mode.build(title, url);
 
@@ -223,6 +231,18 @@
     var summary = document.createElement('summary');
     summary.className = 'chatgpt-box__summary';
     summary.textContent = mode.label;
+    // インライン !important で MkDocs Material の details>summary 既定スタイルを確実に上書き
+    summary.style.setProperty('background', '#ffffff', 'important');
+    summary.style.setProperty('color', '#1f2937', 'important');
+    summary.style.setProperty('border-left', '3px solid ' + (MODE_ACCENT[mode.key] || '#888'), 'important');
+    summary.style.setProperty('padding', '0.55rem 1rem 0.55rem 0.85rem', 'important');
+    summary.style.setProperty('font-weight', '600', 'important');
+    summary.addEventListener('mouseenter', function () {
+      summary.style.setProperty('background', '#f9fafb', 'important');
+    });
+    summary.addEventListener('mouseleave', function () {
+      summary.style.setProperty('background', '#ffffff', 'important');
+    });
 
     var body = document.createElement('div');
     body.className = 'chatgpt-box__body';
