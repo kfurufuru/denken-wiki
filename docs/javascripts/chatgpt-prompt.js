@@ -278,15 +278,21 @@
     return container;
   }
 
+  // 旧バージョン（.chatgpt-prompts に含まれない単独 .chatgpt-box）を毎回除去
+  function cleanupStale() {
+    document.querySelectorAll('.chatgpt-box').forEach(function (box) {
+      if (!box.closest('.chatgpt-prompts')) {
+        box.remove();
+      }
+    });
+  }
+
   function inject() {
     if (!isArticlePage()) return;
-    if (document.querySelector('.chatgpt-prompts')) return;
 
-    // 旧バージョン（単独 .chatgpt-box）が残っていたら除去（移行対策）
-    var stale = document.querySelectorAll('.chatgpt-box');
-    if (stale.length === 1 && !stale[0].closest('.chatgpt-prompts')) {
-      stale[0].remove();
-    }
+    cleanupStale();
+
+    if (document.querySelector('.chatgpt-prompts')) return;
 
     var typeset = document.querySelector('article .md-typeset, .md-content .md-typeset');
     if (!typeset) return;

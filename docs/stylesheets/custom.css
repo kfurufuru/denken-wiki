@@ -853,45 +853,57 @@ details.question.sc-status-wrong:not([open]) > summary      { background: rgba(2
 .chatgpt-prompts {
   display: flex;
   flex-direction: column;
-  gap: 0.6rem;
+  gap: 0.5rem;
   margin-top: var(--space-6, 2rem);
 }
 .chatgpt-prompts .chatgpt-box {
   margin-top: 0;
 }
 
-/* ── モード別カラー（閉じた状態でも見分け可） ───── */
-/* 1) 質問：従来カラー（ティール） */
+/* ── モード別カラー（薄背景 + 左ボーダー + 濃文字） ───── */
+/* 共通: サマリは薄背景に統一して読みやすく */
+.chatgpt-prompts .chatgpt-box__summary {
+  color: #1f2937;
+  border-left: 4px solid transparent;
+}
+.chatgpt-prompts .chatgpt-box__summary::after {
+  color: #6b7280;
+}
+
+/* 1) 質問：薄ティール */
+.chatgpt-box--question {
+  border-color: #b7e0e1;
+}
 .chatgpt-box--question .chatgpt-box__summary {
-  background: var(--primary-500, #2E8B8E);
+  background: #ecf7f7;
+  border-left-color: var(--primary-500, #2E8B8E);
 }
 .chatgpt-box--question .chatgpt-box__summary:hover {
-  background: var(--primary-700, #1F6568);
-}
-.chatgpt-box--question {
-  border-color: var(--primary-300, #5BB8BB);
+  background: #d8eded;
 }
 
-/* 2) 公開前レビュー：レビュー＝注視のオレンジ */
+/* 2) 公開前レビュー：薄アンバー */
+.chatgpt-box--review {
+  border-color: #f0d4a3;
+}
 .chatgpt-box--review .chatgpt-box__summary {
-  background: #d97706;
+  background: #fdf6e6;
+  border-left-color: #d97706;
 }
 .chatgpt-box--review .chatgpt-box__summary:hover {
-  background: #a35a05;
-}
-.chatgpt-box--review {
-  border-color: #f5b35c;
+  background: #f8ebcd;
 }
 
-/* 3) 修正版チェック：再確認＝OKの濃い緑 */
+/* 3) 修正版チェック：薄ミント */
+.chatgpt-box--recheck {
+  border-color: #b7e1c5;
+}
 .chatgpt-box--recheck .chatgpt-box__summary {
-  background: #16a34a;
+  background: #edf8f1;
+  border-left-color: #16a34a;
 }
 .chatgpt-box--recheck .chatgpt-box__summary:hover {
-  background: #0f7a37;
-}
-.chatgpt-box--recheck {
-  border-color: #6ed089;
+  background: #d8efe0;
 }
 
 /* ============================================================
