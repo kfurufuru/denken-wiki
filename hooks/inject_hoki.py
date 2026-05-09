@@ -59,7 +59,13 @@ def _build_doc(entry: dict) -> dict:
     freq = entry.get("freq", "").strip()
     priority = entry.get("priority", "").strip()
 
-    location = f"{HOKI_PAGE_URL}#{eid}" if eid else HOKI_PAGE_URL
+    # location は '#' を含まないユニーク相対パスにする。
+    # MkDocs Material の検索ワーカーは location を '#' で split し
+    # 同一 path のエントリを単一の親ブロックに集約してしまうため、
+    # 絶対URL+#hash 形式だと 58 件全てが 1 グループになり href が壊れる。
+    # 各 entry を独立ページ扱いにし、overrides/main.html の JS で
+    # /hoki/<id>/ → denken-hoki-wiki.html#<id> にリダイレクトする。
+    location = f"hoki/{eid}/" if eid else "hoki/"
     label_chapter = chapter or "暗記Hub"
     full_title = f"{title}（暗記Hub: {label_chapter}）" if title else f"暗記Hub: {label_chapter}"
 

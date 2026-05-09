@@ -1,5 +1,26 @@
 {% extends "base.html" %}
 
+{% block extrahead %}
+  {{ super() }}
+  {# hoki-wiki 検索結果のリダイレクト：
+     inject_hoki.py が search_index.json に注入した暗記Hubエントリは
+     location='hoki/<id>/' という相対パスを持つ。検索結果クリックで
+     /denken-wiki/hoki/<id>/ にナビゲートされた場合に、ここで
+     hoki-wiki 本体（secretary-portal）の該当アンカーへ即時リダイレクト。 #}
+  <script>
+  (function () {
+    try {
+      var m = location.pathname.match(/\/hoki\/([^\/?#]+)\/?$/);
+      if (m && m[1]) {
+        location.replace(
+          'https://kfurufuru.github.io/secretary-portal/denken-hoki-wiki.html#' + m[1]
+        );
+      }
+    } catch (e) { /* noop */ }
+  })();
+  </script>
+{% endblock %}
+
 {% block announce %}
   <div style="display:flex; gap:8px; align-items:center; justify-content:center; flex-wrap:wrap; padding:2px 0;">
     <a href="https://kfurufuru.github.io/secretary-portal/" style="font-weight:600; color:#fff; text-decoration:none; background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.2); border-radius:4px; padding:2px 10px; font-size:0.82rem;" onmouseover="this.style.background='rgba(255,255,255,0.2)'" onmouseout="this.style.background='rgba(255,255,255,0.08)'">← ポータル</a>
