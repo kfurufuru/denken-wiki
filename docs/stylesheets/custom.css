@@ -323,12 +323,22 @@
 /* TOC sidebar — compact & readable for long Japanese headings */
 .md-sidebar--secondary .md-nav__link {
   font-size: var(--text-xs);
-  padding: var(--space-1) var(--space-2);
+  padding: 0.125rem var(--space-2); /* 上下 2px に圧縮 */
   word-break: break-word;
-  line-height: var(--lh-jp-tight);
+  line-height: 1.3; /* 日本語が読める最小限 */
+  margin: 0;
 }
 .md-sidebar--secondary .md-nav__list {
-  line-height: var(--lh-jp-tight);
+  line-height: 1.3;
+}
+.md-sidebar--secondary .md-nav__item {
+  padding: 0;
+  margin: 0;
+}
+/* TOC タイトル「目次」の余白も詰める */
+.md-sidebar--secondary .md-nav__title {
+  padding: var(--space-2) var(--space-2) var(--space-1);
+  line-height: 1.3;
 }
 
 /* ============================================================
