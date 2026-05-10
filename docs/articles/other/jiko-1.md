@@ -311,22 +311,12 @@
 **第1条第2項 → 第3〜5条 の語彙フロー**（実務での参照経路）
 
 ```mermaid
-flowchart LR
-    A["第1条 第2項<br/>14用語の定義<br/>（語彙ハブ）"]:::def
-    B["三号<br/>主要電気工作物"]:::term
-    C["四号<br/>電気火災事故"]:::term
-    D["五号<br/>破損事故"]:::term
-    E["七号<br/>供給支障事故"]:::term
-    F["十二／十三号<br/>PCB含有<br/>電気工作物"]:::term
-    G["第3条<br/>事故報告<br/>（速報24h／詳報30日）"]:::proc
-    H["第4条<br/>公害報告<br/>（PCB漏油等）"]:::proc
-    I["第5条<br/>自家用工作物<br/>届出"]:::proc
-    A --> B & C & D & E & F
-    B & C & D & E --> G
-    F --> H
-    B --> I
+flowchart TD
+    A["第1条第2項<br/>14用語の定義（語彙ハブ）"]:::def
+    A -->|三・四・五・七号<br/>事故区分の語彙| B["第3条<br/>事故報告"]:::proc
+    A -->|十二・十三号<br/>PCB含有電気工作物| C["第4条<br/>公害報告"]:::proc
+    A -->|三号<br/>主要電気工作物| D["第5条<br/>自家用工作物届出"]:::proc
     classDef def fill:#bbdefb,stroke:#0d47a1,stroke-width:2px
-    classDef term fill:#fff9c4,stroke:#f9a825,stroke-width:1.5px
     classDef proc fill:#ffccbc,stroke:#bf360c,stroke-width:2px
 ```
 
