@@ -76,30 +76,58 @@ def is_sorted_old_to_new(years):
 
 
 def detect_admonition_table(text):
-    """admonition 内に table があるか検出"""
+    """admonition 内に「外出し検討」レベルのテーブルがあるか検出（単一テーブル7行以上）。
+
+    許容ケース（検出対象外）：
+      - 解答表（??? success/question 内）
+      - 小さな比較表（連続テーブル行 ≤ 6 行）
+      - 典型ひっかけ表（≤ 6 行で example ラベル）
+    """
     issues = []
-    in_admonition = False
-    admonition_indent = 0
-    admonition_start_line = 0
+    in_adm = False
+    adm_indent = 0
+    adm_kind = ""
+    adm_start_line = 0
+    max_table_rows = 0
+    cur_table_rows = 0
+
+    def check_emit():
+        nonlocal max_table_rows, cur_table_rows, issues, adm_start_line, adm_kind, in_adm
+        if cur_table_rows > max_table_rows:
+            max_table_rows = cur_table_rows
+        is_answer = adm_kind in ("success", "question")
+        if not is_answer and max_table_rows >= 7:
+            issues.append((adm_start_line, max_table_rows))
+        max_table_rows = 0
+        cur_table_rows = 0
+
     for i, line in enumerate(text.split("\n"), 1):
-        # admonition 開始行
-        m = re.match(r"^(\s*)(!!!|\?\?\?)\s+\S", line)
+        m = re.match(r"^(\s*)(!!!|\?\?\?)\s+(\w+)", line)
         if m:
-            in_admonition = True
-            admonition_indent = len(m.group(1))
-            admonition_start_line = i
+            if in_adm:
+                check_emit()
+            in_adm = True
+            adm_indent = len(m.group(1))
+            adm_kind = m.group(3)
+            adm_start_line = i
             continue
-        if in_admonition:
-            # インデントが浅くなったら終了
-            if line.strip() and not line.startswith(" " * (admonition_indent + 4)) and not line.startswith("\t"):
-                in_admonition = False
+        if in_adm:
+            min_indent = adm_indent + 4
+            if line.strip() and (len(line) - len(line.lstrip())) < min_indent:
+                check_emit()
+                in_adm = False
                 continue
-            # admonition 内で table 行を検出
-            if re.match(r"^\s+\|.*\|\s*$", line) and "|" in line[admonition_indent + 4:]:
-                # 連続した table 行を1件としてカウント
-                if not issues or issues[-1] != admonition_start_line:
-                    issues.append(admonition_start_line)
-    return issues
+            content = line[min_indent:] if len(line) > min_indent else ""
+            if content.startswith("|") and content.rstrip().endswith("|"):
+                if not (content.startswith("|---") or content.startswith("|:")):
+                    cur_table_rows += 1
+            else:
+                if cur_table_rows > max_table_rows:
+                    max_table_rows = cur_table_rows
+                cur_table_rows = 0
+    if in_adm:
+        check_emit()
+    return [line_no for line_no, _ in issues]
 
 
 def detect_numbered_pitfalls(text):
