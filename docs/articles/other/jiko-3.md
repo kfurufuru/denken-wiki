@@ -240,26 +240,37 @@
 ```mermaid
 flowchart TD
     Start[事故・異常の発生] --> Q1{電気工作物が原因?}
-    Q1 -->|No<br/>人為・自然災害等| NoReport[報告対象外]
+    Q1 -->|No<br/>人為・自然災害等| N1[対象外]
     Q1 -->|Yes| Q2{種別の判定}
-    Q2 -->|感電| Q3{死亡 OR 入院を要する負傷?}
-    Q2 -->|火災| Q4{建物等を焼損?}
-    Q2 -->|工作物損壊| Q5{供給支障のおそれ?}
-    Q2 -->|油漏れ| Q6{PCB含有?}
-    Q3 -->|Yes| Report[第3条 報告対象]
-    Q3 -->|No 軽傷のみ| NoReport
-    Q4 -->|Yes| Report
-    Q4 -->|No 表面焦げのみ| NoReport
-    Q5 -->|Yes| Report
-    Q5 -->|No 軽微| NoReport
-    Q6 -->|Yes 全件| Report
-    Q6 -->|No 非含有| Q7{基準量超過?}
-    Q7 -->|Yes| Report
-    Q7 -->|No| NoReport
-    Report --> Step[速報24h以内＋詳報30日以内]
 
-    style Report fill:#c8e6c9,stroke:#2e7d32,stroke-width:2px
-    style NoReport fill:#ffccbc,stroke:#d84315,stroke-width:2px
+    Q2 -->|感電| Q3{死亡 OR<br/>入院を要する負傷?}
+    Q3 -->|Yes 該当| R3[報告対象]
+    Q3 -->|No 軽傷のみ| N3[対象外]
+
+    Q2 -->|火災| Q4{建物等を焼損?}
+    Q4 -->|Yes 該当| R4[報告対象]
+    Q4 -->|No 表面焦げのみ| N4[対象外]
+
+    Q2 -->|工作物損壊| Q5{供給支障のおそれ?}
+    Q5 -->|Yes 該当| R5[報告対象]
+    Q5 -->|No 軽微| N5[対象外]
+
+    Q2 -->|油漏れ| Q6{PCB含有?}
+    Q6 -->|Yes 全件| R6[報告対象]
+    Q6 -->|No 非含有| Q7{基準量超過?}
+    Q7 -->|Yes 該当| R7[報告対象]
+    Q7 -->|No| N7[対象外]
+
+    R3 --> Step[速報24h以内 ＋ 詳報30日以内]
+    R4 --> Step
+    R5 --> Step
+    R6 --> Step
+    R7 --> Step
+
+    classDef rep fill:#c8e6c9,stroke:#2e7d32,stroke-width:2px
+    classDef nrep fill:#ffccbc,stroke:#d84315,stroke-width:2px
+    class R3,R4,R5,R6,R7 rep
+    class N1,N3,N4,N5,N7 nrep
     style Step fill:#bbdefb,stroke:#0d47a1,stroke-width:2px
 ```
 
