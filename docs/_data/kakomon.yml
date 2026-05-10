@@ -1417,7 +1417,7 @@ problems:
     topic: "高圧連系時の系統連系用保護装置"
     theme: "bunsan-dengen"
     form: "穴埋"
-    article: "解釈§227"
+    article: "解釈第229条"
   - year: "R06上"
     year_label: "令和6年上期（2024年）"
     num: 8
@@ -1481,7 +1481,7 @@ problems:
     topic: "電気設備技術基準の保安原則"
     theme: "jigyoho-taikei"
     form: "論説"
-    article: "省令§1〜§4"
+    article: "省令第5条"
   - year: "R06下"
     year_label: "令和6年下期（2024年）"
     num: 4
@@ -1509,7 +1509,7 @@ problems:
     topic: "分散型電源における再閉路時の事故防止"
     theme: "bunsan-dengen"
     form: "穴埋"
-    article: "解釈§227"
+    article: "解釈第224条"
   - year: "R06下"
     year_label: "令和6年下期（2024年）"
     num: 8
