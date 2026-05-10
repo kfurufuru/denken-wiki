@@ -1,0 +1,25 @@
+# 役に立った参考文献の追加ログ
+# 編集セッションで新規参照したURLをここに append すること。
+# scripts/merge_refs.py が定期的に docs/reference/links.md にマージする。
+#
+# 運用ルール: .claude/rules/refs-auto-reflect.md
+# - pending は append-only（直接削除しない・merge スクリプトのみが移動可）
+# - カテゴリは links.md のセクション見出し（H2 / `## …`）と部分一致で照合される
+# - 重複URLはスクリプトがスキップするので、人間は重複を気にせず append OK
+
+pending:
+  - url: "https://laws.e-gov.go.jp/law/345AC0000000096"
+    title: "電気工事業の業務の適正化に関する法律"
+    category: "法令原文"
+    used_in: "other/koji-shi-* 監査"
+    used_at: "2026-05-10"
+    rationale: "工事業者の登録・主任電気工事士の選任根拠として頻出だが links.md に未収載だった"
+  - url: "https://www.denki.or.jp/JEAC9701"
+    title: "JEAC 9701 系統連系規程"
+    category: "技術規格"
+    used_in: "kaishaku/220 監査"
+    used_at: "2026-05-10"
+    rationale: "解釈第220条系の『直流流出防止』の実規定はJEACに集約されている可能性"
+
+# 反映済み（マージスクリプトが移動する領域・直接編集禁止）
+merged: []

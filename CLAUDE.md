@@ -252,3 +252,5 @@ MkDocs環境で太字内のΩ（U+03A9）がフォント依存でキリル文字
 | 学習ダッシュボード | `.secretary/denken3-study-dashboard/` | 参照元 |
 | 誤答パターン | `.secretary/denken-study/e-log/` | → 弱点ログへ昇格 |
 | 知識整理 | `.secretary/knowledge/` | → wikiページへ昇格 |
+
+- 編集セッションで新規参照したURL・参考文献は `_data/refs-pending.yml` に append（自動反映運用・詳細は `.claude/rules/refs-auto-reflect.md`）
