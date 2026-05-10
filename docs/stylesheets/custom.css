@@ -1043,3 +1043,30 @@ details.question.sc-status-wrong:not([open]) > summary      { background: rgba(2
 .md-typeset details.abstract > summary {
   font-size: 0.95rem;
 }
+
+/* ----------------------------------------------------------------
+   md-top（ページトップへ戻るボタン）の再配置
+   ----------------------------------------------------------------
+   Material theme の navigation.top 機能で生成される `.md-top` は
+   既定で `position:fixed; top:112px; left:50%; transform:translateX(-50%)`
+   = 画面上部中央に配置される。これは記事中の SVG/mermaid/見出し
+   の上端に重なり「イラストと文字がかぶる」問題を引き起こすため、
+   一般的な FAB（Floating Action Button）位置の右下に再配置する。
+   2026-05-10 教訓（jiko-1.md mermaid・SVG#1 上の見出し被り事案）
+   ---------------------------------------------------------------- */
+.md-top {
+  top: auto !important;
+  bottom: 1.6rem !important;
+  right: 1.6rem !important;
+  left: auto !important;
+  transform: none !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  border-radius: 999px;
+}
+
+@media screen and (max-width: 768px) {
+  .md-top {
+    bottom: 4.5rem !important; /* モバイル下部の navigation footer 回避 */
+    right: 1rem !important;
+  }
+}
