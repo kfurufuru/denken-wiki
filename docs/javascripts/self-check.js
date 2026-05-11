@@ -272,10 +272,31 @@
     });
   }
 
+  function attachToKakomonExamples() {
+    // 過去問演習 (??? example "R0X/H2X 問N ...") — pymdownx.details renders <details class="example">
+    // タイトルに「R\d+」「H\d+」「問\d+」を含むものを kakomon として扱う
+    const details = document.querySelectorAll('details.example');
+    details.forEach(function (el) {
+      if (el.querySelector(':scope > .self-check-buttons')) return;
+      const summary = el.querySelector('summary');
+      if (!summary) return;
+      const summaryText = summary.textContent.trim();
+      // 過去問らしき形式：年度表記（R0X、H2X、令和、平成）+問番号、または「過去問」を含む
+      if (!/(R\d+|H\d+|令和|平成|過去問).*問/.test(summaryText)) return;
+
+      const hash = djb2Hash('kakomon-example::' + summaryText);
+      const buttons = buildButtons(hash, summaryText, 'kakomon', el);
+      el.appendChild(buttons);
+      const memo = buildMemo(hash, el);
+      el.appendChild(memo);
+    });
+  }
+
   function setup() {
     try {
       attachToSelfChecks();
       attachToKakomon();
+      attachToKakomonExamples();
     } catch (e) {
       console.warn('[self-check] setup failed:', e);
     }
