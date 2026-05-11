@@ -93,7 +93,6 @@ extra_javascript:
   - javascripts/theme-filter.js
   - javascripts/task-checkbox.js
   - javascripts/self-check.js
-  - javascripts/review-notebook.js
   - javascripts/search-filter.js
   - javascripts/chatgpt-prompt.js
   - javascripts/mathjax.js
@@ -108,7 +107,6 @@ extra:
 
 nav:
   - Home: index.md
-  - 📝 復習ノート: review.md
   - 理論（Risky攻略）:
     - theory/index.md
     - 直流回路（テブナン・ミルマン・Δ-Y）: theory/dc-circuit.md
