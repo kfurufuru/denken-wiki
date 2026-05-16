@@ -1,8 +1,8 @@
 ---
-template_version: strategy-pattern-1.0
+template_version: strategy-pattern-1.1
 pattern_id: hiseichi-thevenin
 title: 非接地テブナンパターン（B問題・地絡電流・中性点電位）
-related_articles: 解釈第14条 / 解釈第17条 / 省令第58条
+related_articles: 解釈第13条 / 解釈第15条 / 解釈第17条
 importance: A
 ---
 
@@ -18,11 +18,13 @@ importance: A
 
 | ページ | 役割 | 本ページとの違い |
 |--------|------|-----------------|
-| [絶縁テーマ](../themes/zetsuen.md) | 条文ベース（解釈第14条・省令第58条の抵抗値基準） | 「許容下限値の暗記」が中心。本ページは「式の組み立て」 |
+| [絶縁テーマ](../themes/zetsuen.md) | 条文ベース（電路の絶縁／高圧・低圧の絶縁性能） | 「条文・基準値の暗記」が中心。本ページは「式の組み立て」 |
 | [接地工事比較](../reference/grounding-comparison.md) | A〜D種の物理量比較・本体規定 | 接地工事の **種類選定**。本ページは **計算解法** |
 | [B問題得点戦略](b-mondai-strategy.md) | 時間配分・捨て問・部分点全体戦略 | パターン横断のメタ戦略。本ページは **1パターンの完全攻略** |
 | [三相交流理論](../theory/sansou-kouryuu.md) | 平衡条件・フェーザ・線間/相電圧 | 理論。本ページは **法規B問題での適用** |
-| [解釈第14条](../articles/kaishaku/14.md) | 低圧電路の絶縁抵抗値 | 条文原文。本ページは **計算問題で使う場面** |
+| [解釈第13条](../articles/kaishaku/13.md) | 電路は大地から絶縁する（原則） | 条文原文（背景）。本ページは **絶縁低下時の計算** |
+| [解釈第15条](../articles/kaishaku/15.md) | 高圧・特別高圧の電路の絶縁性能（試験電圧） | 条文原文（高圧電路の絶縁基準）。本ページは **絶縁低下時の地絡電流計算** |
+| [解釈第17条](../articles/kaishaku/17.md) | B種接地工事（150/Ig 系） | 接地系の **対立パターン** 条文。本ページは **非接地系の計算** |
 
 !!! tip "使い分けの目安"
     試験本番で問題文に「**非接地方式**」「**対地静電容量C**」「**絶縁抵抗が低下**」のうち2つ以上が同時に現れたら、本ページの4ステップを反射的に取り出す。
@@ -82,13 +84,89 @@ flowchart LR
 
 ### 2-2. 各ステップの中身
 
-#### Step 1 — 対地容量3個を「中性点から見て」並列合成
+#### Step 1 — 対地容量3個を「RGから見て」並列合成
 
-3相の対地容量Cは中性点O点から見ると **直接 大地に並列で3本** ぶら下がる。**直列ではない**。
+RG（地絡点 a-b 間）から回路を見ると、テブナン等価インピーダンスの算出では電源を短絡する。電源を短絡すると、3相の対地容量Cは **a点（R相導体）と大地（b点）の間に、3本すべて並列に見える**。**直列ではない**。
 
 $$
 C_{total} = C + C + C = 3C \quad \Rightarrow \quad Z_C = \frac{1}{j \cdot 3\omega C}
 $$
+
+<div>
+<svg viewBox="0 0 760 320" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;background:#fafafa;border:1px solid #ddd;border-radius:6px">
+  <text x="380" y="22" font-size="14" font-weight="bold" text-anchor="middle" fill="#333">図A：電源短絡 → 3個の対地容量Cが並列 → 合成3C</text>
+  <!-- 左：元の三相非接地回路（電源短絡前） -->
+  <text x="170" y="50" font-size="12" font-weight="bold" text-anchor="middle" fill="#1976d2">① 元の三相非接地回路</text>
+  <!-- 中性点 O -->
+  <circle cx="80" cy="170" r="5" fill="#1976d2"/>
+  <text x="60" y="165" font-size="10" fill="#1976d2">O</text>
+  <!-- 3相電源 -->
+  <line x1="80" y1="170" x2="140" y2="110" stroke="#333" stroke-width="2"/>
+  <line x1="80" y1="170" x2="140" y2="170" stroke="#333" stroke-width="2"/>
+  <line x1="80" y1="170" x2="140" y2="230" stroke="#333" stroke-width="2"/>
+  <text x="100" y="135" font-size="10" fill="#d32f2f">E_R</text>
+  <text x="100" y="165" font-size="10" fill="#388e3c">E_S</text>
+  <text x="100" y="248" font-size="10" fill="#1976d2">E_T</text>
+  <!-- 3相線 -->
+  <line x1="140" y1="110" x2="290" y2="110" stroke="#d32f2f" stroke-width="2"/>
+  <line x1="140" y1="170" x2="290" y2="170" stroke="#388e3c" stroke-width="2"/>
+  <line x1="140" y1="230" x2="290" y2="230" stroke="#1976d2" stroke-width="2"/>
+  <text x="295" y="113" font-size="10" font-weight="bold" fill="#d32f2f">R(a)</text>
+  <text x="295" y="173" font-size="10" font-weight="bold" fill="#388e3c">S</text>
+  <text x="295" y="233" font-size="10" font-weight="bold" fill="#1976d2">T</text>
+  <!-- 対地容量C×3 -->
+  <line x1="220" y1="110" x2="220" y2="135" stroke="#666" stroke-width="1.5"/>
+  <line x1="212" y1="135" x2="228" y2="135" stroke="#666" stroke-width="2"/>
+  <line x1="212" y1="143" x2="228" y2="143" stroke="#666" stroke-width="2"/>
+  <line x1="220" y1="143" x2="220" y2="280" stroke="#666" stroke-width="1.5" stroke-dasharray="3,3"/>
+  <text x="230" y="143" font-size="10" fill="#666">C</text>
+  <line x1="240" y1="170" x2="240" y2="195" stroke="#666" stroke-width="1.5"/>
+  <line x1="232" y1="195" x2="248" y2="195" stroke="#666" stroke-width="2"/>
+  <line x1="232" y1="203" x2="248" y2="203" stroke="#666" stroke-width="2"/>
+  <line x1="240" y1="203" x2="240" y2="280" stroke="#666" stroke-width="1.5" stroke-dasharray="3,3"/>
+  <text x="250" y="203" font-size="10" fill="#666">C</text>
+  <line x1="260" y1="230" x2="260" y2="245" stroke="#666" stroke-width="1.5"/>
+  <line x1="252" y1="245" x2="268" y2="245" stroke="#666" stroke-width="2"/>
+  <line x1="252" y1="253" x2="268" y2="253" stroke="#666" stroke-width="2"/>
+  <line x1="260" y1="253" x2="260" y2="280" stroke="#666" stroke-width="1.5" stroke-dasharray="3,3"/>
+  <text x="270" y="253" font-size="10" fill="#666">C</text>
+  <!-- 大地 -->
+  <line x1="80" y1="285" x2="320" y2="285" stroke="#333" stroke-width="2"/>
+  <text x="200" y="305" font-size="10" fill="#666">大地（b点）</text>
+  <!-- 矢印（→） -->
+  <line x1="335" y1="170" x2="425" y2="170" stroke="#333" stroke-width="2"/>
+  <polygon points="425,170 415,164 415,176" fill="#333"/>
+  <text x="380" y="158" font-size="11" font-weight="bold" text-anchor="middle" fill="#388e3c">電源短絡</text>
+  <text x="380" y="188" font-size="10" text-anchor="middle" fill="#666">（テブナン Z 算出）</text>
+  <!-- 右：a-b間から見たC×3並列 -->
+  <text x="580" y="50" font-size="12" font-weight="bold" text-anchor="middle" fill="#d32f2f">② a-b間：C×3 並列 → 3C</text>
+  <!-- a点（上） -->
+  <text x="455" y="95" font-size="11" font-weight="bold" fill="#d32f2f">a (R相)</text>
+  <line x1="455" y1="100" x2="700" y2="100" stroke="#d32f2f" stroke-width="2"/>
+  <!-- C×3 並列 -->
+  <line x1="490" y1="100" x2="490" y2="155" stroke="#666" stroke-width="1.5"/>
+  <line x1="478" y1="155" x2="502" y2="155" stroke="#666" stroke-width="2"/>
+  <line x1="478" y1="165" x2="502" y2="165" stroke="#666" stroke-width="2"/>
+  <line x1="490" y1="165" x2="490" y2="220" stroke="#666" stroke-width="1.5"/>
+  <text x="475" y="195" font-size="10" fill="#666">C</text>
+  <line x1="580" y1="100" x2="580" y2="155" stroke="#666" stroke-width="1.5"/>
+  <line x1="568" y1="155" x2="592" y2="155" stroke="#666" stroke-width="2"/>
+  <line x1="568" y1="165" x2="592" y2="165" stroke="#666" stroke-width="2"/>
+  <line x1="580" y1="165" x2="580" y2="220" stroke="#666" stroke-width="1.5"/>
+  <text x="565" y="195" font-size="10" fill="#666">C</text>
+  <line x1="670" y1="100" x2="670" y2="155" stroke="#666" stroke-width="1.5"/>
+  <line x1="658" y1="155" x2="682" y2="155" stroke="#666" stroke-width="2"/>
+  <line x1="658" y1="165" x2="682" y2="165" stroke="#666" stroke-width="2"/>
+  <line x1="670" y1="165" x2="670" y2="220" stroke="#666" stroke-width="1.5"/>
+  <text x="655" y="195" font-size="10" fill="#666">C</text>
+  <!-- b点（下：大地） -->
+  <line x1="455" y1="220" x2="700" y2="220" stroke="#333" stroke-width="2"/>
+  <text x="455" y="240" font-size="11" font-weight="bold" fill="#666">b (大地)</text>
+  <!-- 結論 -->
+  <text x="580" y="270" font-size="13" font-weight="bold" text-anchor="middle" fill="#2e7d32">合成 = 3C → Z_ab = 1/(j·3ωC)</text>
+  <text x="580" y="290" font-size="10" text-anchor="middle" fill="#666">（電源短絡で S相・T相も a と同電位に落ちるので C は3本とも a-b 間に並列）</text>
+</svg>
+</div>
 
 #### Step 2 — RGを取り外したときの開放電圧（テブナンVth）
 
@@ -141,9 +219,13 @@ $$
 | 出題年度 | 令和4年度下期（2022年） |
 | 問番号 | 問13（B問題・配点14点） |
 | 形式 | 計算 2小問（a）（b）／5択 |
-| 関連条文 | 解釈第14条・第17条（背景）／省令第58条（絶縁抵抗の根拠） |
-| 一次照合 | [yaku-tik R4下問13](https://yaku-tik.com/denken/r4s-h13/) ／ [denken-ou houkir4-2-13](https://denken-ou.com/houkir4-2-13/) |
+| 関連条文 | 解釈第13条（電路の絶縁／原則）・解釈第15条（高圧電路の絶縁性能）／対比：解釈第17条（B種接地） |
+| 一次出典 | [一般財団法人 電気技術者試験センター 過去問題（令和4年度下期 法規 問13）](https://www.shiken.or.jp/answer/) |
+| 解説補助 | [yaku-tik R4下問13](https://yaku-tik.com/denken/r4s-h13/) ／ [denken-ou houkir4-2-13](https://denken-ou.com/houkir4-2-13/) |
 | 照合日 | 2026-05-16 |
+
+!!! warning "条文の射程に注意（高圧 vs 低圧）"
+    本問は **高圧電路の非接地方式・対地静電容量C・絶縁低下** をテブナンの定理で解く計算問題。**省令第58条・解釈第14条は低圧電路の絶縁抵抗値の規定** であり、本問の計算式の直接根拠ではない。背景条文として参照するのは **解釈第13条（電路の絶縁）** と **解釈第15条（高圧又は特別高圧の電路の絶縁性能）**。
 
 ### 3-2. 与条件と回路
 
@@ -336,6 +418,7 @@ $$
 |--------|---------|-----------|
 | 🔴 致命 | 対地容量3個を **C/3** と直列合成してしまう | 中性点から見て **並列**＝3C。直列計算は誤り |
 | 🔴 致命 | VO の符号を **+** にしてしまう | キルヒホッフで O→電源→a→RG→大地→O の閉路を回る向きで **-ER+RG·IG** |
+| 🔴 致命 | 省令第58条・解釈第14条の **低圧の絶縁抵抗値（0.1/0.2/0.4 MΩ）** をこの **高圧計算問題** にそのまま当てる | 本問は高圧電路の非接地・対地容量・絶縁低下のテブナン計算。省令58・解釈14は **低圧電路の絶縁性能基準** であり、計算式の根拠にはならない（背景は解釈第13条／第15条） |
 | 🟡 注意 | jωを省略してDC扱いで解く | 対地容量Cは交流回路でのみ電流を流す。`Z_C=1/(jωC)` の j を消すと位相が崩れる |
 | 🟡 注意 | 電圧基準を **線間V_L** と **相電圧E_R** で混同 | 本パターンは **R相の相電圧 ER** が基準。線間V_L=√3·ER を使うのは別パターン |
 | 🟢 軽度 | 単位 mA / A の取り違え | 問題文の選択肢の単位を最後に必ず再確認 |
@@ -347,9 +430,10 @@ $$
 
 ### 6-1. 法令側
 
-- [解釈第14条](../articles/kaishaku/14.md) — 低圧電路の絶縁抵抗値の本体規定（本問の「絶縁抵抗RGに低下」の背景）
-- [解釈第17条](../articles/kaishaku/17.md) — B種接地工事（150/Ig）。本パターンの **対立パターン** として併習推奨
-- 省令第58条 — 低圧電路の絶縁抵抗値の最低基準
+- [解釈第13条](../articles/kaishaku/13.md) — 電路の絶縁（原則）。「絶縁低下＝条文違反の状態」の背景
+- [解釈第15条](../articles/kaishaku/15.md) — 高圧又は特別高圧の電路の絶縁性能（試験電圧）。本問が対象とする **高圧電路の絶縁** の本体規定
+- [解釈第17条](../articles/kaishaku/17.md) — B種接地工事（150/Ig）。本パターンの **対立パターン**（接地系）として併習推奨
+- （参考）解釈第14条／省令第58条 — **低圧電路** の絶縁抵抗値。本問（高圧）の計算根拠ではないので混同しない
 
 ### 6-2. 理論側
 
@@ -374,11 +458,21 @@ $$
 
 ## 7. 典拠・更新履歴
 
-### 一次ソース
+### 一次出典（試験原本）
+
+- **一般財団法人 電気技術者試験センター**：令和4年度 第三種電気主任技術者 **下期試験 法規科目 問13**（試験問題・正解）
+    - [試験問題と解答（公式ページ）](https://www.shiken.or.jp/answer/)
+    - 注：問題用紙PDFは年度・期ごとに公開フォルダが変わるため、上記公式ページから「令和4年度下期 第三種 法規」をたどる
+
+### 解説補助（二次ソース・照合用）
 
 - yaku-tik：[https://yaku-tik.com/denken/r4s-h13/](https://yaku-tik.com/denken/r4s-h13/)（令和4年下期 法規 問13）
-- denken-ou：[https://denken-ou.com/houkir4-2-13/](https://denken-ou.com/houkir4-2-13/)（同上）
-- eGov：電気設備技術基準の解釈 第14条・第17条／電気設備に関する技術基準を定める省令 第58条
+- 電験王（denken-ou）：[https://denken-ou.com/houkir4-2-13/](https://denken-ou.com/houkir4-2-13/)（同上）
+
+### 関連条文（背景）
+
+- **電気設備の技術基準の解釈**：第13条（電路の絶縁／原則）・第15条（高圧又は特別高圧の電路の絶縁性能）・第17条（B種接地工事・対比）
+- 参考：解釈第14条／省令第58条は **低圧電路の絶縁性能** であり、本問（高圧）の計算式の直接根拠ではない
 
 ### 監修プロセス
 
@@ -394,7 +488,8 @@ $$
 | 版 | 日付 | 変更内容 |
 |----|------|----------|
 | v1.0 | 2026-05-16 | 新規作成。R04下問13 をフラッグシップ例題として4ステップテンプレを確立 |
+| v1.1 | 2026-05-16 | ChatGPTレビュー反映：(1) 関連条文を解釈第13・15条（背景）＋第17条（対比）に修正、低圧基準（解釈第14・省令58）を計算根拠から外す／(2) 一次出典を電気技術者試験センターに格上げ、yaku-tik・電験王は解説補助に格下げ／(3) 「電源短絡→C×3並列＝3C」の変換図A を Step 1 に追加／(4) 低圧基準の流用ひっかけ行を追加 |
 
 ---
 
-*最終確認: 2026-05-16 | ステータス: v1.0 完全版 | [バージョニング基準](../reference/versioning.md)*
+*最終確認: 2026-05-16 | ステータス: v1.1 完全版 | [バージョニング基準](../reference/versioning.md)*

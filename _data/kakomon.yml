@@ -1185,7 +1185,7 @@ problems:
     topic: "非接地高圧電路の絶縁抵抗低下・地絡電流（テブナン）"
     theme: "zetsuen"
     form: "計算"
-    article: "解釈§14, §17"
+    article: "解釈§13, §15"
   - year: "R05上"
     year_label: "令和5年上期（2023年）"
     num: 1
