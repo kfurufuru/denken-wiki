@@ -64,6 +64,10 @@ verified:
     topic: 高圧架空電線路の接地工事
     article: 解釈§17
     verified_at: '2026-05-02T03:29:54+00:00'
+  R04下-1:
+    topic: 大規模事業者の保安規程に記載すべき事項（200万kW超）
+    article: 事業法§42
+    verified_at: '2026-05-16T00:00:00+00:00'
   R04下-5:
     topic: 低高圧架空電線等の併架
     article: 解釈§80
