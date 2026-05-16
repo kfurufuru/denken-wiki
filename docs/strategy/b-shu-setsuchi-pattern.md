@@ -1,8 +1,8 @@
 ---
-template_version: strategy-pattern-1.0
+template_version: strategy-pattern-1.1
 pattern_id: b-shu-setsuchi-150ig
 title: B種接地150/Ig パターン（B問題・接地抵抗・常時電流）
-related_articles: 解釈第17条 / 解釈第18条
+related_articles: 解釈第17条（計算根拠：B種3段階緩和の本体）／解釈第18条（背景：金属体接地極の特例）／対比：非接地テブナンパターン
 importance: A
 ---
 
