@@ -2,6 +2,8 @@
 
 `docs/articles/{kijun,kaishaku,jigyoho}/*.md` を新規作成・全面改修する際は、以下の手順を必ず踏む。
 
+> **戦略ページ（`docs/strategy/*.md`）・テーマ集約ページ（`docs/themes/*.md` の計算系）は本ルール対象外**。それらの作成には [strategy-page-3-layer.md](strategy-page-3-layer.md)（3層分離ルール）を参照すること。
+
 ## Step 0: 最新テンプレート解決（必須・最初に実行）
 
 新規・改修いずれの場合も、まず以下を実行してゴールドスタンダードを特定:
