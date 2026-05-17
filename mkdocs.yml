@@ -271,6 +271,7 @@ nav:
       - 第5条（風車の安全な状態の確保）: articles/furyoku/5.md
   - 過去問マッピング:
     - kakomon/index.md
+    - 全問一覧（年度×問番号）: kakomon/index-full.md
     - 年度別一覧: kakomon/by-year.md
     - 分野別一覧: kakomon/by-field.md
     - 出題頻度ランキング: kakomon/ranking.md
