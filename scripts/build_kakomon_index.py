@@ -2,9 +2,18 @@
 _data/kakomon.yml から全問一覧 docs/kakomon/index-full.md を生成する。
 ソート: 年度降順（R07下→...→H18）× 問番号昇順（問1→問13）
 """
+import re
 import yaml
 from pathlib import Path
 from collections import defaultdict
+
+SECTION_PATTERN = re.compile(r"§(\d+)(の\d+)?")
+
+def normalize_article(s: str) -> str:
+    """§N / §Nの2 形式を「第N条」「第N条の2」に変換（wiki_check.py 準拠）"""
+    if not s:
+        return s
+    return SECTION_PATTERN.sub(lambda m: f"第{m.group(1)}条{m.group(2) or ''}", s)
 
 REPO = Path(__file__).resolve().parent.parent
 YML_PATH = REPO / "_data" / "kakomon.yml"
@@ -80,7 +89,7 @@ def main():
         for p in plist:
             theme = THEME_LABEL.get(p.get("theme", "other"), p.get("theme", ""))
             form = p.get("form", "")
-            article = p.get("article", "−")
+            article = normalize_article(p.get("article", "−"))
             topic = p.get("topic", "")
             lines.append(f"| 問{p['num']} | {topic} | {theme} | {form} | {article} |")
         lines.append("")
