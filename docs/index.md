@@ -3,14 +3,14 @@
 > 電験3種 法規 — 条文×過去問クロスリファレンス
 
 !!! abstract "🧭 棲み分けルール"
-    **数値・暗記は [法規Wiki Hub](http://127.0.0.1:8092/denken-hoki-wiki.html)、条文・解説・"なぜ" は本サイト**
+    **数値・暗記は [法規Wiki Hub](https://kfurufuru.github.io/secretary-portal/denken-hoki-wiki.html)、条文・解説・"なぜ" は本サイト**
 
     迷ったら：直前期は Hub から、深掘りしたい時は本サイトから。
 
 !!! tip "🎯 動的な学習機能（進捗管理・65分タイマー・暗記カード・直前チェック・ランダム10問演習）"
     本サイトは**条文・過去問の解説（書庫）**に特化しています。
     進捗管理・**65分タイマー**・**暗記カード**・**直前チェック（数値・公式・ひっかけ）**・**間違いノート**等の**動的な学習機能**は
-    [**法規Wiki Hub**](http://127.0.0.1:8092/denken-hoki-wiki.html) でご利用ください。
+    [**法規Wiki Hub**](https://kfurufuru.github.io/secretary-portal/denken-hoki-wiki.html) でご利用ください。
     （Hub-Body責務分離：Hub=入口と進捗、Body=条文と解説）
 
 ## このWikiの目的
@@ -71,7 +71,7 @@
 | 🔍 テーマ別で探す | [テーマ一覧](themes/index.md) |
 | 📖 条文番号で探す | [条文一覧](articles/index.md) |
 | 📝 過去問から探す | [過去問マッピング](kakomon/index.md) |
-| 🔢 条文ベースで数値を確認 | [頻出数値一覧](reference/numbers.md)（暗記用は[法規Wiki Hub](http://127.0.0.1:8092/denken-hoki-wiki.html)） |
+| 🔢 条文ベースで数値を確認 | [頻出数値一覧](reference/numbers.md)（暗記用は[法規Wiki Hub](https://kfurufuru.github.io/secretary-portal/denken-hoki-wiki.html)） |
 | 🎯 攻略戦略で学ぶ | [攻略戦略](strategy/index.md) |
 | 🏛️ 法体系を確認する | [法体系の全体構造](reference/hourei-taikei.md) |
 
