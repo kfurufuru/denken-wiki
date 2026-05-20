@@ -18,7 +18,7 @@
         <link rel="prev" href="../shunin-gijutsusha/">
       
       
-        <link rel="next" href="../hogo-kyocho/">
+        <link rel="next" href="../ritsuryo-kaizen-capacitor/">
       
       
         
@@ -50,10 +50,12 @@
         
         
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
-        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans+JP:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Noto Sans JP";--md-code-font:"Roboto Mono"}</style>
       
     
+    
+      <link rel="stylesheet" href="../../stylesheets/design-tokens.css">
     
       <link rel="stylesheet" href="../../stylesheets/custom.css">
     
@@ -63,6 +65,21 @@
 
     
     
+  
+  
+  <script>
+  (function () {
+    try {
+      var m = location.pathname.match(/\/hoki\/([^\/?#]+)\/?$/);
+      if (m && m[1]) {
+        location.replace(
+          'https://kfurufuru.github.io/secretary-portal/denken-hoki-wiki.html#' + m[1]
+        );
+      }
+    } catch (e) { /* noop */ }
+  })();
+  </script>
+
   </head>
   
   
@@ -73,7 +90,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="deep-orange">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -98,12 +115,22 @@
     <span style="color:rgba(255,255,255,0.3);">|</span>
     <span style="font-size:0.78rem; color:rgba(255,255,255,0.6); margin-right:4px;">電験3種 :</span>
     <span style="font-weight:700; color:#fff; background:rgba(255,255,255,0.25); border-radius:4px; padding:2px 10px; font-size:0.82rem;">
-      📗 法規Wiki
+      📗 法規Wiki(旧)
     </span>
+    <a href="https://kfurufuru.github.io/secretary-portal/denken-hoki-wiki.html"
+       style="font-weight:600; color:#fff; text-decoration:none; background:rgba(255,255,255,0.12); border:1px solid rgba(255,255,255,0.35); border-radius:4px; padding:2px 10px; font-size:0.82rem;"
+       onmouseover="this.style.background='rgba(255,255,255,0.22)'" onmouseout="this.style.background='rgba(255,255,255,0.12)'">
+      📗 法規Wiki(新)
+    </a>
     <a href="https://kfurufuru.github.io/denken-wiki-riron/"
        style="font-weight:600; color:#fff; text-decoration:none; background:rgba(255,255,255,0.12); border:1px solid rgba(255,255,255,0.35); border-radius:4px; padding:2px 10px; font-size:0.82rem;"
        onmouseover="this.style.background='rgba(255,255,255,0.22)'" onmouseout="this.style.background='rgba(255,255,255,0.12)'">
-      📘 理論Wiki
+      📘 理論Wiki(旧)
+    </a>
+    <a href="https://kfurufuru.github.io/secretary-portal/denken3-riron-wiki.html"
+       style="font-weight:600; color:#fff; text-decoration:none; background:rgba(255,255,255,0.12); border:1px solid rgba(255,255,255,0.35); border-radius:4px; padding:2px 10px; font-size:0.82rem;"
+       onmouseover="this.style.background='rgba(255,255,255,0.22)'" onmouseout="this.style.background='rgba(255,255,255,0.12)'">
+      📘 理論Wiki(改)
     </a>
     <a href="https://kfurufuru.github.io/denken-wiki-denryoku/"
        style="font-weight:600; color:#fff; text-decoration:none; background:rgba(255,255,255,0.12); border:1px solid rgba(255,255,255,0.35); border-radius:4px; padding:2px 10px; font-size:0.82rem;"
@@ -164,21 +191,7 @@
     
     
     
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="deep-orange"  aria-label="ダークモードに切り替え"  type="radio" name="__palette" id="__palette_0">
-    
-      <label class="md-header__button md-icon" title="ダークモードに切り替え" for="__palette_1" hidden>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
-      </label>
-    
-  
-    
-    
-    
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="deep-orange"  aria-label="ライトモードに切り替え"  type="radio" name="__palette" id="__palette_1">
-    
-      <label class="md-header__button md-icon" title="ライトモードに切り替え" for="__palette_0" hidden>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
-      </label>
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
     
   
 </form>
@@ -374,6 +387,28 @@
     
     
       <li class="md-tabs__item">
+        <a href="../../strategy/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  攻略戦略
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
         <a href="../../reference/" class="md-tabs__link">
           
   
@@ -491,6 +526,24 @@
       
         
       
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
     
     
     
@@ -543,6 +596,258 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../theory/dc-circuit/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    直流回路（テブナン・ミルマン・Δ-Y）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../theory/ac-circuit/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    交流回路（ベクトル・共振・力率）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../theory/sansou-kouryuu/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    三相交流（Y-Δ・√3・三相電力）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../theory/transient/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    過渡現象（RC・RL・時定数）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../theory/measurement/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    電気計測（倍率器・分流器・ブリッジ）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../theory/electronics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    電子回路（FET・オペアンプ・整流）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../theory/inductance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    自己・相互インダクタンス（変圧器基礎）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../theory/diode/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    pn接合・ダイオード（半導体基礎）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../theory/logic-circuit/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    論理回路（ゲート・ブール代数・FF）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
               
             
               
@@ -733,6 +1038,20 @@
       
         
           
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
         
       
         
@@ -987,6 +1306,62 @@
   
   
     <li class="md-nav__item">
+      <a href="../hogo-relay/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    保護リレー（保護継電器）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../koatsu-kiki-shisetsu/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    高圧機械器具の施設（解釈第21条）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../bunsan-dengen/" class="md-nav__link">
         
   
@@ -1211,6 +1586,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../kosakubutsu-bunrui/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    電気工作物の分類
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../jigyoho-taikei/" class="md-nav__link">
         
   
@@ -1355,6 +1758,17 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        このページで得点するためのゴール
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#vs" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1377,7 +1791,18 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        まず覚える4公式
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       
         概念・趣旨
@@ -1417,7 +1842,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
+  <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
       
         定義
@@ -1428,7 +1853,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
+  <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       
         公式
@@ -1439,7 +1864,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
+  <a href="#_6" class="md-nav__link">
     <span class="md-ellipsis">
       
         身近な例え
@@ -1450,10 +1875,21 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_6" class="md-nav__link">
+  <a href="#_7" class="md-nav__link">
     <span class="md-ellipsis">
       
         数値例（試験レベル）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        図解：設備容量と最大需要電力の関係
       
     </span>
   </a>
@@ -1478,7 +1914,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_7" class="md-nav__link">
+  <a href="#_9" class="md-nav__link">
     <span class="md-ellipsis">
       
         定義
@@ -1489,7 +1925,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_8" class="md-nav__link">
+  <a href="#_10" class="md-nav__link">
     <span class="md-ellipsis">
       
         公式
@@ -1500,7 +1936,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_9" class="md-nav__link">
+  <a href="#_11" class="md-nav__link">
     <span class="md-ellipsis">
       
         身近な例え
@@ -1511,10 +1947,21 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_10" class="md-nav__link">
+  <a href="#_12" class="md-nav__link">
     <span class="md-ellipsis">
       
         数値例（試験レベル）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        図解：1日の負荷曲線と平均・最大
       
     </span>
   </a>
@@ -1539,7 +1986,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_11" class="md-nav__link">
+  <a href="#_13" class="md-nav__link">
     <span class="md-ellipsis">
       
         定義
@@ -1550,7 +1997,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_12" class="md-nav__link">
+  <a href="#_14" class="md-nav__link">
     <span class="md-ellipsis">
       
         公式
@@ -1561,7 +2008,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_13" class="md-nav__link">
+  <a href="#_15" class="md-nav__link">
     <span class="md-ellipsis">
       
         身近な例え
@@ -1572,10 +2019,21 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_14" class="md-nav__link">
+  <a href="#_16" class="md-nav__link">
     <span class="md-ellipsis">
       
         数値例（試験レベル）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        図解：ピークがずれるから合成最大は小さくなる
       
     </span>
   </a>
@@ -1600,7 +2058,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_15" class="md-nav__link">
+  <a href="#_18" class="md-nav__link">
     <span class="md-ellipsis">
       
         設備設計での使い方の流れ
@@ -1611,10 +2069,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_16" class="md-nav__link">
+  <a href="#_19" class="md-nav__link">
     <span class="md-ellipsis">
       
-        変圧器容量の算定公式
+        合成最大需要電力の算定公式
       
     </span>
   </a>
@@ -1622,7 +2080,18 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_17" class="md-nav__link">
+  <a href="#kva" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        変圧器容量[kVA]まで求める場合
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_20" class="md-nav__link">
     <span class="md-ellipsis">
       
         相互の関係式
@@ -1638,7 +2107,46 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_18" class="md-nav__link">
+  <a href="#vs_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔍 負荷率 vs 総合負荷率（最重要・混同注意）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔍 負荷率 vs 総合負荷率（最重要・混同注意）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        図解：単独の負荷率と合成後の総合負荷率の比較
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vs_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一覧で押さえる：負荷率 vs 総合負荷率
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_22" class="md-nav__link">
     <span class="md-ellipsis">
       
         頻出論点と落とし穴
@@ -1649,7 +2157,79 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_19" class="md-nav__link">
+  <a href="#_23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🧮 計算パターン別 セルフチェック
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🧮 計算パターン別 セルフチェック">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        パターン1（基本）: 需要率・不等率・負荷率を求める
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        パターン2（応用）: 変圧器容量の算定
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        パターン3（複合）: 2工場合算の需要率・負荷率
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_24" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📝 出題実績
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_25" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📜 関連条文・出典（電気施設管理関連）
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_26" class="md-nav__link">
     <span class="md-ellipsis">
       
         関連テーマ
@@ -1663,6 +2243,34 @@
   
 </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ritsuryo-kaizen-capacitor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    力率改善コンデンサ
+  
+
+    
+  </span>
+  
+  
+
+      </a>
     </li>
   
 
@@ -1864,6 +2472,90 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hoan-gensoku/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    保安の基本原則
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kokusai-kikaku/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    国際規格の取り入れ（§4の2）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kankyo-boushi/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    公害防止・環境保護
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1882,6 +2574,8 @@
       
         
           
+        
+      
         
       
         
@@ -1971,6 +2665,40 @@
       
         
       
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
     
     
     
@@ -2023,6 +2751,230 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/kijun/1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第1条（用語の定義）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/kijun/2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第2条（電圧の種別）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/kijun/4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第4条（感電・火災等の防止）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/kijun/5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第5条（電路の絶縁）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/kijun/6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第6条（電線等の断線防止）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/kijun/7/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第7条（電線の接続）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/kijun/8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第8条（機械器具の熱的強度）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/kijun/9/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第9条（高圧・特高機器の危険防止）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
               
             
               
@@ -2144,6 +3096,146 @@
   
   
     <li class="md-nav__item">
+      <a href="../../articles/kijun/20/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第20条（電線路等の感電又は火災の防止）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/kijun/21/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第21条（架空電線及び地中電線の感電の防止）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/kijun/23/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第23条（発電所等への立入防止）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/kijun/24/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第24条（支持物の昇塔防止）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/kijun/32/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第32条（支持物の倒壊防止）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../articles/kijun/56/" class="md-nav__link">
         
   
@@ -2152,6 +3244,34 @@
     
   
     第56条（配線の感電防止）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/kijun/57/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第57条（配線の使用電線）
   
 
     
@@ -2193,6 +3313,90 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/kijun/59/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第59条（機械器具の感電等防止）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/kijun/63/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第63条（低圧幹線の過電流保護）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/kijun/64/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第64条（使用場所の地絡保護）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -2212,6 +3416,62 @@
       
         
           
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
         
       
         
@@ -2296,6 +3556,90 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/kaishaku/1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第1条（用語の定義）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/kaishaku/10/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第10条（電気設備の接地）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/kaishaku/13/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第13条（絶縁を要しない部分）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
               
             
               
@@ -2396,7 +3740,7 @@
   <span class="md-ellipsis">
     
   
-    第17条（A種接地工事）
+    第17条（接地工事の種類及び施設方法）
   
 
     
@@ -2424,7 +3768,7 @@
   <span class="md-ellipsis">
     
   
-    第18条（B種接地工事）
+    第18条（工作物の金属体を利用した接地工事）
   
 
     
@@ -2452,7 +3796,63 @@
   <span class="md-ellipsis">
     
   
-    第19条（C種・D種接地工事）
+    第19条（保安上又は機能上必要な場合における電路の接地）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/kaishaku/21/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第21条（高圧の機械器具の施設）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/kaishaku/22/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第22条（特別高圧の機械器具の施設）
   
 
     
@@ -2585,6 +3985,118 @@
   
   
     <li class="md-nav__item">
+      <a href="../../articles/kaishaku/38/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第38条（発変電所等の避雷器）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/kaishaku/53/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第53条（支持物の足場金具等の施設）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/kaishaku/59/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第59条（支持物の強度）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/kaishaku/65/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第65条（架空電線の高さ）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../articles/kaishaku/68/" class="md-nav__link">
         
   
@@ -2592,7 +4104,35 @@
   <span class="md-ellipsis">
     
   
-    第68条（低圧架空電線の高さ）
+    第68条（低圧架空電線の施設）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/kaishaku/71/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第71条（高圧架空電線の施設）
   
 
     
@@ -2641,6 +4181,258 @@
   
   
     <li class="md-nav__item">
+      <a href="../../articles/kaishaku/79/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第79条（架空電線と建造物の離隔）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/kaishaku/81/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第81条（架空電線路相互の離隔）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/kaishaku/120/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第120条（地中電線路の施設）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/kaishaku/133/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第133条（電力保安通信設備）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/kaishaku/143/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第143条（引込線の施設）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/kaishaku/147/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第147条（引込口の施設）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/kaishaku/148/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第148条（低圧幹線の施設）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/kaishaku/149/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第149条（施設場所による工事の種類）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/kaishaku/150/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第150条（配線器具の施設）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../articles/kaishaku/156/" class="md-nav__link">
         
   
@@ -2648,7 +4440,63 @@
   <span class="md-ellipsis">
     
   
-    第156条（低圧屋内配線の工事種類）
+    第156条（合成樹脂管工事）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/kaishaku/159/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第159条（金属管工事）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/kaishaku/164/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第164条（ケーブル工事）
   
 
     
@@ -2697,6 +4545,62 @@
   
   
     <li class="md-nav__item">
+      <a href="../../articles/kaishaku/176/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第176条（可燃性ガス危険場所）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/kaishaku/200/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第200条（小勢力回路）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../articles/kaishaku/220/" class="md-nav__link">
         
   
@@ -2704,7 +4608,147 @@
   <span class="md-ellipsis">
     
   
-    第220条（分散型電源の系統連系）
+    第220条（直流流出防止変圧器）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/kaishaku/222/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第222条（低圧連系の施設要件）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/kaishaku/224/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第224条（高圧/特別高圧連系の再閉路防止）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/kaishaku/227/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第227条（高圧連系の施設要件）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/kaishaku/229/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第229条（逆潮流の制限）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/kaishaku/232/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第232条（単独運転の防止）
   
 
     
@@ -3294,6 +5338,12 @@
           
         
       
+        
+      
+        
+      
+        
+      
     
     
     
@@ -3328,6 +5378,11 @@
 
             </a>
             
+              
+              <label class="md-nav__link " for="__nav_4_5" id="__nav_4_5_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
           </div>
         
         <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_5_label" aria-expanded="false">
@@ -3341,6 +5396,734 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_5_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_5_2" id="__nav_4_5_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    電気工事士法
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_5_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    電気工事士法
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/other/koji-shi-1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第1条（目的）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/other/koji-shi-2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第2条（定義・軽微な工事）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/other/koji-shi-3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第3条（電気工事士の資格）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/other/koji-shi-5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第5条（電気工事士の義務）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_5_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_5_3" id="__nav_4_5_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    電気用品安全法
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_5_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_5_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    電気用品安全法
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/other/pse-2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第2条（定義）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/other/pse-8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第8条（基準適合義務）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/other/pse-10/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第10条（PSEマーク表示）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/other/pse-27/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第27条（販売の制限）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/other/pse-28/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第28条（使用の制限）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_5_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_5_4" id="__nav_4_5_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    電気関係報告規則
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_5_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_5_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    電気関係報告規則
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/other/jiko-1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第1条（定義）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/other/jiko-3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第3条（事故報告）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/other/jiko-4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第4条（公害防止届出）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/other/jiko-5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第5条（自家用電気工作物の報告）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_6" id="__nav_4_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    発電用風力設備技術基準
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    発電用風力設備技術基準
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/furyoku/3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第3条（取扱者以外の者の危険防止）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/furyoku/4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第4条（風車の施設要件）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/furyoku/5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第5条（風車の安全な状態の確保）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
               
             
           </ul>
@@ -3369,6 +6152,8 @@
       
         
           
+        
+      
         
       
         
@@ -3553,6 +6338,34 @@
   
   
   
+    <li class="md-nav__item">
+      <a href="../../kakomon/wave-analysis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    出題波予測（周期性分析）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
     
     
       
@@ -3599,10 +6412,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_6" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_7" >
         
           
-          <label class="md-nav__link" for="__nav_5_6" id="__nav_5_6_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_5_7" id="__nav_5_7_label" tabindex="0">
             
   
   
@@ -3620,8 +6433,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_6_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_5_6">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_7">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -4093,6 +6906,274 @@
       
         
       
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../strategy/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    攻略戦略
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_6" id="__nav_6_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    攻略戦略
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../strategy/hourei-master/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    法令マスタ
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../strategy/b-mondai-method/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    B問題メソッド化
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../strategy/b-mondai-strategy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    B問題得点戦略
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../strategy/jakuten-log/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    弱点ログ
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../strategy/trap-patterns/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    引っかけパターン集
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../strategy/last-3days-checklist/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    直前3日チェックリスト
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../strategy/reissue-patterns-and-regulations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    再出題傾向と最適学習戦略
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
         
       
         
@@ -4116,7 +7197,7 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
         
           
           <div class="md-nav__link md-nav__container">
@@ -4138,14 +7219,14 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_6" id="__nav_6_label" tabindex="0">
+              <label class="md-nav__link " for="__nav_7" id="__nav_7_label" tabindex="0">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_6">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -4163,43 +7244,53 @@
   
   
   
-    <li class="md-nav__item">
-      <a href="../../reference/numbers/" class="md-nav__link">
+    
+    
+      
         
-  
-  
-  <span class="md-ellipsis">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
     
-  
-    頻出数値一覧
-  
-
     
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_2" id="__nav_7_2_label" tabindex="0">
             
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../reference/b-mondai-template/" class="md-nav__link">
-        
   
   
   <span class="md-ellipsis">
     
   
-    B問題 計算テンプレート集
+    📊 条文中の数値・分類
   
 
     
@@ -4207,11 +7298,19 @@
   
   
 
-      </a>
-    </li>
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    📊 条文中の数値・分類
   
 
-              
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
             
               
                 
@@ -4360,6 +7459,302 @@
   
   
     <li class="md-nav__item">
+      <a href="../../reference/penalties/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    罰則・罰金比較表
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/deadlines/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    届出・申請期限一覧
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/numbers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    頻出数値一覧
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/cross-reference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    類題横断（数値・キーワード横串）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/b-mondai-template/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    B問題 計算テンプレート集
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_3" id="__nav_7_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🔖 用語・索引
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    🔖 用語・索引
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/term-usage/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    用語の使い分け（決め手集）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/permit-types/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    手続き6用語の使い分け（許可・認可・登録・届出・承認・報告）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/reporting-destinations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    報告先・届出先 早見マップ
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../reference/glossary/" class="md-nav__link">
         
   
@@ -4388,6 +7783,104 @@
   
   
     <li class="md-nav__item">
+      <a href="../../reference/glossary-index/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    用語索引（五十音順）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_4" id="__nav_7_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ⚖️ 法令体系
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    ⚖️ 法令体系
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../reference/hourei-taikei/" class="md-nav__link">
         
   
@@ -4408,6 +7901,160 @@
   
 
               
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/article-number-mapping/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    旧→現行 条番号マッピング
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/article-structure/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    条文項番マスター辞典
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/hourei-kaisei/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    法令改正一覧
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_5" id="__nav_7_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🛠️ 制作プロセス
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    🛠️ 制作プロセス
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
             
               
                 
@@ -4493,6 +8140,42 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/article-creation-checklist/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    新規記事作成チェックリスト
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -4527,6 +8210,17 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        このページで得点するためのゴール
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#vs" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -4549,7 +8243,18 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        まず覚える4公式
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       
         概念・趣旨
@@ -4589,7 +8294,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
+  <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
       
         定義
@@ -4600,7 +8305,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
+  <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       
         公式
@@ -4611,7 +8316,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
+  <a href="#_6" class="md-nav__link">
     <span class="md-ellipsis">
       
         身近な例え
@@ -4622,10 +8327,21 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_6" class="md-nav__link">
+  <a href="#_7" class="md-nav__link">
     <span class="md-ellipsis">
       
         数値例（試験レベル）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        図解：設備容量と最大需要電力の関係
       
     </span>
   </a>
@@ -4650,7 +8366,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_7" class="md-nav__link">
+  <a href="#_9" class="md-nav__link">
     <span class="md-ellipsis">
       
         定義
@@ -4661,7 +8377,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_8" class="md-nav__link">
+  <a href="#_10" class="md-nav__link">
     <span class="md-ellipsis">
       
         公式
@@ -4672,7 +8388,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_9" class="md-nav__link">
+  <a href="#_11" class="md-nav__link">
     <span class="md-ellipsis">
       
         身近な例え
@@ -4683,10 +8399,21 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_10" class="md-nav__link">
+  <a href="#_12" class="md-nav__link">
     <span class="md-ellipsis">
       
         数値例（試験レベル）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        図解：1日の負荷曲線と平均・最大
       
     </span>
   </a>
@@ -4711,7 +8438,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_11" class="md-nav__link">
+  <a href="#_13" class="md-nav__link">
     <span class="md-ellipsis">
       
         定義
@@ -4722,7 +8449,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_12" class="md-nav__link">
+  <a href="#_14" class="md-nav__link">
     <span class="md-ellipsis">
       
         公式
@@ -4733,7 +8460,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_13" class="md-nav__link">
+  <a href="#_15" class="md-nav__link">
     <span class="md-ellipsis">
       
         身近な例え
@@ -4744,10 +8471,21 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_14" class="md-nav__link">
+  <a href="#_16" class="md-nav__link">
     <span class="md-ellipsis">
       
         数値例（試験レベル）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        図解：ピークがずれるから合成最大は小さくなる
       
     </span>
   </a>
@@ -4772,7 +8510,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_15" class="md-nav__link">
+  <a href="#_18" class="md-nav__link">
     <span class="md-ellipsis">
       
         設備設計での使い方の流れ
@@ -4783,10 +8521,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_16" class="md-nav__link">
+  <a href="#_19" class="md-nav__link">
     <span class="md-ellipsis">
       
-        変圧器容量の算定公式
+        合成最大需要電力の算定公式
       
     </span>
   </a>
@@ -4794,7 +8532,18 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_17" class="md-nav__link">
+  <a href="#kva" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        変圧器容量[kVA]まで求める場合
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_20" class="md-nav__link">
     <span class="md-ellipsis">
       
         相互の関係式
@@ -4810,7 +8559,46 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_18" class="md-nav__link">
+  <a href="#vs_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔍 負荷率 vs 総合負荷率（最重要・混同注意）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔍 負荷率 vs 総合負荷率（最重要・混同注意）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        図解：単独の負荷率と合成後の総合負荷率の比較
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vs_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一覧で押さえる：負荷率 vs 総合負荷率
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_22" class="md-nav__link">
     <span class="md-ellipsis">
       
         頻出論点と落とし穴
@@ -4821,7 +8609,79 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_19" class="md-nav__link">
+  <a href="#_23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🧮 計算パターン別 セルフチェック
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🧮 計算パターン別 セルフチェック">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        パターン1（基本）: 需要率・不等率・負荷率を求める
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        パターン2（応用）: 変圧器容量の算定
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        パターン3（複合）: 2工場合算の需要率・負荷率
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_24" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📝 出題実績
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_25" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📜 関連条文・出典（電気施設管理関連）
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_26" class="md-nav__link">
     <span class="md-ellipsis">
       
         関連テーマ
@@ -4842,6 +8702,54 @@
           
             <div class="md-content" data-md-component="content">
               
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="ナビゲーション" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Home
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    テーマ別
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
               <article class="md-content__inner md-typeset">
                 
                   
@@ -4855,6 +8763,16 @@
 <blockquote>
 <p>設備容量から実際に必要な電力を見積もる3つの指標。電力系統設計の「サイズ感」を決める最重要概念。</p>
 </blockquote>
+<hr />
+<h2 id="_2"><img alt="🎯" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f3af.svg" title=":dart:" /> このページで得点するためのゴール<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<p>過去問で分子・分母を間違えずに得点するために、最終的に以下を即答できる状態を目指す。</p>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> <abbr title="設備容量に対する最大需要電力の比率。最大需要電力÷設備容量">需要率</abbr>・<abbr title="平均需要電力÷最大需要電力。1に近いほど負荷が均等で効率的">負荷率</abbr>・不等率の <strong>分母</strong> をそれぞれ即答できる</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> <strong>不等率が通常 1 以上</strong> になる理由を、ピークずれの観点で説明できる</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> <strong>「合わせた需要率」と「<abbr title="各負荷の最大需要電力の合計÷合成最大需要電力。常に1以上。ピークのずれを表す">不等率</abbr>」の分子の違い</strong> を判別できる（合成最大 vs 各最大の和）</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> <strong>総合負荷率を、単独の負荷率の平均で計算しない</strong>（合成平均 ÷ 合成最大）</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> <strong>kW・kWh・kVA・％</strong> を混同しない（電力／電力量／皮相電力／比率の表示形式）</li>
+</ul>
 <hr />
 <h2 id="vs">🧠 正答者 vs 誤答者の視点差<a class="headerlink" href="#vs" title="Permanent link">&para;</a></h2>
 <blockquote>
@@ -4881,8 +8799,8 @@
 </tr>
 <tr>
 <td>単位・次元</td>
-<td>無次元だと思い込む</td>
-<td><abbr title="設備容量に対する最大需要電力の比率。最大需要電力÷設備容量">需要率</abbr>・<abbr title="平均需要電力÷最大需要電力。1に近いほど負荷が均等で効率的">負荷率</abbr>・不等率は全て無次元（[kW/kW]）。ただし全日効率はkWh/kWhなので混同注意</td>
+<td>kW・kWh・％を混同する</td>
+<td><abbr title="設備容量に対する最大需要電力の比率。最大需要電力÷設備容量">需要率</abbr>・<abbr title="平均需要電力÷最大需要電力。1に近いほど負荷が均等で効率的">負荷率</abbr>・不等率はすべて無次元（kW/kW）。ただし平均電力を出すときは kWh ÷ h = kW と整理する</td>
 </tr>
 <tr>
 <td>3つの公式</td>
@@ -4916,33 +8834,111 @@
 </details>
 <details class="question">
 <summary>セルフチェック②: 不等率は必ず1以上になる。なぜか？</summary>
-<p>各需要家の最大電力が同時に重なることはないため、各最大の合計（分子）≧ 合成最大（分母）が成立するから。不等率が1に近いほどピークが集中、大きいほど分散して設備を小さくできる。</p>
+<p>各需要家のピークは必ずしも同時に一致しないため、各最大の合計（分子）≧ 合成最大（分母）が成立するから。すべて完全に同時一致すれば不等率=1、ピークがずれるほど1より大きくなる。</p>
 </details>
 <hr />
-<h2 id="_2"><img alt="🧠" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f9e0.svg" title=":brain:" /> 概念・趣旨<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<h2 id="4"><img alt="📝" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f4dd.svg" title=":memo:" /> まず覚える4公式<a class="headerlink" href="#4" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>指標</th>
+<th>比率の式</th>
+<th>％で答えるとき</th>
+<th>検算</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong><abbr title="設備容量に対する最大需要電力の比率。最大需要電力÷設備容量">需要率</abbr></strong></td>
+<td>最大需要電力 ÷ 設備容量</td>
+<td>比率 × 100</td>
+<td>通常 1 以下（&gt;1 なら読み違い疑う）</td>
+</tr>
+<tr>
+<td><strong><abbr title="平均需要電力÷最大需要電力。1に近いほど負荷が均等で効率的">負荷率</abbr></strong></td>
+<td>平均需要電力 ÷ 最大需要電力</td>
+<td>比率 × 100</td>
+<td>通常 1 以下（&gt;1 なら平均/最大の取り違え）</td>
+</tr>
+<tr>
+<td><strong><abbr title="各負荷の最大需要電力の合計÷合成最大需要電力。常に1以上。ピークのずれを表す">不等率</abbr></strong></td>
+<td>各需要家の最大需要電力の合計 ÷ 合成最大需要電力</td>
+<td><strong>多くは 1.3、1.4 等の比率のまま答える</strong>（％にしない）</td>
+<td>通常 1 以上（&lt;1 なら合成最大の読み違い）</td>
+</tr>
+<tr>
+<td><strong>総合負荷率</strong></td>
+<td>合成平均需要電力 ÷ 合成最大需要電力</td>
+<td>比率 × 100</td>
+<td>通常 1 以下／単独の負荷率を平均しても出ない</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition tip">
+<p class="admonition-title">単位と平均需要電力の出し方</p>
+<ul>
+<li>平均需要電力 = 使用電力量 [kWh] ÷ 時間 [h]</li>
+<li>設備容量・最大需要電力・平均需要電力はいずれも [kW]</li>
+<li>4公式とも無次元（[kW/kW]）。「％」は比率を100倍した表示形式</li>
+</ul>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">『合わせた需要率』と『<abbr title="各負荷の最大需要電力の合計÷合成最大需要電力。常に1以上。ピークのずれを表す">不等率</abbr>』を混同しない</p>
+<table>
+<thead>
+<tr>
+<th>用語</th>
+<th>分子</th>
+<th>分母</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>合わせた需要率</strong></td>
+<td><strong>合成最大需要電力</strong></td>
+<td><strong>総設備容量</strong></td>
+</tr>
+<tr>
+<td><strong><abbr title="各負荷の最大需要電力の合計÷合成最大需要電力。常に1以上。ピークのずれを表す">不等率</abbr></strong></td>
+<td><strong>各需要家の最大需要電力の合計</strong></td>
+<td><strong>合成最大需要電力</strong></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>✕ 誤り例: 「(各需要家の最大需要電力の合計) ÷ 総設備容量」を <strong>合わせた需要率</strong> として計算する</li>
+<li>○ 正しい: 合わせた需要率 = 合成最大需要電力 ÷ 総設備容量。分子は <strong>合成（同時）最大</strong> であって、各最大の合計ではない</li>
+</ul>
+</div>
+<hr />
+<h2 id="_3"><img alt="🧠" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f9e0.svg" title=":brain:" /> 概念・趣旨<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <h3 id="3">なぜこの3つが重要なのか<a class="headerlink" href="#3" title="Permanent link">&para;</a></h3>
 <p>電力設備を設計するとき、全部の機器が同時にMAXで動くことはまずない。もし全部同時フル稼働を想定して設備を作ったら、変圧器もケーブルも巨大になり、コストが跳ね上がる。</p>
 <p>この3つの指標を使うことで、<strong>現実的な設備容量</strong>を見積もれる。つまり「設備のサイズダウン＝コスト削減」の根拠になる数字だ。</p>
 <hr />
 <h2 id="1-demand-factor">1. <abbr title="設備容量に対する最大需要電力の比率。最大需要電力÷設備容量">需要率</abbr>（Demand Factor）<a class="headerlink" href="#1-demand-factor" title="Permanent link">&para;</a></h2>
-<h3 id="_3">定義<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<h3 id="_4">定義<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
 <blockquote>
 <p><strong><abbr title="設備容量に対する最大需要電力の比率。最大需要電力÷設備容量">需要率</abbr> = 最大需要電力 ÷ 設備容量（負荷の定格電力の合計）</strong></p>
 </blockquote>
-<p>設備容量に対して、実際にどれだけの電力を同時に使うかの割合。<strong>必ず1以下</strong>（100%以下）になる。</p>
-<h3 id="_4">公式<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
-<p>$$
-\text{<abbr title="設備容量に対する最大需要電力の比率。最大需要電力÷設備容量">需要率</abbr>} = \frac{\text{最大需要電力 [kW]}}{\text{設備容量（全負荷の定格合計）[kW]}}
-$$</p>
-<h3 id="_5">身近な例え<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<p>設備容量に対して、実際にどれだけの電力を同時に使うかの割合。電験3種の標準的な計算問題では <strong>通常 1 以下（100%以下）</strong> として扱う。1 を超える値が出た場合は、設備容量・最大需要電力の読み違いをまず疑う。</p>
+<h3 id="_5">公式<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<div class="arithmatex">\[
+\text{需要率} = \frac{\text{最大需要電力 [kW]}}{\text{設備容量（全負荷の定格合計）[kW]}}
+\]</div>
+<h3 id="_6">身近な例え<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
 <div class="admonition example">
 <p class="admonition-title">家庭の例</p>
 <p>自宅にある電気機器の定格電力を全部足すと仮に <strong>10kW</strong> だとする（エアコン2台、電子レンジ、IH、ドライヤー、照明…）。</p>
 <p>でも実際に同時に使うのは最大 <strong>6kW</strong> 程度。全部を一度に使うことはないから。</p>
 <p>→ <strong><abbr title="設備容量に対する最大需要電力の比率。最大需要電力÷設備容量">需要率</abbr> = 6kW ÷ 10kW = 0.6（60%）</strong></p>
-<p>つまり「設備の60%分の容量を準備すれば足りる」ということ。</p>
+<div class="admonition info">
+<p class="admonition-title">試験計算と実際の設備容量選定の違い</p>
+<p>試験計算上は、設備容量×需要率で最大需要電力の目安を求める。
+ただし実際の設備容量選定では、力率・<abbr title="各負荷の最大需要電力の合計÷合成最大需要電力。常に1以上。ピークのずれを表す">不等率</abbr>・将来増設・標準容量・余裕率・保護協調なども考慮するため、需要率だけで決めるわけではない。</p>
 </div>
-<h3 id="_6">数値例（試験レベル）<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+</div>
+<h3 id="_7">数値例（試験レベル）<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
 <p>ある工場に以下の負荷がある:</p>
 <table>
 <thead>
@@ -4971,54 +8967,117 @@ $$</p>
 </tbody>
 </table>
 <p>最大需要電力が 210 kW のとき:</p>
-<p>$$
-\text{<abbr title="設備容量に対する最大需要電力の比率。最大需要電力÷設備容量">需要率</abbr>} = \frac{210}{350} = 0.6 \quad (60\%)
-$$</p>
+<div class="arithmatex">\[
+\text{需要率} = \frac{210}{350} = 0.6 \quad (60\%)
+\]</div>
+<h3 id="_8">図解：設備容量と最大需要電力の関係<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<div><svg viewBox="0 0 600 320" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto">
+  <text x="300" y="22" text-anchor="middle" font-size="16" font-weight="bold">需要率＝最大需要電力÷設備容量</text>
+  <text x="300" y="45" text-anchor="middle" font-size="14" fill="#cc3300">需要率 = 210 ÷ 350 = 0.6（60%）</text>
+  <line x1="80" y1="280" x2="540" y2="280" stroke="#333" stroke-width="2"/>
+  <line x1="80" y1="65" x2="80" y2="280" stroke="#333" stroke-width="2"/>
+  <text x="70" y="80" text-anchor="end" font-size="11" fill="#333">[kW]</text>
+  <rect x="160" y="80" width="100" height="200" fill="#cce5ff" stroke="#0066cc" stroke-width="2"/>
+  <text x="210" y="105" text-anchor="middle" font-size="13" fill="#003366" font-weight="bold">350</text>
+  <text x="210" y="300" text-anchor="middle" font-size="13">設備容量</text>
+  <text x="210" y="316" text-anchor="middle" font-size="11" fill="#666">（定格の合計）</text>
+  <rect x="380" y="160" width="100" height="120" fill="#ffe5cc" stroke="#cc6600" stroke-width="2"/>
+  <text x="430" y="185" text-anchor="middle" font-size="13" fill="#663300" font-weight="bold">210</text>
+  <text x="430" y="300" text-anchor="middle" font-size="13">最大需要電力</text>
+  <text x="430" y="316" text-anchor="middle" font-size="11" fill="#666">（実際の同時最大）</text>
+  <line x1="265" y1="80" x2="375" y2="160" stroke="#999" stroke-width="1" stroke-dasharray="3,2"/>
+  <line x1="265" y1="280" x2="375" y2="280" stroke="#999" stroke-width="1" stroke-dasharray="3,2"/>
+  <text x="320" y="125" text-anchor="middle" font-size="11" fill="#666">同時に</text>
+  <text x="320" y="140" text-anchor="middle" font-size="11" fill="#666">使われない分</text>
+</svg></div>
+
+<div class="admonition info">
+<p class="admonition-title">図から読む値</p>
+<ul>
+<li>設備容量： 350 kW</li>
+<li>最大需要電力： 210 kW</li>
+<li><abbr title="設備容量に対する最大需要電力の比率。最大需要電力÷設備容量">需要率</abbr>： 210 ÷ 350 = 0.6（60%）</li>
+</ul>
+</div>
 <hr />
 <h2 id="2-load-factor">2. <abbr title="平均需要電力÷最大需要電力。1に近いほど負荷が均等で効率的">負荷率</abbr>（Load Factor）<a class="headerlink" href="#2-load-factor" title="Permanent link">&para;</a></h2>
-<h3 id="_7">定義<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<h3 id="_9">定義<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
 <blockquote>
 <p><strong><abbr title="平均需要電力÷最大需要電力。1に近いほど負荷が均等で効率的">負荷率</abbr> = 平均需要電力 ÷ 最大需要電力</strong></p>
 </blockquote>
-<p>最大電力に対して、平均的にどれだけ使っているかの割合。<strong>負荷率が高い = 電力を均一に使っている（ムラが少ない）</strong>。</p>
-<h3 id="_8">公式<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
-<p>$$
-\text{<abbr title="平均需要電力÷最大需要電力。1に近いほど負荷が均等で効率的">負荷率</abbr>} = \frac{\text{平均需要電力 [kW]}}{\text{最大需要電力 [kW]}}
-$$</p>
-<p>$$
+<p>最大電力に対して、平均的にどれだけ使っているかの割合。標準的な計算問題では <strong>通常 1 以下</strong> として扱う。<strong>負荷率が高い = 電力を均一に使っている（ムラが少ない）</strong>。</p>
+<h3 id="_10">公式<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
+<div class="arithmatex">\[
+\text{負荷率} = \frac{\text{平均需要電力 [kW]}}{\text{最大需要電力 [kW]}}
+\]</div>
+<div class="arithmatex">\[
 \text{平均需要電力} = \frac{\text{ある期間の総使用電力量 [kWh]}}{\text{その期間の時間 [h]}}
-$$</p>
-<h3 id="_9">身近な例え<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
+\]</div>
+<h3 id="_11">身近な例え<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
 <div class="admonition example">
 <p class="admonition-title">コンビニ vs レストランの例</p>
 <p><strong>コンビニ</strong>: 24時間営業で、昼も夜もほぼ同じ電力を使う → <strong>負荷率が高い（0.8〜0.9）</strong></p>
 <p><strong>レストラン</strong>: ランチとディナーだけ電力をガッツリ使い、それ以外はほとんど使わない → <strong>負荷率が低い（0.3〜0.4）</strong></p>
 <p>電力会社としては、コンビニのような負荷率が高い客のほうが設備を効率よく使えるのでありがたい。</p>
 </div>
-<h3 id="_10">数値例（試験レベル）<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
+<h3 id="_12">数値例（試験レベル）<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
 <p>ある需要家の1日の記録:</p>
 <ul>
 <li>最大需要電力: <strong>500 kW</strong></li>
 <li>1日の総使用電力量: <strong>6,000 kWh</strong></li>
 </ul>
-<p>$$
+<div class="arithmatex">\[
 \text{平均需要電力} = \frac{6{,}000 \text{ kWh}}{24 \text{ h}} = 250 \text{ kW}
-$$</p>
-<p>$$
-\text{<abbr title="平均需要電力÷最大需要電力。1に近いほど負荷が均等で効率的">負荷率</abbr>} = \frac{250}{500} = 0.5 \quad (50\%)
-$$</p>
+\]</div>
+<div class="arithmatex">\[
+\text{負荷率} = \frac{250}{500} = 0.5 \quad (50\%)
+\]</div>
+<h3 id="1">図解：1日の負荷曲線と平均・最大<a class="headerlink" href="#1" title="Permanent link">&para;</a></h3>
+<div><svg viewBox="0 0 600 340" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto">
+  <text x="300" y="22" text-anchor="middle" font-size="16" font-weight="bold">負荷率＝平均需要電力÷最大需要電力</text>
+  <text x="300" y="45" text-anchor="middle" font-size="14" fill="#cc3300">負荷率 = 250 ÷ 500 = 0.5（50%）</text>
+  <line x1="60" y1="270" x2="560" y2="270" stroke="#333" stroke-width="2"/>
+  <line x1="60" y1="60" x2="60" y2="270" stroke="#333" stroke-width="2"/>
+  <text x="60" y="290" text-anchor="middle" font-size="11">0</text>
+  <text x="160" y="290" text-anchor="middle" font-size="11">6</text>
+  <text x="260" y="290" text-anchor="middle" font-size="11">12</text>
+  <text x="360" y="290" text-anchor="middle" font-size="11">18</text>
+  <text x="460" y="290" text-anchor="middle" font-size="11">24</text>
+  <text x="540" y="290" text-anchor="middle" font-size="11">[h]</text>
+  <text x="50" y="265" text-anchor="end" font-size="11">0</text>
+  <text x="50" y="170" text-anchor="end" font-size="11">250</text>
+  <text x="50" y="80" text-anchor="end" font-size="11">500</text>
+  <text x="50" y="55" text-anchor="end" font-size="11">[kW]</text>
+  <polyline points="60,250 110,240 160,210 210,160 260,110 285,90 310,95 360,140 410,180 460,210 510,235 560,255" fill="none" stroke="#0066cc" stroke-width="2.5"/>
+  <text x="320" y="115" font-size="12" fill="#0066cc">負荷曲線</text>
+  <line x1="60" y1="80" x2="560" y2="80" stroke="#cc3300" stroke-width="1.5" stroke-dasharray="6,3"/>
+  <text x="500" y="73" font-size="13" fill="#cc3300">最大 500kW</text>
+  <line x1="60" y1="170" x2="560" y2="170" stroke="#009933" stroke-width="1.5" stroke-dasharray="6,3"/>
+  <text x="500" y="163" font-size="13" fill="#009933">平均 250kW</text>
+  <text x="120" y="320" font-size="12" fill="#666">※ 平均 = 1日総使用電力量(6,000kWh) ÷ 24h = 250kW</text>
+</svg></div>
+
+<div class="admonition info">
+<p class="admonition-title">図から読む値</p>
+<ul>
+<li>1日の総使用電力量： 6,000 kWh</li>
+<li>平均需要電力： 6,000 ÷ 24 = 250 kW</li>
+<li>最大需要電力： 500 kW</li>
+<li><abbr title="平均需要電力÷最大需要電力。1に近いほど負荷が均等で効率的">負荷率</abbr>： 250 ÷ 500 = 0.5（50%）</li>
+</ul>
+</div>
 <hr />
 <h2 id="3-diversity-factor">3. <abbr title="各負荷の最大需要電力の合計÷合成最大需要電力。常に1以上。ピークのずれを表す">不等率</abbr>（Diversity Factor）<a class="headerlink" href="#3-diversity-factor" title="Permanent link">&para;</a></h2>
-<h3 id="_11">定義<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
+<h3 id="_13">定義<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
 <blockquote>
 <p><strong><abbr title="各負荷の最大需要電力の合計÷合成最大需要電力。常に1以上。ピークのずれを表す">不等率</abbr> = 各需要家の最大需要電力の合計 ÷ 合成最大需要電力</strong></p>
 </blockquote>
-<p>複数の需要家の最大電力のピークが、同時に来るわけではないことを表す指標。<strong>必ず1以上</strong>になる。</p>
-<h3 id="_12">公式<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
-<p>$$
-\text{<abbr title="各負荷の最大需要電力の合計÷合成最大需要電力。常に1以上。ピークのずれを表す">不等率</abbr>} = \frac{\sum \text{各需要家の最大需要電力}}{\text{合成最大需要電力（同時最大電力）}}
-$$</p>
-<h3 id="_13">身近な例え<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
+<p>各需要家のピークは必ずしも同時に一致しない。合成最大需要電力は、各需要家の最大需要電力の合計を超えないため、不等率は <strong>通常 1 以上</strong> になる。すべてのピークが完全に同時一致すれば不等率=1、ピークがずれるほど1より大きくなる。1 未満になったら、合成最大の読み違い（同時最大ではなく単独最大を拾った等）をまず疑う。</p>
+<h3 id="_14">公式<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h3>
+<div class="arithmatex">\[
+\text{不等率} = \frac{\sum \text{各需要家の最大需要電力}}{\text{合成最大需要電力（同時最大電力）}}
+\]</div>
+<h3 id="_15">身近な例え<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h3>
 <div class="admonition example">
 <p class="admonition-title">マンションの例</p>
 <p>3世帯のマンションを考える。</p>
@@ -5059,7 +9118,7 @@ $$</p>
 <p>つまり「各世帯の最大電力を単純に足すと過大評価になる。実際は1.5で割った値でOK」ということ。
 設備容量を 12kW ではなく 8kW 分で設計できる → <strong>コスト削減</strong>。</p>
 </div>
-<h3 id="_14">数値例（試験レベル）<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h3>
+<h3 id="_16">数値例（試験レベル）<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h3>
 <p>3つの需要家がある変電所に接続されている:</p>
 <table>
 <thead>
@@ -5088,62 +9147,253 @@ $$</p>
 </tbody>
 </table>
 <p>合成最大需要電力（3つが実際に同時に使う最大値）= <strong>500 kW</strong></p>
-<p>$$
-\text{<abbr title="各負荷の最大需要電力の合計÷合成最大需要電力。常に1以上。ピークのずれを表す">不等率</abbr>} = \frac{700}{500} = 1.4
-$$</p>
+<div class="arithmatex">\[
+\text{不等率} = \frac{700}{500} = 1.4
+\]</div>
+<h3 id="_17">図解：ピークがずれるから合成最大は小さくなる<a class="headerlink" href="#_17" title="Permanent link">&para;</a></h3>
+<div><svg viewBox="0 0 600 380" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto">
+  <text x="300" y="22" text-anchor="middle" font-size="16" font-weight="bold">不等率＝各最大の合計÷合成最大</text>
+  <text x="300" y="45" text-anchor="middle" font-size="13" fill="#333">3世帯のピークがずれる → 合成最大は単純合計より小さい</text>
+  <line x1="60" y1="310" x2="560" y2="310" stroke="#333" stroke-width="2"/>
+  <line x1="60" y1="65" x2="60" y2="310" stroke="#333" stroke-width="2"/>
+  <text x="60" y="330" text-anchor="middle" font-size="11">0</text>
+  <text x="160" y="330" text-anchor="middle" font-size="11">朝</text>
+  <text x="260" y="330" text-anchor="middle" font-size="11">昼</text>
+  <text x="380" y="330" text-anchor="middle" font-size="11">夕</text>
+  <text x="480" y="330" text-anchor="middle" font-size="11">夜</text>
+  <text x="540" y="330" text-anchor="middle" font-size="11">[時]</text>
+  <text x="50" y="310" text-anchor="end" font-size="11">0</text>
+  <text x="50" y="220" text-anchor="end" font-size="11">5</text>
+  <text x="50" y="155" text-anchor="end" font-size="11">8</text>
+  <text x="50" y="60" text-anchor="end" font-size="11">[kW]</text>
+  <polyline points="60,300 100,290 140,250 180,260 220,295 260,305 300,308 340,308 380,308 420,308 460,308 500,308 540,308" fill="none" stroke="#0066cc" stroke-width="2"/>
+  <text x="155" y="245" font-size="11" fill="#0066cc">C家 朝(3kW)</text>
+  <polyline points="60,308 100,308 140,300 180,290 220,260 260,235 300,235 340,260 380,295 420,305 460,308 500,308 540,308" fill="none" stroke="#cc6600" stroke-width="2"/>
+  <text x="270" y="225" font-size="11" fill="#cc6600">B家 昼(4kW)</text>
+  <polyline points="60,308 100,308 140,308 180,308 220,305 260,290 300,275 340,250 380,220 420,205 460,220 500,260 540,290" fill="none" stroke="#cc0033" stroke-width="2"/>
+  <text x="430" y="195" font-size="11" fill="#cc0033">A家 夜(5kW)</text>
+  <line x1="60" y1="155" x2="560" y2="155" stroke="#009933" stroke-width="2" stroke-dasharray="6,3"/>
+  <text x="490" y="148" font-size="13" fill="#009933" font-weight="bold">合成最大 8kW</text>
+  <line x1="60" y1="68" x2="560" y2="68" stroke="#999" stroke-width="1.5" stroke-dasharray="3,3"/>
+  <text x="490" y="62" font-size="11" fill="#666">単純合計 12kW</text>
+  <text x="300" y="365" text-anchor="middle" font-size="14" fill="#333" font-weight="bold">不等率 = 12 ÷ 8 = 1.5（≧1）</text>
+</svg></div>
+
+<div class="admonition info">
+<p class="admonition-title">図から読む値</p>
+<ul>
+<li>各最大の和： A5 + B4 + C3 = 12 kW</li>
+<li>合成最大（同時最大）： 8 kW</li>
+<li><abbr title="各負荷の最大需要電力の合計÷合成最大需要電力。常に1以上。ピークのずれを表す">不等率</abbr>： 12 ÷ 8 = 1.5</li>
+</ul>
+</div>
 <hr />
 <h2 id="3_1"><img alt="🔗" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f517.svg" title=":link:" /> 3つの関係性まとめ<a class="headerlink" href="#3_1" title="Permanent link">&para;</a></h2>
-<h3 id="_15">設備設計での使い方の流れ<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>設備容量（全負荷の合計）
-  ↓ × 需要率
+<h3 id="_18">設備設計での使い方の流れ<a class="headerlink" href="#_18" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>設備容量（各需要家）
+  ↓ × 各需要家の需要率
 各需要家の最大需要電力
-  ↓ ÷ 不等率
+  ↓ 合計して不等率で割る
 合成最大需要電力（変電所に必要な容量）
-  ↓ × 負荷率
-平均需要電力（日常の電力量の目安）
+  ↓ × 総合負荷率
+合成平均需要電力（日常の電力量の目安）
 </code></pre></div>
-<h3 id="_16">変圧器容量の算定公式<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h3>
-<p>$$
-\text{変圧器容量} = \frac{\text{設備容量} \times \text{<abbr title="設備容量に対する最大需要電力の比率。最大需要電力÷設備容量">需要率</abbr>}}{\text{<abbr title="各負荷の最大需要電力の合計÷合成最大需要電力。常に1以上。ピークのずれを表す">不等率</abbr>}}
-$$</p>
+<div class="admonition note">
+<p class="admonition-title">単独需要家の場合は『<abbr title="平均需要電力÷最大需要電力。1に近いほど負荷が均等で効率的">負荷率</abbr>』、合成後は『総合負荷率』</p>
+<ul>
+<li>単独需要家： 平均需要電力 = 最大需要電力 × <strong><abbr title="平均需要電力÷最大需要電力。1に近いほど負荷が均等で効率的">負荷率</abbr></strong></li>
+<li>複数需要家を合成： 合成平均需要電力 = 合成最大需要電力 × <strong>総合負荷率</strong></li>
+</ul>
+<p>「<abbr title="平均需要電力÷最大需要電力。1に近いほど負荷が均等で効率的">負荷率</abbr>」と「総合負荷率」は値が異なる別の量。流れ図の最後で × するのは合成側なので <strong>総合負荷率</strong>。</p>
+</div>
+<h3 id="_19">合成最大需要電力の算定公式<a class="headerlink" href="#_19" title="Permanent link">&para;</a></h3>
+<div class="admonition note">
+<p class="admonition-title">合成最大需要電力の出し方は3通りある</p>
+<ul>
+<li>問題文で値そのものが与えられる</li>
+<li>24時間負荷曲線から <strong>同時最大値</strong> を読み取る</li>
+<li>不等率と各最大需要電力の合計から計算する（下記の式）</li>
+</ul>
+</div>
+<p><strong>基本式（安全形）</strong>:</p>
+<div class="arithmatex">\[
+\text{合成最大需要電力 [kW]} = \frac{\sum \text{各需要家の最大需要電力}}{\text{不等率}}
+\]</div>
+<p>需要率から求める場合:</p>
+<div class="arithmatex">\[
+\text{合成最大需要電力 [kW]} = \frac{\sum (\text{各需要家の設備容量} \times \text{各需要家の需要率})}{\text{不等率}}
+\]</div>
+<h3 id="kva">変圧器容量[kVA]まで求める場合<a class="headerlink" href="#kva" title="Permanent link">&para;</a></h3>
+<p><strong>親式（最も安全）</strong>:</p>
+<div class="arithmatex">\[
+\text{変圧器容量 [kVA]} = \frac{\text{最大需要電力 [kW]}}{\text{総合力率}}
+\]</div>
+<p><strong>複数需要家を合成する場合</strong>:</p>
+<div class="arithmatex">\[
+\text{変圧器容量 [kVA]} = \frac{\text{合成最大需要電力 [kW]}}{\text{総合力率}}
+\]</div>
+<div class="admonition warning">
+<p class="admonition-title">kWとkVAを混同しない／単独需要家では不等率を勝手に使わない</p>
+<ul>
+<li><abbr title="設備容量に対する最大需要電力の比率。最大需要電力÷設備容量">需要率</abbr>・不等率だけで出るのは <strong>kW</strong>（合成最大需要電力）。変圧器容量を <strong>kVA</strong> で求める場合は、最後に<strong>総合力率で割る</strong>。</li>
+<li>不等率は <strong>複数需要家・複数負荷のピークずれ</strong> を扱うときに使う。単独需要家の変圧器容量問題で不等率が条件にない場合、勝手に不等率で割らない。問題文に「<abbr title="各負荷の最大需要電力の合計÷合成最大需要電力。常に1以上。ピークのずれを表す">不等率</abbr>」が出てきたら、合成（複数需要家）が前提と読む。</li>
+</ul>
+</div>
 <div class="admonition tip">
-<p class="admonition-title">3つの指標の値の範囲を覚えておくこと</p>
+<p class="admonition-title">3つの指標：値の大小が示すこと</p>
 <table>
 <thead>
 <tr>
 <th>指標</th>
-<th>値の範囲</th>
-<th>大きい方が良い？</th>
+<th>大小の意味</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><strong><abbr title="設備容量に対する最大需要電力の比率。最大需要電力÷設備容量">需要率</abbr></strong></td>
-<td>0 〜 1</td>
-<td>小さい方が設備に余裕</td>
+<td>小さいほど、最大需要電力は設備容量に対して小さい（試験では『余裕がある』と表現される）。実務では設備過大・利用率低下を意味することもある</td>
 </tr>
 <tr>
 <td><strong><abbr title="平均需要電力÷最大需要電力。1に近いほど負荷が均等で効率的">負荷率</abbr></strong></td>
-<td>0 〜 1</td>
-<td><strong>大きい方が効率的</strong>（電力を均一に使っている）</td>
+<td><strong>大きいほど効率的</strong>（電力を均一に使っている／ピークが平準化されている）</td>
 </tr>
 <tr>
 <td><strong><abbr title="各負荷の最大需要電力の合計÷合成最大需要電力。常に1以上。ピークのずれを表す">不等率</abbr></strong></td>
-<td>1 以上</td>
-<td><strong>大きい方が設備縮小できる</strong>（ピークがバラける）</td>
+<td><strong>大きいほど設備縮小できる</strong>（各需要家のピークがバラけている）</td>
 </tr>
 </tbody>
 </table>
+<p>（値の範囲は冒頭「まず覚える4公式」を参照）</p>
 </div>
-<h3 id="_17">相互の関係式<a class="headerlink" href="#_17" title="Permanent link">&para;</a></h3>
-<p>$$
-\text{合成最大需要電力} = \frac{\text{設備容量} \times \text{<abbr title="設備容量に対する最大需要電力の比率。最大需要電力÷設備容量">需要率</abbr>}}{\text{<abbr title="各負荷の最大需要電力の合計÷合成最大需要電力。常に1以上。ピークのずれを表す">不等率</abbr>}}
-$$</p>
-<p>$$
-\text{平均電力} = \text{合成最大需要電力} \times \text{<abbr title="平均需要電力÷最大需要電力。1に近いほど負荷が均等で効率的">負荷率</abbr>}
-$$</p>
+<h3 id="_20">相互の関係式<a class="headerlink" href="#_20" title="Permanent link">&para;</a></h3>
+<p><strong>単独需要家の場合</strong>:</p>
+<div class="arithmatex">\[
+\text{平均需要電力 [kW]} = \text{最大需要電力 [kW]} \times \text{負荷率}
+\]</div>
+<p><strong>複数需要家を合成する場合</strong>:</p>
+<div class="arithmatex">\[
+\text{合成平均需要電力 [kW]} = \text{合成最大需要電力 [kW]} \times \text{総合負荷率}
+\]</div>
+<div class="admonition warning">
+<p class="admonition-title">『<abbr title="平均需要電力÷最大需要電力。1に近いほど負荷が均等で効率的">負荷率</abbr>』と『総合負荷率』は別物</p>
+<p>単独の負荷率を合成最大需要電力にかけても、合成平均需要電力にはならない。合成側は必ず総合負荷率を使う。</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">短縮形『設備容量 × <abbr title="設備容量に対する最大需要電力の比率。最大需要電力÷設備容量">需要率</abbr> ÷ <abbr title="各負荷の最大需要電力の合計÷合成最大需要電力。常に1以上。ピークのずれを表す">不等率</abbr>』が使えるのは限定条件下</p>
+<p>「合成最大需要電力 = 設備容量 × <abbr title="設備容量に対する最大需要電力の比率。最大需要電力÷設備容量">需要率</abbr> ÷ <abbr title="各負荷の最大需要電力の合計÷合成最大需要電力。常に1以上。ピークのずれを表す">不等率</abbr>」と書けるのは、
+全需要家を一括した『各最大需要電力の合計』を <code>設備容量 × 需要率</code> として扱える場合、
+または各需要家の需要率が共通の場合に限る。
+複数需要家で需要率が異なる場合は、必ず Σ で個別に足してから不等率で割る。</p>
+</div>
 <hr />
-<h2 id="_18"><img alt="🕳" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f573.svg" title=":hole:" /> 頻出論点と落とし穴<a class="headerlink" href="#_18" title="Permanent link">&para;</a></h2>
+<h2 id="vs_1">🔍 <abbr title="平均需要電力÷最大需要電力。1に近いほど負荷が均等で効率的">負荷率</abbr> vs 総合負荷率（最重要・混同注意）<a class="headerlink" href="#vs_1" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>試験で「総合負荷率」と聞かれたら、<strong>単独需要家の負荷率を平均しても答えにならない</strong>。分母・分子の組み立て方が違う。</p>
+</blockquote>
+<h3 id="_21">図解：単独の負荷率と合成後の総合負荷率の比較<a class="headerlink" href="#_21" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>左右は <strong>別の例</strong>（左＝単独需要家P／右＝工場X+工場Y の合成）。同じ需要家ではない点に注意。</p>
+</blockquote>
+<div><svg viewBox="0 0 600 500" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto">
+  <text x="300" y="22" text-anchor="middle" font-size="16" font-weight="bold">負荷率と総合負荷率は『分母』『分子』が違う</text>
+  <text x="155" y="60" text-anchor="middle" font-size="14" font-weight="bold" fill="#0066cc">[例1] 単独需要家Pの負荷率</text>
+  <line x1="40" y1="220" x2="270" y2="220" stroke="#333" stroke-width="1.5"/>
+  <line x1="40" y1="80" x2="40" y2="220" stroke="#333" stroke-width="1.5"/>
+  <text x="40" y="237" text-anchor="middle" font-size="10">0</text>
+  <text x="270" y="237" text-anchor="middle" font-size="10">24[h]</text>
+  <polyline points="40,205 70,190 100,160 130,120 155,100 180,115 210,145 240,180 270,200" fill="none" stroke="#0066cc" stroke-width="2.5"/>
+  <line x1="40" y1="100" x2="270" y2="100" stroke="#cc3300" stroke-width="1.2" stroke-dasharray="4,2"/>
+  <text x="155" y="95" text-anchor="middle" font-size="11" fill="#cc3300">P最大 500</text>
+  <line x1="40" y1="160" x2="270" y2="160" stroke="#009933" stroke-width="1.2" stroke-dasharray="4,2"/>
+  <text x="155" y="175" text-anchor="middle" font-size="11" fill="#009933">P平均 250</text>
+  <text x="155" y="265" text-anchor="middle" font-size="13">P負荷率＝P平均÷P最大</text>
+  <text x="155" y="285" text-anchor="middle" font-size="13" font-weight="bold" fill="#0066cc">＝ 250 ÷ 500 ＝ 0.5</text>
+  <text x="445" y="60" text-anchor="middle" font-size="14" font-weight="bold" fill="#cc6600">[例2] 工場X+工場Y 合成の総合負荷率</text>
+  <line x1="320" y1="220" x2="570" y2="220" stroke="#333" stroke-width="1.5"/>
+  <line x1="320" y1="80" x2="320" y2="220" stroke="#333" stroke-width="1.5"/>
+  <text x="320" y="237" text-anchor="middle" font-size="10">0</text>
+  <text x="570" y="237" text-anchor="middle" font-size="10">24[h]</text>
+  <polyline points="320,210 350,200 380,185 410,165 435,155 460,165 490,180 520,200 550,210" fill="none" stroke="#0066cc" stroke-width="1.4" stroke-dasharray="3,2"/>
+  <text x="380" y="195" font-size="10" fill="#0066cc">X</text>
+  <polyline points="320,210 350,210 380,205 410,190 435,170 460,150 490,120 515,105 545,135" fill="none" stroke="#cc6600" stroke-width="1.4" stroke-dasharray="3,2"/>
+  <text x="495" y="115" font-size="10" fill="#cc6600">Y</text>
+  <polyline points="320,205 350,195 380,170 410,140 435,115 460,100 490,85 515,90 550,160" fill="none" stroke="#cc0033" stroke-width="2.5"/>
+  <text x="510" y="80" font-size="11" fill="#cc0033" font-weight="bold">合成</text>
+  <line x1="320" y1="85" x2="570" y2="85" stroke="#cc3300" stroke-width="1.2" stroke-dasharray="4,2"/>
+  <text x="445" y="80" text-anchor="middle" font-size="11" fill="#cc3300">合成最大 800</text>
+  <line x1="320" y1="155" x2="570" y2="155" stroke="#009933" stroke-width="1.2" stroke-dasharray="4,2"/>
+  <text x="445" y="170" text-anchor="middle" font-size="11" fill="#009933">合成平均 480</text>
+  <text x="445" y="265" text-anchor="middle" font-size="13">総合負荷率＝合成平均÷合成最大</text>
+  <text x="445" y="285" text-anchor="middle" font-size="13" font-weight="bold" fill="#cc6600">＝ 480 ÷ 800 ＝ 0.6</text>
+  <rect x="30" y="320" width="540" height="170" fill="#fff5e6" stroke="#cc6600" stroke-width="2" rx="4"/>
+  <text x="300" y="345" text-anchor="middle" font-size="14" font-weight="bold" fill="#cc3300">⚠ 総合負荷率の落とし穴（例2に対して）</text>
+  <text x="50" y="372" font-size="13" fill="#cc3300">✕ 各需要家の負荷率を単純平均する → 総合負荷率にはならない</text>
+  <text x="50" y="395" font-size="13" fill="#cc3300">✕ 分母を「各最大の合計」(X500+Y500=1000)にする → 不等率で割っていない</text>
+  <text x="50" y="425" font-size="13" fill="#009933">○ 分母 = 合成最大需要電力（同時最大）= 800</text>
+  <text x="50" y="448" font-size="13" fill="#009933">○ 分子 = 合成平均電力 =（X使用電力量＋Y使用電力量）÷ 期間時間</text>
+  <text x="50" y="473" font-size="12" fill="#666">　　 ＝（5,040+6,480）kWh ÷ 24h = 480kW</text>
+</svg></div>
+
+<div class="admonition info">
+<p class="admonition-title">図から読む値（例2の合成）</p>
+<ul>
+<li>各最大の合計： X500 + Y500 = 1,000 kW</li>
+<li>合成最大： 800 kW（同時最大）</li>
+<li><abbr title="各負荷の最大需要電力の合計÷合成最大需要電力。常に1以上。ピークのずれを表す">不等率</abbr>： 1,000 ÷ 800 = 1.25</li>
+<li>合成平均： 480 kW（X使用 5,040kWh + Y使用 6,480kWh = 11,520kWh ÷ 24h）</li>
+<li>総合負荷率： 480 ÷ 800 = 0.6（60%）</li>
+</ul>
+</div>
+<h3 id="vs_2">一覧で押さえる：<abbr title="平均需要電力÷最大需要電力。1に近いほど負荷が均等で効率的">負荷率</abbr> vs 総合負荷率<a class="headerlink" href="#vs_2" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>観点</th>
+<th><strong><abbr title="平均需要電力÷最大需要電力。1に近いほど負荷が均等で効率的">負荷率</abbr></strong>（単独需要家）</th>
+<th><strong>総合負荷率</strong>（複数需要家を合算）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>分子</td>
+<td>その需要家の <strong>平均需要電力</strong></td>
+<td><strong>合成平均電力</strong>（全需要家の使用電力量の合計÷期間）</td>
+</tr>
+<tr>
+<td>分母</td>
+<td>その需要家の <strong>最大需要電力</strong></td>
+<td><strong>合成最大需要電力</strong>（同時最大値）</td>
+</tr>
+<tr>
+<td>値の範囲</td>
+<td>0 〜 1</td>
+<td>0 〜 1</td>
+</tr>
+<tr>
+<td>よくある誤り</td>
+<td>—</td>
+<td>✕ 分母に「各最大の和」を使う／✕ 各負荷率を平均する</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition danger">
+<p class="admonition-title">総合負荷率の3大ミス</p>
+<ol>
+<li><strong>各需要家の負荷率を単純平均する</strong> → 別物。再計算してはいけない</li>
+<li><strong>分母に「各最大需要電力の合計」を使う</strong> → 不等率で割る前の値。同時最大ではない</li>
+<li><strong>分子に「各最大需要電力の平均」を使う</strong> → 平均電力ではない（最大の平均は意味のある量ではない）</li>
+</ol>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">覚え方：『総合』のときは分子も分母も "合成"（同時）</p>
+<ul>
+<li>単独 → 平均 ÷ 最大</li>
+<li>総合 → <strong>合成平均 ÷ 合成最大</strong></li>
+<li>「総合」とつくと、上下とも複数需要家を <strong>同時</strong> で見たときの値に置き換わる</li>
+</ul>
+</div>
+<hr />
+<h2 id="_22"><img alt="🕳" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f573.svg" title=":hole:" /> 頻出論点と落とし穴<a class="headerlink" href="#_22" title="Permanent link">&para;</a></h2>
 <blockquote>
 <p>危険度ランク: 🔴致命（連鎖失点リスク）/ 🟡要注意（単発失点）/ 🟢安心（加点要素）</p>
 </blockquote>
@@ -5166,15 +9416,17 @@ $$</p>
 <li>
 <p>🟡 <img alt="🎯" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f3af.svg" title=":dart:" /> <strong>負荷率の計算で「期間」を間違える</strong></p>
 <ul>
-<li>日負荷率なら24h、月負荷率なら720h（30日×24h）</li>
-<li>問題文の「1日」「1ヶ月」を見落とさない</li>
+<li>月負荷率では、問題文で「1か月=30日」と指定されていれば720h を使う。31日なら744h、28日なら672h</li>
+<li>日負荷率なら24h、年負荷率なら8,760h（うるう年は8,784h）</li>
+<li><strong>必ず問題文の期間指定を優先する</strong>（暗黙の30日固定はしない）</li>
 </ul>
 </li>
 <li>
 <p>🟡 <img alt="🎯" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f3af.svg" title=":dart:" /> <strong>変圧器容量の算定問題</strong></p>
 <ul>
 <li><abbr title="設備容量に対する最大需要電力の比率。最大需要電力÷設備容量">需要率</abbr>・<abbr title="各負荷の最大需要電力の合計÷合成最大需要電力。常に1以上。ピークのずれを表す">不等率</abbr>・力率がセットで出題される</li>
-<li>力率も含めた式: 変圧器容量 [kVA] = 設備容量 × <abbr title="設備容量に対する最大需要電力の比率。最大需要電力÷設備容量">需要率</abbr> ÷ (<abbr title="各負荷の最大需要電力の合計÷合成最大需要電力。常に1以上。ピークのずれを表す">不等率</abbr> × 力率)</li>
+<li>親式: 変圧器容量 [kVA] = 最大需要電力 [kW] ÷ 総合力率</li>
+<li>短縮形「変圧器容量 [kVA] = 設備容量 × <abbr title="設備容量に対する最大需要電力の比率。最大需要電力÷設備容量">需要率</abbr> ÷ (<abbr title="各負荷の最大需要電力の合計÷合成最大需要電力。常に1以上。ピークのずれを表す">不等率</abbr> × 力率)」が成立するのは、複数需要家かつ需要率が共通とみなせる場合のみ。需要率がバラバラなら Σ で合成最大を作ってから力率で割る</li>
 </ul>
 </li>
 <li>
@@ -5185,13 +9437,213 @@ $$</p>
 </ul>
 </li>
 </ol>
-<h2 id="_19"><img alt="🔗" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f517.svg" title=":link:" /> 関連テーマ<a class="headerlink" href="#_19" title="Permanent link">&para;</a></h2>
+<div class="admonition warning">
+<p class="admonition-title">最大需要電力は瞬時最大とは限らない</p>
+<p>試験では、最大需要電力が「30分間の平均使用電力」などとして定義されることがある。
+瞬間的な最大値ではなく、<strong>問題文で指定された時間幅の平均電力</strong> として読む。
+デマンド管理問題（デマンド値の警報・ファン停止台数等）では特に注意する。</p>
+</div>
+<h2 id="_23">🧮 計算パターン別 セルフチェック<a class="headerlink" href="#_23" title="Permanent link">&para;</a></h2>
+<h3 id="1_1">パターン1（基本）: <abbr title="設備容量に対する最大需要電力の比率。最大需要電力÷設備容量">需要率</abbr>・<abbr title="各負荷の最大需要電力の合計÷合成最大需要電力。常に1以上。ピークのずれを表す">不等率</abbr>・負荷率を求める<a class="headerlink" href="#1_1" title="Permanent link">&para;</a></h3>
+<details class="question">
+<summary>問題: 次のデータから需要率・<abbr title="各負荷の最大需要電力の合計÷合成最大需要電力。常に1以上。ピークのずれを表す">不等率</abbr>・1日の負荷率を求めよ</summary>
+<p>設備容量: A工場 400kW / B工場 300kW（合計 700kW）<br />
+各工場の最大需要電力: A工場 280kW / B工場 240kW<br />
+合成最大需要電力（同時最大）: 400kW<br />
+A工場の1日の使用電力量: 3,360kWh</p>
+<hr />
+<p><strong>解答</strong></p>
+<p><strong><abbr title="設備容量に対する最大需要電力の比率。最大需要電力÷設備容量">需要率</abbr></strong> (A工場) = 280 ÷ 400 = <strong>0.7（70%）</strong></p>
+<p><strong><abbr title="各負荷の最大需要電力の合計÷合成最大需要電力。常に1以上。ピークのずれを表す">不等率</abbr></strong> = (280 + 240) ÷ 400 = 520 ÷ 400 = <strong>1.3</strong></p>
+<p><strong><abbr title="平均需要電力÷最大需要電力。1に近いほど負荷が均等で効率的">負荷率</abbr></strong> (A工場) = 平均需要電力 ÷ 最大需要電力<br />
+　平均 = 3,360 ÷ 24 = 140kW<br />
+　<abbr title="平均需要電力÷最大需要電力。1に近いほど負荷が均等で効率的">負荷率</abbr> = 140 ÷ 280 = <strong>0.5（50%）</strong></p>
+<p><strong>検算</strong>: <abbr title="各負荷の最大需要電力の合計÷合成最大需要電力。常に1以上。ピークのずれを表す">不等率</abbr> 1.3 &gt; 1 ✅ / <abbr title="設備容量に対する最大需要電力の比率。最大需要電力÷設備容量">需要率</abbr> 0.7 ≤ 1 ✅ / <abbr title="平均需要電力÷最大需要電力。1に近いほど負荷が均等で効率的">負荷率</abbr> 0.5 ≤ 1 ✅</p>
+</details>
+<h3 id="2">パターン2（応用）: 変圧器容量の算定<a class="headerlink" href="#2" title="Permanent link">&para;</a></h3>
+<details class="question">
+<summary>問題: 設備容量500kW、需要率0.8、不等率1.25、力率0.9のとき、必要な変圧器容量[kVA]を求めよ</summary>
+<blockquote>
+<p>この問題は <strong>複数需要家を合成する前提（不等率が条件として与えられている）</strong> で出題されている。需要率を共通とみなせるケースなので短縮形が使える。</p>
+</blockquote>
+<p>変圧器容量 [kVA] = 設備容量 × <abbr title="設備容量に対する最大需要電力の比率。最大需要電力÷設備容量">需要率</abbr> ÷ (<abbr title="各負荷の最大需要電力の合計÷合成最大需要電力。常に1以上。ピークのずれを表す">不等率</abbr> × 力率)  </p>
+<p>= 500 × 0.8 ÷ (1.25 × 0.9)<br />
+= 400 ÷ 1.125<br />
+= <strong>約 356 kVA</strong></p>
+<p>→ 標準品から選ぶなら <strong>400kVA</strong> を選定（356kVA以上の次のサイズ）</p>
+<div class="admonition warning">
+<p class="admonition-title">力率を忘れると kW のまま計算してしまう</p>
+<p>変圧器容量は<strong>kVA</strong>。有効電力 [kW] を力率で割ってkVAに変換する。</p>
+</div>
+</details>
+<h3 id="3-2">パターン3（複合）: 2工場合算の需要率・<abbr title="平均需要電力÷最大需要電力。1に近いほど負荷が均等で効率的">負荷率</abbr><a class="headerlink" href="#3-2" title="Permanent link">&para;</a></h3>
+<details class="question">
+<summary>問題: 2工場を合わせた合算需要率と総合負荷率を求めよ（R05上問11型の類題）</summary>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>A工場</th>
+<th>B工場</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>設備容量</td>
+<td>600kW</td>
+<td>400kW</td>
+</tr>
+<tr>
+<td>最大需要電力</td>
+<td>420kW</td>
+<td>240kW</td>
+</tr>
+<tr>
+<td>1日の使用電力量</td>
+<td>5,040kWh</td>
+<td>2,400kWh</td>
+</tr>
+</tbody>
+</table>
+<p>合成最大需要電力 = 540kW（同時最大）</p>
+<hr />
+<p><strong>合算需要率</strong> = 合成最大需要電力 ÷ 総設備容量<br />
+　= 540 ÷ (600 + 400) = 540 ÷ 1,000 = <strong>0.54（54%）</strong></p>
+<p><strong>総合負荷率</strong> = (5,040 + 2,400) ÷ 24 ÷ 540<br />
+　総使用電力量 = 7,440kWh<br />
+　平均需要電力 = 7,440 ÷ 24 = 310kW<br />
+　総合負荷率 = 310 ÷ 540 ≒ <strong>0.574（57.4%）</strong></p>
+<div class="admonition warning">
+<p class="admonition-title">「合算需要率」と「<abbr title="各負荷の最大需要電力の合計÷合成最大需要電力。常に1以上。ピークのずれを表す">不等率</abbr>」で分子が違う</p>
+<p>2工場を<strong>合わせた需要率</strong>の分子は、個々の最大需要電力の和ではなく<strong>合成最大需要電力</strong>。<br />
+個々の最大需要電力の和を使うのは、<strong>不等率の分子</strong>。<br />
+（誤: (420+240)÷(600+400)=0.66 ／ 正: 540÷1,000=0.54）</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">総合負荷率の分母は合成最大需要電力</p>
+<p>個々の工場の最大の和（660kW）ではなく、<strong>同時最大（540kW）</strong>が分母。</p>
+</div>
+</details>
+<hr />
+<h2 id="_24">📝 出題実績<a class="headerlink" href="#_24" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>年度</th>
+<th>問</th>
+<th>形式</th>
+<th>内容</th>
+<th>確認</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>R05上</td>
+<td>問10</td>
+<td><strong>計算</strong></td>
+<td>最大需要電力を抑えるためのファン停止台数（デマンド管理）</td>
+<td>要一次情報確認</td>
+</tr>
+<tr>
+<td>R05上</td>
+<td>問11</td>
+<td><strong>計算</strong> ✅</td>
+<td>2つの工場の合算需要率・総合負荷率（パターン3）</td>
+<td>要一次情報確認</td>
+</tr>
+<tr>
+<td>R04上</td>
+<td>問12</td>
+<td><strong>計算</strong> ✅</td>
+<td>需要率から変圧器設置台数を導出（パターン2変形）</td>
+<td>要一次情報確認</td>
+</tr>
+<tr>
+<td>R03</td>
+<td>問13</td>
+<td><strong>計算</strong></td>
+<td><abbr title="設備容量に対する最大需要電力の比率。最大需要電力÷設備容量">需要率</abbr>・<abbr title="各負荷の最大需要電力の合計÷合成最大需要電力。常に1以上。ピークのずれを表す">不等率</abbr>・<abbr title="平均需要電力÷最大需要電力。1に近いほど負荷が均等で効率的">負荷率</abbr>（パターン1）</td>
+<td>要一次情報確認</td>
+</tr>
+<tr>
+<td>R01</td>
+<td>問10</td>
+<td>論説</td>
+<td>電力の供給（需要管理の応用）</td>
+<td>要一次情報確認</td>
+</tr>
+<tr>
+<td>H30</td>
+<td>問10</td>
+<td>論説</td>
+<td>電力の需給（<abbr title="平均需要電力÷最大需要電力。1に近いほど負荷が均等で効率的">負荷率</abbr>・需要管理）</td>
+<td>要一次情報確認</td>
+</tr>
+<tr>
+<td>H26</td>
+<td>問12</td>
+<td>計算</td>
+<td>需要率及び負荷率</td>
+<td>要一次情報確認</td>
+</tr>
+<tr>
+<td>H23</td>
+<td>問12</td>
+<td>計算</td>
+<td>不等率及び力率（力率との複合）</td>
+<td>要一次情報確認</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>出典：一般財団法人 電気技術者試験センター 公表問題をもとに整理。問題文を改変・要約している箇所があります。年度・問番号は本ページ作成時点の整理であり、最終確認は公式PDFで行うこと。</p>
+</blockquote>
+<div class="admonition info">
+<p class="admonition-title">公式問題PDF・解答PDFの参照先</p>
+<p>一次情報は以下から確認できる（年度ごとに「問題」「解答」のリンクが分かれて掲載）:</p>
+<ul>
+<li><a href="https://www.shiken.or.jp/situation/index.html">一般財団法人 電気技術者試験センター — 過去問題</a></li>
+<li>上記の年度別ページから第三種電気主任技術者試験の <strong>法規</strong> 問題・解答PDFを参照</li>
+</ul>
+</div>
+<div class="admonition note">
+<p class="admonition-title">今後の学習優先度</p>
+<p><abbr title="設備容量に対する最大需要電力の比率。最大需要電力÷設備容量">需要率</abbr>・<abbr title="平均需要電力÷最大需要電力。1に近いほど負荷が均等で効率的">負荷率</abbr>・不等率は、法規の電気施設管理で計算問題化しやすい。
+近年も R5上期問11、R4上期問12、R3問13などで関連出題があるため、優先度は高い。
+ただし、出題年度を断定するものではない。</p>
+<p>押さえておく観点:
+- 直近R05上の「複合計算（2工場合算）」型と、変圧器容量算定型・基本型（パターン1・2）の両方を解けるようにする
+- 「<abbr title="各負荷の最大需要電力の合計÷合成最大需要電力。常に1以上。ピークのずれを表す">不等率</abbr>」の計算は試験で差がつく論点。特に「1以上を確認する検算」まで意識しておくこと</p>
+</div>
+<hr />
+<h2 id="_25">📜 関連条文・出典（電気施設管理関連）<a class="headerlink" href="#_25" title="Permanent link">&para;</a></h2>
+<div class="admonition info">
+<p class="admonition-title">用語の位置付け</p>
+<p><abbr title="設備容量に対する最大需要電力の比率。最大需要電力÷設備容量">需要率</abbr>・<abbr title="平均需要電力÷最大需要電力。1に近いほど負荷が均等で効率的">負荷率</abbr>・不等率は、電気事業法・<abbr title="電気設備に関する技術基準を定める省令（電技）。電気事業法第39条の委任を受ける">電気設備技術基準</abbr>・電技解釈に <strong>直接の定義条文はない</strong>。
+電気施設管理（需要設備の容量計画・デマンド管理）の <strong>計算用語</strong> として整理されている。
+法規科目で計算問題化されるが、論点は「条文暗記」ではなく「定義式の使い分け」。</p>
+</div>
+<p>一次資料（条文ではどう書かれているか確認したい場合）:</p>
+<ul>
+<li><a href="https://elaws.e-gov.go.jp/">e-Gov 法令検索</a> — 「需要」「最大電力」で検索すると関連条文を一覧できる</li>
+<li><a href="https://elaws.e-gov.go.jp/document?lawid=407M50000400077">電気事業法施行規則（e-Gov）</a> — 需要設備の届出・主任技術者選任・需要管理の文脈で「需要」が登場</li>
+<li><a href="https://elaws.e-gov.go.jp/document?lawid=340M50000400054">電気関係報告規則（e-Gov）</a> — 需要設備の事故報告・統計の文脈</li>
+<li>一般財団法人 電気技術者試験センター 公表問題 — 計算問題としての出題形式の一次資料</li>
+</ul>
+<div class="admonition tip">
+<p class="admonition-title">条文ベースで需要率の定義を探しても見つからない理由</p>
+<p><abbr title="設備容量に対する最大需要電力の比率。最大需要電力÷設備容量">需要率</abbr>・<abbr title="平均需要電力÷最大需要電力。1に近いほど負荷が均等で効率的">負荷率</abbr>・不等率は <strong>電力系統設計・需要設備設計の慣用用語</strong> であり、法令条文の定義ではなく工学テキスト（電気事業便覧・JEAC・JIS等）で定義されている。
+試験では計算問題として出題されるため、定義式で押さえれば足りる。</p>
+</div>
+<hr />
+<h2 id="_26"><img alt="🔗" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f517.svg" title=":link:" /> 関連テーマ<a class="headerlink" href="#_26" title="Permanent link">&para;</a></h2>
 <ul>
 <li><a href="../shisetsu-kanri/">電気施設管理</a> — <abbr title="設備容量に対する最大需要電力の比率。最大需要電力÷設備容量">需要率</abbr>・負荷率は施設管理の基本概念</li>
+<li><a href="../ritsuryo-kaizen-capacitor/">力率改善コンデンサ</a> — 変圧器容量算定に力率も絡む複合問題</li>
 <li><a href="../bunsan-dengen/">分散型電源・系統連系</a> — 分散型電源の導入が負荷率に与える影響</li>
 </ul>
 <hr />
-<p><em>最終確認: 2026-04-04 | ステータス: v1.0 | <a href="../../reference/versioning/">バージョニング基準</a></em></p>
+<p><em>最終確認: 2026-05-09 | ステータス: v1.4（ChatGPTレビュー反映：単独/合成の式分離・フロー図総合負荷率化・SVG数値整合・合わせた需要率vs不等率注意・ゴールセクション・図から読む値・公式PDFリンク）| <a href="../../reference/versioning/">バージョニング基準</a></em></p>
 
 
 
@@ -5223,6 +9675,46 @@ $$</p>
       </main>
       
         <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="フッター" >
+        
+          
+          <a href="../shunin-gijutsusha/" class="md-footer__link md-footer__link--prev" aria-label="前: 電気主任技術者の職務">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                前
+              </span>
+              <div class="md-ellipsis">
+                電気主任技術者の職務
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../ritsuryo-kaizen-capacitor/" class="md-footer__link md-footer__link--next" aria-label="次: 力率改善コンデンサ">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                次
+              </span>
+              <div class="md-ellipsis">
+                力率改善コンデンサ
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
@@ -5268,12 +9760,28 @@ $$</p>
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.indexes", "navigation.top", "navigation.instant", "navigation.instant.progress", "search.suggest", "search.highlight", "search.share", "content.tabs.link", "content.tooltips", "toc.follow"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u30b3\u30d4\u30fc\u3057\u307e\u3057\u305f", "clipboard.copy": "\u30af\u30ea\u30c3\u30d7\u30dc\u30fc\u30c9\u3078\u30b3\u30d4\u30fc", "search.result.more.one": "\u3053\u306e\u30da\u30fc\u30b8\u5185\u306b\u3082\u30461\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.more.other": "\u3053\u306e\u30da\u30fc\u30b8\u5185\u306b\u3042\u3068#\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.none": "\u4f55\u3082\u898b\u3064\u304b\u308a\u307e\u305b\u3093\u3067\u3057\u305f", "search.result.one": "1\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.other": "#\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.placeholder": "\u691c\u7d22\u30ad\u30fc\u30ef\u30fc\u30c9\u3092\u5165\u529b\u3057\u3066\u304f\u3060\u3055\u3044", "search.result.term.missing": "\u691c\u7d22\u306b\u542b\u307e\u308c\u306a\u3044", "select.version": "\u30d0\u30fc\u30b8\u30e7\u30f3\u5207\u308a\u66ff\u3048"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.indexes", "navigation.top", "navigation.instant", "navigation.instant.progress", "navigation.path", "navigation.footer", "search.suggest", "search.highlight", "search.share", "content.tabs.link", "content.tooltips", "toc.follow"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u30b3\u30d4\u30fc\u3057\u307e\u3057\u305f", "clipboard.copy": "\u30af\u30ea\u30c3\u30d7\u30dc\u30fc\u30c9\u3078\u30b3\u30d4\u30fc", "search.result.more.one": "\u3053\u306e\u30da\u30fc\u30b8\u5185\u306b\u3082\u30461\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.more.other": "\u3053\u306e\u30da\u30fc\u30b8\u5185\u306b\u3042\u3068#\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.none": "\u4f55\u3082\u898b\u3064\u304b\u308a\u307e\u305b\u3093\u3067\u3057\u305f", "search.result.one": "1\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.other": "#\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.placeholder": "\u691c\u7d22\u30ad\u30fc\u30ef\u30fc\u30c9\u3092\u5165\u529b\u3057\u3066\u304f\u3060\u3055\u3044", "search.result.term.missing": "\u691c\u7d22\u306b\u542b\u307e\u308c\u306a\u3044", "select.version": "\u30d0\u30fc\u30b8\u30e7\u30f3\u5207\u308a\u66ff\u3048"}, "version": null}</script>
     
     
       <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
       
         <script src="https://unpkg.com/mermaid@10/dist/mermaid.min.js"></script>
+      
+        <script src="../../javascripts/theme-filter.js"></script>
+      
+        <script src="../../javascripts/task-checkbox.js"></script>
+      
+        <script src="../../javascripts/self-check.js"></script>
+      
+        <script src="../../javascripts/search-filter.js"></script>
+      
+        <script src="../../javascripts/chatgpt-prompt.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   </body>

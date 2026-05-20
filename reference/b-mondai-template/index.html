@@ -15,10 +15,10 @@
         <link rel="canonical" href="https://kfurufuru.github.io/denken-wiki/reference/b-mondai-template/">
       
       
-        <link rel="prev" href="../numbers/">
+        <link rel="prev" href="../cross-reference/">
       
       
-        <link rel="next" href="../voltage-zones/">
+        <link rel="next" href="../term-usage/">
       
       
         
@@ -50,10 +50,12 @@
         
         
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
-        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans+JP:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Noto Sans JP";--md-code-font:"Roboto Mono"}</style>
       
     
+    
+      <link rel="stylesheet" href="../../stylesheets/design-tokens.css">
     
       <link rel="stylesheet" href="../../stylesheets/custom.css">
     
@@ -63,6 +65,21 @@
 
     
     
+  
+  
+  <script>
+  (function () {
+    try {
+      var m = location.pathname.match(/\/hoki\/([^\/?#]+)\/?$/);
+      if (m && m[1]) {
+        location.replace(
+          'https://kfurufuru.github.io/secretary-portal/denken-hoki-wiki.html#' + m[1]
+        );
+      }
+    } catch (e) { /* noop */ }
+  })();
+  </script>
+
   </head>
   
   
@@ -73,7 +90,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="deep-orange">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -98,12 +115,22 @@
     <span style="color:rgba(255,255,255,0.3);">|</span>
     <span style="font-size:0.78rem; color:rgba(255,255,255,0.6); margin-right:4px;">電験3種 :</span>
     <span style="font-weight:700; color:#fff; background:rgba(255,255,255,0.25); border-radius:4px; padding:2px 10px; font-size:0.82rem;">
-      📗 法規Wiki
+      📗 法規Wiki(旧)
     </span>
+    <a href="https://kfurufuru.github.io/secretary-portal/denken-hoki-wiki.html"
+       style="font-weight:600; color:#fff; text-decoration:none; background:rgba(255,255,255,0.12); border:1px solid rgba(255,255,255,0.35); border-radius:4px; padding:2px 10px; font-size:0.82rem;"
+       onmouseover="this.style.background='rgba(255,255,255,0.22)'" onmouseout="this.style.background='rgba(255,255,255,0.12)'">
+      📗 法規Wiki(新)
+    </a>
     <a href="https://kfurufuru.github.io/denken-wiki-riron/"
        style="font-weight:600; color:#fff; text-decoration:none; background:rgba(255,255,255,0.12); border:1px solid rgba(255,255,255,0.35); border-radius:4px; padding:2px 10px; font-size:0.82rem;"
        onmouseover="this.style.background='rgba(255,255,255,0.22)'" onmouseout="this.style.background='rgba(255,255,255,0.12)'">
-      📘 理論Wiki
+      📘 理論Wiki(旧)
+    </a>
+    <a href="https://kfurufuru.github.io/secretary-portal/denken3-riron-wiki.html"
+       style="font-weight:600; color:#fff; text-decoration:none; background:rgba(255,255,255,0.12); border:1px solid rgba(255,255,255,0.35); border-radius:4px; padding:2px 10px; font-size:0.82rem;"
+       onmouseover="this.style.background='rgba(255,255,255,0.22)'" onmouseout="this.style.background='rgba(255,255,255,0.12)'">
+      📘 理論Wiki(改)
     </a>
     <a href="https://kfurufuru.github.io/denken-wiki-denryoku/"
        style="font-weight:600; color:#fff; text-decoration:none; background:rgba(255,255,255,0.12); border:1px solid rgba(255,255,255,0.35); border-radius:4px; padding:2px 10px; font-size:0.82rem;"
@@ -164,21 +191,7 @@
     
     
     
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="deep-orange"  aria-label="ダークモードに切り替え"  type="radio" name="__palette" id="__palette_0">
-    
-      <label class="md-header__button md-icon" title="ダークモードに切り替え" for="__palette_1" hidden>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
-      </label>
-    
-  
-    
-    
-    
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="deep-orange"  aria-label="ライトモードに切り替え"  type="radio" name="__palette" id="__palette_1">
-    
-      <label class="md-header__button md-icon" title="ライトモードに切り替え" for="__palette_0" hidden>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
-      </label>
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
     
   
 </form>
@@ -368,6 +381,28 @@
   
   
   
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../strategy/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  攻略戦略
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
     
   
   
@@ -491,6 +526,24 @@
       
         
       
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
     
     
     
@@ -543,6 +596,258 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../theory/dc-circuit/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    直流回路（テブナン・ミルマン・Δ-Y）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../theory/ac-circuit/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    交流回路（ベクトル・共振・力率）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../theory/sansou-kouryuu/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    三相交流（Y-Δ・√3・三相電力）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../theory/transient/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    過渡現象（RC・RL・時定数）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../theory/measurement/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    電気計測（倍率器・分流器・ブリッジ）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../theory/electronics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    電子回路（FET・オペアンプ・整流）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../theory/inductance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    自己・相互インダクタンス（変圧器基礎）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../theory/diode/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    pn接合・ダイオード（半導体基礎）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../theory/logic-circuit/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    論理回路（ゲート・ブール代数・FF）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
               
             
               
@@ -731,6 +1036,20 @@
       
         
           
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
         
       
         
@@ -982,6 +1301,62 @@
   
   
     <li class="md-nav__item">
+      <a href="../../themes/hogo-relay/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    保護リレー（保護継電器）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../themes/koatsu-kiki-shisetsu/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    高圧機械器具の施設（解釈第21条）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../themes/bunsan-dengen/" class="md-nav__link">
         
   
@@ -1206,6 +1581,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../themes/kosakubutsu-bunrui/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    電気工作物の分類
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../themes/jigyoho-taikei/" class="md-nav__link">
         
   
@@ -1298,6 +1701,34 @@
     
   
     需要率・負荷率・不等率
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../themes/ritsuryo-kaizen-capacitor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    力率改善コンデンサ
   
 
     
@@ -1507,6 +1938,90 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../themes/hoan-gensoku/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    保安の基本原則
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../themes/kokusai-kikaku/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    国際規格の取り入れ（§4の2）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../themes/kankyo-boushi/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    公害防止・環境保護
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1525,6 +2040,8 @@
       
         
           
+        
+      
         
       
         
@@ -1614,6 +2131,40 @@
       
         
       
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
     
     
     
@@ -1666,6 +2217,230 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/kijun/1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第1条（用語の定義）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/kijun/2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第2条（電圧の種別）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/kijun/4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第4条（感電・火災等の防止）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/kijun/5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第5条（電路の絶縁）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/kijun/6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第6条（電線等の断線防止）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/kijun/7/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第7条（電線の接続）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/kijun/8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第8条（機械器具の熱的強度）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/kijun/9/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第9条（高圧・特高機器の危険防止）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
               
             
               
@@ -1787,6 +2562,146 @@
   
   
     <li class="md-nav__item">
+      <a href="../../articles/kijun/20/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第20条（電線路等の感電又は火災の防止）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/kijun/21/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第21条（架空電線及び地中電線の感電の防止）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/kijun/23/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第23条（発電所等への立入防止）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/kijun/24/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第24条（支持物の昇塔防止）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/kijun/32/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第32条（支持物の倒壊防止）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../articles/kijun/56/" class="md-nav__link">
         
   
@@ -1795,6 +2710,34 @@
     
   
     第56条（配線の感電防止）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/kijun/57/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第57条（配線の使用電線）
   
 
     
@@ -1836,6 +2779,90 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/kijun/59/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第59条（機械器具の感電等防止）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/kijun/63/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第63条（低圧幹線の過電流保護）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/kijun/64/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第64条（使用場所の地絡保護）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1855,6 +2882,62 @@
       
         
           
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
         
       
         
@@ -1939,6 +3022,90 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/kaishaku/1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第1条（用語の定義）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/kaishaku/10/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第10条（電気設備の接地）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/kaishaku/13/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第13条（絶縁を要しない部分）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
               
             
               
@@ -2039,7 +3206,7 @@
   <span class="md-ellipsis">
     
   
-    第17条（A種接地工事）
+    第17条（接地工事の種類及び施設方法）
   
 
     
@@ -2067,7 +3234,7 @@
   <span class="md-ellipsis">
     
   
-    第18条（B種接地工事）
+    第18条（工作物の金属体を利用した接地工事）
   
 
     
@@ -2095,7 +3262,63 @@
   <span class="md-ellipsis">
     
   
-    第19条（C種・D種接地工事）
+    第19条（保安上又は機能上必要な場合における電路の接地）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/kaishaku/21/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第21条（高圧の機械器具の施設）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/kaishaku/22/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第22条（特別高圧の機械器具の施設）
   
 
     
@@ -2228,6 +3451,118 @@
   
   
     <li class="md-nav__item">
+      <a href="../../articles/kaishaku/38/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第38条（発変電所等の避雷器）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/kaishaku/53/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第53条（支持物の足場金具等の施設）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/kaishaku/59/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第59条（支持物の強度）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/kaishaku/65/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第65条（架空電線の高さ）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../articles/kaishaku/68/" class="md-nav__link">
         
   
@@ -2235,7 +3570,35 @@
   <span class="md-ellipsis">
     
   
-    第68条（低圧架空電線の高さ）
+    第68条（低圧架空電線の施設）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/kaishaku/71/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第71条（高圧架空電線の施設）
   
 
     
@@ -2284,6 +3647,258 @@
   
   
     <li class="md-nav__item">
+      <a href="../../articles/kaishaku/79/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第79条（架空電線と建造物の離隔）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/kaishaku/81/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第81条（架空電線路相互の離隔）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/kaishaku/120/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第120条（地中電線路の施設）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/kaishaku/133/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第133条（電力保安通信設備）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/kaishaku/143/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第143条（引込線の施設）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/kaishaku/147/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第147条（引込口の施設）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/kaishaku/148/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第148条（低圧幹線の施設）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/kaishaku/149/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第149条（施設場所による工事の種類）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/kaishaku/150/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第150条（配線器具の施設）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../articles/kaishaku/156/" class="md-nav__link">
         
   
@@ -2291,7 +3906,63 @@
   <span class="md-ellipsis">
     
   
-    第156条（低圧屋内配線の工事種類）
+    第156条（合成樹脂管工事）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/kaishaku/159/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第159条（金属管工事）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/kaishaku/164/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第164条（ケーブル工事）
   
 
     
@@ -2340,6 +4011,62 @@
   
   
     <li class="md-nav__item">
+      <a href="../../articles/kaishaku/176/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第176条（可燃性ガス危険場所）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/kaishaku/200/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第200条（小勢力回路）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../articles/kaishaku/220/" class="md-nav__link">
         
   
@@ -2347,7 +4074,147 @@
   <span class="md-ellipsis">
     
   
-    第220条（分散型電源の系統連系）
+    第220条（直流流出防止変圧器）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/kaishaku/222/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第222条（低圧連系の施設要件）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/kaishaku/224/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第224条（高圧/特別高圧連系の再閉路防止）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/kaishaku/227/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第227条（高圧連系の施設要件）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/kaishaku/229/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第229条（逆潮流の制限）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/kaishaku/232/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第232条（単独運転の防止）
   
 
     
@@ -2937,6 +4804,12 @@
           
         
       
+        
+      
+        
+      
+        
+      
     
     
     
@@ -2971,6 +4844,11 @@
 
             </a>
             
+              
+              <label class="md-nav__link " for="__nav_4_5" id="__nav_4_5_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
           </div>
         
         <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_5_label" aria-expanded="false">
@@ -2984,6 +4862,734 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_5_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_5_2" id="__nav_4_5_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    電気工事士法
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_5_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    電気工事士法
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/other/koji-shi-1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第1条（目的）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/other/koji-shi-2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第2条（定義・軽微な工事）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/other/koji-shi-3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第3条（電気工事士の資格）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/other/koji-shi-5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第5条（電気工事士の義務）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_5_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_5_3" id="__nav_4_5_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    電気用品安全法
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_5_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_5_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    電気用品安全法
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/other/pse-2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第2条（定義）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/other/pse-8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第8条（基準適合義務）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/other/pse-10/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第10条（PSEマーク表示）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/other/pse-27/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第27条（販売の制限）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/other/pse-28/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第28条（使用の制限）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_5_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_5_4" id="__nav_4_5_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    電気関係報告規則
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_5_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_5_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    電気関係報告規則
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/other/jiko-1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第1条（定義）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/other/jiko-3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第3条（事故報告）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/other/jiko-4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第4条（公害防止届出）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/other/jiko-5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第5条（自家用電気工作物の報告）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_6" id="__nav_4_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    発電用風力設備技術基準
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    発電用風力設備技術基準
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/furyoku/3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第3条（取扱者以外の者の危険防止）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/furyoku/4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第4条（風車の施設要件）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/furyoku/5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第5条（風車の安全な状態の確保）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
               
             
           </ul>
@@ -3012,6 +5618,8 @@
       
         
           
+        
+      
         
       
         
@@ -3196,6 +5804,34 @@
   
   
   
+    <li class="md-nav__item">
+      <a href="../../kakomon/wave-analysis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    出題波予測（周期性分析）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
     
     
       
@@ -3242,10 +5878,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_6" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_7" >
         
           
-          <label class="md-nav__link" for="__nav_5_6" id="__nav_5_6_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_5_7" id="__nav_5_7_label" tabindex="0">
             
   
   
@@ -3263,8 +5899,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_6_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_5_6">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_7">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -3713,8 +6349,6 @@
       
   
   
-    
-  
   
   
     
@@ -3738,6 +6372,276 @@
       
         
       
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../strategy/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    攻略戦略
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_6" id="__nav_6_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    攻略戦略
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../strategy/hourei-master/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    法令マスタ
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../strategy/b-mondai-method/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    B問題メソッド化
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../strategy/b-mondai-strategy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    B問題得点戦略
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../strategy/jakuten-log/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    弱点ログ
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../strategy/trap-patterns/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    引っかけパターン集
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../strategy/last-3days-checklist/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    直前3日チェックリスト
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../strategy/reissue-patterns-and-regulations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    再出題傾向と最適学習戦略
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
         
       
         
@@ -3764,7 +6668,7 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" checked>
         
           
           <div class="md-nav__link md-nav__container">
@@ -3786,14 +6690,14 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_6" id="__nav_6_label" tabindex="">
+              <label class="md-nav__link " for="__nav_7" id="__nav_7_label" tabindex="">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_6">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_7">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -3803,6 +6707,281 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_7_2" id="__nav_7_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    📊 条文中の数値・分類
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_7_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    📊 条文中の数値・分類
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../voltage-zones/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    電圧区分早見表
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../grounding-comparison/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    接地工事種別比較表
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wiring-methods/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    工事の種類と施設場所の対応表
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../protection-timing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    保護装置の動作時間まとめ
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../distributed-power-zones/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    分散型電源の連系区分早見表
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../penalties/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    罰則・罰金比較表
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../deadlines/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    届出・申請期限一覧
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
               
             
               
@@ -3820,6 +6999,34 @@
     
   
     頻出数値一覧
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cross-reference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    類題横断（数値・キーワード横串）
   
 
     
@@ -4134,7 +7341,395 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. 水力発電
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. 水力発電">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        なぜ出る？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        共通基礎：公式と用語
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3方式の判別フロー
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        概念図（落差・流量・出力の関係）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7-1. 流込式：流量持続曲線で発電量を読む
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7-1. 流込式：流量持続曲線で発電量を読む">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fdc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        まず絵で理解：流量持続曲線（FDC）とは
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        用語の翻訳辞書（問題文を読み解くカギ）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#qh-23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        なぜ QH は渇水量の 2〜3倍に設計するのか
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step（3つに圧縮）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-2-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7-2. 調整池式：1日の貯水と放流サイクル
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7-2. 調整池式：1日の貯水と放流サイクル">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        まず絵で理解：1日の流量と貯水量
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        用語の翻訳辞書
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step3_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step（3つに圧縮）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7-3. 揚水式：昼夜の電力サイクルと総合効率
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7-3. 揚水式：昼夜の電力サイクルと総合効率">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_18" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        まず絵で理解：揚水発電所は系統の蓄電池
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#h_g-h_p" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        用語の翻訳辞書（H_g と H_p の使い分けが命）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_19" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        なぜポンプ時の効率は「分母」なのか
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step3_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step（3つに圧縮）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7-4. 流量の単位換算早見表
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        第3条 全日効率との関連
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. 太陽電池発電所（自家消費＋系統連系）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. 太陽電池発電所（自家消費＋系統連系）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_20" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        なぜ出る？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        まず絵で理解：1日の発電と消費の重ね合わせ
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        用語の翻訳辞書（問題文を読み解くカギ）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step3_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step（3つに圧縮）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-bd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. 接地工事と接地抵抗値（B種・D種）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. 接地工事と接地抵抗値（B種・D種）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        なぜ出る？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        まず絵で理解：混触事故時の電流経路
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_24" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        用語の翻訳辞書
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1718" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        数値早見表（電技解釈第17条・18条）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step3_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step（3つに圧縮）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_25" class="md-nav__link">
     <span class="md-ellipsis">
       
         横断チェックリスト
@@ -4145,7 +7740,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_14" class="md-nav__link">
+  <a href="#_26" class="md-nav__link">
     <span class="md-ellipsis">
       
         関連ページ
@@ -4164,6 +7759,81 @@
 
               
             
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_3" id="__nav_7_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🔖 用語・索引
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    🔖 用語・索引
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
               
                 
   
@@ -4171,14 +7841,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../voltage-zones/" class="md-nav__link">
+      <a href="../term-usage/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    電圧区分早見表
+    用語の使い分け（決め手集）
   
 
     
@@ -4199,14 +7869,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../grounding-comparison/" class="md-nav__link">
+      <a href="../permit-types/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    接地工事種別比較表
+    手続き6用語の使い分け（許可・認可・登録・届出・承認・報告）
   
 
     
@@ -4227,70 +7897,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../wiring-methods/" class="md-nav__link">
+      <a href="../reporting-destinations/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    工事の種類と施設場所の対応表
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../protection-timing/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    保護装置の動作時間まとめ
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../distributed-power-zones/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    分散型電源の連系区分早見表
+    報告先・届出先 早見マップ
   
 
     
@@ -4339,6 +7953,107 @@
   
   
     <li class="md-nav__item">
+      <a href="../glossary-index/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    用語索引（五十音順）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_4" id="__nav_7_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ⚖️ 法令体系
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    ⚖️ 法令体系
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../hourei-taikei/" class="md-nav__link">
         
   
@@ -4359,6 +8074,163 @@
   
 
               
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../article-number-mapping/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    旧→現行 条番号マッピング
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../article-structure/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    条文項番マスター辞典
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hourei-kaisei/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    法令改正一覧
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_5" id="__nav_7_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🛠️ 制作プロセス
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    🛠️ 制作プロセス
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
             
               
                 
@@ -4439,6 +8311,42 @@
   
 
       </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../article-creation-checklist/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    新規記事作成チェックリスト
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
     </li>
   
 
@@ -4712,7 +8620,395 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. 水力発電
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. 水力発電">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        なぜ出る？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        共通基礎：公式と用語
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3方式の判別フロー
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        概念図（落差・流量・出力の関係）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7-1. 流込式：流量持続曲線で発電量を読む
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7-1. 流込式：流量持続曲線で発電量を読む">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fdc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        まず絵で理解：流量持続曲線（FDC）とは
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        用語の翻訳辞書（問題文を読み解くカギ）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#qh-23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        なぜ QH は渇水量の 2〜3倍に設計するのか
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step（3つに圧縮）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-2-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7-2. 調整池式：1日の貯水と放流サイクル
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7-2. 調整池式：1日の貯水と放流サイクル">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        まず絵で理解：1日の流量と貯水量
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        用語の翻訳辞書
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step3_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step（3つに圧縮）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7-3. 揚水式：昼夜の電力サイクルと総合効率
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7-3. 揚水式：昼夜の電力サイクルと総合効率">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_18" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        まず絵で理解：揚水発電所は系統の蓄電池
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#h_g-h_p" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        用語の翻訳辞書（H_g と H_p の使い分けが命）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_19" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        なぜポンプ時の効率は「分母」なのか
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step3_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step（3つに圧縮）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7-4. 流量の単位換算早見表
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        第3条 全日効率との関連
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. 太陽電池発電所（自家消費＋系統連系）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. 太陽電池発電所（自家消費＋系統連系）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_20" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        なぜ出る？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        まず絵で理解：1日の発電と消費の重ね合わせ
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        用語の翻訳辞書（問題文を読み解くカギ）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step3_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step（3つに圧縮）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-bd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. 接地工事と接地抵抗値（B種・D種）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. 接地工事と接地抵抗値（B種・D種）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        なぜ出る？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        まず絵で理解：混触事故時の電流経路
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_24" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        用語の翻訳辞書
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1718" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        数値早見表（電技解釈第17条・18条）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step3_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step（3つに圧縮）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_25" class="md-nav__link">
     <span class="md-ellipsis">
       
         横断チェックリスト
@@ -4723,7 +9019,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_14" class="md-nav__link">
+  <a href="#_26" class="md-nav__link">
     <span class="md-ellipsis">
       
         関連ページ
@@ -4744,6 +9040,72 @@
           
             <div class="md-content" data-md-component="content">
               
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="ナビゲーション" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Home
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    リファレンス
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../voltage-zones/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    📊 条文中の数値・分類
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
               <article class="md-content__inner md-typeset">
                 
                   
@@ -4758,6 +9120,11 @@
 <p>法規B問題（問10〜13）の計算パターンをステップバイステップでテンプレート化。
 手順に沿って数値を代入するだけで解ける「再現性のある解法」を目指す。</p>
 </blockquote>
+<div class="admonition tip">
+<p class="admonition-title">🧭 SOTはこちら</p>
+<p><strong>演習・タイマー付き・進捗管理用</strong> → <a href="http://127.0.0.1:8092/denken-hoki-wiki.html#/sec01/zetsuen-tairyoku">法規Wiki Hub「B問題対策」</a>（65分タイマー・章立て進捗）</p>
+<p>本ページは<strong>解法の理屈を理解する用</strong>（テンプレート定義・なぜそう解くか）</p>
+</div>
 <hr />
 <h2 id="1">1. <abbr title="設備容量に対する最大需要電力の比率。最大需要電力÷設備容量">需要率</abbr>・<abbr title="各負荷の最大需要電力の合計÷合成最大需要電力。常に1以上。ピークのずれを表す">不等率</abbr>・<abbr title="平均需要電力÷最大需要電力。1に近いほど負荷が均等で効率的">負荷率</abbr><a class="headerlink" href="#1" title="Permanent link">&para;</a></h2>
 <h3 id="_1">なぜ出る？<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
@@ -4859,7 +9226,6 @@
 <p class="admonition-title">実務の背景</p>
 <p>なぜ1.5倍？ 通常使用電圧＋雷サージや開閉サージの過電圧を想定し、十分な絶縁マージンを確保するため。</p>
 </div>
-<hr />
 <h2 id="5-z">5. %Z（パーセントインピーダンス）と短絡電流<a class="headerlink" href="#5-z" title="Permanent link">&para;</a></h2>
 <h3 id="_9">なぜ出る？<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
 <p>遮断器の遮断容量選定や保護協調の基礎。工場の受変電設備設計の実務そのもの。</p>
@@ -4910,17 +9276,903 @@
   └─ 上位・下位の協調（時間差0.3秒以上）を確認
 </code></pre></div>
 <hr />
-<h2 id="_13">横断チェックリスト<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h2>
-<p>解答後に確認する共通ミス防止リスト:</p>
+<h2 id="7">7. 水力発電<a class="headerlink" href="#7" title="Permanent link">&para;</a></h2>
+<h3 id="_13">なぜ出る？<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
+<p>電気施設管理カテゴリの計算問題として頻出。R07上期問11（流込式）・過去5回以上の出題実績、再出題🔁が3件。「年間発電電力量・設備利用率・揚水総合効率」の組合せで出題され、<strong>今後の再出題確率が高い</strong>最重要計算カテゴリ。</p>
+<h3 id="_14">共通基礎：公式と用語<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h3>
+<p><strong>P [kW] = 9.8 × Q [m³/s] × H [m] × η</strong>　（位置エネルギー mgh から導出。ρ=1000、g=9.8 を代入し /1000 で kW 換算）</p>
+<table>
+<thead>
+<tr>
+<th>記号</th>
+<th>日常語</th>
+<th>試験での意味</th>
+<th>単位ひっかけ</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Q</td>
+<td>流量</td>
+<td>単位時間あたりの水の体積</td>
+<td>m³/h なら ÷3600、L/s なら ÷1000</td>
+</tr>
+<tr>
+<td>H</td>
+<td>落差</td>
+<td>有効落差（総落差 − 損失落差）</td>
+<td>揚水時は実揚程 H' を使う</td>
+</tr>
+<tr>
+<td>η</td>
+<td>総合効率</td>
+<td>水車効率 η_t × 発電機効率 η_g</td>
+<td>ポンプ時は分母に η_pump</td>
+</tr>
+</tbody>
+</table>
+<p>時間軸: 1年=8760時間／1日=86400秒。式の左辺と右辺で「秒」か「時」かを揃えてから代入する。</p>
+<h3 id="3_1">3方式の判別フロー<a class="headerlink" href="#3_1" title="Permanent link">&para;</a></h3>
+<pre class="mermaid"><code>flowchart TD
+    A[水力発電所のタイプは？] --&gt; B{貯水池がある？}
+    B --&gt;|なし&lt;br&gt;河川流量そのまま発電| C[流込式&lt;br&gt;＝Run-of-river]
+    B --&gt;|あり| D{揚水ポンプがある？}
+    D --&gt;|なし&lt;br&gt;1日〜1週間の流量調整| E[調整池式&lt;br&gt;または貯水池式]
+    D --&gt;|あり&lt;br&gt;夜間に汲み上げ昼に発電| F[揚水式&lt;br&gt;＝Pumped storage]
+    C --&gt; G[7-1: 年間発電電力量と設備利用率]
+    E --&gt; H[7-2: 1日の貯水と運用]
+    F --&gt; I[7-3: 総合効率と所要電力量]</code></pre>
+<h3 id="_15">概念図（落差・流量・出力の関係）<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h3>
+<div>
+<svg viewBox="0 0 720 320" xmlns="http://www.w3.org/2000/svg" style="max-width:720px;width:100%;height:auto;">
+  <defs>
+    <marker id="arrR" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#1565c0"/></marker>
+    <marker id="arrDown" viewBox="0 0 10 10" refX="5" refY="9" markerWidth="8" markerHeight="8" orient="auto"><path d="M0,0 L10,0 L5,10 z" fill="#0288d1"/></marker>
+  </defs>
+  <!-- 上池 -->
+  <rect x="40" y="30" width="180" height="60" fill="#e1f5fe" stroke="#0288d1" stroke-width="2"/>
+  <text x="130" y="65" text-anchor="middle" font-size="14" fill="#01579b">上池（取水口）</text>
+  <text x="130" y="20" text-anchor="middle" font-size="12" fill="#01579b">標高 H_u</text>
+  <!-- 下池 -->
+  <rect x="500" y="220" width="180" height="60" fill="#e1f5fe" stroke="#0288d1" stroke-width="2"/>
+  <text x="590" y="255" text-anchor="middle" font-size="14" fill="#01579b">下池（放水口）</text>
+  <text x="590" y="300" text-anchor="middle" font-size="12" fill="#01579b">標高 H_d</text>
+  <!-- 水圧管路（斜め線） -->
+  <line x1="220" y1="90" x2="500" y2="220" stroke="#0288d1" stroke-width="3" marker-end="url(#arrDown)"/>
+  <text x="340" y="155" text-anchor="middle" font-size="13" fill="#0288d1">水圧管路 Q [m³/s]</text>
+  <!-- 落差表示（縦線） -->
+  <line x1="260" y1="90" x2="260" y2="250" stroke="#c62828" stroke-width="1.5" stroke-dasharray="4 4"/>
+  <text x="245" y="180" text-anchor="middle" font-size="13" fill="#c62828" transform="rotate(-90 245 180)">有効落差 H</text>
+  <!-- 水車・発電機 -->
+  <rect x="430" y="180" width="80" height="50" fill="#fff3e0" stroke="#ef6c00" stroke-width="2"/>
+  <text x="470" y="200" text-anchor="middle" font-size="12" fill="#bf360c">水車</text>
+  <text x="470" y="218" text-anchor="middle" font-size="12" fill="#bf360c">η_t</text>
+  <rect x="350" y="180" width="80" height="50" fill="#e8f5e9" stroke="#2e7d32" stroke-width="2"/>
+  <text x="390" y="200" text-anchor="middle" font-size="12" fill="#1b5e20">発電機</text>
+  <text x="390" y="218" text-anchor="middle" font-size="12" fill="#1b5e20">η_g</text>
+  <line x1="430" y1="205" x2="350" y2="205" stroke="#666" stroke-width="2" marker-end="url(#arrR)"/>
+  <!-- 出力 -->
+  <text x="350" y="170" text-anchor="middle" font-size="13" fill="#1565c0" font-weight="bold">P = 9.8 × Q × H × η_t × η_g [kW]</text>
+</svg>
+</div>
+
+<hr />
+<h3 id="7-1">7-1. 流込式：流量持続曲線で発電量を読む<a class="headerlink" href="#7-1" title="Permanent link">&para;</a></h3>
+<p>対応過去問: <strong>R07上期問11</strong>（流込式水力発電所の年間発電電力量と設備利用率）／その他過去5回以上の出題実績</p>
+<h4 id="fdc">まず絵で理解：流量持続曲線（FDC）とは<a class="headerlink" href="#fdc" title="Permanent link">&para;</a></h4>
+<p>「1年365日の流量を <strong>多い順に並べ直した曲線</strong>」が流量持続曲線。横軸は日数、縦軸は流量。豊水期は左、渇水期は右に来る。</p>
+<div>
+<svg viewBox="0 0 720 380" xmlns="http://www.w3.org/2000/svg" style="max-width:720px;width:100%;height:auto;">
+  <defs>
+    <pattern id="useArea" patternUnits="userSpaceOnUse" width="6" height="6"><rect width="6" height="6" fill="#c8e6c9"/><line x1="0" y1="0" x2="6" y2="6" stroke="#2e7d32" stroke-width="0.5"/></pattern>
+    <pattern id="wasteArea" patternUnits="userSpaceOnUse" width="6" height="6"><rect width="6" height="6" fill="#eeeeee"/><line x1="0" y1="6" x2="6" y2="0" stroke="#9e9e9e" stroke-width="0.5"/></pattern>
+  </defs>
+  <!-- 軸 -->
+  <line x1="80" y1="320" x2="660" y2="320" stroke="#333" stroke-width="2"/>
+  <line x1="80" y1="40" x2="80" y2="320" stroke="#333" stroke-width="2"/>
+  <text x="360" y="360" text-anchor="middle" font-size="13" fill="#333">日数 d（流量を多い順に並べた順位）</text>
+  <text x="40" y="180" text-anchor="middle" font-size="13" fill="#333" transform="rotate(-90 40 180)">流量 Q [m³/s]</text>
+  <!-- 横軸の目盛 -->
+  <line x1="80" y1="320" x2="80" y2="325" stroke="#333"/>
+  <text x="80" y="338" text-anchor="middle" font-size="11">0日</text>
+  <line x1="180" y1="320" x2="180" y2="325" stroke="#333"/>
+  <text x="180" y="338" text-anchor="middle" font-size="11">90日</text>
+  <line x1="280" y1="320" x2="280" y2="325" stroke="#333"/>
+  <text x="280" y="338" text-anchor="middle" font-size="11">185日</text>
+  <line x1="450" y1="320" x2="450" y2="325" stroke="#333"/>
+  <text x="450" y="338" text-anchor="middle" font-size="11">275日</text>
+  <line x1="620" y1="320" x2="620" y2="325" stroke="#333"/>
+  <text x="620" y="338" text-anchor="middle" font-size="11">355日</text>
+  <!-- 流量持続曲線（豊→渇への単調減少） -->
+  <!-- 「使える水量」面積（QH線以下、曲線以下） -->
+  <path d="M 180 160 L 180 320 L 620 320 L 620 220 Q 500 180, 360 165 Q 270 158, 180 160 Z" fill="url(#useArea)" stroke="none"/>
+  <!-- 「捨てる水量」面積（曲線がQHより上の部分、d=0〜180） -->
+  <path d="M 80 70 Q 110 90, 130 110 Q 155 135, 180 160 L 180 160 L 80 160 Z" fill="url(#wasteArea)" stroke="none"/>
+  <!-- 流量持続曲線（曲線本体・濃い青） -->
+  <path d="M 80 70 Q 110 90, 130 110 Q 155 135, 180 160 Q 270 158, 360 165 Q 500 180, 620 220" fill="none" stroke="#0d47a1" stroke-width="2.5"/>
+  <!-- QH水平線（赤） -->
+  <line x1="80" y1="160" x2="660" y2="160" stroke="#c62828" stroke-width="2" stroke-dasharray="6 3"/>
+  <text x="666" y="164" font-size="12" fill="#c62828" font-weight="bold">QH</text>
+  <text x="666" y="178" font-size="10" fill="#c62828">最大使用水量</text>
+  <!-- 渇水量水平線（青点線） -->
+  <line x1="80" y1="220" x2="660" y2="220" stroke="#1976d2" stroke-width="1.5" stroke-dasharray="3 3"/>
+  <text x="666" y="224" font-size="12" fill="#1976d2" font-weight="bold">Qd</text>
+  <text x="666" y="237" font-size="10" fill="#1976d2">渇水量</text>
+  <!-- 縦の補助線（180日点） -->
+  <line x1="180" y1="160" x2="180" y2="320" stroke="#666" stroke-width="0.8" stroke-dasharray="2 2"/>
+  <!-- ラベル -->
+  <text x="125" y="125" font-size="12" fill="#616161" font-weight="bold">捨てる水量</text>
+  <text x="125" y="140" font-size="10" fill="#616161">（QHを超える流量）</text>
+  <text x="380" y="245" text-anchor="middle" font-size="13" fill="#1b5e20" font-weight="bold">使える水量＝発電に回る</text>
+  <text x="380" y="263" text-anchor="middle" font-size="11" fill="#1b5e20">（曲線下・QH以下の面積）</text>
+  <!-- タイトル -->
+  <text x="360" y="22" text-anchor="middle" font-size="14" fill="#0d47a1" font-weight="bold">流量持続曲線（Flow Duration Curve）</text>
+</svg>
+</div>
+
+<p><strong>この絵で押さえるべき3点</strong>:</p>
+<ol>
+<li><strong>曲線下の面積 = 1年に流れる総水量</strong>。豊水期は線が高く、渇水期は線が低い。</li>
+<li><strong>QH（最大使用水量）の水平線で頭打ち</strong>。線より上の流量は水車で処理できず捨てるしかない（捨水）。</li>
+<li><strong>使える水量＝曲線とQH線で囲まれた下側面積</strong>。これに 9.8 × H × η × 24時間 を掛けて積分すれば年間発電電力量になる。</li>
+</ol>
+<h4 id="_16">用語の翻訳辞書（問題文を読み解くカギ）<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>法規用語</th>
+<th>何を意味するか</th>
+<th>試験での読み方</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>渇水量 Qd</strong></td>
+<td>1年で <strong>355日以上</strong> 確保できる流量</td>
+<td>流量曲線の「右端 d=355」で読む値</td>
+</tr>
+<tr>
+<td><strong>低水量</strong></td>
+<td>1年で 275日以上 確保できる流量</td>
+<td>d=275 で読む値（出題は少ない）</td>
+</tr>
+<tr>
+<td><strong>平水量</strong></td>
+<td>1年で 185日以上 確保できる流量</td>
+<td>d=185 で読む値</td>
+</tr>
+<tr>
+<td><strong>豊水量</strong></td>
+<td>1年で <strong>90日以上</strong> 確保できる流量</td>
+<td>d=90 で読む値</td>
+</tr>
+<tr>
+<td><strong>最大使用水量 QH</strong></td>
+<td>水車が処理できる <strong>流量の上限</strong>＝設備容量</td>
+<td>曲線にQHの水平線を引き、頭打ち区間を作る</td>
+</tr>
+<tr>
+<td><strong>使用水量</strong></td>
+<td>実際に発電に使う流量</td>
+<td>min(その日の流量, QH)</td>
+</tr>
+</tbody>
+</table>
+<p>問題文に「最大使用水量は渇水量の2倍」と書かれていたら、<strong>QH = 2 × Qd を曲線に水平線として描く</strong>だけ。あとは曲線とこの水平線の交点で日数を読むのみ。</p>
+<h4 id="qh-23">なぜ QH は渇水量の 2〜3倍に設計するのか<a class="headerlink" href="#qh-23" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>QH の設計値</th>
+<th>設備利用率</th>
+<th>年間発電量</th>
+<th>コメント</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>QH = Qd（渇水量と同じ）</td>
+<td>100%</td>
+<td>小さい（渇水量×365日分のみ）</td>
+<td>設備は遊ばないが発電量が伸びない</td>
+</tr>
+<tr>
+<td>QH = Qd × 2〜3</td>
+<td>60〜90%</td>
+<td>バランス良</td>
+<td><strong>実機のセオリー・出題の典型値</strong></td>
+</tr>
+<tr>
+<td>QH = Qd × 10</td>
+<td>10〜30%</td>
+<td>やや大</td>
+<td>豊水期しか稼働できず設備が遊ぶ</td>
+</tr>
+</tbody>
+</table>
+<p><strong>設備容量を大きくすればピーク発電量は増えるが、年間の大半は流量がそこまで来ないので遊休</strong>。発電量と稼働率の妥協点が「渇水量の2〜3倍」。試験ではこの倍率で QH が与えられる。</p>
+<h4 id="step3">Step（3つに圧縮）<a class="headerlink" href="#step3" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code>【Step 1】曲線から QH と Qd を読む
+  ├─ Qd = 流量曲線の d=355 点（または問題で直接与えられる）
+  ├─ QH = 問題文「渇水量の○倍」「最大使用水量◯◯m³/s」から確定
+  └─ QH の水平線を曲線に引き、交点の日数 d₁ を読む（QH以上の流量がある日数）
+
+【Step 2】1年を2区間に分けて発電量を計算
+  ├─ 区間A（0日〜d₁日）: QH 頭打ち
+  │     W_A = 9.8 × QH × H × η × 24 × d₁  [kWh]
+  └─ 区間B（d₁日〜365日）: 曲線に追従
+        平均流量 Q_avg を曲線から読む（中点の値 or 積分）
+        W_B = 9.8 × Q_avg × H × η × 24 × (365 − d₁)  [kWh]
+  → 年間電力量 W = W_A + W_B
+
+【Step 3】設備利用率
+  P_max [kW] = 9.8 × QH × H × η  （定格出力）
+  設備利用率 = W ÷ (P_max × 8760) × 100  [%]
+</code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">最頻出ミス</p>
+<p><strong>「渇水量」と「年平均流量」を混同する</strong>。前者は355日点（曲線の右端）、後者は曲線下面積を365で割った値。問題文に「渇水量」と書かれていたら d=355 の値を使う。</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">速解テクニック</p>
+<p>流込式の設備利用率は典型 <strong>60〜90%</strong>。30%以下や100%超は計算ミス。R07上期問11の正解 88.0% も典型値帯に収まる。</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">R07上期問11の鍵</p>
+<p>流量曲線が <strong>Q = −0.05d + 25.5（d≥90日）</strong> の直線で与えられたら、QH の水平線との交点 d₁ は方程式 <strong>QH = −0.05d₁ + 25.5</strong> を解くだけ。区間Bの平均流量も直線なので「両端の中点」で計算できる（積分不要）。</p>
+</div>
+<hr />
+<h3 id="7-2-1">7-2. 調整池式：1日の貯水と放流サイクル<a class="headerlink" href="#7-2-1" title="Permanent link">&para;</a></h3>
+<p>対応過去問: 調整池水力発電所の運転管理🔁／調整池式水力発電所の貯水量・発電電力🔁／調整池式水力発電の発電電力量と流量🔁</p>
+<h4 id="1_1">まず絵で理解：1日の流量と貯水量<a class="headerlink" href="#1_1" title="Permanent link">&para;</a></h4>
+<p>河川は <strong>1日中ほぼ一定の流量</strong> で流れ込む（雨が降らない限り）。しかし電力需要は昼ピーク・夜オフピークで大きく変動する。<strong>調整池はこのギャップを吸収するバッファ</strong>。オフピーク時に溜めて、ピーク時に一気に放流する。</p>
+<div>
+<svg viewBox="0 0 720 360" xmlns="http://www.w3.org/2000/svg" style="max-width:720px;width:100%;height:auto;">
+  <!-- 上段：流量グラフ -->
+  <text x="360" y="20" text-anchor="middle" font-size="13" fill="#0d47a1" font-weight="bold">上段：放流量の時間変化（ピーク時に一気に放流）</text>
+  <line x1="80" y1="140" x2="660" y2="140" stroke="#333" stroke-width="2"/>
+  <line x1="80" y1="40" x2="80" y2="140" stroke="#333" stroke-width="2"/>
+  <text x="360" y="158" text-anchor="middle" font-size="11" fill="#333">時刻</text>
+  <text x="40" y="90" text-anchor="middle" font-size="11" fill="#333" transform="rotate(-90 40 90)">流量 [m³/s]</text>
+  <!-- 横軸目盛 -->
+  <line x1="80" y1="140" x2="80" y2="143" stroke="#333"/><text x="80" y="155" text-anchor="middle" font-size="10">0時</text>
+  <line x1="280" y1="140" x2="280" y2="143" stroke="#333"/><text x="280" y="155" text-anchor="middle" font-size="10">9時</text>
+  <line x1="350" y1="140" x2="350" y2="143" stroke="#333"/><text x="350" y="155" text-anchor="middle" font-size="10">12時</text>
+  <line x1="420" y1="140" x2="420" y2="143" stroke="#333"/><text x="420" y="155" text-anchor="middle" font-size="10">15時</text>
+  <line x1="660" y1="140" x2="660" y2="143" stroke="#333"/><text x="660" y="155" text-anchor="middle" font-size="10">24時</text>
+  <!-- 河川流入量 Q_in（一定線） -->
+  <line x1="80" y1="115" x2="660" y2="115" stroke="#1976d2" stroke-width="2" stroke-dasharray="4 3"/>
+  <text x="666" y="119" font-size="11" fill="#1976d2" font-weight="bold">Q_in</text>
+  <text x="666" y="131" font-size="9" fill="#1976d2">河川流入量</text>
+  <!-- ピーク放流量 Q_peak（9時〜15時） -->
+  <rect x="280" y="60" width="140" height="80" fill="#ffcdd2" stroke="#c62828" stroke-width="2"/>
+  <text x="350" y="55" text-anchor="middle" font-size="11" fill="#c62828" font-weight="bold">Q_peak（ピーク放流）</text>
+  <line x1="80" y1="60" x2="660" y2="60" stroke="#c62828" stroke-width="1" stroke-dasharray="2 2" opacity="0.4"/>
+  <text x="666" y="64" font-size="11" fill="#c62828" font-weight="bold">Q_peak</text>
+  <!-- オフピーク放流量（少量、または0） -->
+  <line x1="80" y1="135" x2="280" y2="135" stroke="#9e9e9e" stroke-width="2"/>
+  <line x1="420" y1="135" x2="660" y2="135" stroke="#9e9e9e" stroke-width="2"/>
+  <text x="180" y="125" text-anchor="middle" font-size="10" fill="#616161">オフピーク（貯水中）</text>
+  <text x="540" y="125" text-anchor="middle" font-size="10" fill="#616161">オフピーク（貯水中）</text>
+
+  <!-- 下段：貯水量グラフ -->
+  <text x="360" y="195" text-anchor="middle" font-size="13" fill="#1b5e20" font-weight="bold">下段：調整池の貯水量（オフピークで溜め、ピークで放出）</text>
+  <line x1="80" y1="320" x2="660" y2="320" stroke="#333" stroke-width="2"/>
+  <line x1="80" y1="220" x2="80" y2="320" stroke="#333" stroke-width="2"/>
+  <text x="360" y="338" text-anchor="middle" font-size="11" fill="#333">時刻</text>
+  <text x="40" y="270" text-anchor="middle" font-size="11" fill="#333" transform="rotate(-90 40 270)">貯水量 V [m³]</text>
+  <!-- 貯水量曲線：0〜9時 上昇、9〜15時 急落、15〜24時 上昇 -->
+  <line x1="80" y1="290" x2="280" y2="245" stroke="#2e7d32" stroke-width="3"/>
+  <line x1="280" y1="245" x2="420" y2="305" stroke="#2e7d32" stroke-width="3"/>
+  <line x1="420" y1="305" x2="660" y2="260" stroke="#2e7d32" stroke-width="3"/>
+  <!-- ピーク区間ハイライト -->
+  <rect x="280" y="220" width="140" height="100" fill="#fff3e0" opacity="0.4"/>
+  <text x="350" y="240" text-anchor="middle" font-size="10" fill="#bf360c">ピーク時に消費</text>
+  <!-- 必要容量V矢印 -->
+  <line x1="285" y1="245" x2="285" y2="305" stroke="#ef6c00" stroke-width="1.5" marker-end="url(#arrDown)" marker-start="url(#arrUp)"/>
+  <text x="265" y="280" text-anchor="end" font-size="11" fill="#bf360c" font-weight="bold">必要容量V</text>
+  <defs>
+    <marker id="arrUp" viewBox="0 0 10 10" refX="5" refY="1" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,10 L5,0 L10,10 z" fill="#ef6c00"/></marker>
+  </defs>
+</svg>
+</div>
+
+<p><strong>この絵で押さえるべき3点</strong>:</p>
+<ol>
+<li><strong>流入量 Q_in は1日中一定</strong>（青破線）。河川は人間の都合では変わらない。</li>
+<li><strong>放流量はピーク時間（昼9〜15時）に Q_peak で大きく、オフピークは小さい</strong>（赤い箱）。需要追従。</li>
+<li><strong>必要な調整池容量 V</strong> は「ピーク時に流入だけでは足りない分」＝（Q_peak − Q_in）× ピーク時間 × 3600。オフピーク時間に溜める量と等しい（保存則）。</li>
+</ol>
+<h4 id="_17">用語の翻訳辞書<a class="headerlink" href="#_17" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>用語</th>
+<th>何を意味するか</th>
+<th>試験での読み方</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>河川流入量 Q_in</strong></td>
+<td>1日中ほぼ一定で池に流れ込む量</td>
+<td>1日平均流量と同じ</td>
+</tr>
+<tr>
+<td><strong>ピーク放流量 Q_peak</strong></td>
+<td>需要のピーク時間帯に放流する量</td>
+<td>Q_peak &gt; Q_in が前提</td>
+</tr>
+<tr>
+<td><strong>ピーク時間 t_peak</strong></td>
+<td>高出力で発電する時間（典型 3〜6時間）</td>
+<td>オフピークは 24 − t_peak</td>
+</tr>
+<tr>
+<td><strong>必要調整池容量 V</strong></td>
+<td>ピーク放流をまかなうために溜めておく必要のある水量</td>
+<td>(Q_peak − Q_in) × t_peak × 3600 [m³]</td>
+</tr>
+</tbody>
+</table>
+<h4 id="step3_1">Step（3つに圧縮）<a class="headerlink" href="#step3_1" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code>【Step 1】1日の流入総量と放流総量を確認（保存則）
+  V_in_total = Q_in × 86400 [m³]  （1日に流れ込む水量）
+  V_out_total = Q_peak × t_peak × 3600 + Q_off × t_off × 3600
+  ※ 保存則: V_in_total = V_out_total（池の水位が1日で同じに戻る場合）
+
+【Step 2】必要調整池容量
+  V = (Q_peak − Q_in) × t_peak × 3600  [m³]
+  ※ ピーク時に「流入で足りない分」だけ池から取り出す
+  ※ オフピークでこの量が再度溜まる
+
+【Step 3】ピーク時発電出力
+  P_peak [kW] = 9.8 × Q_peak × H × η
+</code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">最頻出ミス</p>
+<p><strong>時間と秒の混在</strong>。流量 [m³/s] × 時間 [h] では次元が合わない。t_peak が「3時間」なら必ず ×3600 で秒に直してから掛ける。</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">速解テクニック</p>
+<p>保存則「1日の流入＝1日の放流」を最初に書く。問題文で Q_peak または Q_off が抜けていてもこの式で出せる。</p>
+</div>
+<hr />
+<h3 id="7-3">7-3. 揚水式：昼夜の電力サイクルと総合効率<a class="headerlink" href="#7-3" title="Permanent link">&para;</a></h3>
+<p>対応過去問: 系統に接続する水力発電所の運用 タイプ</p>
+<h4 id="_18">まず絵で理解：揚水発電所は系統の蓄電池<a class="headerlink" href="#_18" title="Permanent link">&para;</a></h4>
+<p>夜間（オフピーク）：原子力・石炭火力などのベースロード電源が<strong>余る</strong>。この余剰電力でポンプを回して下池の水を上池へ汲み上げる。<br />
+昼（ピーク）：電力需要が大きい。汲み上げた水を落として発電し、不足分を補う。</p>
+<p><strong>夜の安い電気 → 昼の高い電気</strong> に変換する装置。系統運用の経済性を支える。</p>
+<div>
+<svg viewBox="0 0 720 320" xmlns="http://www.w3.org/2000/svg" style="max-width:720px;width:100%;height:auto;">
+  <defs>
+    <marker id="arrPump" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#1976d2"/></marker>
+    <marker id="arrGen" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#c62828"/></marker>
+  </defs>
+  <!-- タイトル -->
+  <text x="360" y="18" text-anchor="middle" font-size="14" fill="#0d47a1" font-weight="bold">系統需要と揚水発電所の動作（24時間サイクル）</text>
+  <!-- 系統需要曲線 -->
+  <line x1="80" y1="240" x2="660" y2="240" stroke="#333" stroke-width="2"/>
+  <line x1="80" y1="40" x2="80" y2="240" stroke="#333" stroke-width="2"/>
+  <text x="360" y="262" text-anchor="middle" font-size="11" fill="#333">時刻</text>
+  <text x="40" y="140" text-anchor="middle" font-size="11" fill="#333" transform="rotate(-90 40 140)">系統需要 [kW]</text>
+  <!-- 横軸目盛 -->
+  <line x1="80" y1="240" x2="80" y2="243" stroke="#333"/><text x="80" y="255" text-anchor="middle" font-size="10">0時</text>
+  <line x1="220" y1="240" x2="220" y2="243" stroke="#333"/><text x="220" y="255" text-anchor="middle" font-size="10">6時</text>
+  <line x1="360" y1="240" x2="360" y2="243" stroke="#333"/><text x="360" y="255" text-anchor="middle" font-size="10">12時</text>
+  <line x1="500" y1="240" x2="500" y2="243" stroke="#333"/><text x="500" y="255" text-anchor="middle" font-size="10">18時</text>
+  <line x1="660" y1="240" x2="660" y2="243" stroke="#333"/><text x="660" y="255" text-anchor="middle" font-size="10">24時</text>
+  <!-- 系統需要曲線（昼ピーク・夜谷） -->
+  <path d="M 80 220 Q 150 230, 220 215 Q 290 130, 360 90 Q 430 100, 500 110 Q 580 200, 660 215" fill="none" stroke="#0d47a1" stroke-width="2.5"/>
+  <!-- ベースロード水平線 -->
+  <line x1="80" y1="180" x2="660" y2="180" stroke="#666" stroke-width="1.5" stroke-dasharray="4 3"/>
+  <text x="666" y="184" font-size="10" fill="#666">ベースロード</text>
+  <!-- 夜（揚水）区間ハイライト -->
+  <rect x="80" y="180" width="170" height="60" fill="#bbdefb" opacity="0.5"/>
+  <text x="165" y="208" text-anchor="middle" font-size="11" fill="#0d47a1" font-weight="bold">夜：余剰電力</text>
+  <text x="165" y="222" text-anchor="middle" font-size="10" fill="#0d47a1">→ 揚水（W_p消費）</text>
+  <!-- 昼（発電）区間ハイライト -->
+  <rect x="290" y="40" width="170" height="140" fill="#ffcdd2" opacity="0.5"/>
+  <text x="375" y="60" text-anchor="middle" font-size="11" fill="#c62828" font-weight="bold">昼：需要ピーク</text>
+  <text x="375" y="74" text-anchor="middle" font-size="10" fill="#c62828">→ 発電（W_g供給）</text>
+  <!-- 矢印（夜揚水→昼発電） -->
+  <path d="M 165 175 Q 250 130, 375 130" fill="none" stroke="#666" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#arrGen)"/>
+  <text x="280" y="120" text-anchor="middle" font-size="10" fill="#666">エネルギー時刻シフト</text>
+  <!-- 下部：効率の関係式 -->
+  <line x1="80" y1="285" x2="660" y2="285" stroke="#999" stroke-width="0.5"/>
+  <text x="360" y="305" text-anchor="middle" font-size="13" fill="#0d47a1" font-weight="bold">η_total = W_g / W_p = (H_g × η_g × η_p) / H_p ≈ 0.65〜0.75</text>
+</svg>
+</div>
+
+<p><strong>この絵で押さえるべき3点</strong>:</p>
+<ol>
+<li><strong>夜の余剰電力 W_p で揚水</strong>（青箱）→ 水のポテンシャルエネルギーに変換して上池に蓄える</li>
+<li><strong>昼のピーク需要に W_g で発電</strong>（赤箱）→ 上池の水を落として電気に戻す</li>
+<li><strong>W_g &lt; W_p</strong>（往復で必ず損失）。比率が <strong>総合効率 η_total ≈ 0.65〜0.75</strong>（蓄電池でいう充放電効率）</li>
+</ol>
+<h4 id="h_g-h_p">用語の翻訳辞書（H_g と H_p の使い分けが命）<a class="headerlink" href="#h_g-h_p" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>用語</th>
+<th>何を意味するか</th>
+<th>注意</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>有効落差 H_g</strong></td>
+<td>発電時、水が落下する有効な高さ</td>
+<td>上池-下池の差から <strong>管路損失を引く</strong>。「使える落差」</td>
+</tr>
+<tr>
+<td><strong>全揚程 H_p</strong></td>
+<td>揚水時、ポンプが水を持ち上げる総高さ</td>
+<td>上池-下池の差に <strong>管路損失を足す</strong>。「実際に必要な持ち上げ高さ」</td>
+</tr>
+<tr>
+<td><strong>発電効率 η_g</strong></td>
+<td>水の運動E → 電気E の変換効率</td>
+<td>水車効率 × 発電機効率</td>
+</tr>
+<tr>
+<td><strong>ポンプ効率 η_p</strong></td>
+<td>電気E → 水のポテンシャルE の変換効率</td>
+<td>ポンプ効率 × 電動機効率</td>
+</tr>
+<tr>
+<td><strong>揚水総合効率 η_total</strong></td>
+<td>同水量を循環させたときの W_g / W_p</td>
+<td>(H_g × η_g × η_p) / H_p</td>
+</tr>
+</tbody>
+</table>
+<p><strong>H_g &lt; H_p が必ず成立</strong>（管路損失は引く・足すの両方で効くため）。</p>
+<h4 id="_19">なぜポンプ時の効率は「分母」なのか<a class="headerlink" href="#_19" title="Permanent link">&para;</a></h4>
 <ul>
-<li>[ ] <strong>単位は統一したか？</strong>（kW/MW、V/kV の混在に注意）</li>
-<li>[ ] <strong>三相と単相を間違えていないか？</strong>（√3 の有無）</li>
-<li>[ ] <strong>分母・分子が逆になっていないか？</strong>（<abbr title="設備容量に対する最大需要電力の比率。最大需要電力÷設備容量">需要率</abbr>/<abbr title="平均需要電力÷最大需要電力。1に近いほど負荷が均等で効率的">負荷率</abbr>/<abbr title="各負荷の最大需要電力の合計÷合成最大需要電力。常に1以上。ピークのずれを表す">不等率</abbr>）</li>
-<li>[ ] <strong>「以上」「以下」「超える」「未満」を正確に区別したか？</strong></li>
-<li>[ ] <strong>答えの桁数・オーダーが常識的か？</strong>（短絡電流が数Aや数百万Aはおかしい）</li>
+<li>発電時：水のエネルギー × η_g = 電気エネルギー → <strong>電気側は η_g 倍に減る</strong>（η_g を掛ける）</li>
+<li>揚水時：必要な仕事 / η_p = 電気の入力 → <strong>電気側は 1/η_p 倍に増える</strong>（η_p で割る）</li>
+</ul>
+<p>「<strong>得る側に掛ける、消費する側で割る</strong>」が普遍ルール。揚水でも発電でも同じ。</p>
+<h4 id="step3_2">Step（3つに圧縮）<a class="headerlink" href="#step3_2" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code>【Step 1】発電時の電力量
+  P_g [kW] = 9.8 × Q_g × H_g × η_g
+  W_g [kWh] = P_g × t_g
+
+【Step 2】揚水時の所要電力量（同じ水量を循環）
+  P_p [kW] = 9.8 × Q_p × H_p ÷ η_p
+  W_p [kWh] = P_p × t_p
+  ※ ポンプは消費側なので η_p は分母
+
+【Step 3】総合効率
+  η_total = W_g ÷ W_p
+  同水量循環時: η_total = (H_g × η_g × η_p) / H_p
+</code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">最頻出ミス</p>
+<p><strong>H_g と H_p の混同</strong>。問題文で「発電時 H_g = 〇〇 m、揚水時 H_p = 〇〇 m」と分けて与えられたら必ず使い分ける。<strong>H_g に η_p を掛けて η_g を割る</strong> など、効率の対応も間違えない。</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">速解テクニック</p>
+<p>総合効率 0.65〜0.75 は「夜の電気 1.5 kWh 使って、昼に 1 kWh 取り戻す」イメージ。0.5 以下や 0.9 以上が出たら計算ミス。</p>
+</div>
+<hr />
+<h3 id="7-4">7-4. 流量の単位換算早見表<a class="headerlink" href="#7-4" title="Permanent link">&para;</a></h3>
+<p>冒頭「共通基礎」で軽く触れた単位ひっかけの完全版。落差3用語（総落差・有効落差・実揚程）と効率3用語（水車効率・発電機効率・総合効率）は冒頭表に統合済み。</p>
+<table>
+<thead>
+<tr>
+<th>与えられた単位</th>
+<th>m³/s への換算</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>m³/h</td>
+<td>× (1/3600)</td>
+</tr>
+<tr>
+<td>L/s</td>
+<td>× (1/1000)</td>
+</tr>
+<tr>
+<td>L/min</td>
+<td>× (1/60000)</td>
+</tr>
+<tr>
+<td>m³/日</td>
+<td>× (1/86400)</td>
+</tr>
+</tbody>
+</table>
+<p>問題文の単位が m³/s でない場合は <strong>必ず冒頭で換算</strong>。式に代入してから単位だけ直そうとすると、後段の積計算で桁を踏み外す。</p>
+<hr />
+<h3 id="3_2">第3条 全日効率との関連<a class="headerlink" href="#3_2" title="Permanent link">&para;</a></h3>
+<p>設備利用率は 第3条 全日効率の負荷率と数式構造が同じ：</p>
+<ul>
+<li><abbr title="平均需要電力÷最大需要電力。1に近いほど負荷が均等で効率的">負荷率</abbr>（第3条）= 平均需要電力 ÷ 最大需要電力</li>
+<li>設備利用率（第7条-1）= 平均出力 ÷ 最大（定格）出力</li>
+</ul>
+<p>「最大需要」を「定格出力」と読み替えれば負荷率の式そのもの。発電所側の指標が <strong>設備利用率</strong>、消費側の指標が <strong><abbr title="平均需要電力÷最大需要電力。1に近いほど負荷が均等で効率的">負荷率</abbr></strong>。</p>
+<hr />
+<h2 id="8">8. 太陽電池発電所（自家消費＋系統連系）<a class="headerlink" href="#8" title="Permanent link">&para;</a></h2>
+<h3 id="_20">なぜ出る？<a class="headerlink" href="#_20" title="Permanent link">&para;</a></h3>
+<p>電気施設管理カテゴリで再出題🔁が3件以上の頻出論点。R07上期問13（太陽電池発電所を設置した需要設備の電力需給）ほか過去複数回出題。再生可能エネルギー普及で出題頻度がさらに増す傾向。</p>
+<h3 id="1_2">まず絵で理解：1日の発電と消費の重ね合わせ<a class="headerlink" href="#1_2" title="Permanent link">&para;</a></h3>
+<p>太陽電池の発電曲線は <strong>昼に山を持つ三角形（または台形）</strong> 。一方、施設の消費は <strong>時間帯ごとの階段状</strong>。両者を24時間軸で重ね合わせると、<strong>3つの領域</strong>が見える：</p>
+<div>
+<svg viewBox="0 0 720 360" xmlns="http://www.w3.org/2000/svg" style="max-width:720px;width:100%;height:auto;">
+  <defs>
+    <pattern id="selfUse" patternUnits="userSpaceOnUse" width="6" height="6"><rect width="6" height="6" fill="#c8e6c9"/><line x1="0" y1="0" x2="6" y2="6" stroke="#2e7d32" stroke-width="0.5"/></pattern>
+    <pattern id="exportArea" patternUnits="userSpaceOnUse" width="6" height="6"><rect width="6" height="6" fill="#bbdefb"/><line x1="0" y1="0" x2="6" y2="6" stroke="#1565c0" stroke-width="0.5"/></pattern>
+    <pattern id="importArea" patternUnits="userSpaceOnUse" width="6" height="6"><rect width="6" height="6" fill="#eeeeee"/><line x1="0" y1="6" x2="6" y2="0" stroke="#757575" stroke-width="0.5"/></pattern>
+  </defs>
+  <!-- タイトル -->
+  <text x="360" y="20" text-anchor="middle" font-size="14" fill="#0d47a1" font-weight="bold">太陽電池発電と消費の重ね合わせ（R07上期問13ベース）</text>
+  <!-- 軸 -->
+  <line x1="80" y1="290" x2="680" y2="290" stroke="#333" stroke-width="2"/>
+  <line x1="80" y1="40" x2="80" y2="290" stroke="#333" stroke-width="2"/>
+  <text x="380" y="320" text-anchor="middle" font-size="12" fill="#333">時刻 [h]</text>
+  <text x="40" y="170" text-anchor="middle" font-size="12" fill="#333" transform="rotate(-90 40 170)">電力 [kW]</text>
+  <!-- 横軸目盛 -->
+  <line x1="80" y1="290" x2="80" y2="293" stroke="#333"/><text x="80" y="307" text-anchor="middle" font-size="10">0</text>
+  <line x1="155" y1="290" x2="155" y2="293" stroke="#333"/><text x="155" y="307" text-anchor="middle" font-size="10">6</text>
+  <line x1="205" y1="290" x2="205" y2="293" stroke="#333"/><text x="205" y="307" text-anchor="middle" font-size="10">10</text>
+  <line x1="230" y1="290" x2="230" y2="293" stroke="#333"/><text x="230" y="307" text-anchor="middle" font-size="10">12</text>
+  <line x1="318" y1="290" x2="318" y2="293" stroke="#333"/><text x="318" y="307" text-anchor="middle" font-size="10">17</text>
+  <line x1="380" y1="290" x2="380" y2="293" stroke="#333"/><text x="380" y="307" text-anchor="middle" font-size="10">21</text>
+  <line x1="430" y1="290" x2="430" y2="293" stroke="#333"/><text x="430" y="307" text-anchor="middle" font-size="10">24</text>
+  <!-- 縦軸目盛 -->
+  <line x1="77" y1="290" x2="80" y2="290" stroke="#333"/><text x="73" y="294" text-anchor="end" font-size="10">0</text>
+  <line x1="77" y1="250" x2="80" y2="250" stroke="#333"/><text x="73" y="254" text-anchor="end" font-size="10">100</text>
+  <line x1="77" y1="170" x2="80" y2="170" stroke="#333"/><text x="73" y="174" text-anchor="end" font-size="10">300</text>
+  <line x1="77" y1="130" x2="80" y2="130" stroke="#333"/><text x="73" y="134" text-anchor="end" font-size="10">400</text>
+  <line x1="77" y1="50" x2="80" y2="50" stroke="#333"/><text x="73" y="54" text-anchor="end" font-size="10">600</text>
+  <!-- ===== 領域塗り（背景に） ===== -->
+  <!-- 自家消費領域 = min(発電, 消費) の下側 -->
+  <!-- 0-7時: 発電0、消費100、自家消費=0 -->
+  <!-- 7時(P=100,L=100) 〜 10時(P=400,L=100): 自家消費 = 消費(100)上限、つまり矩形(7-10, 0-100) -->
+  <polygon points="167.5,290 167.5,250 205,250 205,290" fill="url(#selfUse)"/>
+  <!-- 10-12時: 発電(400→600), 消費300、自家消費=300（消費上限） -->
+  <polygon points="205,290 205,170 230,170 230,290" fill="url(#selfUse)"/>
+  <!-- 12-15時: 発電(600→300), 消費300、自家消費=min(P,L) → 12-15は P>=300なので自家消費=300 -->
+  <polygon points="230,290 230,170 268,170 268,290" fill="url(#selfUse)"/>
+  <!-- 15-17時: 発電(300→200), 消費300、自家消費=発電（P側） -->
+  <polygon points="268,290 268,170 318,210 318,290" fill="url(#selfUse)"/>
+  <!-- 17-18時: 発電(200→0), 消費400、自家消費=発電 -->
+  <polygon points="318,290 318,210 343,290" fill="url(#selfUse)"/>
+  <!-- 系統送電領域（青）= 発電>消費 の上部 -->
+  <!-- 7-10時: 発電(100→400), 消費100、送電=P-100 -->
+  <polygon points="167.5,250 205,130 205,250" fill="url(#exportArea)"/>
+  <!-- 10-12時: 発電(400→600), 消費300、送電=P-300 -->
+  <polygon points="205,130 230,50 230,170 205,170" fill="url(#exportArea)"/>
+  <!-- 12-15時: 発電(600→300), 消費300、送電=P-300 -->
+  <polygon points="230,50 268,170 230,170" fill="url(#exportArea)"/>
+  <!-- 系統購入領域（灰）= 消費>発電 の差分 -->
+  <!-- 0-7時: 消費100、発電0 -->
+  <polygon points="80,290 80,250 167.5,250 167.5,290" fill="url(#importArea)"/>
+  <!-- 7-10時: 消費100、発電>100 → 購入なし -->
+  <!-- 10時付近: 消費が100→300にジャンプ。発電400なのでまだ送電 -->
+  <!-- 15-17時: 消費300、発電(300→200) → 購入=300-P -->
+  <polygon points="268,170 318,170 318,210" fill="url(#importArea)"/>
+  <!-- 17-18時: 消費400、発電(200→0) → 購入=400-P -->
+  <polygon points="318,130 343,130 343,290 318,290 318,210" fill="url(#importArea)"/>
+  <!-- 18-21時: 消費400、発電0 → 購入=400 -->
+  <polygon points="343,130 380,130 380,290 343,290" fill="url(#importArea)"/>
+  <!-- 21-24時: 消費100、発電0 → 購入=100 -->
+  <polygon points="380,250 430,250 430,290 380,290" fill="url(#importArea)"/>
+  <!-- ===== 曲線本体 ===== -->
+  <!-- 発電曲線（三角形：6-12-18時） -->
+  <polyline points="80,290 155,290 230,50 343,290 430,290" fill="none" stroke="#0d47a1" stroke-width="2.5"/>
+  <text x="240" y="42" font-size="12" fill="#0d47a1" font-weight="bold">発電 P(t)</text>
+  <!-- 消費曲線（階段状） -->
+  <polyline points="80,250 205,250 205,170 318,170 318,130 380,130 380,250 430,250" fill="none" stroke="#c62828" stroke-width="2.5"/>
+  <text x="335" y="125" font-size="12" fill="#c62828" font-weight="bold">消費 L(t)</text>
+  <!-- 凡例 -->
+  <rect x="475" y="50" width="200" height="120" fill="#fafafa" stroke="#999" stroke-width="0.5"/>
+  <rect x="485" y="60" width="14" height="14" fill="url(#selfUse)"/>
+  <text x="505" y="72" font-size="11" fill="#1b5e20" font-weight="bold">自家消費</text>
+  <text x="505" y="84" font-size="9" fill="#1b5e20">min(P, L) の積分</text>
+  <rect x="485" y="95" width="14" height="14" fill="url(#exportArea)"/>
+  <text x="505" y="107" font-size="11" fill="#0d47a1" font-weight="bold">系統送電</text>
+  <text x="505" y="119" font-size="9" fill="#0d47a1">max(P−L, 0) の積分</text>
+  <rect x="485" y="130" width="14" height="14" fill="url(#importArea)"/>
+  <text x="505" y="142" font-size="11" fill="#424242" font-weight="bold">系統購入</text>
+  <text x="505" y="154" font-size="9" fill="#424242">max(L−P, 0) の積分</text>
+</svg>
+</div>
+
+<p><strong>この絵で押さえるべき3点</strong>:</p>
+<ol>
+<li><strong>発電曲線（青）</strong> は太陽の高度に従い昼に山を持つ三角形（晴天理想）。雨天は台形・低め。</li>
+<li><strong>消費曲線（赤）</strong> は施設の利用パターンで階段状。ショッピングセンターなら開店から閉店までが高負荷。</li>
+<li><strong>3領域</strong> がすべて。</li>
+<li>緑（重なり下部）= <strong>自家消費</strong>：発電を施設で直接使う</li>
+<li>青（発電&gt;消費の上）= <strong>系統送電</strong>：余った電力を売る（売電）</li>
+<li>灰（消費&gt;発電の上）= <strong>系統購入</strong>：足りない電力を買う</li>
+</ol>
+<h3 id="_21">用語の翻訳辞書（問題文を読み解くカギ）<a class="headerlink" href="#_21" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>用語</th>
+<th>何を意味するか</th>
+<th>試験での読み方</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>パネル出力 P_max</strong></td>
+<td>太陽電池が最大に発電できる定格出力</td>
+<td>三角形/台形の頂点の値</td>
+</tr>
+<tr>
+<td><strong>発電曲線 P(t)</strong></td>
+<td>時刻ごとの発電出力</td>
+<td>「6時に立ち上がり12時で最大、18時に0」が典型</td>
+</tr>
+<tr>
+<td><strong>日負荷曲線 L(t)</strong></td>
+<td>時刻ごとの消費電力</td>
+<td>階段状で時間帯別に与えられる</td>
+</tr>
+<tr>
+<td><strong>自家消費</strong></td>
+<td>発電のうち施設で使った量</td>
+<td>緑領域の面積＝min(P,L) の積分</td>
+</tr>
+<tr>
+<td><strong>系統送電（売電）</strong></td>
+<td>発電のうち電力会社に売った量</td>
+<td>青領域の面積＝max(P−L, 0) の積分</td>
+</tr>
+<tr>
+<td><strong>系統購入（買電）</strong></td>
+<td>消費のうち電力会社から買った量</td>
+<td>灰領域の面積＝max(L−P, 0) の積分</td>
+</tr>
+<tr>
+<td><strong>自給率</strong></td>
+<td>消費のうち自家発電で賄えた比率</td>
+<td>自家消費 ÷ 総消費 [%]</td>
+</tr>
+</tbody>
+</table>
+<p><strong>保存則</strong>: 総発電 = 自家消費 + 系統送電／総消費 = 自家消費 + 系統購入。<strong>問題文で値が抜けていてもこの式で出せる</strong>。</p>
+<h3 id="step3_3">Step（3つに圧縮）<a class="headerlink" href="#step3_3" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>【Step 1】発電曲線と消費曲線を時刻区間で表化
+  ├─ 発電・消費の値が変わる「時刻区間」に分割（典型 4〜8区間）
+  └─ 各区間で P(t) と L(t) を確認
+
+【Step 2】発電 vs 消費の交点を特定し、領域分けして面積計算
+  ├─ 発電&gt;消費の区間: 系統送電 = ∫(P−L)dt（台形面積の和）
+  ├─ 消費&gt;発電の区間: 系統購入 = ∫(L−P)dt
+  └─ 重なり下部: 自家消費 = ∫min(P,L)dt
+  ※ 発電曲線が直線なら方程式 P(t) = L(t) で交点時刻を求める
+
+【Step 3】保存則チェック＋自給率
+  発電量 = 自家消費 + 系統送電  ← 検算用
+  消費量 = 自家消費 + 系統購入  ← 検算用
+  自給率 = 自家消費 ÷ 総消費 × 100  [%]
+</code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">最頻出ミス</p>
+<p><strong>発電曲線と消費曲線の交点（送電開始/終了時刻）の見落とし</strong>。発電が直線なら方程式で交点を求める（例: P(t)=100(t−6) と L=100 の交点 → t=7時）。グラフだけで目分量で読むと境界時刻を1時間ずらして送電量計算を全部間違える。</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">速解テクニック</p>
+<p><strong>保存則で検算</strong>: (総発電)−(系統送電) と (総消費)−(系統購入) は両方とも自家消費に等しい。両者の値が一致しなければ計算ミス。R07上期問13なら 3600−1300 = 5000−2700 = 2300 で確認できる。</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">R07上期問13の鍵</p>
+<p>発電が三角形（6時0、12時600kW、18時0）なら傾きは ±100 [kW/h]。消費の階段（100→300→400）との交点は方程式で：
+- 100(t−6) = 100 → <strong>t=7時</strong>（送電開始）
+- 100(18−t) = 300 → <strong>t=15時</strong>（送電終了）
+- 100(18−t) = 200 ← 17時に消費が400に上がる前の参考。送電期間は7〜15時の8時間。</p>
+</div>
+<hr />
+<h2 id="9-bd">9. 接地工事と接地抵抗値（B種・D種）<a class="headerlink" href="#9-bd" title="Permanent link">&para;</a></h2>
+<h3 id="_22">なぜ出る？<a class="headerlink" href="#_22" title="Permanent link">&para;</a></h3>
+<p>法規B問題の <strong>過去30年で最頻出論点（8回以上・🔁多数）</strong>。R06上期問13・H30問13・H22問10ほか、ほぼ毎回出題される。電気主任技術者の最重要実務（安全基準）と直結し、解釈第17条・18条の数値暗記＋並列回路計算の混合論点。</p>
+<h3 id="_23">まず絵で理解：混触事故時の電流経路<a class="headerlink" href="#_23" title="Permanent link">&para;</a></h3>
+<p>高圧側で1線地絡が起きると、変圧器の混触で低圧側の電位が上昇する。<strong>B種接地は変圧器中性点を低抵抗で大地に落として、電位上昇を抑える</strong>。さらに <strong>D種接地は機器外箱を接地して、漏電時の感電を防ぐ</strong>。下の絵で電流経路を追う。</p>
+<div>
+<svg viewBox="0 0 720 360" xmlns="http://www.w3.org/2000/svg" style="max-width:720px;width:100%;height:auto;">
+  <defs>
+    <marker id="arrCur" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#c62828"/></marker>
+  </defs>
+  <!-- タイトル -->
+  <text x="360" y="20" text-anchor="middle" font-size="14" fill="#0d47a1" font-weight="bold">混触事故時の電流経路（赤=地絡電流の流れ）</text>
+  <!-- 高圧電路（左上） -->
+  <line x1="60" y1="60" x2="200" y2="60" stroke="#0d47a1" stroke-width="2.5"/>
+  <line x1="60" y1="80" x2="200" y2="80" stroke="#0d47a1" stroke-width="2.5"/>
+  <text x="50" y="64" text-anchor="end" font-size="11" fill="#0d47a1">高圧</text>
+  <text x="50" y="84" text-anchor="end" font-size="11" fill="#0d47a1">電路</text>
+  <!-- 1線地絡発生点 -->
+  <circle cx="170" cy="60" r="5" fill="#c62828"/>
+  <text x="180" y="55" font-size="11" fill="#c62828" font-weight="bold">1線地絡発生</text>
+  <text x="180" y="48" font-size="10" fill="#c62828">Ig = 5A</text>
+  <!-- 変圧器（中央） -->
+  <rect x="200" y="50" width="80" height="100" fill="#fff3e0" stroke="#ef6c00" stroke-width="2"/>
+  <text x="240" y="80" text-anchor="middle" font-size="11" fill="#bf360c">変圧器</text>
+  <text x="240" y="100" text-anchor="middle" font-size="10" fill="#bf360c">高圧↓低圧</text>
+  <text x="240" y="115" text-anchor="middle" font-size="9" fill="#c62828">混触</text>
+  <!-- 低圧電路 -->
+  <line x1="280" y1="100" x2="500" y2="100" stroke="#1976d2" stroke-width="2.5"/>
+  <line x1="280" y1="120" x2="500" y2="120" stroke="#1976d2" stroke-width="2.5"/>
+  <text x="390" y="92" text-anchor="middle" font-size="11" fill="#1976d2">低圧電路 100V</text>
+  <!-- 中性点（B種接地） -->
+  <circle cx="280" cy="130" r="3" fill="#1b5e20"/>
+  <line x1="280" y1="130" x2="280" y2="200" stroke="#1b5e20" stroke-width="2"/>
+  <rect x="265" y="200" width="30" height="40" fill="#e8f5e9" stroke="#1b5e20" stroke-width="2"/>
+  <text x="280" y="220" text-anchor="middle" font-size="10" fill="#1b5e20" font-weight="bold">R_B</text>
+  <text x="280" y="234" text-anchor="middle" font-size="9" fill="#1b5e20">B種</text>
+  <!-- 機器（負荷） -->
+  <rect x="500" y="80" width="80" height="60" fill="#fafafa" stroke="#333" stroke-width="2"/>
+  <text x="540" y="105" text-anchor="middle" font-size="11">機器</text>
+  <text x="540" y="120" text-anchor="middle" font-size="10">（外箱）</text>
+  <!-- 漏電想定点 -->
+  <circle cx="580" cy="110" r="4" fill="#c62828"/>
+  <text x="595" y="105" font-size="10" fill="#c62828">漏電</text>
+  <!-- D種接地（機器外箱から） -->
+  <line x1="580" y1="140" x2="580" y2="200" stroke="#1b5e20" stroke-width="2"/>
+  <rect x="565" y="200" width="30" height="40" fill="#e8f5e9" stroke="#1b5e20" stroke-width="2"/>
+  <text x="580" y="220" text-anchor="middle" font-size="10" fill="#1b5e20" font-weight="bold">R_D</text>
+  <text x="580" y="234" text-anchor="middle" font-size="9" fill="#1b5e20">D種</text>
+  <!-- 人体（D種に並列） -->
+  <line x1="630" y1="140" x2="630" y2="200" stroke="#666" stroke-width="2" stroke-dasharray="3 2"/>
+  <line x1="580" y1="140" x2="630" y2="140" stroke="#666" stroke-width="1" stroke-dasharray="2 2"/>
+  <rect x="615" y="200" width="30" height="40" fill="#f5f5f5" stroke="#666" stroke-width="1.5"/>
+  <text x="630" y="220" text-anchor="middle" font-size="10" fill="#424242">R_h</text>
+  <text x="630" y="234" text-anchor="middle" font-size="9" fill="#424242">人体</text>
+  <text x="630" y="248" text-anchor="middle" font-size="8" fill="#424242">6000Ω</text>
+  <!-- 大地 -->
+  <line x1="100" y1="260" x2="700" y2="260" stroke="#5d4037" stroke-width="3"/>
+  <line x1="100" y1="260" x2="120" y2="270" stroke="#5d4037" stroke-width="1"/>
+  <line x1="140" y1="260" x2="160" y2="270" stroke="#5d4037" stroke-width="1"/>
+  <line x1="180" y1="260" x2="200" y2="270" stroke="#5d4037" stroke-width="1"/>
+  <line x1="220" y1="260" x2="240" y2="270" stroke="#5d4037" stroke-width="1"/>
+  <line x1="260" y1="260" x2="280" y2="270" stroke="#5d4037" stroke-width="1"/>
+  <line x1="500" y1="260" x2="520" y2="270" stroke="#5d4037" stroke-width="1"/>
+  <line x1="540" y1="260" x2="560" y2="270" stroke="#5d4037" stroke-width="1"/>
+  <line x1="580" y1="260" x2="600" y2="270" stroke="#5d4037" stroke-width="1"/>
+  <line x1="620" y1="260" x2="640" y2="270" stroke="#5d4037" stroke-width="1"/>
+  <line x1="660" y1="260" x2="680" y2="270" stroke="#5d4037" stroke-width="1"/>
+  <text x="400" y="280" text-anchor="middle" font-size="11" fill="#5d4037">大地</text>
+  <!-- 地絡電流の流れ（赤矢印） -->
+  <path d="M 170 60 L 240 60 L 240 90" fill="none" stroke="#c62828" stroke-width="1.5" marker-end="url(#arrCur)"/>
+  <path d="M 280 130 L 280 240" fill="none" stroke="#c62828" stroke-width="1.5" stroke-dasharray="3 3" marker-end="url(#arrCur)"/>
+  <text x="295" y="180" font-size="10" fill="#c62828">混触</text>
+  <text x="295" y="192" font-size="10" fill="#c62828">による</text>
+  <text x="295" y="204" font-size="10" fill="#c62828">地絡電流</text>
+  <!-- 注釈 -->
+  <text x="360" y="320" text-anchor="middle" font-size="11" fill="#0d47a1" font-weight="bold">B種：混触時の対地電圧を制限／D種：漏電時の感電を防止</text>
+  <text x="360" y="338" text-anchor="middle" font-size="10" fill="#666">人体は外箱に触ったときD種に並列に接続される（接地電位×並列回路で人体電圧が決まる）</text>
+</svg>
+</div>
+
+<p><strong>この絵で押さえるべき3点</strong>:</p>
+<ol>
+<li><strong>B種接地（R_B）</strong> は変圧器中性点と大地を結ぶ。混触時に低圧側の対地電圧が上がりすぎないよう <strong>電位を引き下げる</strong> 役割。</li>
+<li><strong>D種接地（R_D）</strong> は機器外箱と大地を結ぶ。漏電時に外箱の電位を抑え、<strong>人が触っても感電しない</strong> ようにする。</li>
+<li><strong>人体は外箱に触ったとき D種に並列</strong>。並列合成抵抗で人体に分圧される電圧を 60V 以下に抑えるのが設計目標。</li>
+</ol>
+<h3 id="_24">用語の翻訳辞書<a class="headerlink" href="#_24" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>用語</th>
+<th>何を意味するか</th>
+<th>試験での読み方</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>B種接地 R_B</strong></td>
+<td>変圧器低圧側中性点の接地</td>
+<td>混触対策。基準は 150/Ig（緩和あり）</td>
+</tr>
+<tr>
+<td><strong>D種接地 R_D</strong></td>
+<td>300V以下の低圧機器外箱の接地</td>
+<td>感電防止。基準は 100Ω以下（緩和あり）</td>
+</tr>
+<tr>
+<td><strong><abbr title="高圧電路の1線が大地に地絡した時に流れる電流（Ig）。B種接地抵抗値の計算に使用">1線地絡電流</abbr> Ig</strong></td>
+<td>高圧側で1線が大地に短絡した時の電流</td>
+<td>問題文で与えられる（5A・10Aなど）</td>
+</tr>
+<tr>
+<td><strong>混触</strong></td>
+<td>高圧と低圧が誤って接触する故障</td>
+<td>B種接地が緩和する対象</td>
+</tr>
+<tr>
+<td><strong>自動遮断時間</strong></td>
+<td>地絡から遮断までの時間</td>
+<td>短いほど R_B の許容値が <strong>緩和</strong> される</td>
+</tr>
+<tr>
+<td><strong>許容触電電圧 V_safe</strong></td>
+<td>人体が触れても安全な電圧</td>
+<td>V_safe = R_h × I_safe（典型 60V）</td>
+</tr>
+</tbody>
+</table>
+<h3 id="1718">数値早見表（電技解釈第17条・18条）<a class="headerlink" href="#1718" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>接地種別</th>
+<th>基準抵抗値</th>
+<th>自動遮断による緩和</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>A種</strong></td>
+<td>10 Ω以下</td>
+<td>高圧用（特高機器外箱・避雷器など）</td>
+</tr>
+<tr>
+<td><strong>B種</strong></td>
+<td>150 / Ig [<strong> Ω </strong>]</td>
+<td>1秒以内遮断 →<strong>600 / Ig</strong>、1〜2秒以内 → 300 / Ig</td>
+</tr>
+<tr>
+<td><strong>C種</strong></td>
+<td>10 Ω以下</td>
+<td>0.5秒以内遮断で 500 Ω</td>
+</tr>
+<tr>
+<td><strong>D種</strong></td>
+<td>100 Ω以下</td>
+<td>0.5秒以内遮断で 500 Ω</td>
+</tr>
+</tbody>
+</table>
+<p><strong>緩和の理屈</strong>: 速く遮断できれば対地電圧の継続時間が短いから、抵抗値を上げてもよい（短時間なら多少電位が上がっても感電しない）。</p>
+<h3 id="step3_4">Step（3つに圧縮）<a class="headerlink" href="#step3_4" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>【Step 1】B種接地抵抗 R_B
+  ├─ 自動遮断時間を確認 → 基準値 600/Ig（1秒以内）か 150/Ig（緩和なし）か
+  ├─ 問題文の特殊条件（「許容値の1/3に維持」など）を反映
+  └─ R_B = 基準値 × 緩和係数
+
+【Step 2】許容触電電圧 V_safe を計算
+  V_safe [V] = 人体抵抗 R_h × 許容流過電流 I_safe
+  例: R_h=6000Ω, I_safe=10mA → V_safe = 60V
+
+【Step 3】D種接地抵抗 R_D の上限
+  並列回路解析: R_D || R_h を含む分圧式から外箱電圧 V_外箱 ≦ V_safe を解く
+  V_外箱 = V_電源 × (R_D||R_h) ÷ (R_D||R_h + R_B)  ≦ V_safe
+  → R_D の上限を導出
+</code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">最頻出ミス</p>
+<p><strong>遮断時間の段階を見落とす</strong>。1秒以内・1〜2秒以内・2秒超で R_B の許容値が3段階に変わる。問題文に「0.8秒以内に自動遮断」とあれば 600/Ig、無記載なら 150/Ig。さらに「許容値の1/3に維持」のような追加条件があれば最後に掛ける。</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">速解テクニック</p>
+<p><strong>R_B = 600/Ig</strong> を最初に書く（典型的に最頻）。問題文に「○倍に維持」と書かれていればそれを掛ける。並列回路は「分圧で V_外箱 を出して V_safe と比較」の単純構造。</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">R06上期問13の鍵</p>
+<p>Ig=5A、0.8秒以内自動遮断 → 基準 = 600/5 = 120Ω。「許容値の1/3に維持」→ R_B = 120 × 1/3 = <strong>40</strong> Ω。<br />
+人体: V_safe = 6000 × 0.01 = 60V。並列回路で V_外箱 = 100 × X/(X+40) ≦ 60、X = R_D × 6000/(R_D + 6000) → 計算結果 R_D ≦ 60.6Ω → <strong>60</strong> Ω。</p>
+</div>
+<hr />
+<h2 id="_25">横断チェックリスト<a class="headerlink" href="#_25" title="Permanent link">&para;</a></h2>
+<p>解答後に確認する共通ミス防止リスト:</p>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> <strong>単位は統一したか？</strong>（kW/MW、V/kV の混在に注意）</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> <strong>三相と単相を間違えていないか？</strong>（√3 の有無）</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> <strong>分母・分子が逆になっていないか？</strong>（<abbr title="設備容量に対する最大需要電力の比率。最大需要電力÷設備容量">需要率</abbr>/<abbr title="平均需要電力÷最大需要電力。1に近いほど負荷が均等で効率的">負荷率</abbr>/<abbr title="各負荷の最大需要電力の合計÷合成最大需要電力。常に1以上。ピークのずれを表す">不等率</abbr>）</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> <strong>「以上」「以下」「超える」「未満」を正確に区別したか？</strong></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> <strong>答えの桁数・オーダーが常識的か？</strong>（短絡電流が数Aや数百万Aはおかしい）</li>
 </ul>
 <hr />
-<h2 id="_14">関連ページ<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h2>
+<h2 id="_26">関連ページ<a class="headerlink" href="#_26" title="Permanent link">&para;</a></h2>
 <ul>
 <li><a href="../../themes/shisetsu-kanri/">電気施設管理</a> — テーマ別の概念解説・落とし穴</li>
 <li><a href="../numbers/">頻出数値一覧</a> — 計算の前提となる法定数値</li>
@@ -4959,6 +10211,46 @@
       </main>
       
         <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="フッター" >
+        
+          
+          <a href="../cross-reference/" class="md-footer__link md-footer__link--prev" aria-label="前: 類題横断（数値・キーワード横串）">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                前
+              </span>
+              <div class="md-ellipsis">
+                類題横断（数値・キーワード横串）
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../term-usage/" class="md-footer__link md-footer__link--next" aria-label="次: 用語の使い分け（決め手集）">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                次
+              </span>
+              <div class="md-ellipsis">
+                用語の使い分け（決め手集）
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
@@ -5004,12 +10296,28 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.indexes", "navigation.top", "navigation.instant", "navigation.instant.progress", "search.suggest", "search.highlight", "search.share", "content.tabs.link", "content.tooltips", "toc.follow"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u30b3\u30d4\u30fc\u3057\u307e\u3057\u305f", "clipboard.copy": "\u30af\u30ea\u30c3\u30d7\u30dc\u30fc\u30c9\u3078\u30b3\u30d4\u30fc", "search.result.more.one": "\u3053\u306e\u30da\u30fc\u30b8\u5185\u306b\u3082\u30461\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.more.other": "\u3053\u306e\u30da\u30fc\u30b8\u5185\u306b\u3042\u3068#\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.none": "\u4f55\u3082\u898b\u3064\u304b\u308a\u307e\u305b\u3093\u3067\u3057\u305f", "search.result.one": "1\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.other": "#\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.placeholder": "\u691c\u7d22\u30ad\u30fc\u30ef\u30fc\u30c9\u3092\u5165\u529b\u3057\u3066\u304f\u3060\u3055\u3044", "search.result.term.missing": "\u691c\u7d22\u306b\u542b\u307e\u308c\u306a\u3044", "select.version": "\u30d0\u30fc\u30b8\u30e7\u30f3\u5207\u308a\u66ff\u3048"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.indexes", "navigation.top", "navigation.instant", "navigation.instant.progress", "navigation.path", "navigation.footer", "search.suggest", "search.highlight", "search.share", "content.tabs.link", "content.tooltips", "toc.follow"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u30b3\u30d4\u30fc\u3057\u307e\u3057\u305f", "clipboard.copy": "\u30af\u30ea\u30c3\u30d7\u30dc\u30fc\u30c9\u3078\u30b3\u30d4\u30fc", "search.result.more.one": "\u3053\u306e\u30da\u30fc\u30b8\u5185\u306b\u3082\u30461\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.more.other": "\u3053\u306e\u30da\u30fc\u30b8\u5185\u306b\u3042\u3068#\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.none": "\u4f55\u3082\u898b\u3064\u304b\u308a\u307e\u305b\u3093\u3067\u3057\u305f", "search.result.one": "1\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.other": "#\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.placeholder": "\u691c\u7d22\u30ad\u30fc\u30ef\u30fc\u30c9\u3092\u5165\u529b\u3057\u3066\u304f\u3060\u3055\u3044", "search.result.term.missing": "\u691c\u7d22\u306b\u542b\u307e\u308c\u306a\u3044", "select.version": "\u30d0\u30fc\u30b8\u30e7\u30f3\u5207\u308a\u66ff\u3048"}, "version": null}</script>
     
     
       <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
       
         <script src="https://unpkg.com/mermaid@10/dist/mermaid.min.js"></script>
+      
+        <script src="../../javascripts/theme-filter.js"></script>
+      
+        <script src="../../javascripts/task-checkbox.js"></script>
+      
+        <script src="../../javascripts/self-check.js"></script>
+      
+        <script src="../../javascripts/search-filter.js"></script>
+      
+        <script src="../../javascripts/chatgpt-prompt.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   </body>

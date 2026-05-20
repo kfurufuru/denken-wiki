@@ -15,7 +15,7 @@
         <link rel="canonical" href="https://kfurufuru.github.io/denken-wiki/themes/bunsan-dengen/">
       
       
-        <link rel="prev" href="../hogo-sochi/">
+        <link rel="prev" href="../koatsu-kiki-shisetsu/">
       
       
         <link rel="next" href="../tokushu-basho/">
@@ -50,10 +50,12 @@
         
         
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
-        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans+JP:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Noto Sans JP";--md-code-font:"Roboto Mono"}</style>
       
     
+    
+      <link rel="stylesheet" href="../../stylesheets/design-tokens.css">
     
       <link rel="stylesheet" href="../../stylesheets/custom.css">
     
@@ -63,6 +65,21 @@
 
     
     
+  
+  
+  <script>
+  (function () {
+    try {
+      var m = location.pathname.match(/\/hoki\/([^\/?#]+)\/?$/);
+      if (m && m[1]) {
+        location.replace(
+          'https://kfurufuru.github.io/secretary-portal/denken-hoki-wiki.html#' + m[1]
+        );
+      }
+    } catch (e) { /* noop */ }
+  })();
+  </script>
+
   </head>
   
   
@@ -73,7 +90,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="deep-orange">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -98,12 +115,22 @@
     <span style="color:rgba(255,255,255,0.3);">|</span>
     <span style="font-size:0.78rem; color:rgba(255,255,255,0.6); margin-right:4px;">電験3種 :</span>
     <span style="font-weight:700; color:#fff; background:rgba(255,255,255,0.25); border-radius:4px; padding:2px 10px; font-size:0.82rem;">
-      📗 法規Wiki
+      📗 法規Wiki(旧)
     </span>
+    <a href="https://kfurufuru.github.io/secretary-portal/denken-hoki-wiki.html"
+       style="font-weight:600; color:#fff; text-decoration:none; background:rgba(255,255,255,0.12); border:1px solid rgba(255,255,255,0.35); border-radius:4px; padding:2px 10px; font-size:0.82rem;"
+       onmouseover="this.style.background='rgba(255,255,255,0.22)'" onmouseout="this.style.background='rgba(255,255,255,0.12)'">
+      📗 法規Wiki(新)
+    </a>
     <a href="https://kfurufuru.github.io/denken-wiki-riron/"
        style="font-weight:600; color:#fff; text-decoration:none; background:rgba(255,255,255,0.12); border:1px solid rgba(255,255,255,0.35); border-radius:4px; padding:2px 10px; font-size:0.82rem;"
        onmouseover="this.style.background='rgba(255,255,255,0.22)'" onmouseout="this.style.background='rgba(255,255,255,0.12)'">
-      📘 理論Wiki
+      📘 理論Wiki(旧)
+    </a>
+    <a href="https://kfurufuru.github.io/secretary-portal/denken3-riron-wiki.html"
+       style="font-weight:600; color:#fff; text-decoration:none; background:rgba(255,255,255,0.12); border:1px solid rgba(255,255,255,0.35); border-radius:4px; padding:2px 10px; font-size:0.82rem;"
+       onmouseover="this.style.background='rgba(255,255,255,0.22)'" onmouseout="this.style.background='rgba(255,255,255,0.12)'">
+      📘 理論Wiki(改)
     </a>
     <a href="https://kfurufuru.github.io/denken-wiki-denryoku/"
        style="font-weight:600; color:#fff; text-decoration:none; background:rgba(255,255,255,0.12); border:1px solid rgba(255,255,255,0.35); border-radius:4px; padding:2px 10px; font-size:0.82rem;"
@@ -164,21 +191,7 @@
     
     
     
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="deep-orange"  aria-label="ダークモードに切り替え"  type="radio" name="__palette" id="__palette_0">
-    
-      <label class="md-header__button md-icon" title="ダークモードに切り替え" for="__palette_1" hidden>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
-      </label>
-    
-  
-    
-    
-    
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="deep-orange"  aria-label="ライトモードに切り替え"  type="radio" name="__palette" id="__palette_1">
-    
-      <label class="md-header__button md-icon" title="ライトモードに切り替え" for="__palette_0" hidden>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
-      </label>
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
     
   
 </form>
@@ -374,6 +387,28 @@
     
     
       <li class="md-tabs__item">
+        <a href="../../strategy/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  攻略戦略
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
         <a href="../../reference/" class="md-tabs__link">
           
   
@@ -491,6 +526,24 @@
       
         
       
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
     
     
     
@@ -543,6 +596,258 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../theory/dc-circuit/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    直流回路（テブナン・ミルマン・Δ-Y）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../theory/ac-circuit/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    交流回路（ベクトル・共振・力率）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../theory/sansou-kouryuu/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    三相交流（Y-Δ・√3・三相電力）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../theory/transient/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    過渡現象（RC・RL・時定数）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../theory/measurement/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    電気計測（倍率器・分流器・ブリッジ）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../theory/electronics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    電子回路（FET・オペアンプ・整流）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../theory/inductance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    自己・相互インダクタンス（変圧器基礎）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../theory/diode/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    pn接合・ダイオード（半導体基礎）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../theory/logic-circuit/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    論理回路（ゲート・ブール代数・FF）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
               
             
               
@@ -733,6 +1038,20 @@
       
         
           
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
         
       
         
@@ -984,6 +1303,62 @@
                 
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="../hogo-relay/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    保護リレー（保護継電器）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../koatsu-kiki-shisetsu/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    高圧機械器具の施設（解釈第21条）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
     
   
   
@@ -1168,7 +1543,57 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#v2hv2g-2202" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🚗 新出角度: 電気自動車からの電力供給（V2H・V2G）— 解釈第220条の2
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🚗 新出角度: 電気自動車からの電力供給（V2H・V2G）— 解釈第220条の2">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        何が変わったか
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2202" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        第220条の2 の主要要件（穴埋め対策）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        過去問演習
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
     <span class="md-ellipsis">
       
         混同注意
@@ -1390,6 +1815,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../kosakubutsu-bunrui/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    電気工作物の分類
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../jigyoho-taikei/" class="md-nav__link">
         
   
@@ -1482,6 +1935,34 @@
     
   
     需要率・負荷率・不等率
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ritsuryo-kaizen-capacitor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    力率改善コンデンサ
   
 
     
@@ -1691,6 +2172,90 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hoan-gensoku/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    保安の基本原則
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kokusai-kikaku/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    国際規格の取り入れ（§4の2）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kankyo-boushi/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    公害防止・環境保護
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1709,6 +2274,8 @@
       
         
           
+        
+      
         
       
         
@@ -1798,6 +2365,40 @@
       
         
       
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
     
     
     
@@ -1850,6 +2451,230 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/kijun/1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第1条（用語の定義）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/kijun/2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第2条（電圧の種別）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/kijun/4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第4条（感電・火災等の防止）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/kijun/5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第5条（電路の絶縁）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/kijun/6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第6条（電線等の断線防止）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/kijun/7/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第7条（電線の接続）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/kijun/8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第8条（機械器具の熱的強度）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/kijun/9/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第9条（高圧・特高機器の危険防止）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
               
             
               
@@ -1971,6 +2796,146 @@
   
   
     <li class="md-nav__item">
+      <a href="../../articles/kijun/20/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第20条（電線路等の感電又は火災の防止）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/kijun/21/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第21条（架空電線及び地中電線の感電の防止）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/kijun/23/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第23条（発電所等への立入防止）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/kijun/24/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第24条（支持物の昇塔防止）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/kijun/32/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第32条（支持物の倒壊防止）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../articles/kijun/56/" class="md-nav__link">
         
   
@@ -1979,6 +2944,34 @@
     
   
     第56条（配線の感電防止）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/kijun/57/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第57条（配線の使用電線）
   
 
     
@@ -2020,6 +3013,90 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/kijun/59/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第59条（機械器具の感電等防止）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/kijun/63/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第63条（低圧幹線の過電流保護）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/kijun/64/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第64条（使用場所の地絡保護）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -2039,6 +3116,62 @@
       
         
           
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
         
       
         
@@ -2123,6 +3256,90 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/kaishaku/1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第1条（用語の定義）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/kaishaku/10/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第10条（電気設備の接地）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/kaishaku/13/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第13条（絶縁を要しない部分）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
               
             
               
@@ -2223,7 +3440,7 @@
   <span class="md-ellipsis">
     
   
-    第17条（A種接地工事）
+    第17条（接地工事の種類及び施設方法）
   
 
     
@@ -2251,7 +3468,7 @@
   <span class="md-ellipsis">
     
   
-    第18条（B種接地工事）
+    第18条（工作物の金属体を利用した接地工事）
   
 
     
@@ -2279,7 +3496,63 @@
   <span class="md-ellipsis">
     
   
-    第19条（C種・D種接地工事）
+    第19条（保安上又は機能上必要な場合における電路の接地）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/kaishaku/21/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第21条（高圧の機械器具の施設）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/kaishaku/22/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第22条（特別高圧の機械器具の施設）
   
 
     
@@ -2412,6 +3685,118 @@
   
   
     <li class="md-nav__item">
+      <a href="../../articles/kaishaku/38/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第38条（発変電所等の避雷器）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/kaishaku/53/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第53条（支持物の足場金具等の施設）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/kaishaku/59/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第59条（支持物の強度）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/kaishaku/65/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第65条（架空電線の高さ）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../articles/kaishaku/68/" class="md-nav__link">
         
   
@@ -2419,7 +3804,35 @@
   <span class="md-ellipsis">
     
   
-    第68条（低圧架空電線の高さ）
+    第68条（低圧架空電線の施設）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/kaishaku/71/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第71条（高圧架空電線の施設）
   
 
     
@@ -2468,6 +3881,258 @@
   
   
     <li class="md-nav__item">
+      <a href="../../articles/kaishaku/79/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第79条（架空電線と建造物の離隔）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/kaishaku/81/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第81条（架空電線路相互の離隔）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/kaishaku/120/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第120条（地中電線路の施設）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/kaishaku/133/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第133条（電力保安通信設備）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/kaishaku/143/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第143条（引込線の施設）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/kaishaku/147/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第147条（引込口の施設）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/kaishaku/148/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第148条（低圧幹線の施設）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/kaishaku/149/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第149条（施設場所による工事の種類）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/kaishaku/150/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第150条（配線器具の施設）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../articles/kaishaku/156/" class="md-nav__link">
         
   
@@ -2475,7 +4140,63 @@
   <span class="md-ellipsis">
     
   
-    第156条（低圧屋内配線の工事種類）
+    第156条（合成樹脂管工事）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/kaishaku/159/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第159条（金属管工事）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/kaishaku/164/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第164条（ケーブル工事）
   
 
     
@@ -2524,6 +4245,62 @@
   
   
     <li class="md-nav__item">
+      <a href="../../articles/kaishaku/176/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第176条（可燃性ガス危険場所）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/kaishaku/200/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第200条（小勢力回路）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../articles/kaishaku/220/" class="md-nav__link">
         
   
@@ -2531,7 +4308,147 @@
   <span class="md-ellipsis">
     
   
-    第220条（分散型電源の系統連系）
+    第220条（直流流出防止変圧器）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/kaishaku/222/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第222条（低圧連系の施設要件）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/kaishaku/224/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第224条（高圧/特別高圧連系の再閉路防止）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/kaishaku/227/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第227条（高圧連系の施設要件）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/kaishaku/229/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第229条（逆潮流の制限）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/kaishaku/232/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第232条（単独運転の防止）
   
 
     
@@ -3121,6 +5038,12 @@
           
         
       
+        
+      
+        
+      
+        
+      
     
     
     
@@ -3155,6 +5078,11 @@
 
             </a>
             
+              
+              <label class="md-nav__link " for="__nav_4_5" id="__nav_4_5_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
           </div>
         
         <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_5_label" aria-expanded="false">
@@ -3168,6 +5096,734 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_5_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_5_2" id="__nav_4_5_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    電気工事士法
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_5_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    電気工事士法
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/other/koji-shi-1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第1条（目的）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/other/koji-shi-2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第2条（定義・軽微な工事）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/other/koji-shi-3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第3条（電気工事士の資格）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/other/koji-shi-5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第5条（電気工事士の義務）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_5_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_5_3" id="__nav_4_5_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    電気用品安全法
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_5_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_5_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    電気用品安全法
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/other/pse-2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第2条（定義）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/other/pse-8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第8条（基準適合義務）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/other/pse-10/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第10条（PSEマーク表示）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/other/pse-27/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第27条（販売の制限）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/other/pse-28/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第28条（使用の制限）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_5_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_5_4" id="__nav_4_5_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    電気関係報告規則
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_5_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_5_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    電気関係報告規則
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/other/jiko-1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第1条（定義）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/other/jiko-3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第3条（事故報告）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/other/jiko-4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第4条（公害防止届出）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/other/jiko-5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第5条（自家用電気工作物の報告）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_6" id="__nav_4_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    発電用風力設備技術基準
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    発電用風力設備技術基準
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/furyoku/3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第3条（取扱者以外の者の危険防止）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/furyoku/4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第4条（風車の施設要件）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/furyoku/5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第5条（風車の安全な状態の確保）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
               
             
           </ul>
@@ -3196,6 +5852,8 @@
       
         
           
+        
+      
         
       
         
@@ -3380,6 +6038,34 @@
   
   
   
+    <li class="md-nav__item">
+      <a href="../../kakomon/wave-analysis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    出題波予測（周期性分析）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
     
     
       
@@ -3426,10 +6112,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_6" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_7" >
         
           
-          <label class="md-nav__link" for="__nav_5_6" id="__nav_5_6_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_5_7" id="__nav_5_7_label" tabindex="0">
             
   
   
@@ -3447,8 +6133,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_6_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_5_6">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_7">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -3920,6 +6606,274 @@
       
         
       
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../strategy/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    攻略戦略
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_6" id="__nav_6_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    攻略戦略
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../strategy/hourei-master/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    法令マスタ
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../strategy/b-mondai-method/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    B問題メソッド化
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../strategy/b-mondai-strategy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    B問題得点戦略
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../strategy/jakuten-log/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    弱点ログ
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../strategy/trap-patterns/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    引っかけパターン集
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../strategy/last-3days-checklist/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    直前3日チェックリスト
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../strategy/reissue-patterns-and-regulations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    再出題傾向と最適学習戦略
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
         
       
         
@@ -3943,7 +6897,7 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
         
           
           <div class="md-nav__link md-nav__container">
@@ -3965,14 +6919,14 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_6" id="__nav_6_label" tabindex="0">
+              <label class="md-nav__link " for="__nav_7" id="__nav_7_label" tabindex="0">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_6">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -3990,43 +6944,53 @@
   
   
   
-    <li class="md-nav__item">
-      <a href="../../reference/numbers/" class="md-nav__link">
+    
+    
+      
         
-  
-  
-  <span class="md-ellipsis">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
     
-  
-    頻出数値一覧
-  
-
     
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_2" id="__nav_7_2_label" tabindex="0">
             
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../reference/b-mondai-template/" class="md-nav__link">
-        
   
   
   <span class="md-ellipsis">
     
   
-    B問題 計算テンプレート集
+    📊 条文中の数値・分類
   
 
     
@@ -4034,11 +6998,19 @@
   
   
 
-      </a>
-    </li>
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    📊 条文中の数値・分類
   
 
-              
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
             
               
                 
@@ -4187,6 +7159,302 @@
   
   
     <li class="md-nav__item">
+      <a href="../../reference/penalties/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    罰則・罰金比較表
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/deadlines/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    届出・申請期限一覧
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/numbers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    頻出数値一覧
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/cross-reference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    類題横断（数値・キーワード横串）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/b-mondai-template/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    B問題 計算テンプレート集
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_3" id="__nav_7_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🔖 用語・索引
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    🔖 用語・索引
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/term-usage/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    用語の使い分け（決め手集）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/permit-types/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    手続き6用語の使い分け（許可・認可・登録・届出・承認・報告）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/reporting-destinations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    報告先・届出先 早見マップ
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../reference/glossary/" class="md-nav__link">
         
   
@@ -4215,6 +7483,104 @@
   
   
     <li class="md-nav__item">
+      <a href="../../reference/glossary-index/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    用語索引（五十音順）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_4" id="__nav_7_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ⚖️ 法令体系
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    ⚖️ 法令体系
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../reference/hourei-taikei/" class="md-nav__link">
         
   
@@ -4235,6 +7601,160 @@
   
 
               
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/article-number-mapping/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    旧→現行 条番号マッピング
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/article-structure/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    条文項番マスター辞典
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/hourei-kaisei/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    法令改正一覧
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_5" id="__nav_7_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🛠️ 制作プロセス
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    🛠️ 制作プロセス
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
             
               
                 
@@ -4315,6 +7835,42 @@
   
 
       </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/article-creation-checklist/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    新規記事作成チェックリスト
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
     </li>
   
 
@@ -4475,7 +8031,57 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#v2hv2g-2202" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🚗 新出角度: 電気自動車からの電力供給（V2H・V2G）— 解釈第220条の2
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🚗 新出角度: 電気自動車からの電力供給（V2H・V2G）— 解釈第220条の2">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        何が変わったか
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2202" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        第220条の2 の主要要件（穴埋め対策）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        過去問演習
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
     <span class="md-ellipsis">
       
         混同注意
@@ -4495,6 +8101,54 @@
           
           
             <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="ナビゲーション" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Home
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    テーマ別
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
               
               <article class="md-content__inner md-typeset">
                 
@@ -4575,59 +8229,72 @@
 </details>
 <hr />
 <h2 id="_4"><img alt="🔍" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f50d.svg" title=":mag:" /> 技術翻訳表<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>「過去問出現」列: ◎ = 超頻出（5問以上）／ ○ = 頻出（2〜4問）／ △ = 出題あり（1問）</p>
+</blockquote>
 <table>
 <thead>
 <tr>
 <th>条文の表現</th>
 <th>現場で言うと</th>
 <th>物理で言うと</th>
+<th style="text-align: center;">過去問出現 H23〜R07</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>単独運転防止</td>
+<td><strong>単独運転防止</strong></td>
 <td>停電したのにソーラーが勝手に電気を送り続けるのを防ぐ</td>
 <td>系統電源喪失を検出し、分散型電源を自動解列する</td>
+<td style="text-align: center;">◎ 毎年（11問）</td>
 </tr>
 <tr>
-<td><abbr title="分散型電源（太陽光等）が発電した電力を系統側（電力会社側）に送ること">逆潮流</abbr></td>
+<td><strong><abbr title="分散型電源（太陽光等）が発電した電力を系統側（電力会社側）に送ること">逆潮流</abbr></strong></td>
 <td>自家発の余った電気が電力会社側に流れること</td>
 <td>分散型電源の出力 &gt; 負荷消費 → 差分が系統に逆流</td>
+<td style="text-align: center;">◎ 9/14年</td>
 </tr>
 <tr>
-<td>逆潮流なしの場合</td>
+<td><strong>逆潮流なしの場合</strong></td>
 <td>自分で使い切る。余っても系統に流さない</td>
-<td>逆電力リレー（RPR）で逆潮流を検出し遮断</td>
+<td><strong>逆電力リレー（RPR）</strong>で逆潮流を検出し遮断</td>
+<td style="text-align: center;">◎ 8/14年</td>
 </tr>
 <tr>
 <td>解列</td>
 <td>系統から切り離すこと</td>
 <td>連系用遮断器を開放して電気的に分離</td>
+<td style="text-align: center;">○ 4/14年</td>
 </tr>
 <tr>
-<td>連系点の力率</td>
-<td>遅れ力率85%以上を維持すること ✅</td>
+<td><strong>連系点の力率 遅れ85%以上</strong></td>
+<td><strong>遅れ力率85%以上</strong>を維持すること ✅</td>
 <td>無効電力を抑制して連系点の電圧変動を小さくする</td>
+<td style="text-align: center;">○ 3/14年</td>
 </tr>
 <tr>
 <td>電圧変動の制限</td>
 <td>低圧連系時は逆潮流による電圧上昇を±2%以内に収めること（系統連系規程 JEAC 9701〔一般社団法人日本電気協会〕に規定）。低圧供給電圧の維持基準は101±6V / 202±20V（電気事業法施行規則）</td>
 <td>分散型電源の出力変動に伴う配電線の電圧上昇・降下を許容範囲内に収める</td>
+<td style="text-align: center;">△ 2/14年</td>
 </tr>
 <tr>
-<td>インバータ保護機能</td>
+<td><strong>インバータ保護機能</strong></td>
 <td>PCS（パワーコンディショナ）が自ら異常を感知して停止</td>
 <td>系統電圧・周波数の異常を検出してゲートブロック → 逆変換停止</td>
+<td style="text-align: center;">◎ 8/14年</td>
 </tr>
 <tr>
 <td>転送遮断</td>
 <td>上位変電所が停電したら即座に分散型電源も落とす仕組み</td>
 <td>変電所の遮断器動作を信号で伝達し、連系用遮断器を遠方トリップ</td>
+<td style="text-align: center;">○ 3/14年</td>
 </tr>
 <tr>
 <td>FRT要件</td>
 <td>系統事故が起きてもすぐには脱落しないで耐える</td>
 <td>Fault Ride Through — 残電圧20%以上かつ1秒以内の電圧低下で運転継続、復帰後0.1秒以内に出力80%以上に戻す ✅</td>
+<td style="text-align: center;">△ 1/14年</td>
 </tr>
 </tbody>
 </table>
@@ -4650,33 +8317,33 @@
 </tr>
 <tr>
 <td><strong>単独運転検出</strong></td>
-<td>受動的 + 能動的の両方式（各1方式以上）✅（電技解釈第227条第2号に明記。「受動のみ」は誤り）</td>
+<td><strong>受動的 + 能動的の両方式</strong>（各1方式以上）✅（電技解釈第227条第2号に明記。「受動のみ」は誤り）</td>
 <td>受動的 + 能動的の両方式</td>
 <td>受動的 + 能動的の両方式 + 転送遮断 ✅</td>
 </tr>
 <tr>
 <td><strong>逆潮流なし時のRPR</strong></td>
-<td>必要</td>
-<td>必要</td>
-<td>必要</td>
+<td><strong>必要</strong></td>
+<td><strong>必要</strong></td>
+<td><strong>必要</strong></td>
 </tr>
 <tr>
 <td><strong>地絡保護（OVGR）</strong></td>
-<td>不要（PCS内蔵）</td>
-<td>必要</td>
-<td>必要</td>
+<td><strong>不要</strong>（PCS内蔵）</td>
+<td><strong>必要</strong></td>
+<td><strong>必要</strong></td>
 </tr>
 <tr>
 <td><strong>過電流保護（<abbr title="過電流継電器（Over Current Relay）。過負荷・短絡電流を検出して遮断器に引き外し信号を送る保護継電器">OCR</abbr>）</strong></td>
-<td>不要 ✅</td>
-<td>必要</td>
-<td>必要</td>
+<td><strong>不要</strong> ✅</td>
+<td><strong>必要</strong></td>
+<td><strong>必要</strong></td>
 </tr>
 <tr>
 <td><strong>転送遮断装置</strong></td>
-<td>不要</td>
-<td>不要 ✅</td>
-<td>必要 ✅</td>
+<td><strong>不要</strong></td>
+<td><strong>不要</strong> ✅</td>
+<td><strong>必要</strong> ✅</td>
 </tr>
 <tr>
 <td><strong>連系用遮断器（外部）</strong></td>
@@ -4686,9 +8353,9 @@
 </tr>
 <tr>
 <td><strong>力率要件</strong></td>
-<td>遅れ85%以上 ✅</td>
-<td>遅れ85%以上 ✅</td>
-<td>遅れ85%以上 ✅</td>
+<td><strong>遅れ85%以上</strong> ✅</td>
+<td><strong>遅れ85%以上</strong> ✅</td>
+<td><strong>遅れ85%以上</strong> ✅</td>
 </tr>
 <tr>
 <td><strong>電圧変動許容値</strong></td>
@@ -4808,12 +8475,12 @@
 </thead>
 <tbody>
 <tr>
-<td><strong>受動的方式</strong></td>
+<td><strong><em>*受動的方式</em></strong>*</td>
 <td>系統側の電圧・周波数・位相の変化を検出</td>
 <td>検出が遅い場合がある。負荷と発電が均衡すると検出困難</td>
 </tr>
 <tr>
-<td><strong>能動的方式</strong></td>
+<td><strong><em>*能動的方式</em></strong>*</td>
 <td>意図的に系統に微小な擾乱を注入し、応答の変化を検出</td>
 <td>確実だが系統に微小な影響を与える</td>
 </tr>
@@ -4913,6 +8580,53 @@
 </li>
 </ol>
 <h2 id="_10"><img alt="📝" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f4dd.svg" title=":memo:" /> 出題実績<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h2>
+<div class="admonition info">
+<p class="admonition-title">出題傾向（自動集計 · kakomon.yml）</p>
+<p>出題頻度: <strong>◎ 14問 / 14年出題</strong>（H25〜R07）  </p>
+<p>直近の出題実績:</p>
+<table>
+<thead>
+<tr>
+<th>年度</th>
+<th style="text-align: center;">問</th>
+<th style="text-align: center;">形式</th>
+<th>出題内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>R7下</td>
+<td style="text-align: center;">問9</td>
+<td style="text-align: center;">穴埋</td>
+<td>電気自動車から電気を供給する設備の施設</td>
+</tr>
+<tr>
+<td>R7上</td>
+<td style="text-align: center;">問7</td>
+<td style="text-align: center;">穴埋</td>
+<td>高圧連系時の系統連系用保護装置</td>
+</tr>
+<tr>
+<td>R6下</td>
+<td style="text-align: center;">問7</td>
+<td style="text-align: center;">穴埋</td>
+<td>高圧又は特別高圧連系における再閉路時の事故防止</td>
+</tr>
+<tr>
+<td>R6上</td>
+<td style="text-align: center;">問7</td>
+<td style="text-align: center;">穴埋</td>
+<td>高圧連系時の系統連系用保護装置</td>
+</tr>
+<tr>
+<td>R5下</td>
+<td style="text-align: center;">問7</td>
+<td style="text-align: center;">穴埋</td>
+<td>分散型電源の系統連系設備に係る用語の定義</td>
+</tr>
+</tbody>
+</table>
+</div>
 <table>
 <thead>
 <tr>
@@ -4924,6 +8638,41 @@
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>R07下</td>
+<td>問9</td>
+<td>穴埋め ✅</td>
+<td><strong>電気自動車から電気を供給する設備の施設（V2H・V2G）</strong></td>
+<td>解釈第220条の2</td>
+</tr>
+<tr>
+<td>R07上</td>
+<td>問7</td>
+<td>穴埋め</td>
+<td>高圧連系時の系統連系用保護装置（<abbr title="過電流継電器（Over Current Relay）。過負荷・短絡電流を検出して遮断器に引き外し信号を送る保護継電器">OCR</abbr>・OVGR・RPR等）</td>
+<td>解釈第227条</td>
+</tr>
+<tr>
+<td>R06下</td>
+<td>問7</td>
+<td>穴埋め</td>
+<td>分散型電源における再閉路時の事故防止</td>
+<td>解釈第227条</td>
+</tr>
+<tr>
+<td>R06上</td>
+<td>問7</td>
+<td>穴埋め</td>
+<td>高圧連系時の系統連系用保護装置（単独運転検出）</td>
+<td>解釈第227条</td>
+</tr>
+<tr>
+<td>R05下</td>
+<td>問7</td>
+<td>穴埋め</td>
+<td>分散型電源の系統連系設備に係る用語の定義（<abbr title="分散型電源（太陽光等）が発電した電力を系統側（電力会社側）に送ること">逆潮流</abbr>・単独運転等）</td>
+<td>解釈第220条</td>
+</tr>
 <tr>
 <td>R05上</td>
 <td>問7 ✅</td>
@@ -5003,8 +8752,314 @@
 </tr>
 </tbody>
 </table>
-<p>→ 出題頻度: <strong><img alt="⭐" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/2b50.svg" title=":star:" /><img alt="⭐" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/2b50.svg" title=":star:" /><img alt="⭐" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/2b50.svg" title=":star:" /><img alt="⭐" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/2b50.svg" title=":star:" /></strong> （6回/11年 — 近年は毎年出題。再エネ拡大で重要度上昇中）</p>
-<h2 id="_11"><img alt="🔗" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f517.svg" title=":link:" /> 混同注意<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h2>
+<p>→ 出題頻度: <strong><img alt="⭐" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/2b50.svg" title=":star:" /><img alt="⭐" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/2b50.svg" title=":star:" /><img alt="⭐" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/2b50.svg" title=":star:" /><img alt="⭐" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/2b50.svg" title=":star:" /><img alt="⭐" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/2b50.svg" title=":star:" /></strong> （毎年出題。H27以降全14回中14回出題。近年は毎回必出）</p>
+<div class="admonition note">
+<p class="admonition-title">R08 出題予測</p>
+<p>直近の出題角度の変遷:<br />
+R06上・R06下・R07上 → 第227条（高圧連系保護装置）が3回連続<br />
+R07下 → 第220条の2（V2H）に変化<br />
+<strong>R08は第227条・高圧連系から離れた角度（低圧連系・逆潮流あり 第226条、またはV2H 第220条の2の深掘り）が有力。</strong></p>
+<p>最重点: ① <abbr title="直流750V以下、交流600V以下の電圧区分（電気設備技術基準第2条）">低圧</abbr>/高圧の保護装置の差（<abbr title="過電流継電器（Over Current Relay）。過負荷・短絡電流を検出して遮断器に引き外し信号を送る保護継電器">OCR</abbr>・OVGR は高圧から）② 逆潮流なし→RPR必要 ③ V2H（第220条の2）の追加要件</p>
+</div>
+<hr />
+<h2 id="v2hv2g-2202">🚗 新出角度: 電気自動車からの電力供給（V2H・V2G）— 解釈第220条の2<a class="headerlink" href="#v2hv2g-2202" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>R07下問9で初出題。R08でも出題される可能性あり（新設条文）。</p>
+</blockquote>
+<h3 id="_11">何が変わったか<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
+<p>従来の系統連系は「分散型電源→系統（一方向 or <abbr title="分散型電源（太陽光等）が発電した電力を系統側（電力会社側）に送ること">逆潮流</abbr>）」。V2H/V2Gは<strong>電気自動車（EV）のバッテリーを蓄電源として系統や住宅に電力を供給する双方向システム</strong>。</p>
+<table>
+<thead>
+<tr>
+<th>用語</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>V2G</strong> (Vehicle to Grid)</td>
+<td>EVから電力系統へ逆潮流（売電・系統安定化）</td>
+</tr>
+<tr>
+<td><strong>V2H</strong> (Vehicle to Home)</td>
+<td>EVから住宅負荷へ給電（停電時の自立電源）</td>
+</tr>
+<tr>
+<td><strong>双方向PCS</strong></td>
+<td>充電・放電の両方向に対応したパワーコンディショナ</td>
+</tr>
+</tbody>
+</table>
+<h3 id="2202">第220条の2 の主要要件（穴埋め対策）<a class="headerlink" href="#2202" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>電気自動車等から電気を供給する設備は：
+① 単独運転防止機能を有すること（受動的+能動的両方式）
+② 逆潮流を生じさせる場合は、系統連系用保護装置を施設すること
+③ 双方向の電力変換装置（双方向PCS）を使用すること
+④ 充電電流・電圧が定格を超えないよう制御すること
+</code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">V2H問題の注意点</p>
+<ul>
+<li>V2Hで「系統から切り離して住宅負荷に給電」= <strong>自立運転</strong>（正常・意図的）</li>
+<li>V2Gで「系統停電後もEVが系統に送電し続ける」= <strong><abbr title="系統事故で電力会社が解列した後も、分散型電源が孤立して発電を継続する危険状態">単独運転</abbr></strong>（危険・防止必要）</li>
+<li>「V2HはEVが電源になるから単独運転防止不要」→ <strong>誤り</strong>（単独運転防止は必要）</li>
+</ul>
+</div>
+<details class="question">
+<summary>セルフチェック: V2H機器を系統連系で使用する場合、単独運転防止装置は必要か？</summary>
+<p><strong>必要</strong>。EVバッテリーは分散型電源として機能するため、系統停電時に単独運転に陥る危険がある。解釈第220条の2により、単独運転検出装置（受動的+能動的両方式）の施設が求められる。</p>
+</details>
+<hr />
+<h2 id="_12"><img alt="📝" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f4dd.svg" title=":pencil:" /> 過去問演習<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h2>
+<div class="admonition tip">
+<p class="admonition-title">使い方</p>
+<p>問題を開く → 自分で解く → 解答・解説を開いて確認。<strong>二重折りたたみ</strong>なので答えが先に見えません。</p>
+</div>
+<details class="example">
+<summary>H29 問9（穴埋）— 低圧連系の単独運転検出 ｜ 解釈第227条</summary>
+<p>次の文章は、「電気設備技術基準の解釈」に基づく分散型電源の低圧系統連系設備に関する記述である。</p>
+<p>低圧連系時の系統連系用保護装置には、次の機能を有するものであること。</p>
+<p>① <mark>（ア）</mark> リレーにより、自動的に分散型電源を解列する機能
+② <mark>（イ）</mark> 運転検出（能動的方式及び <mark>（ウ）</mark> 方式のそれぞれ1方式以上）による自動解列機能</p>
+<p>また、逆潮流を生じさせない場合には <mark>（エ）</mark> リレーを施設すること。</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>（ア）</th>
+<th>（イ）</th>
+<th>（ウ）</th>
+<th>（エ）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>(1)</strong></td>
+<td>過電圧・不足電圧・周波数</td>
+<td>単独</td>
+<td>受動的</td>
+<td>逆電力</td>
+</tr>
+<tr>
+<td><strong>(2)</strong></td>
+<td>過電圧・不足電流・周波数</td>
+<td>独立</td>
+<td>能動的</td>
+<td>逆電力</td>
+</tr>
+<tr>
+<td><strong>(3)</strong></td>
+<td>過電圧・不足電圧・周波数</td>
+<td>単独</td>
+<td>受動的</td>
+<td>過電流</td>
+</tr>
+<tr>
+<td><strong>(4)</strong></td>
+<td>地絡過電圧・不足電圧</td>
+<td>独立</td>
+<td>受動的</td>
+<td>逆電力</td>
+</tr>
+<tr>
+<td><strong>(5)</strong></td>
+<td>過電圧・不足電圧・力率</td>
+<td>単独</td>
+<td>能動的</td>
+<td>過電流</td>
+</tr>
+</tbody>
+</table>
+<details class="success">
+<summary>解答・解説</summary>
+<p><strong>正解: (1)</strong>　（ア）過電圧・不足電圧・周波数　（イ）単独　（ウ）受動的　（エ）逆電力</p>
+<table>
+<thead>
+<tr>
+<th>空欄</th>
+<th>正答</th>
+<th>根拠</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>（ア）</td>
+<td><strong>過電圧・不足電圧・周波数リレー</strong></td>
+<td>OVR・UVR・OFR・UFRが低圧連系の基本セット。「地絡過電圧（OVGR）」は高圧連系から必要なので低圧では不要</td>
+</tr>
+<tr>
+<td>（イ）</td>
+<td><strong>単独</strong>運転検出</td>
+<td>「<abbr title="系統事故で電力会社が解列した後も、分散型電源が孤立して発電を継続する危険状態">単独運転</abbr>」が正式用語。「独立運転」は自立運転の別称で意味が異なる</td>
+</tr>
+<tr>
+<td>（ウ）</td>
+<td><strong>受動的</strong>方式</td>
+<td>解釈第227条第2号「能動的方式及び受動的方式のそれぞれ1方式以上」。能動的が先に書かれているが両方必要</td>
+</tr>
+<tr>
+<td>（エ）</td>
+<td><strong>逆電力</strong>リレー（RPR）</td>
+<td>逆潮流を「防ぐ」場合にRPRが必要。逆潮流なし ＝ RPR必要</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>💡 <strong>得点のカギ</strong>: （ウ）は「能動的方式<strong>及び</strong>受動的方式」を問う問題。「能動的のみ」「受動的のみ」はどちらも誤り。両方必要が条文に明記されている。</p>
+</blockquote>
+</details>
+</details>
+<details class="example">
+<summary>R02 問10（穴埋）— 高圧連系の保護装置 ｜ 解釈第229条</summary>
+<p>次の文章は、「電気設備技術基準の解釈」に基づく分散型電源の高圧系統連系設備に関する記述である。</p>
+<p>高圧連系時の系統連系用保護装置には、次の機能を有するものを施設すること。</p>
+<ul>
+<li>過電流（短絡）を検出し、自動解列する <mark>（ア）</mark> リレー</li>
+<li>地絡を検出し、自動解列する <mark>（イ）</mark> リレー（零相電圧を検出）</li>
+<li>逆潮流を生じさせない場合に施設する <mark>（ウ）</mark> リレー</li>
+<li><mark>（エ）</mark> 運転を防止するための検出装置（受動的方式＋能動的方式）</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>（ア）</th>
+<th>（イ）</th>
+<th>（ウ）</th>
+<th>（エ）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>(1)</strong></td>
+<td>過電流（<abbr title="過電流継電器（Over Current Relay）。過負荷・短絡電流を検出して遮断器に引き外し信号を送る保護継電器">OCR</abbr>）</td>
+<td>地絡過電圧（OVGR）</td>
+<td>逆電力（RPR）</td>
+<td>単独</td>
+</tr>
+<tr>
+<td><strong>(2)</strong></td>
+<td>過電圧（OVR）</td>
+<td>地絡方向（<abbr title="地絡方向継電器（Directional Ground Relay）。地絡の方向を判別して自系統の地絡のみを選択遮断">DGR</abbr>）</td>
+<td>逆電力（RPR）</td>
+<td>自立</td>
+</tr>
+<tr>
+<td><strong>(3)</strong></td>
+<td>過電流（<abbr title="過電流継電器（Over Current Relay）。過負荷・短絡電流を検出して遮断器に引き外し信号を送る保護継電器">OCR</abbr>）</td>
+<td>地絡方向（<abbr title="地絡方向継電器（Directional Ground Relay）。地絡の方向を判別して自系統の地絡のみを選択遮断">DGR</abbr>）</td>
+<td>逆電流（RCR）</td>
+<td>単独</td>
+</tr>
+<tr>
+<td><strong>(4)</strong></td>
+<td>過電流（<abbr title="過電流継電器（Over Current Relay）。過負荷・短絡電流を検出して遮断器に引き外し信号を送る保護継電器">OCR</abbr>）</td>
+<td>地絡過電圧（OVGR）</td>
+<td>過電圧（OVR）</td>
+<td>単独</td>
+</tr>
+<tr>
+<td><strong>(5)</strong></td>
+<td>不足電圧（UVR）</td>
+<td>地絡過電圧（OVGR）</td>
+<td>逆電力（RPR）</td>
+<td>単独</td>
+</tr>
+</tbody>
+</table>
+<details class="success">
+<summary>解答・解説</summary>
+<p><strong>正解: (1)</strong>　（ア）<abbr title="過電流継電器（Over Current Relay）。過負荷・短絡電流を検出して遮断器に引き外し信号を送る保護継電器">OCR</abbr>　（イ）OVGR　（ウ）RPR　（エ）単独</p>
+<table>
+<thead>
+<tr>
+<th>空欄</th>
+<th>正答</th>
+<th>根拠</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>（ア）</td>
+<td><strong><abbr title="過電流継電器（Over Current Relay）。過負荷・短絡電流を検出して遮断器に引き外し信号を送る保護継電器">OCR</abbr></strong>（過電流リレー）</td>
+<td>高圧連系から追加される短絡保護装置。低圧連系にはないが高圧・特高は必須</td>
+</tr>
+<tr>
+<td>（イ）</td>
+<td><strong>OVGR</strong>（地絡過電圧リレー）</td>
+<td>零相電圧を検出する地絡保護。高圧連系から必要。<abbr title="地絡方向継電器（Directional Ground Relay）。地絡の方向を判別して自系統の地絡のみを選択遮断">DGR</abbr>（地絡方向）は特高連系でさらに追加</td>
+</tr>
+<tr>
+<td>（ウ）</td>
+<td><strong>RPR</strong>（逆電力リレー）</td>
+<td>逆潮流を防ぎたい場合に必要。「逆電流リレー（RCR）」という名称は存在しない</td>
+</tr>
+<tr>
+<td>（エ）</td>
+<td><strong>単独</strong>運転</td>
+<td>「自立運転」は意図的な自家給電で正常動作。「<abbr title="系統事故で電力会社が解列した後も、分散型電源が孤立して発電を継続する危険状態">単独運転</abbr>」が防止すべき異常状態</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>💡 <strong>得点のカギ</strong>: （イ）のOVGR vs DGRの区別が最頻出。OVGRは高圧連系から、DGRは特別高圧連系でさらに追加、という階段構造で整理する。</p>
+</blockquote>
+</details>
+</details>
+<details class="example">
+<summary>R01 問9（論説・誤り選択）— 系統連系用語の正誤判定 ｜ 解釈第220条</summary>
+<p>次の文章は、分散型電源の系統連系設備に係る用語に関する記述である。<strong>誤っているもの</strong>を一つ選べ。</p>
+<p><strong>(1)</strong> 「<abbr title="系統事故で電力会社が解列した後も、分散型電源が孤立して発電を継続する危険状態">単独運転</abbr>」とは、分散型電源が、連系している電力系統から解列された状態において、当該分散型電源設置者の構内負荷にのみ電力を供給している状態をいう。</p>
+<p><strong>(2)</strong> 「<abbr title="分散型電源（太陽光等）が発電した電力を系統側（電力会社側）に送ること">逆潮流</abbr>」とは、分散型電源設置者の構内から、一般送配電事業者が運用する電力系統側へ向かう有効電力の流れをいう。</p>
+<p><strong>(3)</strong> 「自立運転」とは、分散型電源が連系している電力系統から解列された状態において、当該分散型電源設置者の構内負荷にのみ電力を供給している状態で、かつ、この状態を継続させる意図がある場合をいう。</p>
+<p><strong>(4)</strong> 「転送遮断」とは、電力系統の事故等により解列が必要な場合に、分散型電源側の保護リレー等が系統の異常を能動的に検知して解列する方式をいう。</p>
+<p><strong>(5)</strong> 「解列」とは、分散型電源を電力系統から切り離すことをいう。</p>
+<details class="success">
+<summary>解答・解説</summary>
+<p><strong>正解: (4)</strong> — 転送遮断の説明が誤り</p>
+<table>
+<thead>
+<tr>
+<th>選択肢</th>
+<th>判定</th>
+<th>理由</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>(1)</td>
+<td>✅</td>
+<td>単独運転の定義（解釈第220条）として正確。系統解列後に構内負荷にのみ給電している状態</td>
+</tr>
+<tr>
+<td>(2)</td>
+<td>✅</td>
+<td>逆潮流の定義として正確。「構内→系統」への有効電力の流れ</td>
+</tr>
+<tr>
+<td>(3)</td>
+<td>✅</td>
+<td>自立運転の定義。単独運転と状態は似ているが「継続させる意図がある」点が異なる</td>
+</tr>
+<tr>
+<td>(4)</td>
+<td>❌</td>
+<td><strong>誤り</strong>。転送遮断は「系統側（変電所の遮断器動作）の情報を通信で伝達して解列させる方式」。分散型電源側が能動的に検知するのは単独運転検出（能動的方式）の説明</td>
+</tr>
+<tr>
+<td>(5)</td>
+<td>✅</td>
+<td>解列の定義として正確</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>💡 <strong>得点のカギ</strong>: 転送遮断は「外から信号を受けて切る（受動）」、単独運転検出（能動的方式）は「自分で異常を感知して切る（能動）」。問題文(4)は両者を混同した記述。用語の定義問題は「能動/受動」「単独/自立」「転送遮断/単独運転検出」の3セットを整理することが鉄則。</p>
+</blockquote>
+</details>
+</details>
+<hr />
+<h2 id="_13"><img alt="🔗" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f517.svg" title=":link:" /> 混同注意<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong><abbr title="系統事故で電力会社が解列した後も、分散型電源が孤立して発電を継続する危険状態">単独運転</abbr> vs 自立運転</strong>: 単独運転は「系統停電時に意図せず送電し続ける（危険）」、自立運転は「意図的に系統から切り離して自家用負荷に給電する（安全）」</li>
 <li><strong><abbr title="分散型電源（太陽光等）が発電した電力を系統側（電力会社側）に送ること">逆潮流</abbr> vs 逆充電</strong>: 逆潮流は「分散型電源から系統への電力流出」、逆充電は「停止中の系統が分散型電源から充電される状態（単独運転の一形態）」</li>
@@ -5012,8 +9067,8 @@
 <li><a href="../hogo-sochi/">保護装置（過電流・地絡）</a> — 単独運転防止のための保護協調設計</li>
 <li><a href="../setsuchi/">接地工事</a> — 系統連系時の接地方式（B種接地との関係）</li>
 </ul>
-<details class="note">
-<summary>Level 2: 物理的背景 <img alt="🔬" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f52c.svg" title=":microscope:" /></summary>
+<div class="admonition note">
+<p class="admonition-title">Level 2: 物理的背景 <img alt="🔬" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f52c.svg" title=":microscope:" /></p>
 <p><strong>なぜ単独運転が危険なのか</strong></p>
 <ol>
 <li><strong>作業者感電</strong>: 系統側で停電作業中 → 分散型電源が逆充電 → 停電だと思って触れた作業者が感電</li>
@@ -5024,9 +9079,9 @@
 <p>配電線の電圧降下: V_drop = I × R（Iは負荷電流、Rは配電線抵抗）
 逆潮流発生時: 電流の向きが逆転 → 電圧降下が電圧<strong>上昇</strong>に転じる
 末端に大容量太陽光 → 昼間に逆潮流 → 連系点の電圧が上限を超える</p>
-</details>
-<details class="note">
-<summary>Level 3: 設計パラメータ <img alt="📐" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f4d0.svg" title=":triangular_ruler:" /></summary>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Level 3: 設計パラメータ <img alt="📐" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f4d0.svg" title=":triangular_ruler:" /></p>
 <p><strong>系統連系の設計手順</strong> ✅</p>
 <ol>
 <li>連系区分の決定（<abbr title="直流750V以下、交流600V以下の電圧区分（電気設備技術基準第2条）">低圧</abbr>/<abbr title="直流750V超〜7,000V以下、交流600V超〜7,000V以下の電圧区分">高圧</abbr>/<abbr title="7,000Vを超える電圧区分">特別高圧</abbr>）</li>
@@ -5045,9 +9100,9 @@
 <li>単独運転検出（受動的+能動的方式内蔵）</li>
 <li>力率制御・出力制御</li>
 </ul>
-</details>
+</div>
 <hr />
-<p><em>最終確認: 2026-04-01 | ステータス: v1.0 完全版 | <a href="../../reference/versioning/">バージョニング基準</a></em></p>
+<p><em>最終確認: 2026-04-16 | ステータス: v1.2（R05下〜R07下出題実績追加・V2H 第220条の2 追記・R08予測更新）| <a href="../../reference/versioning/">バージョニング基準</a></em></p>
 
 
 
@@ -5079,6 +9134,46 @@
       </main>
       
         <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="フッター" >
+        
+          
+          <a href="../koatsu-kiki-shisetsu/" class="md-footer__link md-footer__link--prev" aria-label="前: 高圧機械器具の施設（解釈第21条）">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                前
+              </span>
+              <div class="md-ellipsis">
+                高圧機械器具の施設（解釈第21条）
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../tokushu-basho/" class="md-footer__link md-footer__link--next" aria-label="次: 特殊場所の施設">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                次
+              </span>
+              <div class="md-ellipsis">
+                特殊場所の施設
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
@@ -5124,12 +9219,28 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.indexes", "navigation.top", "navigation.instant", "navigation.instant.progress", "search.suggest", "search.highlight", "search.share", "content.tabs.link", "content.tooltips", "toc.follow"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u30b3\u30d4\u30fc\u3057\u307e\u3057\u305f", "clipboard.copy": "\u30af\u30ea\u30c3\u30d7\u30dc\u30fc\u30c9\u3078\u30b3\u30d4\u30fc", "search.result.more.one": "\u3053\u306e\u30da\u30fc\u30b8\u5185\u306b\u3082\u30461\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.more.other": "\u3053\u306e\u30da\u30fc\u30b8\u5185\u306b\u3042\u3068#\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.none": "\u4f55\u3082\u898b\u3064\u304b\u308a\u307e\u305b\u3093\u3067\u3057\u305f", "search.result.one": "1\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.other": "#\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.placeholder": "\u691c\u7d22\u30ad\u30fc\u30ef\u30fc\u30c9\u3092\u5165\u529b\u3057\u3066\u304f\u3060\u3055\u3044", "search.result.term.missing": "\u691c\u7d22\u306b\u542b\u307e\u308c\u306a\u3044", "select.version": "\u30d0\u30fc\u30b8\u30e7\u30f3\u5207\u308a\u66ff\u3048"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.indexes", "navigation.top", "navigation.instant", "navigation.instant.progress", "navigation.path", "navigation.footer", "search.suggest", "search.highlight", "search.share", "content.tabs.link", "content.tooltips", "toc.follow"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u30b3\u30d4\u30fc\u3057\u307e\u3057\u305f", "clipboard.copy": "\u30af\u30ea\u30c3\u30d7\u30dc\u30fc\u30c9\u3078\u30b3\u30d4\u30fc", "search.result.more.one": "\u3053\u306e\u30da\u30fc\u30b8\u5185\u306b\u3082\u30461\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.more.other": "\u3053\u306e\u30da\u30fc\u30b8\u5185\u306b\u3042\u3068#\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.none": "\u4f55\u3082\u898b\u3064\u304b\u308a\u307e\u305b\u3093\u3067\u3057\u305f", "search.result.one": "1\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.other": "#\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.placeholder": "\u691c\u7d22\u30ad\u30fc\u30ef\u30fc\u30c9\u3092\u5165\u529b\u3057\u3066\u304f\u3060\u3055\u3044", "search.result.term.missing": "\u691c\u7d22\u306b\u542b\u307e\u308c\u306a\u3044", "select.version": "\u30d0\u30fc\u30b8\u30e7\u30f3\u5207\u308a\u66ff\u3048"}, "version": null}</script>
     
     
       <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
       
         <script src="https://unpkg.com/mermaid@10/dist/mermaid.min.js"></script>
+      
+        <script src="../../javascripts/theme-filter.js"></script>
+      
+        <script src="../../javascripts/task-checkbox.js"></script>
+      
+        <script src="../../javascripts/self-check.js"></script>
+      
+        <script src="../../javascripts/search-filter.js"></script>
+      
+        <script src="../../javascripts/chatgpt-prompt.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   </body>

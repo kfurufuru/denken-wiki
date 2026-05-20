@@ -1,0 +1,283 @@
+/* ============================================================
+   design-tokens.css — 電験Wiki共通デザイントークン
+   設計: Fカンパニー DENKEN-WIKI監修部 デザイン班（2026-05-03）
+   - アイブ: 装飾削減（影2種・色数最小化）
+   - ラムス: 10原則準拠（Honest / Long-lasting / As little as possible）
+   - 原研哉: 和文タイポ（行間・字間）
+   - 佐藤可士和: スケール段階数の意図的制約（情報整理）
+   - ショガー: 実装ルール（CSS変数・命名規則）
+
+   採用方針: extra_css に design-tokens.css → custom.css の順で読込み、
+   custom.css 内のハードコードされた色・余白・影をトークン参照に置換していく。
+   ============================================================ */
+
+:root {
+  /* ----------------------------------------------------------
+     COLOR — グレー10段階（Schoger原則3: tinted neutral）
+     pure grey ではなく、わずかに青寄りの cool grey を使う
+     ---------------------------------------------------------- */
+  --gray-50:  #F8F8F6;
+  --gray-100: #EEEEEA;
+  --gray-200: #E4E2D9;
+  --gray-300: #C9CDD3;
+  --gray-400: #9AA3AE;
+  --gray-500: #637080;
+  --gray-600: #4A5563;
+  --gray-700: #374151;
+  --gray-800: #2C3A45;
+  --gray-900: #1A2230;
+
+  /* ----------------------------------------------------------
+     COLOR — プライマリ（Wiki teal） / アクセント（Wiki blue）
+     Schoger原則4: hierarchyは色の濃淡で作る。各5段階だけ
+     ---------------------------------------------------------- */
+  --primary-50:  #E8F4F4;
+  --primary-100: #B5DDDF;
+  --primary-300: #5BB8BB;
+  --primary-500: #2E8B8E;   /* base */
+  --primary-700: #1F6568;
+  --primary-900: #0F3A3C;
+
+  --accent-50:   #E8F0F9;
+  --accent-100:  #BDD3EC;
+  --accent-300:  #7AA8D6;
+  --accent-500:  #3A7FC0;   /* link base */
+  --accent-700:  #2B6CB0;
+  --accent-900:  #143E6A;
+
+  /* ----------------------------------------------------------
+     COLOR — セマンティック（各1色のみ・装飾色禁止）
+     アイブ: 装飾のための色は持たない
+     ---------------------------------------------------------- */
+  --color-success: #2E7D32;
+  --color-warning: #C77700;
+  --color-danger:  #C62828;
+  --color-info:    var(--accent-500);
+
+  /* セマンティック背景（admonition / overview node 等の薄い面用）
+     2026-05-03 追加・56.md デザインレビュー結果反映 */
+  --color-success-bg: #E8F5E9;
+  --color-warning-bg: #FFF3E0;
+  --color-danger-bg:  #FFEBEE;
+  --color-info-bg:    var(--accent-50);
+
+  /* ----------------------------------------------------------
+     SURFACE — 用途別エイリアス（直接 gray-* を使わずこちらを参照）
+     ラムス原則6 Honest: 同じ意味は同じ変数名で
+     ---------------------------------------------------------- */
+  --color-bg:        var(--gray-50);
+  --color-surface:   #FFFFFF;
+  --color-elevated:  #FFFFFF;
+  --color-border:    var(--gray-200);
+  --color-border-strong: var(--gray-300);
+  --color-text:      var(--gray-800);
+  --color-text-muted:var(--gray-500);
+  --color-text-on-primary: #FFFFFF;
+  --color-link:      var(--accent-700);
+  --color-highlight: #FFF9C4;
+
+  /* レガシー別名（custom.css の既存参照を壊さないため） */
+  --color-primary: var(--primary-500);
+  --color-accent:  var(--accent-500);
+  --color-muted:   var(--color-text-muted);
+
+  /* ----------------------------------------------------------
+     TYPOGRAPHY — フォントスタック（原研哉: 和文優先）
+     ---------------------------------------------------------- */
+  --font-jp: "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic UI", "Meiryo", sans-serif;
+  --font-en: "Inter", "Segoe UI", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", "Cascadia Code", "Consolas", monospace;
+
+  /* ----------------------------------------------------------
+     TYPOGRAPHY — サイズスケール 8段階（佐藤可士和: 段階制限）
+     1.125倍ではなく1.2倍刻みで明確な差を作る
+     ---------------------------------------------------------- */
+  --text-xs:   0.75rem;   /* 12px - キャプション・バッジ */
+  --text-sm:   0.875rem;  /* 14px - 補助テキスト */
+  --text-base: 1rem;      /* 16px - 本文 */
+  --text-lg:   1.125rem;  /* 18px - 強調本文 */
+  --text-xl:   1.25rem;   /* 20px - h4 */
+  --text-2xl:  1.5rem;    /* 24px - h3 */
+  --text-3xl:  1.875rem;  /* 30px - h2 */
+  --text-4xl:  2.25rem;   /* 36px - h1 */
+
+  /* ----------------------------------------------------------
+     TYPOGRAPHY — 行間・字間（原研哉）
+     和文は欧文より広く取る。1.5は窮屈、1.8が標準、1.9で余裕
+     ---------------------------------------------------------- */
+  --lh-jp-tight: 1.6;     /* 見出し・カード見出し */
+  --lh-jp:       1.8;     /* 本文標準 */
+  --lh-jp-loose: 1.9;     /* 長文記事・ゆとり版 */
+  --lh-en:       1.5;     /* 欧文・コード */
+
+  --ls-jp:        0.04em; /* 和文標準 */
+  --ls-jp-loose:  0.06em; /* 大見出し */
+  --ls-en:        0;
+  --ls-uppercase: 0.08em; /* 全英大文字ラベル */
+
+  /* ----------------------------------------------------------
+     TYPOGRAPHY — 太さ
+     ---------------------------------------------------------- */
+  --weight-normal:    400;
+  --weight-medium:    500;
+  --weight-semibold:  600;
+  --weight-bold:      700;
+
+  /* ----------------------------------------------------------
+     SPACING — 4の倍数 8段階（ショガー）
+     使うときは必ずこのスケールから選ぶ。直接 px / rem を書かない
+     ---------------------------------------------------------- */
+  --space-1:  0.25rem;  /* 4px  */
+  --space-2:  0.5rem;   /* 8px  */
+  --space-3:  0.75rem;  /* 12px */
+  --space-4:  1rem;     /* 16px */
+  --space-6:  1.5rem;   /* 24px */
+  --space-8:  2rem;     /* 32px */
+  --space-12: 3rem;     /* 48px */
+  --space-16: 4rem;     /* 64px */
+
+  /* ----------------------------------------------------------
+     RADIUS — 4段階（ショガー: スケール制限）
+     ---------------------------------------------------------- */
+  --radius-sm:   4px;    /* バッジ・小ボタン */
+  --radius-md:   8px;    /* ボタン・入力欄 */
+  --radius-lg:   12px;   /* カード */
+  --radius-full: 999px;  /* ピル・チェックリスト進捗 */
+
+  /* ----------------------------------------------------------
+     SHADOW — 2段階のみ（アイブ: 影は装飾しない）
+     重ねず単独運用。card hover で sm→md に1段だけ持ち上げる
+     ---------------------------------------------------------- */
+  --shadow-sm: 0 1px 2px rgba(28, 36, 48, 0.06),
+               0 1px 3px rgba(28, 36, 48, 0.04);
+  --shadow-md: 0 4px 12px rgba(28, 36, 48, 0.08),
+               0 2px 4px rgba(28, 36, 48, 0.04);
+
+  /* ----------------------------------------------------------
+     BORDER — 太さ
+     ---------------------------------------------------------- */
+  --border-thin:   1px;
+  --border-thick:  2px;
+  --border-accent: 4px;   /* admonition左ボーダー / 引用 */
+
+  /* ----------------------------------------------------------
+     TRANSITION — 2段階（アイブ: 遷移は静かに）
+     ---------------------------------------------------------- */
+  --ease-out-fast: 120ms cubic-bezier(0.2, 0, 0, 1);
+  --ease-out-base: 200ms cubic-bezier(0.2, 0, 0, 1);
+
+  /* ----------------------------------------------------------
+     Z-INDEX
+     ---------------------------------------------------------- */
+  --z-base:     1;
+  --z-elevated: 10;
+  --z-sticky:   100;
+  --z-modal:    1000;
+  --z-toast:    9999;
+
+  /* ----------------------------------------------------------
+     LAYOUT — コンテンツ幅
+     ---------------------------------------------------------- */
+  --content-max: 72rem;     /* 1152px */
+  --reading-max: 42rem;     /* 672px - 長文記事の最適幅 */
+
+  /* ----------------------------------------------------------
+     MkDocs Material 互換エイリアス
+     既存テーマが参照する変数にトークンを橋渡しする
+     ---------------------------------------------------------- */
+  --md-primary-fg-color:        var(--primary-500);
+  --md-primary-fg-color--light: var(--primary-300);
+  --md-primary-fg-color--dark:  var(--primary-700);
+  --md-primary-bg-color:        var(--color-text-on-primary);
+  --md-accent-fg-color:         var(--accent-500);
+  --md-default-bg-color:        var(--color-bg);
+  --md-default-fg-color:        var(--color-text);
+  --md-typeset-a-color:         var(--color-link);
+  --md-code-bg-color:           var(--gray-100);
+}
+
+/* ============================================================
+   DARK MODE — slate scheme
+   ラムス原則7 Long-lasting: ダークモードでも同じ命名で動く
+   ============================================================ */
+[data-md-color-scheme="slate"] {
+  --color-bg:        #0F141B;
+  --color-surface:   #161B22;
+  --color-elevated:  #1C242E;
+  --color-border:    #30363D;
+  --color-border-strong: #444C56;
+  --color-text:      #E6EDF3;
+  --color-text-muted:#8B949E;
+  --color-text-on-primary: #FFFFFF;
+  --color-link:      #79B8FF;
+  --color-highlight: #4D3F0F;
+
+  --primary-50:  #0F3A3C;
+  --primary-100: #1F6568;
+  --primary-300: #2E8B8E;
+  --primary-500: #5BB8BB;   /* dark mode上はライト寄りが映える */
+  --primary-700: #B5DDDF;
+  --primary-900: #E8F4F4;
+
+  --accent-500:  #79B8FF;
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4),
+               0 1px 3px rgba(0, 0, 0, 0.25);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.5),
+               0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* ============================================================
+   GLOBAL — 和文タイポの底上げ（原研哉）
+   トークンを一括適用するルート設定。
+   既存スタイルに干渉しないよう、最小限の宣言だけ
+   ============================================================ */
+:root {
+  color-scheme: light dark;
+}
+
+html {
+  font-feature-settings: "palt" 1;  /* 和文プロポーショナル詰め */
+}
+
+body {
+  font-family: var(--font-jp);
+  line-height: var(--lh-jp);
+  letter-spacing: var(--ls-jp);
+  color: var(--color-text);
+  background: var(--color-bg);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* 句読点ぶら下げ（和文組版の品位） */
+.md-typeset p,
+.md-typeset li {
+  hanging-punctuation: allow-end;
+}
+
+/* ============================================================
+   UTILITY CLASSES — 任意採用（強制ではない）
+   既存コンポーネントを段階的にトークンに寄せるとき用
+   ============================================================ */
+.u-card {
+  background: var(--color-surface);
+  border: var(--border-thin) solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow var(--ease-out-base),
+              border-color var(--ease-out-base);
+}
+.u-card:hover {
+  box-shadow: var(--shadow-md);
+  border-color: var(--color-border-strong);
+}
+
+.u-text-muted { color: var(--color-text-muted); }
+.u-text-sm    { font-size: var(--text-sm); }
+.u-text-xs    { font-size: var(--text-xs); }
+
+.u-stack-2 > * + * { margin-top: var(--space-2); }
+.u-stack-4 > * + * { margin-top: var(--space-4); }
+.u-stack-6 > * + * { margin-top: var(--space-6); }
