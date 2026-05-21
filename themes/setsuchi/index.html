@@ -8426,12 +8426,12 @@ B種の緩和は「1秒超〜2秒以下→300 / Ig」と「1秒以下→600 / Ig
 <p><strong>「A10高圧、B=150/Ig混触、C10さんびゃく超え、D100以下。ELBでCDは500」</strong></p>
 </blockquote>
 <details class="question">
-<summary>セルフチェック①: B種接地工事で、1秒以内に遮断する装置がある場合の接地抵抗値の上限は？（Igは高圧側の1線地絡電流）</summary>
-<p><strong>600 / Ig</strong> Ω 以下。基本値150/Ig → 1秒超〜2秒以内で300/Ig → 1秒以内で600/Ig（倍々ルール）。<strong>B種は「0.5秒以内」という条件はない</strong>。</p>
+<summary>セルフチェック①: B種接地で、遮断が速いほど接地抵抗値の上限が緩む（150/Ig→300/Ig→600/Ig）のはなぜか。</summary>
+<p><strong>地絡時に低圧側へ危険電圧がかかる「時間」が短ければ短いほど人体への危険が下がるため、速く遮断できる設備は接地抵抗値を緩和できる。</strong> 抵抗値は「危険電圧が続く時間」とのトレードオフで決まる。結果として基本150/Ig → 1秒超〜2秒以内300/Ig → 1秒以内600/Ig（いずれもΩ以下）。</p>
 </details>
 <details class="question">
-<summary>セルフチェック②: C種接地工事とD種接地工事でELB緩和が適用される場合の接地抵抗値と条件は？</summary>
-<p><strong>500</strong> Ω 以下（0.5秒以内に自動遮断する漏電遮断器を施設した場合）。A種・B種にはこの緩和は適用されない。<strong>「0.5秒以内」はC/D種だけのキーワード</strong>。</p>
+<summary>セルフチェック②: C種・D種にだけELBによる500Ω緩和があり、A種・B種にはないのはなぜか。緩和の条件は。</summary>
+<p><strong>C種・D種は「漏電した機器外箱に人が触れる感電」を防ぐ接地で、ELBが地絡を素早く切れば感電を別経路で防げるため抵抗値を緩和できる。A種・B種は高圧機器・中性点という別目的の接地でELBでは代替できない。</strong> 条件は0.5秒以内に動作する漏電遮断器の施設で、このときC種・D種とも500Ω以下に緩和。</p>
 </details>
 <hr />
 <h2 id="_5"><img alt="🔍" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f50d.svg" title=":mag:" /> 技術翻訳表<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
