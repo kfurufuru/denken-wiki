@@ -923,6 +923,31 @@ def _check_caps_v3(content: str, path: Path, items: dict) -> list:
 
     # C06: 削除（Sprint 1で廃止 — 法規記事に書く慣例なし）
 
+    # C07: 改正前後対比mermaidの左右対称形バイアス疑い（2026-05-23 第38条 v2.2 事案・差分マトリクス先行ルール）
+    # 発火条件: KAISEI-*警告あり ＋ mermaid内に「改正前」「改正後」両方あり ＋ 差分マトリクス特徴語なし
+    if re.search(r"KAISEI-\d{4}-\d{3}", content):
+        mermaid_blocks = re.findall(r"```mermaid\s*\n(.*?)\n```", content, re.DOTALL)
+        bias_suspect = False
+        for block in mermaid_blocks:
+            # 改正前/改正後 両方を含むmermaid＝対比図と判定
+            if "改正前" in block and "改正後" in block:
+                # 差分マトリクス特徴語が記事全体にあるか（境界の追加/不変/新設を明示しているか）
+                full_scope = block + "\n" + content
+                has_diff_markers = bool(re.search(
+                    r"境界(?:が)?(?:新設|追加|のみ|1本だけ|1つだけ|単一)|"
+                    r"境界(?:は|が)?(?:不変|変わらない|変動なし)|"
+                    r"\*\*新設\*\*|"
+                    r"差分マトリクス|"
+                    r"改正前(?:は|に)(?:は)?\s*(?:存在しない|存在せず|なかった)|"
+                    r"改正前(?:は|に)\s*\d+\s*kW(?:[A-Za-z]+)?\s*境界の(?:1本|単一)",
+                    full_scope
+                ))
+                if not has_diff_markers:
+                    bias_suspect = True
+                    break
+        if bias_suspect:
+            caps.append(("C07", 89, "改正前後対比mermaidに差分マトリクス特徴語なし（左右対称形バイアスの疑い）"))
+
     return caps
 
 
