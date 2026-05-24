@@ -205,6 +205,7 @@ nav:
       - 第59条（機械器具の感電等防止）: articles/kijun/59.md
       - 第63条（低圧幹線の過電流保護）: articles/kijun/63.md
       - 第64条（使用場所の地絡保護）: articles/kijun/64.md
+      - 第66条（異常時の移動電線・接触電線の遮断）: articles/kijun/66.md
       - 第67条（電気機械器具・接触電線の無線障害防止）: articles/kijun/67.md
       - 第74条（電気さくの施設の禁止）: articles/kijun/74.md
     - 電技解釈:
@@ -228,6 +229,7 @@ nav:
       - 第53条（支持物の足場金具等の施設）: articles/kaishaku/53.md
       - 第59条（支持物の強度）: articles/kaishaku/59.md
       - 第65条（架空電線の高さ）: articles/kaishaku/65.md
+      - 第66条（低高圧架空電線の引張強さに対する安全率）: articles/kaishaku/66.md
       - 第68条（低圧架空電線の施設）: articles/kaishaku/68.md
       - 第71条（高圧架空電線の施設）: articles/kaishaku/71.md
       - 第75条（高圧架空電線の高さ）: articles/kaishaku/75.md
