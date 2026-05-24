@@ -85,7 +85,7 @@
 | 第61条 | 支持物の種類と安全率 | [支持物](../../themes/shijimono.md) | 📝 作成予定 |
 | 第62条 | 風圧荷重の計算 | [支持物](../../themes/shijimono.md) | 📝 作成予定 |
 | 第65条 | 架空電線の高さ | [架空電線路](../../themes/kachiku-densen.md) | 📝 作成予定 |
-| 第66条 | 低圧架空電線の高さ | [架空電線路](../../themes/kachiku-densen.md) | 📝 作成予定 |
+| [第66条](66.md) | 低高圧架空電線の引張強さに対する安全率 | [架空電線路](../../themes/kachiku-densen.md) | ✅ v2.3 |
 | 第67条 | 高圧架空電線の高さ | [架空電線路](../../themes/kachiku-densen.md) | 📝 作成予定 |
 | 第68条 | 低圧架空電線の施設 | [架空電線路](../../themes/kachiku-densen.md) | 📝 作成予定 |
 | 第71条 | 高圧架空電線の施設 | [架空電線路](../../themes/kachiku-densen.md) | 📝 作成予定 |
