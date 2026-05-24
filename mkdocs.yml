@@ -44,6 +44,15 @@ plugins:
       module_name: main
       include_yaml:
         - _data/kakomon.yml
+  - redirects:
+      redirect_maps:
+        # 2026-05-24 Phase E: 第227条⇄第229条 主題スワップ解消リネーム
+        # 旧 227.md（中身は高圧連系の保護装置）は新 229.md に正式リネーム
+        'articles/kaishaku/227.md': 'articles/kaishaku/229.md'
+        # 旧 229.md（中身は逆潮流の制限）は新 228.md に正式リネーム
+        # 注: 新229.md（高圧保護）が同パスに存在するため、外部から旧229.md被リンクで来た場合は
+        # 新229.mdが返る（内容は本来の第229条＝高圧保護で意味的にも近接）。外部リンク救済の主軸は
+        # 旧227.md→新229.mdで担保し、旧229.md→新228.mdは将来追加検討（要kakomon.yml側照合）。
 
 exclude_docs: |
   _data/
@@ -228,8 +237,8 @@ nav:
       - 第220条（直流流出防止変圧器）: articles/kaishaku/220.md
       - 第222条（低圧連系の施設要件）: articles/kaishaku/222.md
       - 第224条（高圧/特別高圧連系の再閉路防止）: articles/kaishaku/224.md
-      - 第227条（高圧連系の施設要件）: articles/kaishaku/227.md
-      - 第229条（逆潮流の制限）: articles/kaishaku/229.md
+      - 第228条（高圧連系の施設要件・逆潮流の制限）: articles/kaishaku/228.md
+      - 第229条（高圧連系の系統連系用保護装置）: articles/kaishaku/229.md
       - 第232条（単独運転の防止）: articles/kaishaku/232.md
     - 電気事業法:
       - articles/jigyoho/index.md
