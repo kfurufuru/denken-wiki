@@ -314,6 +314,9 @@ nav:
       - 頻出数値一覧: reference/numbers.md
       - 類題横断（数値・キーワード横串）: reference/cross-reference.md
       - B問題 計算テンプレート集: reference/b-mondai-template.md
+      - 🆕 安全率マスタ（電技解釈全条文）: reference/safety-factors.md
+      - 🆕 離隔距離マスタ（主要4ブロック）: reference/distance-spacing.md
+      - 🆕 絶縁抵抗・絶縁性能マスタ（省令第22・58条＋解釈第13-16条）: reference/insulation-resistance.md
     - 🔖 用語・索引:
       - 用語の使い分け（決め手集）: reference/term-usage.md
       - 手続き6用語の使い分け（許可・認可・登録・届出・承認・報告）: reference/permit-types.md
@@ -330,3 +333,4 @@ nav:
       - 学習システム全体マップ: reference/system-map.md
       - バージョニング基準: reference/versioning.md
       - 新規記事作成チェックリスト: reference/article-creation-checklist.md
+      - 写真導入ポリシー（ライセンス・クレジット）: reference/photo-policy.md
