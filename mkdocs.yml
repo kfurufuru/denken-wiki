@@ -184,6 +184,7 @@ nav:
       - 第59条（機械器具の感電等防止）: articles/kijun/59.md
       - 第63条（低圧幹線の過電流保護）: articles/kijun/63.md
       - 第64条（使用場所の地絡保護）: articles/kijun/64.md
+      - 第74条（電気さくの施設の禁止）: articles/kijun/74.md
     - 電技解釈:
       - articles/kaishaku/index.md
       - 第1条（用語の定義）: articles/kaishaku/1.md
@@ -211,6 +212,7 @@ nav:
       - 第79条（架空電線と建造物の離隔）: articles/kaishaku/79.md
       - 第81条（架空電線路相互の離隔）: articles/kaishaku/81.md
       - 第120条（地中電線路の施設）: articles/kaishaku/120.md
+      - 第125条（地中電線と他の地中電線等との接近又は交差）: articles/kaishaku/125.md
       - 第133条（電力保安通信設備）: articles/kaishaku/133.md
       - 第143条（引込線の施設）: articles/kaishaku/143.md
       - 第147条（引込口の施設）: articles/kaishaku/147.md
@@ -220,8 +222,10 @@ nav:
       - 第156条（合成樹脂管工事）: articles/kaishaku/156.md
       - 第159条（金属管工事）: articles/kaishaku/159.md
       - 第164条（ケーブル工事）: articles/kaishaku/164.md
+      - 第165条（特殊な低圧屋内配線工事・ライティングダクト等）: articles/kaishaku/165.md
       - 第175条（粉じん危険場所）: articles/kaishaku/175.md
       - 第176条（可燃性ガス危険場所）: articles/kaishaku/176.md
+      - 第192条（電気さくの施設）: articles/kaishaku/192.md
       - 第200条（小勢力回路）: articles/kaishaku/200.md
       - 第220条（直流流出防止変圧器）: articles/kaishaku/220.md
       - 第222条（低圧連系の施設要件）: articles/kaishaku/222.md
