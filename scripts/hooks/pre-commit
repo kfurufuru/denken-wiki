@@ -113,5 +113,27 @@ if [ -n "$NEED_REDIRECT_CHECK" ]; then
     fi
 fi
 
+# 7. kakomon.yml article-topic 整合性監査（kakomon.yml 変更時のみ高速化・ERRORありブロック）
+# 2026-05-26 ChatGPT監修発覚の H29問9 §224 誤記再発防止
+# feedback_kakomon_article_topic_audit / feedback_external_review_blindspot_analysis
+NEED_KAKOMON_CHECK=$(echo "$CHANGED" | grep -E '^(_data/kakomon\.yml|docs/_data/kakomon\.yml|scripts/audit_kakomon_article\.py)$' || true)
+if [ -n "$NEED_KAKOMON_CHECK" ]; then
+    set +e
+    KAKOMON_AUDIT_RESULT=$(PYTHONIOENCODING=utf-8 python scripts/audit_kakomon_article.py 2>&1)
+    KAKOMON_AUDIT_EXIT=$?
+    set -e
+    if [ "$KAKOMON_AUDIT_EXIT" -ne "0" ]; then
+        echo "❌ [pre-commit] kakomon.yml の article欄と topic欄が不整合です。"
+        echo "$KAKOMON_AUDIT_RESULT" | tail -30
+        echo ""
+        echo "→ topic に対応する正しい article 値に修正してください（両ファイル要更新）。"
+        echo "  rule: feedback_kakomon_article_topic_audit"
+        echo "  検出: PYTHONIOENCODING=utf-8 python scripts/audit_kakomon_article.py"
+        echo "  緊急時は --no-verify でスキップ可能。"
+        exit 1
+    fi
+    # 範囲表記 warning は continue（既存大量存在・別タスクで段階対処）
+fi
+
 echo "✅ [pre-commit] チェック完了"
 exit 0
