@@ -44,6 +44,20 @@ plugins:
       module_name: main
       include_yaml:
         - _data/kakomon.yml
+  # 2026-05-24 Phase E: 第227条⇄第229条 主題スワップ解消リネーム
+  # 当初 redirect_maps で 'articles/kaishaku/227.md' → 'articles/kaishaku/229.md' を設定したが、
+  # **新227.md（低圧連系の系統連系用保護装置）が同パスに新規作成された** ため redirect_maps が
+  # 新規ファイルを上書きする衝突が発生。修正方針：
+  # - 新227.md（低圧保護）は実在ファイルとして配信（リダイレクト解除）
+  # - 旧 227.md（中身は高圧連系の保護装置）被リンクの救済は、新227.md冒頭の Phase E 成功ボックスで
+  #   「旧 227.md（高圧連系の保護装置）は 229.md に正式リネーム済」と明示し、新229.md への内部リンクを設置
+  # - 旧 229.md（逆潮流の制限）被リンクの救済も同様に、新229.md冒頭の Phase E 成功ボックスでカバー
+  # 結論: redirect_maps は **空配列**。被リンク救済は記事本体の冒頭メッセージで実現
+  #
+  # 教訓: redirect_maps は「旧パスに新規ファイルを置かない」前提でのみ機能する。リネーム+同パス新規作成
+  #       が同時発生する場合、redirect_maps を残すと新規ファイルが配信不能になる。
+  #
+  # 当面 mkdocs-redirects プラグイン自体は無効化（将来 redirect 必要時に再度追加検討）
 
 exclude_docs: |
   _data/
@@ -230,8 +244,9 @@ nav:
       - 第220条（直流流出防止変圧器）: articles/kaishaku/220.md
       - 第222条（低圧連系の施設要件）: articles/kaishaku/222.md
       - 第224条（高圧/特別高圧連系の再閉路防止）: articles/kaishaku/224.md
-      - 第227条（高圧連系の施設要件）: articles/kaishaku/227.md
-      - 第229条（逆潮流の制限）: articles/kaishaku/229.md
+      - 第227条（低圧連系の系統連系用保護装置）: articles/kaishaku/227.md
+      - 第228条（高圧連系の施設要件・逆潮流の制限）: articles/kaishaku/228.md
+      - 第229条（高圧連系の系統連系用保護装置）: articles/kaishaku/229.md
       - 第232条（単独運転の防止）: articles/kaishaku/232.md
     - 電気事業法:
       - articles/jigyoho/index.md

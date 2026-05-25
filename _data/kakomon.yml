@@ -702,7 +702,7 @@ problems:
     topic: "分散型電源の高圧連系時の系統連系用保護装置"
     theme: "bunsan-dengen"
     form: "穴埋"
-    article: "解釈§227"
+    article: "解釈§229"
   - year: "H30"
     year_label: "平成30年（2018年）"
     num: 10
@@ -891,7 +891,7 @@ problems:
     topic: "分散型電源の高圧連系時の系統連系用保護装置"
     theme: "bunsan-dengen"
     form: "穴埋"
-    article: "解釈§227"
+    article: "解釈§229"
   - year: "R02"
     year_label: "令和2年（2020年）"
     num: 11
@@ -1234,7 +1234,7 @@ problems:
     topic: "分散型電源の低圧及び高圧連系時の施設要件"
     theme: "bunsan-dengen"
     form: "穴埋"
-    article: "解釈§220〜§232"
+    article: "解釈§226, §228"
   - year: "R05上"
     year_label: "令和5年上期（2023年）"
     num: 8
@@ -1417,7 +1417,7 @@ problems:
     topic: "高圧連系時の系統連系用保護装置"
     theme: "bunsan-dengen"
     form: "穴埋"
-    article: "解釈§227"
+    article: "解釈§229"
   - year: "R06上"
     year_label: "令和6年上期（2024年）"
     num: 8
