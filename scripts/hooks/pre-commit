@@ -92,5 +92,26 @@ if [ -n "$NEED_LAW_CHECK" ]; then
     fi
 fi
 
+# 6. redirect_maps 衝突検出（mkdocs.yml 変更時のみ高速化・NG件あればブロック）
+# Phase E (2026-05-24) redirect bug 再発防止
+# feedback_redirect_vs_new_file_collision
+NEED_REDIRECT_CHECK=$(echo "$CHANGED" | grep -E '^(mkdocs\.yml|docs/articles/.+\.md)$' || true)
+if [ -n "$NEED_REDIRECT_CHECK" ]; then
+    set +e
+    REDIRECT_RESULT=$(python scripts/precommit_redirect_collision.py 2>&1)
+    REDIRECT_EXIT=$?
+    set -e
+    if [ "$REDIRECT_EXIT" -ne "0" ]; then
+        echo "❌ [pre-commit] redirect_maps と docs/ 実在ファイルが衝突しています。"
+        echo "$REDIRECT_RESULT" | tail -20
+        echo ""
+        echo "→ 該当 redirect_maps entry を削除してください（新規ファイル実体を優先）。"
+        echo "  rule: feedback_redirect_vs_new_file_collision"
+        echo "  検出: python scripts/precommit_redirect_collision.py"
+        echo "  緊急時は --no-verify でスキップ可能。"
+        exit 1
+    fi
+fi
+
 echo "✅ [pre-commit] チェック完了"
 exit 0
