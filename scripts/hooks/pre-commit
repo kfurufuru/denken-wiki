@@ -5,6 +5,7 @@
 # - check_kakomon_consistency.py: 過去問テーブルとby-field.mdの整合性（警告のみ）
 # - audit_titles.py: kijun/ H1 と省令公式条見出しの整合性（NG件あればブロック・R6機械化）
 # - check_law_citations.py: 法令引用整合性（電気事業法第N条＋認可/届出/対象 の検証・NG件あればブロック）
+# - check_law_facts.py: 法令数値ハルシネーション類型検出（H01/H02/H03・ERRORあればブロック）
 
 set -e
 REPO_ROOT="$(git rev-parse --show-toplevel)"
@@ -133,6 +134,30 @@ if [ -n "$NEED_KAKOMON_CHECK" ]; then
         exit 1
     fi
     # 範囲表記 warning は continue（既存大量存在・別タスクで段階対処）
+fi
+
+# 8. 法令数値ハルシネーション類型検出（docs/ .md 変更時・ERRORあればブロック）
+# 2026-05-31 ChatGPT・古舘さん指摘3件(H01/H02/H03)の再発防止
+# feedback_law_value_conservation_bias / feedback_hallucination_taxonomy
+NEED_LAW_FACTS_CHECK=$(echo "$CHANGED" | grep -E '^docs/.+\.md$' || true)
+if [ -n "$NEED_LAW_FACTS_CHECK" ]; then
+    set +e
+    LAW_FACTS_RESULT=$(PYTHONIOENCODING=utf-8 python scripts/check_law_facts.py --staged 2>&1)
+    LAW_FACTS_EXIT=$?
+    set -e
+    if [ "$LAW_FACTS_EXIT" -ne "0" ]; then
+        echo "❌ [pre-commit] 法令数値ハルシネーション類型を検出しました（check_law_facts.py）。"
+        echo "$LAW_FACTS_RESULT"
+        echo ""
+        echo "→ 上記の誤記を修正してから再commitしてください。"
+        echo "  H01: 解釈第14条の根拠は「漏えい電流1mA以下」(1/2000は省令第22条/電線路)"
+        echo "  H02: 低圧電路の活線代替根拠は第14条第1項第二号(第15条は高圧・特高の耐圧試験)"
+        echo "  H03: 三相3線式200VはΔ結線主流→対地200V→0.2MΩ(B種接地のみで0.1MΩと断定しない)"
+        echo "  一次ソース: 解釈第14条第1項第二号・省令第22条・省令第58条"
+        echo "  確認: python scripts/check_law_facts.py"
+        echo "  緊急時は --no-verify でスキップ可能（非推奨）。"
+        exit 1
+    fi
 fi
 
 echo "✅ [pre-commit] チェック完了"
