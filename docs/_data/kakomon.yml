@@ -1119,10 +1119,10 @@ problems:
   - year: "R04下"
     year_label: "令和4年下期（2022年）"
     num: 4
-    topic: "電気供給のための電気設備の施設（供給設備）"
+    topic: "架空電線等の高さ（感電・交通安全）"
     theme: "kachiku-densen"
     form: "穴埋"
-    article: "省令§20"
+    article: "省令§25, 解釈§68"
   - year: "R04下"
     year_label: "令和4年下期（2022年）"
     num: 5
@@ -1294,10 +1294,10 @@ problems:
   - year: "R05下"
     year_label: "令和5年下期（2023年）"
     num: 3
-    topic: "電気設備技術基準に規定される保安原則"
+    topic: "電路の絶縁の原則と例外"
     theme: "yogo-teigi"
     form: "穴埋"
-    article: "省令§1〜§4"
+    article: "省令§5"
   - year: "R05下"
     year_label: "令和5年下期（2023年）"
     num: 4
@@ -1478,10 +1478,10 @@ problems:
   - year: "R06下"
     year_label: "令和6年下期（2024年）"
     num: 3
-    topic: "電気設備技術基準の保安原則"
+    topic: "電路の絶縁の原則と例外"
     theme: "jigyoho-taikei"
     form: "論説"
-    article: "省令第5条"
+    article: "省令§5"
   - year: "R06下"
     year_label: "令和6年下期（2024年）"
     num: 4
