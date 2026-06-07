@@ -103,7 +103,11 @@ extra_css:
   - stylesheets/custom.css
 
 extra_javascript:
-  - https://unpkg.com/mermaid@10/dist/mermaid.min.js
+  # self-hosted mermaid@10.9.6（旧: https://unpkg.com/mermaid@10/dist/mermaid.min.js）
+  # 社内ネットワーク等で unpkg.com が遮断/低速だと mermaid.js が読めず、図が生コード
+  # （flowchart TD ... の羅列）のまま表示され「文字化け」に見える。同一オリジン配信で回避。
+  # 更新時は `curl -sL https://unpkg.com/mermaid@10/dist/mermaid.min.js -o docs/javascripts/mermaid.min.js`
+  - javascripts/mermaid.min.js
   - javascripts/theme-filter.js
   - javascripts/task-checkbox.js
   - javascripts/self-check.js
