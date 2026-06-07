@@ -114,7 +114,11 @@ extra_javascript:
   - javascripts/search-filter.js
   - javascripts/chatgpt-prompt.js
   - javascripts/mathjax.js
-  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+  # self-hosted MathJax（旧: https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js）
+  # 社内NW等で jsdelivr 遮断時、数式が生LaTeX（\(...\)）表示になる文字化けを回避。
+  # CHTML→SVG出力に変更：SVGはグリフをパス内蔵し外部フォント読込が不要＝単一ファイルで自己完結。
+  # 更新時は `curl -sL https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-svg.js -o docs/javascripts/tex-mml-svg.js`
+  - javascripts/tex-mml-svg.js
 
 extra:
   social:
