@@ -65,7 +65,7 @@ problems:
     topic: "ライティングダクト工事での低圧屋内配線の施設"
     theme: "haisen-koji"
     form: "論説"
-    article: "解釈§166"
+    article: "解釈§165"
   - year: "H23"
     year_label: "平成23年（2011年）"
     num: 10
@@ -1182,7 +1182,7 @@ problems:
   - year: "R04下"
     year_label: "令和4年下期（2022年）"
     num: 13
-    topic: "配電線路の絶縁抵抗の低下"
+    topic: "非接地高圧電路の絶縁抵抗低下・地絡電流（テブナン）"
     theme: "zetsuen"
     form: "計算"
     article: "解釈§14"
@@ -1295,7 +1295,7 @@ problems:
     year_label: "令和5年下期（2023年）"
     num: 3
     topic: "電路の絶縁の原則と例外"
-    theme: "yogo-teigi"
+    theme: "zetsuen"
     form: "穴埋"
     article: "省令§5"
   - year: "R05下"
@@ -1339,7 +1339,7 @@ problems:
     topic: "ライティングダクト工事での屋内配線の施設"
     theme: "haisen-koji"
     form: "穴埋"
-    article: "解釈§166"
+    article: "解釈§165"
   - year: "R05下"
     year_label: "令和5年下期（2023年）"
     num: 10
@@ -1417,7 +1417,7 @@ problems:
     topic: "高圧連系時の系統連系用保護装置"
     theme: "bunsan-dengen"
     form: "穴埋"
-    article: "解釈第229条"
+    article: "解釈§229"
   - year: "R06上"
     year_label: "令和6年上期（2024年）"
     num: 8
@@ -1479,7 +1479,7 @@ problems:
     year_label: "令和6年下期（2024年）"
     num: 3
     topic: "電路の絶縁の原則と例外"
-    theme: "jigyoho-taikei"
+    theme: "zetsuen"
     form: "論説"
     article: "省令§5"
   - year: "R06下"
@@ -1509,7 +1509,7 @@ problems:
     topic: "分散型電源における再閉路時の事故防止"
     theme: "bunsan-dengen"
     form: "穴埋"
-    article: "解釈第224条"
+    article: "解釈§224"
   - year: "R06下"
     year_label: "令和6年下期（2024年）"
     num: 8
