@@ -1185,7 +1185,7 @@ problems:
     topic: "非接地高圧電路の絶縁抵抗低下・地絡電流（テブナン）"
     theme: "zetsuen"
     form: "計算"
-    article: "解釈§13, §15"
+    article: "解釈§14"
   - year: "R05上"
     year_label: "令和5年上期（2023年）"
     num: 1
@@ -1269,7 +1269,7 @@ problems:
     topic: "B種接地工事の抵抗値及び常時流れる電流"
     theme: "setsuchi"
     form: "計算"
-    article: "解釈§18"
+    article: "解釈§17"
   - year: "R05上"
     year_label: "令和5年上期（2023年）"
     num: 13
@@ -1295,7 +1295,7 @@ problems:
     year_label: "令和5年下期（2023年）"
     num: 3
     topic: "電路の絶縁の原則と例外"
-    theme: "yogo-teigi"
+    theme: "zetsuen"
     form: "穴埋"
     article: "省令§5"
   - year: "R05下"
@@ -1353,7 +1353,7 @@ problems:
     topic: "需要設備付近で発生した1線地絡事故（計算）"
     theme: "setsuchi"
     form: "計算"
-    article: "解釈§18"
+    article: "解釈§17"
   - year: "R05下"
     year_label: "令和5年下期（2023年）"
     num: 12
@@ -1479,7 +1479,7 @@ problems:
     year_label: "令和6年下期（2024年）"
     num: 3
     topic: "電路の絶縁の原則と例外"
-    theme: "jigyoho-taikei"
+    theme: "zetsuen"
     form: "論説"
     article: "省令§5"
   - year: "R06下"
@@ -1506,7 +1506,7 @@ problems:
   - year: "R06下"
     year_label: "令和6年下期（2024年）"
     num: 7
-    topic: "高圧又は特別高圧連系における再閉路時の事故防止"
+    topic: "分散型電源における再閉路時の事故防止"
     theme: "bunsan-dengen"
     form: "穴埋"
     article: "解釈§224"
