@@ -6,6 +6,19 @@
 # - audit_titles.py: kijun/ H1 と省令公式条見出しの整合性（NG件あればブロック・R6機械化）
 # - check_law_citations.py: 法令引用整合性（電気事業法第N条＋認可/届出/対象 の検証・NG件あればブロック）
 # - check_law_facts.py: 法令数値ハルシネーション類型検出（H01/H02/H03・ERRORあればブロック）
+# - [先頭ガード] master/main への直接コミットを禁止（feature→PR を強制）
+
+# === master 直コミット禁止ガード（feedback-denken-wiki-master-branch-workflow）===
+# local master への直接コミットは origin と乖離し未push成果を孤立させる事故の温床。
+# 必ず feature ブランチ → PR → squash-merge を通すこと。
+_guard_branch="$(git rev-parse --abbrev-ref HEAD 2>/dev/null || echo '')"
+if [ "$_guard_branch" = "master" ] || [ "$_guard_branch" = "main" ]; then
+    echo "❌ [pre-commit] '$_guard_branch' への直接コミットは禁止です。"
+    echo "→ feature ブランチを切ってコミットし、PR 経由でマージしてください:"
+    echo "     git switch -c feature/<topic>"
+    echo "   緊急時のみ git commit --no-verify でスキップ可能（非推奨）。"
+    exit 1
+fi
 
 set -e
 REPO_ROOT="$(git rev-parse --show-toplevel)"
