@@ -205,6 +205,7 @@ nav:
       - 第59条（機械器具の感電等防止）: articles/kijun/59.md
       - 第63条（低圧幹線の過電流保護）: articles/kijun/63.md
       - 第64条（使用場所の地絡保護）: articles/kijun/64.md
+      - 第66条（異常時の移動電線・接触電線の遮断）: articles/kijun/66.md
       - 第67条（電気機械器具・接触電線の無線障害防止）: articles/kijun/67.md
       - 第74条（電気さくの施設の禁止）: articles/kijun/74.md
     - 電技解釈:
@@ -228,7 +229,9 @@ nav:
       - 第38条（発変電所等の避雷器）: articles/kaishaku/38.md
       - 第53条（支持物の足場金具等の施設）: articles/kaishaku/53.md
       - 第59条（支持物の強度）: articles/kaishaku/59.md
+      - 第61条（支線の施設方法及び支柱による代用）: articles/kaishaku/61.md
       - 第65条（架空電線の高さ）: articles/kaishaku/65.md
+      - 第66条（低高圧架空電線の引張強さに対する安全率）: articles/kaishaku/66.md
       - 第68条（低圧架空電線の施設）: articles/kaishaku/68.md
       - 第71条（高圧架空電線の施設）: articles/kaishaku/71.md
       - 第75条（高圧架空電線の高さ）: articles/kaishaku/75.md
@@ -342,6 +345,9 @@ nav:
       - 頻出数値一覧: reference/numbers.md
       - 類題横断（数値・キーワード横串）: reference/cross-reference.md
       - B問題 計算テンプレート集: reference/b-mondai-template.md
+      - 🆕 安全率マスタ（電技解釈全条文）: reference/safety-factors.md
+      - 🆕 離隔距離マスタ（主要4ブロック）: reference/distance-spacing.md
+      - 🆕 絶縁抵抗・絶縁性能マスタ（省令第22・58条＋解釈第13-16条）: reference/insulation-resistance.md
     - 🔖 用語・索引:
       - 用語の使い分け（決め手集）: reference/term-usage.md
       - 手続き6用語の使い分け（許可・認可・登録・届出・承認・報告）: reference/permit-types.md
@@ -358,3 +364,4 @@ nav:
       - 学習システム全体マップ: reference/system-map.md
       - バージョニング基準: reference/versioning.md
       - 新規記事作成チェックリスト: reference/article-creation-checklist.md
+      - 写真導入ポリシー（ライセンス・クレジット）: reference/photo-policy.md

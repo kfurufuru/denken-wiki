@@ -1168,10 +1168,10 @@ problems:
   - year: "R04下"
     year_label: "令和4年下期（2022年）"
     num: 11
-    topic: "高圧架空電線の引張強さ"
+    topic: "高圧架空電線の引張強さに対する安全率と許容引張荷重"
     theme: "densen-cable"
     form: "計算"
-    article: "解釈§65"
+    article: "解釈§66"
   - year: "R04下"
     year_label: "令和4年下期（2022年）"
     num: 12
