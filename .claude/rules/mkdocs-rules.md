@@ -58,7 +58,7 @@
 
 ## 出題頻度・過去問実績の記載ルール
 
-**正データソース**: `docs/_data/kakomon.yml`（247問DB・H23〜R07下）
+**正データソース**: `_data/kakomon.yml`（247問DB・H23〜R07下／mkdocs build が `include_yaml` で読む正本）。`docs/_data/kakomon.yml` は同期コピー（`exclude_docs` でビルド対象外）で、両者は `scripts/check_kakomon_dual_sync.py`（CI: quality-check.yml ／ ローカルは `--fix` で再同期）が **byte 一致を保証**する。記事内の `出典: docs/_data/kakomon.yml` 等の引用は両ファイル同値のため有効。
 
 - 過去問実績テーブルは**必ず kakomon.yml を一次照合**してから記載する。記憶ベースの「H25頃」「R03」等は推測値であり禁止
 - 出題頻度の `★` 数は実件数に整合させる（pre-commit hookでチェック済み）：
