@@ -130,6 +130,7 @@
 | 電験王 | [denken-ou.com](https://denken-ou.com/) | 過去問解説。本Wikiでは解説文を引用しない（著作権配慮）。URL パターン: `houkir{年}-{期}-{問}` |
 | **過去問.com 第三種電気主任技術者** | [kakomonn.com/denken3/](https://kakomonn.com/denken3/) | 過去問複数年度横断検索。denken-ou.com の404補完用 |
 | 電気の神髄 | [shimatake-web.com](https://shimatake-web.com/) | 実務寄りの解説が豊富 |
+| 電験 法規解説（joho.info） | [denken.joho.info](https://denken.joho.info/) | 法規分野の体系・条文解説。電気事業法の法令ピラミッドや電技解釈の位置づけが整理されている |
 
 !!! warning "過去問解説は複数ソース併用"
     denken-ou.com 単独依存は404多発のため避ける（2026-05 監査時）。`過去問.com` および `公式PDF` を併用して照合する運用が必須。
