@@ -20,6 +20,18 @@ pending:
     used_in: "kaishaku/220 監査"
     used_at: "2026-05-10"
     rationale: "解釈第220条系の『直流流出防止』の実規定はJEACに集約されている可能性"
+  - url: "https://denken.joho.info/"
+    title: "電験 法規解説（joho.info）"
+    category: "試験情報"
+    used_in: "themes/jigyoho-taikei・reference/hourei-taikei（参照ページ: /hoki/denkijigyoho-taikei-kankeihorei/）"
+    used_at: "2026-06-08"
+    rationale: "省令レベルの発電設備別技術基準省令（火技/水技/風技/太陽電池）の列挙と『電技解釈に従う義務の有無』の論点が体系図に欠けていた。links.md 4.2解説サイトに直接反映済"
+  - url: "https://laws.e-gov.go.jp/law/503M60000400029"
+    title: "発電用太陽電池設備に関する技術基準を定める省令（令和3年経済産業省令第29号）"
+    category: "法令原文"
+    used_in: "reference/hourei-taikei 省令テーブル追記"
+    used_at: "2026-06-08"
+    rationale: "発電設備別技術基準省令の正式名称・制定年の一次照合源（WebFetch由来の略称『大技』が不正確だったため）"
 
 # 反映済み（マージスクリプトが移動する領域・直接編集禁止）
 merged: []
