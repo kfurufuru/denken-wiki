@@ -842,7 +842,7 @@ problems:
     topic: "使用電圧6600Vの交流電路の絶縁性能"
     theme: "zetsuen"
     form: "穴埋"
-    article: "省令§58, 解釈§14"
+    article: "省令§5, 解釈§15"
   - year: "R02"
     year_label: "令和2年（2020年）"
     num: 4
@@ -1080,7 +1080,7 @@ problems:
     topic: "低圧電線路の絶縁耐力試験"
     theme: "zetsuen"
     form: "計算"
-    article: "解釈§15"
+    article: "省令§22"
   - year: "R04上"
     year_label: "令和4年上期（2022年）"
     num: 12
