@@ -44,6 +44,18 @@ pending:
     used_in: "kaishaku/index.md 章節構成の確認"
     used_at: "2026-06-08"
     rationale: "省令と解釈の目次を一覧化。解釈の第3節=電路の絶縁及び接地(13〜19条)・第4節=電気機械器具の保安原則(20〜31条)の節構成確認に有用（ただし解釈1〜12条は省略されている点に注意）"
+  - url: "https://www.meti.go.jp/policy/safety_security/industrial_safety/law/files/dengikaishaku.pdf"
+    title: "経済産業省 電気設備の技術基準の解釈（20130215商局第4号・最新版PDF）"
+    category: "法令原文"
+    used_in: "kaishaku/12（電線の接続法）新規作成"
+    used_at: "2026-06-08"
+    rationale: "電技解釈の現行公式PDF（法令本文）。解釈は e-Gov 法令DBに無い（通達）ため条文一次ソースとして必須。第12条の第一〜五号・20%・異種金属電食の照合に使用"
+  - url: "https://denken-ou.com/houkih23-4/"
+    title: "電験王3 H23 法規 問4（電線の接続・論説）"
+    category: "試験情報"
+    used_in: "kaishaku/12（電線の接続法）新規作成"
+    used_at: "2026-06-08"
+    rationale: "解釈第12条が論説の誤選択肢（20%→25%・例外『含め』）として出題された実例。改変なしの過去問引用元として使用"
 
 # 反映済み（マージスクリプトが移動する領域・直接編集禁止）
 merged: []
