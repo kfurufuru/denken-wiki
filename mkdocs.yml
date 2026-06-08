@@ -134,6 +134,7 @@ nav:
     - 保護リレー（保護継電器）: themes/hogo-relay.md
     - 高圧機械器具の施設（解釈第21条）: themes/koatsu-kiki-shisetsu.md
     - 分散型電源・系統連系: themes/bunsan-dengen.md
+    - 単独運転の防止: themes/tandoku-unten-boushi.md
     - 特殊場所の施設: themes/tokushu-basho.md
     - 配線工事・屋内配線: themes/haisen-koji.md
     - 電線・ケーブルの選定: themes/densen-cable.md
@@ -226,12 +227,19 @@ nav:
       - 第175条（粉じん危険場所）: articles/kaishaku/175.md
       - 第176条（可燃性ガス危険場所）: articles/kaishaku/176.md
       - 第200条（小勢力回路）: articles/kaishaku/200.md
-      - 第220条（直流流出防止変圧器）: articles/kaishaku/220.md
-      - 第222条（低圧連系の施設要件）: articles/kaishaku/222.md
+      - 第220条（用語の定義）: articles/kaishaku/220.md
+      - 第221条（直流流出防止変圧器）: articles/kaishaku/221.md
+      - 第222条（限流リアクトル等の施設）: articles/kaishaku/222.md
+      - 第223条（自動負荷制限の実施）: articles/kaishaku/223.md
       - 第224条（高圧/特別高圧連系の再閉路防止）: articles/kaishaku/224.md
-      - 第227条（高圧連系の施設要件）: articles/kaishaku/227.md
-      - 第229条（逆潮流の制限）: articles/kaishaku/229.md
-      - 第232条（単独運転の防止）: articles/kaishaku/232.md
+      - 第225条（電話設備の施設）: articles/kaishaku/225.md
+      - 第226条（低圧連系時の施設要件）: articles/kaishaku/226.md
+      - 第227条（低圧連系時の系統連系用保護装置）: articles/kaishaku/227.md
+      - 第228条（高圧連系時の施設要件）: articles/kaishaku/228.md
+      - 第229条（高圧連系時の系統連系用保護装置）: articles/kaishaku/229.md
+      - 第230条（特別高圧連系時の施設要件）: articles/kaishaku/230.md
+      - 第231条（特別高圧連系時の系統連系用保護装置）: articles/kaishaku/231.md
+      - 第232条（高圧・特別高圧連系における例外）: articles/kaishaku/232.md
     - 電気事業法:
       - articles/jigyoho/index.md
       - 第2条（定義）: articles/jigyoho/2.md
