@@ -4,12 +4,16 @@ on:
   pull_request:
     paths:
       - 'docs/**'
+      - '_data/kakomon.yml'
+      - 'scripts/check_kakomon_dual_sync.py'
       - 'wiki_check.py'
       - '.github/workflows/quality-check.yml'
   push:
     branches: [master]
     paths:
       - 'docs/**'
+      - '_data/kakomon.yml'
+      - 'scripts/check_kakomon_dual_sync.py'
       - 'wiki_check.py'
       - '.github/workflows/quality-check.yml'
 
@@ -23,6 +27,8 @@ jobs:
           python-version: '3.11'
       - name: Run wiki_check.py
         run: python wiki_check.py docs/
+      - name: kakomon dual-file sync guard (_data/ == docs/_data/)
+        run: python scripts/check_kakomon_dual_sync.py
       - name: MathJax block math sanity (arithmatex blank-line check)
         run: |
           set -e
