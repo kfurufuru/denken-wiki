@@ -226,7 +226,7 @@ problems:
     topic: "高圧又は特別高圧の電路に施設する過電流遮断器"
     theme: "hogo-sochi"
     form: "穴埋"
-    article: "解釈§35"
+    article: "解釈§34"
   - year: "H25"
     year_label: "平成25年（2013年）"
     num: 7
@@ -1073,7 +1073,7 @@ problems:
     topic: "過電流継電器と真空遮断器の連動動作試験"
     theme: "hogo-sochi"
     form: "計算"
-    article: "解釈§33"
+    article: "解釈§34"
   - year: "R04上"
     year_label: "令和4年上期（2022年）"
     num: 11
