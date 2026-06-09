@@ -17,9 +17,9 @@ usage:
   python scripts/check_stale_evidence.py --include-warn    # メタ未設定もstale扱いで集計
   python scripts/check_stale_evidence.py --today 2026-05-16  # テスト用に基準日固定
 
-メタ表記（denken-wiki 標準）:
-  | **照合日** | 2026-05-02（補足コメント） |
-  | **次回監査** | 2026-11-02 |          ← 任意
+メタ表記（denken-wiki 標準・どちらの形式も照合日として拾う）:
+  テーブル形式: | **照合日** | 2026-05-02 |  ／  | **次回監査** | 2026-11-02 |（任意）
+  フッター形式: *最終確認: 2026-05-02 | ステータス: v2.7 | ...*（照合日テーブルが無い場合の fallback）
 
 依存: 標準ライブラリのみ。
 """
@@ -52,6 +52,11 @@ VERIFIED_RE = re.compile(
 NEXT_AUDIT_RE = re.compile(
     r"\|\s*\*\*次回監査\*\*\s*\|\s*(\d{4}-\d{2}-\d{2})"
 )
+# フッター形式（CLAUDE.md 標準）: *最終確認: YYYY-MM-DD | ステータス: ...*
+# 照合日テーブルを持たない記事の verified_on を fallback で拾う
+VERIFIED_FOOTER_RE = re.compile(
+    r"最終確認\s*[:：]\s*(\d{4}-\d{2}-\d{2})"
+)
 
 
 @dataclass
@@ -76,7 +81,8 @@ def parse_date(s: str) -> date | None:
 
 def parse_article(path: Path) -> Record:
     text = path.read_text(encoding="utf-8")
-    v = VERIFIED_RE.search(text)
+    # 照合日テーブルを優先し、無ければ最終確認フッターを fallback で拾う
+    v = VERIFIED_RE.search(text) or VERIFIED_FOOTER_RE.search(text)
     n = NEXT_AUDIT_RE.search(text)
     verified = parse_date(v.group(1)) if v else None
     next_audit = parse_date(n.group(1)) if n else None

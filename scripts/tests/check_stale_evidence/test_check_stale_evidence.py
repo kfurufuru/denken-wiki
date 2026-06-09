@@ -50,6 +50,12 @@ class StaleEvidenceTest(unittest.TestCase):
     def test_due_soon(self):
         self.assertEqual(self._classify("sample_due_soon.md"), "DUE_SOON")
 
+    def test_footer_format(self):
+        # 照合日テーブルが無く「*最終確認: YYYY-MM-DD ...*」フッターだけの記事も拾う
+        rec = mod.parse_article(HERE / "sample_footer_format.md")
+        self.assertEqual(rec.verified_on, date(2026, 3, 1))
+        self.assertEqual(mod.classify(rec, self.TODAY), "OK")
+
     def test_inferred_next_audit(self):
         rec = mod.parse_article(HERE / "sample_inferred.md")
         self.assertIsNotNone(rec.next_audit)
