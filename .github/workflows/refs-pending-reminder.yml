@@ -1,0 +1,106 @@
+name: Refs pending reminder
+
+on:
+  schedule:
+    # 月初 9:00 JST = 0:00 UTC（既存 audit と同 cadence・別ジョブ）
+    - cron: '0 0 1 * *'
+  workflow_dispatch:
+    # 手動実行も可
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  refs-pending:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install deps
+        run: python -m pip install --quiet pyyaml
+
+      - name: merge_refs dry-run
+        id: refs
+        run: |
+          mkdir -p inbox
+          # dry-run のみ。links.md には一切書き込まない（実反映は人間が手動で）
+          python scripts/merge_refs.py --dry-run | tee inbox/refs-pending-report.txt || true
+          ADD=$(grep -cE '^[[:space:]]*\[ADD\]' inbox/refs-pending-report.txt || true)
+          WARN=$(grep -c 'カテゴリ未マッチ' inbox/refs-pending-report.txt || true)
+          echo "add_count=${ADD:-0}" >> "$GITHUB_OUTPUT"
+          echo "warn_count=${WARN:-0}" >> "$GITHUB_OUTPUT"
+          echo "actionable=$(( ${ADD:-0} + ${WARN:-0} ))" >> "$GITHUB_OUTPUT"
+
+      - name: Ensure refs label exists
+        if: steps.refs.outputs.actionable != '0'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh label create refs --color 1D76DB \
+            --description "未反映の参考文献（refs-pending.yml）" 2>/dev/null || true
+
+      - name: Create issue on pending refs
+        if: steps.refs.outputs.actionable != '0'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # 既に open な refs Issue があれば二重作成しない（処理されるまで1件のまま）
+          EXISTING=$(gh issue list --label refs --state open --json number --jq 'length')
+          if [ "${EXISTING:-0}" != "0" ]; then
+            echo "open な refs Issue が既に存在するため新規作成をスキップ"
+            exit 0
+          fi
+          {
+            echo "## 未反映の参考文献あり（即マージ可 ${{ steps.refs.outputs.add_count }}件／カテゴリ未マッチ ${{ steps.refs.outputs.warn_count }}件）"
+            echo ""
+            echo "\`_data/refs-pending.yml\` に未処理の参考文献があります（\`.claude/rules/refs-auto-reflect.md\` の月次マージ運用）。"
+            echo "本ワークフローは **dry-run のみ**。実反映は下記コマンドを手動実行してください。"
+            echo ""
+            echo "### 即マージ可能（links.md の既存セクションにマッチ）"
+            echo "\`docs/reference/links.md\` に追記し、pending → merged へ移動します:"
+            echo ""
+            echo '```bash'
+            echo "python scripts/merge_refs.py --dry-run   # 確認"
+            echo "python scripts/merge_refs.py             # 実反映"
+            echo '```'
+            echo ""
+            echo "### カテゴリ未マッチ（先に links.md にセクション追加が必要）"
+            echo "category がどの H2 見出しにもマッチしないため保留中。\`docs/reference/links.md\` に該当セクションを作ってから再マージしてください。"
+            echo ""
+            echo "<details><summary>dry-run 全文（実行時点）</summary>"
+            echo ""
+            echo '```'
+            cat inbox/refs-pending-report.txt
+            echo '```'
+            echo ""
+            echo "</details>"
+            echo ""
+            echo "> 件数は Issue 作成時点のもの。最新は \`workflow_dispatch\` 再実行か手元の \`--dry-run\` で確認。"
+          } > inbox/refs-issue-body.md
+          gh issue create \
+            --title "[refs] 未反映の参考文献 即マージ可${{ steps.refs.outputs.add_count }}件＋未マッチ${{ steps.refs.outputs.warn_count }}件" \
+            --body-file inbox/refs-issue-body.md \
+            --label refs
+
+      - name: Auto-close resolved refs issues
+        if: steps.refs.outputs.actionable == '0'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh issue list --label refs --state open --json number --jq '.[].number' | while read n; do
+            [ -z "$n" ] && continue
+            gh issue close "$n" --comment "未処理の参考文献なしを確認（$(date -u +%Y-%m-%d) auto）"
+          done
+
+      - name: Upload report artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: refs-pending-report
+          path: inbox/refs-pending-report.txt
+          retention-days: 90

@@ -1,0 +1,121 @@
+name: Reference drift (gold standard)
+
+on:
+  schedule:
+    # 月初 9:00 JST = 0:00 UTC（既存 audit と同 cadence・別ジョブ）
+    - cron: '0 0 1 * *'
+  workflow_dispatch:
+    # 手動実行も可
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  reference-drift:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install deps
+        run: python -m pip install --quiet pyyaml
+
+      - name: Compute live #1 vs recorded gold
+        id: drift
+        run: |
+          mkdir -p inbox
+          python wiki_quality_check.py --rank --v3 | tee inbox/reference-rank.txt
+          python <<'PY' >> "$GITHUB_OUTPUT"
+          import io, json, yaml
+          # --- --rank --v3 出力から首位（rank 1）の path/score を抽出 ---
+          live_path, live_score = "", ""
+          for line in io.open('inbox/reference-rank.txt', encoding='utf-8'):
+              parts = line.split()
+              # 表データ行のみ: 先頭トークンが '1' かつ末尾が *.md
+              if len(parts) >= 3 and parts[0] == '1' and parts[-1].endswith('.md'):
+                  live_score = parts[1]
+                  live_path = parts[-1].replace('\\', '/')
+                  break
+          # --- 記録済みゴールドを読む ---
+          rec = yaml.safe_load(io.open('_data/reference-gold.yml', encoding='utf-8')) or {}
+          gold = rec.get('gold') or {}
+          rec_path = (gold.get('path') or '').replace('\\', '/')
+          rec_score = gold.get('score', '')
+          # 首位ページ自体が入れ替わったときだけ発火（同一ページのスコア揺れは無視）
+          changed = bool(live_path) and bool(rec_path) and live_path != rec_path
+          json.dump(
+              {'changed': changed, 'live_path': live_path, 'live_score': live_score,
+               'rec_path': rec_path, 'rec_score': rec_score},
+              io.open('inbox/reference-drift.json', 'w', encoding='utf-8'),
+              ensure_ascii=False, indent=2,
+          )
+          print(f"changed={'1' if changed else '0'}")
+          print(f"live_path={live_path}")
+          PY
+
+      - name: Ensure reference label exists
+        if: steps.drift.outputs.changed != '0'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh label create reference --color 0E8A16 \
+            --description "リファレンス（ゴールド）首位の入れ替わり" 2>/dev/null || true
+
+      - name: Create issue on gold-standard change
+        if: steps.drift.outputs.changed != '0'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # 既に open な reference Issue があれば二重作成しない（首位据え置きの間は1件に保つ）
+          EXISTING=$(gh issue list --label reference --state open --json number --jq 'length')
+          if [ "${EXISTING:-0}" != "0" ]; then
+            echo "open な reference Issue が既に存在するため新規作成をスキップ"
+            exit 0
+          fi
+          BODY=$(python <<'PY'
+          import json
+          d = json.load(open('inbox/reference-drift.json', encoding='utf-8'))
+          out = ["## リファレンス（ゴールドスタンダード）首位が入れ替わりました", ""]
+          out.append("`wiki_quality_check.py --rank --v3` の首位ページが `_data/reference-gold.yml` の記録と異なります。")
+          out.append("")
+          out.append("| | パス | スコア |")
+          out.append("|---|---|---|")
+          out.append(f"| 記録（旧ゴールド） | `{d['rec_path']}` | {d['rec_score']} |")
+          out.append(f"| 現首位（新候補） | `{d['live_path']}` | {d['live_score']} |")
+          out.append("")
+          out.append("### 対処")
+          out.append("1. 新首位ページの内容を確認し、ゴールド昇格を承認するか判断")
+          out.append("2. 承認するなら `_data/reference-gold.yml` の `gold.path / score / verdict / updated` を更新")
+          out.append("3. CLAUDE.md・`.claude/rules/denken-page-creation.md` のパス記述も追従（補助情報）")
+          out.append("4. 本 Issue は次回監査（首位が記録と一致）で自動クローズされます")
+          out.append("")
+          out.append("> 運用上の真のゴールドは常に `--rank --v3` 出力。本ファイルはそれを機械可読に固定したもの。")
+          print("\n".join(out))
+          PY
+          )
+          gh issue create \
+            --title "[reference] ゴールド首位入れ替わり: ${{ steps.drift.outputs.live_path }}" \
+            --body "$BODY" \
+            --label reference
+
+      - name: Auto-close resolved reference issues
+        if: steps.drift.outputs.changed == '0'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh issue list --label reference --state open --json number --jq '.[].number' | while read n; do
+            [ -z "$n" ] && continue
+            gh issue close "$n" --comment "首位が記録（_data/reference-gold.yml）と一致を確認（$(date -u +%Y-%m-%d) auto）"
+          done
+
+      - name: Upload artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: reference-drift
+          path: inbox/reference-*
+          retention-days: 90
