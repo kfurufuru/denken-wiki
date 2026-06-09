@@ -26,6 +26,27 @@ cd "$REPO_ROOT"
 
 # 条文記事配下またはby-field.mdが変更されたときだけ実行（高速化）
 CHANGED=$(git diff --cached --name-only)
+
+# 0. kakomon.yml ↔ by-year.md / 年度ページ 同期ガード（NEED_CHECK 早期 exit より前に実行）
+#    by-year.md 手動メンテ時代のドリフト（R06/R07 が丸ごと別問題化）の再発防止。
+#    -f ガードで旧worktree（スクリプト未配置）での誤ブロックを回避する。
+NEED_PAGES_SYNC=$(echo "$CHANGED" | grep -E '^(_data/kakomon\.yml|docs/_data/kakomon\.yml|docs/kakomon/(by-year|H[12][0-9]|H30|R0[1-7])\.md|scripts/(gen_kakomon_by_year|check_kakomon_pages_sync)\.py)$' || true)
+if [ -n "$NEED_PAGES_SYNC" ] && [ -f scripts/check_kakomon_pages_sync.py ]; then
+    set +e
+    PAGES_SYNC_RESULT=$(PYTHONIOENCODING=utf-8 python scripts/check_kakomon_pages_sync.py 2>&1)
+    PAGES_SYNC_EXIT=$?
+    set -e
+    if [ "$PAGES_SYNC_EXIT" -ne "0" ]; then
+        echo "❌ [pre-commit] kakomon.yml と by-year.md / 年度ページ がズレています。"
+        echo "$PAGES_SYNC_RESULT" | tail -30
+        echo ""
+        echo "→ by-year.md 再生成: python scripts/gen_kakomon_by_year.py"
+        echo "  年度ページは kakomon.yml に合わせて topic/article を是正してください。"
+        echo "  緊急時は --no-verify でスキップ可能。"
+        exit 1
+    fi
+fi
+
 NEED_CHECK=$(echo "$CHANGED" | grep -E '^(docs/articles/(kijun|kaishaku|jigyoho|other)/|docs/kakomon/by-field\.md|scripts/(audit_frequency|check_frequency_consistency|check_kakomon_consistency|audit_titles)\.py)' || true)
 
 if [ -z "$NEED_CHECK" ]; then
