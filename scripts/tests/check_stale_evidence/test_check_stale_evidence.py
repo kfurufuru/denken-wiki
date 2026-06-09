@@ -56,6 +56,12 @@ class StaleEvidenceTest(unittest.TestCase):
         self.assertEqual(rec.verified_on, date(2026, 3, 1))
         self.assertEqual(mod.classify(rec, self.TODAY), "OK")
 
+    def test_inline_format(self):
+        # 箇条書きインライン「- **照合日**: YYYY-MM-DD」形式も拾う（kaishaku/165.md 実例）
+        rec = mod.parse_article(HERE / "sample_inline_format.md")
+        self.assertEqual(rec.verified_on, date(2026, 3, 1))
+        self.assertEqual(mod.classify(rec, self.TODAY), "OK")
+
     def test_inferred_next_audit(self):
         rec = mod.parse_article(HERE / "sample_inferred.md")
         self.assertIsNotNone(rec.next_audit)
