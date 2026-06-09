@@ -91,6 +91,18 @@ AUDIT_RULES = [
 # 範囲表記禁止（範囲が広すぎて空欄根拠条文が特定不能）
 FORBIDDEN_RANGE_PATTERN = re.compile(r"§\d+〜§\d+")
 
+# 横断/総則ゆえ範囲表記が「実態に合う」問題の allowlist（denken-ou.com 一次照合済・2026-06-09）。
+# 穴埋でも複数条文を横断し単一条文に収束しないものを含む。AI社員諮問（落合・ひろゆき・早川）
+# 全員一致のハイブリッド方針で確定：単一条文に収束する穴埋のみ精緻化し、横断/総則は範囲維持。
+# allowlist 外の新規範囲表記は引き続き warning（精緻化漏れの検出を維持）。
+ALLOWED_RANGE_PROBLEMS = {
+    ("H23", 3), ("R01", 3), ("R04下", 2), ("R07下", 3),  # 省令§1〜§4 保安原則・総則・選定
+    ("H25", 7), ("R02", 5),                              # 解釈§120〜§125 地中電線路（論説横断）
+    ("H23", 8),                                          # 解釈§181〜§199 特殊施設変圧器（論説横断）
+    ("R01", 9), ("R04下", 8),                            # 解釈§220〜§232 分散型 系統連系設備（包括）
+    ("R01", 8),                                          # 解釈§68〜§82 低高圧架空電線（論説横断）
+}
+
 
 def audit_file(path: Path):
     """1つの kakomon.yml ファイルを監査"""
@@ -110,7 +122,8 @@ def audit_file(path: Path):
         num = prob.get("num", "?")
 
         # 範囲表記検出（最初に check：他ルールより優先）
-        if FORBIDDEN_RANGE_PATTERN.search(article):
+        # ただし横断/総則で範囲が実態の問題は allowlist で除外（denken-ou 照合済）
+        if FORBIDDEN_RANGE_PATTERN.search(article) and (year, num) not in ALLOWED_RANGE_PROBLEMS:
             violations.append({
                 "file": path.relative_to(ROOT),
                 "year": year,
