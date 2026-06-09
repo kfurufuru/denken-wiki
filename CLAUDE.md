@@ -54,6 +54,8 @@ CLAUDE.md・他ドキュメントの記述は補助情報であり、`--rank --v
 
 3. ユーザー承認後、本 CLAUDE.md および `.claude/rules/denken-page-creation.md` の参照記述（あれば）を更新する。なお、運用上の真のゴールド指定は常に `--rank --v3` の出力であり、ファイル中のパス記述は補助情報。
 
+> **月次の自動検知**: `.github/workflows/reference-drift.yml`（月初）が `--rank --v3` 首位と `_data/reference-gold.yml` の記録の乖離を検知して Issue 化する。**新ゴールドを承認したら同ファイルの `gold.path/score/verdict/updated` も更新する**（reference-gold.yml が首位の機械可読な真実・真のゴールドは常に `--rank --v3`）。
+
 ## プロジェクト概要
 
 - **サイト**: https://kfurufuru.github.io/denken-wiki/
