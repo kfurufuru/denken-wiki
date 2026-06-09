@@ -126,7 +126,7 @@ mkdocs build              # 静的サイトビルド
 
 ### 条文解説ページ（標準セクション構成）
 
-ゴールドスタンダード: `kijun/58.md`（Sprint 1.1 時点で `--rank --v3` 単独首位 = verdict A / 80点）。常に `python wiki_quality_check.py --rank --v3 | head -10` で最新の首位を確認すること（ここのパス記述は補助情報）。
+ゴールドスタンダード: `kaishaku/226.md`（2026-06-09 時点で `--rank --v3` 単独首位 = verdict S / 100点・施設規定系）。記事タイプ別に kijun/58.md（数値規定）・jiko-3.md（手続規定）・jiko-1.md（定義条文）も参照。常に `python wiki_quality_check.py --rank --v3 | head -10` で最新の首位を確認すること（ここのパス記述は補助情報）。
 
 | # | セクション | 必須 | 内容 |
 |---|----------|:----:|------|
