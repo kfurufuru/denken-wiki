@@ -1,0 +1,20 @@
+# リファレンス（ゴールドスタンダード）の現行記録 — 機械可読版
+#
+# wiki_quality_check.py --rank --v3 の「首位」を記録する単一の真実。
+# CLAUDE.md / .claude/rules/denken-page-creation.md のパス記述は補助情報であり、
+# 運用上の真のゴールドは常に --rank --v3 出力。本ファイルはその出力を機械可読に固定したもの。
+#
+# 月次ワークフロー .github/workflows/reference-drift.yml が
+#   live #1（--rank --v3 の現首位） vs 本ファイルの gold.path
+# を比較し、首位ページが入れ替わっていたら Issue を立てる。
+#
+# 【更新手順】首位が入れ替わった（= Issue が立った）とき:
+#   1. 新首位ページの内容を確認し、ゴールド昇格を承認するか判断する
+#   2. 承認するなら gold.path / gold.score / gold.verdict / updated を更新
+#   3. CLAUDE.md・denken-page-creation.md のパス記述も追従（任意・補助情報）
+#   4. 旧 Issue は次回監査（首位が記録と一致）で自動クローズされる
+gold:
+  path: docs/articles/kaishaku/226.md
+  score: 99
+  verdict: S
+updated: "2026-06-09"
