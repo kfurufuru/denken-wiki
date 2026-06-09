@@ -1,0 +1,90 @@
+name: Audit stale evidence
+
+on:
+  schedule:
+    # 月初 9:00 JST = 0:00 UTC（kakomon監査と同cadence・別ジョブ）
+    - cron: '0 0 1 * *'
+  workflow_dispatch:
+    # 手動実行も可
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  stale-evidence:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Run stale-evidence check
+        id: stale
+        run: |
+          mkdir -p inbox
+          # check_stale_evidence.py は標準ライブラリのみ（pip不要）
+          python scripts/check_stale_evidence.py | tee inbox/stale-evidence-report.txt
+          # SUMMARY 行（[SUMMARY] ... STALE: N ...）から STALE 件数を抽出
+          STALE=$(sed -n 's/.*STALE: \([0-9]*\).*/\1/p' inbox/stale-evidence-report.txt | head -1)
+          echo "stale_count=${STALE:-0}" >> "$GITHUB_OUTPUT"
+
+      - name: Ensure stale-evidence label exists
+        if: steps.stale.outputs.stale_count != '0'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh label create stale-evidence --color D93F0B \
+            --description "照合日が監査周期を超過" 2>/dev/null || true
+
+      - name: Create issue on stale evidence
+        if: steps.stale.outputs.stale_count != '0'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          BODY=$(python <<'PY'
+          lines = open('inbox/stale-evidence-report.txt', encoding='utf-8').read().splitlines()
+          stale = [l for l in lines if l.startswith('STALE')]
+          due = [l for l in lines if l.startswith('DUE_SOON')]
+          out = ["## 照合日が監査周期を超過した記事を検出", ""]
+          out.append("`check_stale_evidence.py` の月次監査で、照合日（最終確認）からの経過が")
+          out.append("監査周期（kaishaku 180日 / kijun・jigyoho・other 365日）を超えた記事を検出しました。")
+          out.append("")
+          out.append("### STALE（要再照合）")
+          out += ["- `%s`" % l for l in stale] if stale else ["- (なし)"]
+          if due:
+              out.append("")
+              out.append("### DUE_SOON（30日以内に周期到来・予防的に確認推奨）")
+              out += ["- `%s`" % l for l in due]
+          out.append("")
+          out.append("### 対処")
+          out.append("1. 各記事の一次ソース（e-Gov 法令検索・経産省告示等）を再照合")
+          out.append("2. 内容に変更が無ければ `最終確認:` フッター（または `| **照合日** |`）の日付を更新")
+          out.append("3. 改正等があれば本文・関連条文・kakomon.yml も更新")
+          print("\n".join(out))
+          PY
+          )
+          gh issue create \
+            --title "[stale-evidence] 照合日が監査周期を超過した記事 ${{ steps.stale.outputs.stale_count }}件" \
+            --body "$BODY" \
+            --label stale-evidence
+
+      - name: Auto-close resolved stale-evidence issues
+        if: steps.stale.outputs.stale_count == '0'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh issue list --label stale-evidence --state open --json number --jq '.[].number' | while read n; do
+            [ -z "$n" ] && continue
+            gh issue close "$n" --comment "月次監査で STALE 解消を確認（$(date -u +%Y-%m-%d) auto）"
+          done
+
+      - name: Upload report artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: stale-evidence-report
+          path: inbox/stale-evidence-report.txt
+          retention-days: 90
