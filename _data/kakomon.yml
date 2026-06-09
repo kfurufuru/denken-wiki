@@ -863,7 +863,7 @@ problems:
     topic: "低圧屋内配線の施設場所による工事の種類"
     theme: "haisen-koji"
     form: "穴埋"
-    article: "解釈§156〜§174"
+    article: "解釈§156"
   - year: "R02"
     year_label: "令和2年（2020年）"
     num: 7
@@ -877,7 +877,7 @@ problems:
     topic: "遊戯用電車，電気浴器等特殊機器の施設"
     theme: "tokushu-basho"
     form: "穴埋"
-    article: "解釈§181〜§199"
+    article: "解釈§189, §198, §199の2"
   - year: "R02"
     year_label: "令和2年（2020年）"
     num: 9
@@ -961,7 +961,7 @@ problems:
     topic: "特殊場所における施設制限"
     theme: "tokushu-basho"
     form: "穴埋"
-    article: "解釈§175〜§180"
+    article: "省令§68, §69"
   - year: "R03"
     year_label: "令和3年（2021年）"
     num: 8
@@ -1052,7 +1052,7 @@ problems:
     topic: "水中照明の施設"
     theme: "tokushu-basho"
     form: "穴埋"
-    article: "解釈§181〜§199"
+    article: "解釈§187"
   - year: "R04上"
     year_label: "令和4年上期（2022年）"
     num: 8
