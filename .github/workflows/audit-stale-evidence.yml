@@ -30,6 +30,9 @@ jobs:
         id: stale
         run: |
           mkdir -p inbox
+          # 既定シェルは pipefail なし: self-test 通過後に本実行が自壊すると tee の exit 0 に
+          # 吸われ SUMMARY 行なし → STALE/WARN とも :-0 で 0 → 緑＋自動クローズ、と無音化する
+          set -o pipefail
           # check_stale_evidence.py は標準ライブラリのみ（pip不要）
           python scripts/check_stale_evidence.py | tee inbox/stale-evidence-report.txt
           # SUMMARY 行（[SUMMARY] ... STALE: N ...）から STALE 件数を抽出

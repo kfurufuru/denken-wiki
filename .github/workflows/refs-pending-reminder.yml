@@ -28,8 +28,18 @@ jobs:
         id: refs
         run: |
           mkdir -p inbox
+          # 旧 `|| true`＋pipefail なしは refs-pending.yml の YAML 破損（exit 1）まで握り潰し
+          # 0/0 の緑＋issue自動クローズに落としていた。ツール自壊は job 赤で可視化する
+          set -o pipefail
           # dry-run のみ。links.md には一切書き込まない（実反映は人間が手動で）
-          python scripts/merge_refs.py --dry-run | tee inbox/refs-pending-report.txt || true
+          # 2>&1: [WARN] カテゴリ未マッチ は stderr 出力のため、stdout だけ tee すると
+          # warn_count が恒久 0 になり「未マッチのみの月」が無音化する
+          python scripts/merge_refs.py --dry-run 2>&1 | tee inbox/refs-pending-report.txt
+          # 形式drift ガード: サマリ行が無い＝出力形式が変わって下の grep カウントが信頼できない
+          if ! grep -qE '\[DRY-RUN\]|pending が空' inbox/refs-pending-report.txt; then
+            echo "::error::merge_refs.py のサマリ行（[DRY-RUN] / pending が空）が見つからない — 出力形式変更の可能性。カウント不能のため fail"
+            exit 1
+          fi
           ADD=$(grep -cE '^[[:space:]]*\[ADD\]' inbox/refs-pending-report.txt || true)
           WARN=$(grep -c 'カテゴリ未マッチ' inbox/refs-pending-report.txt || true)
           echo "add_count=${ADD:-0}" >> "$GITHUB_OUTPUT"

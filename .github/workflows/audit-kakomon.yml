@@ -28,9 +28,33 @@ jobs:
         id: audit
         run: |
           mkdir -p inbox
+          set -o pipefail
+          # exit 2 = 不一致あり（正常系・後段で起票）。それ以外の非0 = ツール自壊 → job を赤に
           python scripts/audit_kakomon.py --all --delay 1.5 \
-            --json inbox/audit-mismatches.json || true
+            --json inbox/audit-mismatches.json 2>&1 | tee inbox/audit-log.txt || [ $? -eq 2 ]
           echo "mismatch_count=$(python -c "import json; print(len(json.load(open('inbox/audit-mismatches.json'))))")" >> $GITHUB_OUTPUT
+
+      # denken-ou.com 停止・URL体系変更・HTML構造変更ではパーサは例外を吐かず全件 skipped に
+      # 落ち、mismatch 0 件＝緑のまま監査が無音で盲目化する（既存 issue も自動クローズされる）。
+      # 「照合に成功した件数」がキャッシュ検証済み件数の半分を割ったら fail させて可視化する
+      - name: Coverage floor guard (照合崩壊の無音死ガード)
+        run: |
+          python <<'PY'
+          import re, sys, yaml
+          log = open('inbox/audit-log.txt', encoding='utf-8').read()
+          m = re.search(r'^一致: (\d+) \| 不一致: (\d+)', log, re.M)
+          compared = int(m.group(1)) + int(m.group(2)) if m else 0
+          cache = yaml.safe_load(open('_data/denken-ou-cache.yml', encoding='utf-8')) or {}
+          verified = len(cache.get('verified') or {})
+          floor = max(10, (verified + 1) // 2)
+          print(f"照合成功 {compared} 件 / floor {floor} 件 (cache verified {verified} 件)")
+          if compared < floor:
+              print(f"::error::照合成功 {compared} 件 < floor {floor} 件。denken-ou.com 停止/"
+                    f"URL体系変更/HTML構造変更で監査が盲目化している可能性（mismatch 0 は"
+                    f"「全件一致」ではなく「何も照合できていない」かもしれない）。"
+                    f"一時的なサイト障害なら workflow_dispatch で再実行", file=sys.stderr)
+              sys.exit(1)
+          PY
 
       - name: Filter cache-known mismatches (real bugs only)
         id: filter
@@ -107,5 +131,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: audit-results
-          path: inbox/audit-*.json
+          path: |
+            inbox/audit-*.json
+            inbox/audit-log.txt
           retention-days: 90

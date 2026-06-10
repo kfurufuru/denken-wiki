@@ -28,9 +28,12 @@ jobs:
         id: drift
         run: |
           mkdir -p inbox
+          # 既定シェルは pipefail なし: wiki_quality_check.py が自壊しても tee の exit 0 に吸われ
+          # 「首位抽出ゼロ → changed=0 → 緑＋issue自動クローズ」と無音化するため明示する
+          set -o pipefail
           python wiki_quality_check.py --rank --v3 | tee inbox/reference-rank.txt
           python <<'PY' >> "$GITHUB_OUTPUT"
-          import io, json, yaml
+          import io, json, sys, yaml
           # --- --rank --v3 出力から首位（rank 1）の path/score を抽出 ---
           live_path, live_score = "", ""
           for line in io.open('inbox/reference-rank.txt', encoding='utf-8'):
@@ -53,6 +56,13 @@ jobs:
               io.open('inbox/reference-drift.json', 'w', encoding='utf-8'),
               ensure_ascii=False, indent=2,
           )
+          # 盲目化ガード: 首位が抽出できない（--rank --v3 の出力形式変更）/ 記録が読めない
+          # （reference-gold.yml 破損）場合は changed=0 の緑＋自動クローズに落とさず job を赤に
+          if not live_path or not rec_path:
+              print(f"[guard] 抽出失敗: live_path={live_path!r} rec_path={rec_path!r} — "
+                    f"--rank --v3 の出力形式変更か _data/reference-gold.yml 破損の可能性",
+                    file=sys.stderr)
+              sys.exit(1)
           print(f"changed={'1' if changed else '0'}")
           print(f"live_path={live_path}")
           PY
