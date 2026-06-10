@@ -57,5 +57,12 @@ pending:
     used_at: "2026-06-08"
     rationale: "解釈第12条が論説の誤選択肢（20%→25%・例外『含め』）として出題された実例。改変なしの過去問引用元として使用"
 
+  - url: "https://denken-ou.com/houkih23-3/"
+    title: "電験王3 H23 法規 問3（電気設備の保安原則・穴埋）"
+    category: "試験情報"
+    used_in: "kakomon.yml Tier2/3 article照合（H23問3=省令第10条・第11条の確定）"
+    used_at: "2026-06-10"
+    rationale: "空欄（電位上昇/接地/大地に通ずる）の根拠が省令第10条・第11条と確定した一次解説。R07下問3の再出題元。audit_kakomon.py が未対応の平成年度URLパターン houkih{N}-{問} が実在する実証例（将来のbuild_url拡張候補）"
+
 # 反映済み（マージスクリプトが移動する領域・直接編集禁止）
 merged: []
