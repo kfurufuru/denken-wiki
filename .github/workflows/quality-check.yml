@@ -8,6 +8,8 @@ on:
       - 'scripts/check_kakomon_dual_sync.py'
       - 'scripts/check_kakomon_pages_sync.py'
       - 'scripts/gen_kakomon_by_year.py'
+      - 'scripts/check_stale_evidence.py'
+      - 'scripts/tests/check_stale_evidence/**'
       - 'wiki_check.py'
       - '.github/workflows/quality-check.yml'
   push:
@@ -18,6 +20,8 @@ on:
       - 'scripts/check_kakomon_dual_sync.py'
       - 'scripts/check_kakomon_pages_sync.py'
       - 'scripts/gen_kakomon_by_year.py'
+      - 'scripts/check_stale_evidence.py'
+      - 'scripts/tests/check_stale_evidence/**'
       - 'wiki_check.py'
       - '.github/workflows/quality-check.yml'
 
@@ -37,6 +41,10 @@ jobs:
         run: python scripts/check_kakomon_dual_sync.py
       - name: kakomon by-year + year-page sync guard (yml ↔ 派生md)
         run: python scripts/check_kakomon_pages_sync.py
+      # 照合日パーサ回帰ガード: パーサが壊れると記事は WARN（STALE ではない）に落ち、
+      # 月次 audit-stale-evidence は issue を立てず無音化する。PR 時点で破壊を検出する。
+      - name: check_stale_evidence self-test (照合日パーサ回帰ガード)
+        run: python scripts/tests/check_stale_evidence/test_check_stale_evidence.py
       - name: MathJax block math sanity (arithmatex blank-line check)
         run: |
           set -e
