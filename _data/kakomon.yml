@@ -884,7 +884,7 @@ problems:
     topic: "低圧用の配線器具の施設"
     theme: "haisen-koji"
     form: "穴埋"
-    article: "解釈§155"
+    article: "解釈§150"
   - year: "R02"
     year_label: "令和2年（2020年）"
     num: 10
@@ -1431,7 +1431,7 @@ problems:
     topic: "配線器具の施設"
     theme: "haisen-koji"
     form: "穴埋"
-    article: "解釈§155"
+    article: "解釈§150"
   - year: "R06上"
     year_label: "令和6年上期（2024年）"
     num: 10
@@ -1573,14 +1573,14 @@ problems:
     topic: "低圧電線路の絶縁性能"
     theme: "zetsuen"
     form: "穴埋"
-    article: "省令§58, 解釈§14"
+    article: "省令§22"
   - year: "R07上"
     year_label: "令和7年上期（2025年）"
     num: 4
     topic: "アークを生じる器具の施設"
     theme: "shiyo-basho"
     form: "穴埋"
-    article: "解釈§175"
+    article: "解釈§23"
   - year: "R07上"
     year_label: "令和7年上期（2025年）"
     num: 5
@@ -1615,7 +1615,7 @@ problems:
     topic: "低圧屋内配線の金属ダクト工事"
     theme: "haisen-koji"
     form: "穴埋"
-    article: "解釈§163"
+    article: "解釈§162"
   - year: "R07上"
     year_label: "令和7年上期（2025年）"
     num: 10
@@ -1679,7 +1679,7 @@ problems:
     topic: "低圧電線路の絶縁性能"
     theme: "zetsuen"
     form: "穴埋"
-    article: "省令§58"
+    article: "省令§22"
   - year: "R07下"
     year_label: "令和7年下期（2025年）"
     num: 6
@@ -1707,7 +1707,7 @@ problems:
     topic: "電気自動車から電気を供給する設備の施設"
     theme: "bunsan-dengen"
     form: "穴埋"
-    article: "解釈§220の2"
+    article: "解釈§199の2"
   - year: "R07下"
     year_label: "令和7年下期（2025年）"
     num: 10

@@ -250,6 +250,18 @@ Layer 4: morning-reporter統合（任意・gh issue list で件数表示）
 
 朝のブリーフィング時に `gh issue list -R kfurufuru/denken-wiki --label audit --state open --json number,title` を実行し、件数があれば1行通知。issueが無い時はAIトークン消費0。
 
+### その他の月次監査ワークフロー
+
+audit-kakomon 以外にも、同じ「検知 → Issue化 ／ 解消時 auto-close → artifact保管」パターンの月次ワークフロー（`cron: 0 0 1 * *` ＋ `workflow_dispatch`）が稼働:
+
+| ワークフロー | 検知対象 | ラベル | 主スクリプト／コマンド |
+|------|---------|--------|-----------|
+| `audit-stale-evidence.yml` | 照合日が監査周期を超過した記事 | `stale-evidence` | `scripts/check_stale_evidence.py` |
+| `reference-drift.yml` | ゴールド首位の入れ替わり（`_data/reference-gold.yml` と乖離） | `reference` | `wiki_quality_check.py --rank --v3` |
+| `refs-pending-reminder.yml` | 未反映の参考文献（`_data/refs-pending.yml`） | `refs` | `scripts/merge_refs.py --dry-run` |
+
+いずれも **コンテンツ自動生成・自動コミットはしない**（検知して Issue で人間に通知するのみ）。`reference-drift` で新ゴールドを承認したら `_data/reference-gold.yml` の `gold.*` を更新する。
+
 **pre-commit hook の有効化（初回のみ）**:
 ```bash
 # キャッシュ生成（約8分・1回のみ）
