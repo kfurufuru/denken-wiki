@@ -198,9 +198,10 @@ if [ -n "$NEED_LAW_FACTS_CHECK" ]; then
 fi
 
 # 9. 数値クロス整合（value-correction sweep 検出・docs/.md 変更時）
-#    V01 MΩ太字バグ（ERROR・ブロック）/ V02 三段値の自己不整合・plain Ω太字（WARNING・report）。
-#    2026-06-10: MΩ分28件を --fix --mohm-only で一掃済み → MΩ太字は blocking 化。
-#    plain Ω の太字（接地抵抗等76件）は当面 WARNING（別タスクで一掃後に ERROR 昇格可）。
+#    V01 Ω太字バグ（MΩ・plain Ω とも ERROR・ブロック）/ V02 三段値の自己不整合（WARNING・report）。
+#    2026-06-10: MΩ 28件を PR #59 で一掃 → MΩ blocking 化。同日 plain Ω 111箇所/19ファイルも
+#    docs/ 全域 --fix で一掃し ERROR へ昇格（severity 分岐撤廃・ドリフト0維持）。
+#    ビルド時フック hooks/bold_unit_separator.py は実行時の安全網（本ゲートが一次防衛線）。
 NEED_VALUE_CHECK=$(echo "$CHANGED" | grep -E '^docs/.+\.md$' || true)
 if [ -n "$NEED_VALUE_CHECK" ] && [ -f scripts/check_value_consistency.py ]; then
     set +e
@@ -208,16 +209,16 @@ if [ -n "$NEED_VALUE_CHECK" ] && [ -f scripts/check_value_consistency.py ]; then
     VALUE_EXIT=$?
     set -e
     if [ "$VALUE_EXIT" -ne "0" ]; then
-        echo "❌ [pre-commit] MΩ太字バグ（V01-ERROR）を検出しました。"
+        echo "❌ [pre-commit] Ω太字バグ（V01-ERROR・MΩ/plain Ω とも）を検出しました。"
         echo "$VALUE_RESULT" | tail -30
         echo ""
-        echo "→ 数値だけ太字に（**0.1MΩ** ではなく **0.1**MΩ）。"
-        echo "  一掃: python scripts/check_value_consistency.py docs/articles --fix --mohm-only"
+        echo "→ 数値だけ太字に（**0.1MΩ**→**0.1**MΩ / **10Ω以下**→**10**Ω以下）。"
+        echo "  一掃: python scripts/check_value_consistency.py docs --fix"
         echo "  rule: CLAUDE.md「MΩ表記ルール」/ memory: feedback-value-correction-sweep"
         echo "  緊急時は --no-verify でスキップ可能（非推奨）。"
         exit 1
     fi
-    # WARNING（plain Ω 太字 / V02 三段値）は report-only（commit続行）
+    # WARNING（V02 三段値）は report-only（commit続行）
     if echo "$VALUE_RESULT" | grep -q "WARNING [1-9]"; then
         echo "⚠️  [pre-commit] 数値クロス整合 WARNING（commit続行・report-only）:"
         echo "$VALUE_RESULT" | tail -15
