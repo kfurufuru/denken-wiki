@@ -21,6 +21,11 @@ jobs:
         with:
           python-version: '3.11'
 
+      # パーサ回帰ガード: パーサが壊れると全記事が WARN に落ち、issue 条件（STALE>0）を
+      # 満たさず監視が無音で死ぬ。月次実行の冒頭で self-test を走らせ、壊れていれば job を fail させる
+      - name: Self-test (照合日パーサ回帰ガード)
+        run: python scripts/tests/check_stale_evidence/test_check_stale_evidence.py
+
       - name: Run stale-evidence check
         id: stale
         run: |
