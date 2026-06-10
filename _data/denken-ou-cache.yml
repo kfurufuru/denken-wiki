@@ -42,8 +42,8 @@ verified:
     verified_at: '2026-05-02T03:29:54+00:00'
   R02-6:
     topic: 低圧屋内配線の施設場所による工事の種類
-    article: 解釈§156〜§174
-    verified_at: '2026-05-02T03:29:54+00:00'
+    article: 解釈§156
+    verified_at: '2026-06-10T00:00:00+00:00'  # PR #57 で denken-ou 照合の上「範囲表記→具体条文」へ精緻化済（audit allowlist 対応）。キャッシュを追従更新
   R02-7:
     topic: 引込線における用語の定義
     article: 解釈§1
