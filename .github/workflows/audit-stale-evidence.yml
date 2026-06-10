@@ -21,6 +21,11 @@ jobs:
         with:
           python-version: '3.11'
 
+      # パーサ回帰ガード: パーサが壊れると全記事が WARN に落ち、issue 条件（STALE>0）を
+      # 満たさず監視が無音で死ぬ。月次実行の冒頭で self-test を走らせ、壊れていれば job を fail させる
+      - name: Self-test (照合日パーサ回帰ガード)
+        run: python scripts/tests/check_stale_evidence/test_check_stale_evidence.py
+
       - name: Run stale-evidence check
         id: stale
         run: |
@@ -30,9 +35,13 @@ jobs:
           # SUMMARY 行（[SUMMARY] ... STALE: N ...）から STALE 件数を抽出
           STALE=$(sed -n 's/.*STALE: \([0-9]*\).*/\1/p' inbox/stale-evidence-report.txt | head -1)
           echo "stale_count=${STALE:-0}" >> "$GITHUB_OUTPUT"
+          # WARN = 照合日メタ未設定/パース不能（記事側 drift の検出器）。
+          # 基線が WARN 0 のため、1件でも出たらその記事は監視から漏れている → WARN>0 で起票
+          WARN=$(sed -n 's/.*WARN: \([0-9]*\).*/\1/p' inbox/stale-evidence-report.txt | head -1)
+          echo "warn_count=${WARN:-0}" >> "$GITHUB_OUTPUT"
 
       - name: Ensure stale-evidence label exists
-        if: steps.stale.outputs.stale_count != '0'
+        if: steps.stale.outputs.stale_count != '0' || steps.stale.outputs.warn_count != '0'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
@@ -40,7 +49,7 @@ jobs:
             --description "照合日が監査周期を超過" 2>/dev/null || true
 
       - name: Create issue on stale evidence
-        if: steps.stale.outputs.stale_count != '0'
+        if: steps.stale.outputs.stale_count != '0' || steps.stale.outputs.warn_count != '0'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
@@ -48,37 +57,43 @@ jobs:
           lines = open('inbox/stale-evidence-report.txt', encoding='utf-8').read().splitlines()
           stale = [l for l in lines if l.startswith('STALE')]
           due = [l for l in lines if l.startswith('DUE_SOON')]
-          out = ["## 照合日が監査周期を超過した記事を検出", ""]
-          out.append("`check_stale_evidence.py` の月次監査で、照合日（最終確認）からの経過が")
-          out.append("監査周期（kaishaku 180日 / kijun・jigyoho・other 365日）を超えた記事を検出しました。")
+          warn = [l for l in lines if l.startswith('WARN')]
+          out = ["## 照合日監査で要対応の記事を検出", ""]
+          out.append("`check_stale_evidence.py` の月次監査で、監査周期（kaishaku 180日 / kijun・jigyoho・other 365日）を")
+          out.append("超えた記事（STALE）または照合日メタが読めない記事（WARN）を検出しました。")
           out.append("")
           out.append("### STALE（要再照合）")
           out += ["- `%s`" % l for l in stale] if stale else ["- (なし)"]
+          if warn:
+              out.append("")
+              out.append("### WARN（照合日メタ未設定/パース不能 — 監視から漏れている記事）")
+              out += ["- `%s`" % l for l in warn]
           if due:
               out.append("")
               out.append("### DUE_SOON（30日以内に周期到来・予防的に確認推奨）")
               out += ["- `%s`" % l for l in due]
           out.append("")
           out.append("### 対処")
-          out.append("1. 各記事の一次ソース（e-Gov 法令検索・経産省告示等）を再照合")
+          out.append("1. STALE: 各記事の一次ソース（e-Gov 法令検索・経産省告示等）を再照合")
           out.append("2. 内容に変更が無ければ `最終確認:` フッター（または `| **照合日** |`）の日付を更新")
           out.append("3. 改正等があれば本文・関連条文・kakomon.yml も更新")
+          out.append("4. WARN: 記事メタに照合日（`| **照合日** | YYYY-MM-DD |` / `- **照合日**: YYYY-MM-DD` / `*最終確認: YYYY-MM-DD ...*` フッター）を追加して監視対象に戻す")
           print("\n".join(out))
           PY
           )
           gh issue create \
-            --title "[stale-evidence] 照合日が監査周期を超過した記事 ${{ steps.stale.outputs.stale_count }}件" \
+            --title "[stale-evidence] STALE ${{ steps.stale.outputs.stale_count }}件 / WARN ${{ steps.stale.outputs.warn_count }}件（照合日監査）" \
             --body "$BODY" \
             --label stale-evidence
 
       - name: Auto-close resolved stale-evidence issues
-        if: steps.stale.outputs.stale_count == '0'
+        if: steps.stale.outputs.stale_count == '0' && steps.stale.outputs.warn_count == '0'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           gh issue list --label stale-evidence --state open --json number --jq '.[].number' | while read n; do
             [ -z "$n" ] && continue
-            gh issue close "$n" --comment "月次監査で STALE 解消を確認（$(date -u +%Y-%m-%d) auto）"
+            gh issue close "$n" --comment "月次監査で STALE/WARN 解消を確認（$(date -u +%Y-%m-%d) auto）"
           done
 
       - name: Upload report artifact

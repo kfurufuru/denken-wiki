@@ -19,6 +19,9 @@ denken-ou.com（信頼できる過去問解説サイト）と一致するかチ�
     - denken-ou.com への礼儀として --delay (default 2秒) 間隔でリクエスト
     - 平成年度はURL構造が異なる場合があり対応外（令和のみ確実）
     - HTMLパースは簡易版。誤検出時は手動で URL を開いて確認すること
+    - 「根拠条文（法）＋記載事項（施行規則）」の 2 層構造ページ（保安規程等）は
+      denken-ou が施行規則条番号や定義条番号を主表示するため、KNOWN_OK_MISMATCH に
+      登録して誤検出（real な改正でない）を mismatch から除外する
 """
 from __future__ import annotations
 
@@ -138,6 +141,42 @@ def year_sort_key(p: dict):
     return (era_v, parsed[1], period_v, p.get("num", 0))
 
 
+# ---------------------------------------------------------------------------
+# 既知の正当な不一致（denken-ou 主表示 ≠ kakomon.yml 代表条文）— 誤検出抑止
+# ---------------------------------------------------------------------------
+# 一部の出題は「根拠条文（法）」と「記載事項の出典（施行規則）」が 2 層構造に
+# なっており、denken-ou.com の解説は施行規則条番号や定義条番号を主表示する。
+# 本スクリプトの簡易パースはそれを拾うため kakomon.yml の代表条文（法）と
+# 「不一致」に見えるが、これは real な改正・誤登録ではなく誤検出。
+# yml が正しいと人手で確認したケースを登録し mismatch から除外する。
+#   キー: (year, num)
+#   recorded_num: yml 側の代表条番号（これが変わったら allowlist を外し再検出）
+KNOWN_OK_MISMATCH: dict = {
+    ("R04下", 1): {
+        "recorded_num": "42",
+        "reason": (
+            "保安規程の根拠は電気事業法第42条（作成・届出義務）。denken-ou は"
+            "大規模事業者の定義＝法第38条第4項第5号／施行規則第48条の2、記載事項＝"
+            "施行規則第50条第2項第14号 を主表示するため §38/§50 を拾う。代表条文は §42。"
+        ),
+    },
+    ("R05下", 1): {
+        "recorded_num": "42",
+        "reason": (
+            "保安規程の根拠は電気事業法第42条。問題文が『電気事業法施行規則に基づく』"
+            "と明記し denken-ou も『施行規則第50条からの出題』と解説するため §50 を拾う。"
+            "記載事項の列挙は施行規則第50条第3項（自家用）だが代表条文は法 §42。"
+        ),
+    },
+}
+
+
+def is_known_ok(year: str, num: int, recorded: str | None) -> bool:
+    """既知の正当な不一致（2 層構造）なら True。mismatch から除外する."""
+    k = KNOWN_OK_MISMATCH.get((year, num))
+    return bool(k and recorded and k["recorded_num"] == recorded)
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--article", help="特定条文の出題のみ照合 (例: 解釈§224)")
@@ -179,6 +218,7 @@ def main():
     mismatches = []
     skipped = 0
     matched = 0
+    allowlisted = 0
     matched_entries: list[dict] = []
 
     for i, p in enumerate(target, 1):
@@ -202,6 +242,12 @@ def main():
             matched += 1
             matched_entries.append(p)
             mark = "✓"
+        elif actual and recorded and is_known_ok(p["year"], p["num"], recorded):
+            # 既知の正当な不一致（2 層構造）。yml が正しいので検証済み扱い
+            matched += 1
+            allowlisted += 1
+            matched_entries.append(p)
+            mark = "✓*"
         elif actual and recorded and actual != recorded:
             mismatches.append(
                 {
@@ -226,7 +272,15 @@ def main():
         )
 
     print("-" * 80)
-    print(f"一致: {matched} | 不一致: {len(mismatches)} | スキップ/失敗: {skipped}")
+    print(
+        f"一致: {matched} | 不一致: {len(mismatches)} | スキップ/失敗: {skipped}"
+        + (f" | 既知の正当な不一致(allowlist): {allowlisted}" if allowlisted else "")
+    )
+    if allowlisted:
+        print(
+            "  ✓* = denken-ou 主表示と代表条文が 2 層構造で正当に異なる既知ケース"
+            "（KNOWN_OK_MISMATCH 登録済み・誤検出抑止）"
+        )
 
     if mismatches:
         print("\n=== 不一致詳細（要手動確認） ===")
