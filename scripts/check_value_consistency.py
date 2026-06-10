@@ -10,9 +10,14 @@ kijun/58 単相3線式200V→0.1MΩ 事案）を機械検出する。
 人手の grep から pre-commit / CI の機械ゲートへ移すことが目的。
 
 検出ルール:
-  V01 [MΩ太字バグ]  Ω(U+03A9) を太字(**...**)の内側に置くと、MkDocs 環境で
+  V01 [Ω太字バグ]  Ω(U+03A9/U+2126) を太字(**...**)の内側に置くと、MkDocs 環境で
        フォント依存によりキリル文字に化ける（CLAUDE.md「MΩ表記ルール（Ω太字バグ回避）」）。
-       正: **0.1**MΩ（数値だけ太字・MΩ は太字の外）。誤: **0.1MΩ**。 severity=ERROR。
+       正: **0.1**MΩ / **10**Ω以下（数値だけ太字・単位は太字の外）。
+       誤: **0.1MΩ** / **10Ω以下**。 severity=ERROR（MΩ・plain Ω とも）。
+       ※ 2026-06-10: MΩ 28件を PR #59、plain Ω 111箇所/19ファイルを本日 --fix で
+         一掃し、plain Ω を WARNING から ERROR へ昇格（ドリフト0を維持する一次防衛線）。
+         ビルド時フック hooks/bold_unit_separator.py は残存太字Ωを実行時に分離する
+         安全網（同日 誤ペアリングバグ修正済み）であり、本チェックの代替ではない。
        ※ `0.4**MΩ**`（太字を一旦閉じ MΩ は素・直後にまた太字開始）のような
          "並置" は誤検出しない（** の左右ペアリングで内部判定するため）。
   V02 [MΩ三段値の自己不整合]  同一ファイル内に複数回登場する「A／B／C MΩ」三段組のうち、
@@ -48,7 +53,7 @@ DOCS_DIR = ROOT / "docs"
 # Ω は U+03A9（ギリシャ大文字オメガ）／ U+2126（OHM SIGN）の両方を拾う
 _OHM = "[ΩΩ]"
 _MOHM = re.compile(_OHM)  # "MΩ" の Ω 部分だけ判定すれば十分
-_MOHM_UNIT = re.compile(r"M[ΩΩ]")  # 単位が MΩ か（ERROR）／単なる Ω か（WARNING）の判別
+_MOHM_UNIT = re.compile(r"M[ΩΩ]")  # --fix --mohm-only（MΩ限定修正）の判別用に残置
 _NUM = r"\d+(?:\.\d+)?"
 
 # V01: 「太字スパン全体が “数値＋Ω単位” そのもの」の形だけを bug とみなす。
@@ -96,17 +101,18 @@ def check_bold_omega(lines: list[str]) -> list[tuple[int, str]]:
     文・式まるごとの強調にΩが紛れただけのもの（**なぜ10Ω以下か？** 等）は
     _VALUE_BOLD にマッチしないため拾わない。
     戻り値: (行番号, 該当する太字セグメント) のリスト
+
+    2026-06-10: plain Ω（接地抵抗等）を WARNING から ERROR へ昇格。
+    MΩ／Ω の severity 分岐を撤廃し、太字内の数値+Ω単位はすべてブロック対象。
     """
-    hits: list[tuple[int, str, str]] = []
+    hits: list[tuple[int, str]] = []
     for idx, line in enumerate(lines):
         if "**" not in line or not _MOHM.search(line):
             continue
         for seg in bold_inside_segments(line):
             s = seg.strip()
             if _MOHM.search(s) and _VALUE_BOLD.match(s):
-                # 単位が MΩ なら ERROR（ブロック対象）、単なる Ω なら WARNING（report-only）
-                sev = "ERROR" if _MOHM_UNIT.search(s) else "WARNING"
-                hits.append((idx + 1, s[:60], sev))
+                hits.append((idx + 1, s[:60]))
     return hits
 
 
@@ -255,15 +261,10 @@ def main(argv: list[str]) -> int:
         rel = str(f.relative_to(ROOT)) if f.is_relative_to(ROOT) else str(f)
         lines = text.splitlines()
 
-        for lineno, seg, sev in check_bold_omega(lines):
-            if sev == "ERROR":
-                errors += 1
-                print(f"❌ [V01] {rel}:{lineno}  MΩ太字バグ（MΩが **...** の内側）")
-                print(f"   検出: **{seg}** → 数値だけ太字に（例: **0.1**MΩ）")
-            else:
-                warns += 1
-                print(f"⚠️  [V01] {rel}:{lineno}  Ω太字（接地抵抗等・plain Ω・report-only）")
-                print(f"   検出: **{seg}** → 数値だけ太字に（例: **10**Ω以下）")
+        for lineno, seg in check_bold_omega(lines):
+            errors += 1
+            print(f"❌ [V01] {rel}:{lineno}  Ω太字バグ（Ω/MΩ が **...** の内側）")
+            print(f"   検出: **{seg}** → 数値だけ太字に（例: **0.1**MΩ / **10**Ω以下）")
             print()
 
         for lineno, t, maj in check_triple_consistency(text):
