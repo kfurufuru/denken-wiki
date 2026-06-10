@@ -1045,7 +1045,7 @@ problems:
     topic: "無線設備への障害防止（電磁障害）"
     theme: "kachiku-densen"
     form: "穴埋"
-    article: "省令§30"
+    article: "省令§67"
   - year: "R04上"
     year_label: "令和4年上期（2022年）"
     num: 7
@@ -1304,7 +1304,7 @@ problems:
     topic: "高圧の機械器具の施設（さく・へいの施設等）"
     theme: "shiyo-basho"
     form: "穴埋"
-    article: "解釈§38"
+    article: "解釈§21"
   - year: "R05下"
     year_label: "令和5年下期（2023年）"
     num: 5
