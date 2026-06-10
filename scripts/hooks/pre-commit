@@ -5,7 +5,8 @@
 # - check_kakomon_consistency.py: 過去問テーブルとby-field.mdの整合性（警告のみ）
 # - audit_titles.py: kijun/ H1 と省令公式条見出しの整合性（NG件あればブロック・R6機械化）
 # - check_law_citations.py: 法令引用整合性（電気事業法第N条＋認可/届出/対象 の検証・NG件あればブロック）
-# - check_law_facts.py: 法令数値ハルシネーション類型検出（H01/H02/H03・ERRORあればブロック）
+# - check_law_facts.py: 法令数値ハルシネーション類型検出（H01-H05・ERRORあればブロック / H03-H05はWARNING）
+# - check_value_consistency.py: 数値クロス整合（V01 MΩ太字=ERRORブロック / plain Ω・V02三段値=WARNING report）
 # - [先頭ガード] master/main への直接コミットを禁止（feature→PR を強制）
 
 # === master 直コミット禁止ガード（feedback-denken-wiki-master-branch-workflow）===
@@ -187,10 +188,39 @@ if [ -n "$NEED_LAW_FACTS_CHECK" ]; then
         echo "  H01: 解釈第14条の根拠は「漏えい電流1mA以下」(1/2000は省令第22条/電線路)"
         echo "  H02: 低圧電路の活線代替根拠は第14条第1項第二号(第15条は高圧・特高の耐圧試験)"
         echo "  H03: 三相3線式200VはΔ結線主流→対地200V→0.2MΩ(B種接地のみで0.1MΩと断定しない)"
+        echo "  H04: 単相3線式200Vは中性線接地で対地100V→0.1MΩ(0.2MΩは三相3線式の値)"
+        echo "  H05: 三相3線式200VはΔ結線で対地200V→0.2MΩ(0.1MΩは単相3線式の値)"
         echo "  一次ソース: 解釈第14条第1項第二号・省令第22条・省令第58条"
         echo "  確認: python scripts/check_law_facts.py"
         echo "  緊急時は --no-verify でスキップ可能（非推奨）。"
         exit 1
+    fi
+fi
+
+# 9. 数値クロス整合（value-correction sweep 検出・docs/.md 変更時）
+#    V01 MΩ太字バグ（ERROR・ブロック）/ V02 三段値の自己不整合・plain Ω太字（WARNING・report）。
+#    2026-06-10: MΩ分28件を --fix --mohm-only で一掃済み → MΩ太字は blocking 化。
+#    plain Ω の太字（接地抵抗等76件）は当面 WARNING（別タスクで一掃後に ERROR 昇格可）。
+NEED_VALUE_CHECK=$(echo "$CHANGED" | grep -E '^docs/.+\.md$' || true)
+if [ -n "$NEED_VALUE_CHECK" ] && [ -f scripts/check_value_consistency.py ]; then
+    set +e
+    VALUE_RESULT=$(PYTHONIOENCODING=utf-8 python scripts/check_value_consistency.py --staged 2>&1)
+    VALUE_EXIT=$?
+    set -e
+    if [ "$VALUE_EXIT" -ne "0" ]; then
+        echo "❌ [pre-commit] MΩ太字バグ（V01-ERROR）を検出しました。"
+        echo "$VALUE_RESULT" | tail -30
+        echo ""
+        echo "→ 数値だけ太字に（**0.1MΩ** ではなく **0.1**MΩ）。"
+        echo "  一掃: python scripts/check_value_consistency.py docs/articles --fix --mohm-only"
+        echo "  rule: CLAUDE.md「MΩ表記ルール」/ memory: feedback-value-correction-sweep"
+        echo "  緊急時は --no-verify でスキップ可能（非推奨）。"
+        exit 1
+    fi
+    # WARNING（plain Ω 太字 / V02 三段値）は report-only（commit続行）
+    if echo "$VALUE_RESULT" | grep -q "WARNING [1-9]"; then
+        echo "⚠️  [pre-commit] 数値クロス整合 WARNING（commit続行・report-only）:"
+        echo "$VALUE_RESULT" | tail -15
     fi
 fi
 
