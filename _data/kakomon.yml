@@ -219,7 +219,7 @@ problems:
     topic: "アークを生じる器具の施設"
     theme: "shiyo-basho"
     form: "穴埋"
-    article: "解釈§152"
+    article: "解釈§23"
   - year: "H25"
     year_label: "平成25年（2013年）"
     num: 6
@@ -1143,7 +1143,7 @@ problems:
     topic: "低圧屋内配線の金属ダクト工事"
     theme: "haisen-koji"
     form: "穴埋"
-    article: "解釈§163"
+    article: "解釈§162"
   - year: "R04下"
     year_label: "令和4年下期（2022年）"
     num: 8
