@@ -7,25 +7,7 @@
 # - カテゴリは links.md のセクション見出し（H2 / `## …`）と部分一致で照合される
 # - 重複URLはスクリプトがスキップするので、人間は重複を気にせず append OK
 
-pending:
-- url: https://www.denki.or.jp/JEAC9701
-  title: JEAC 9701 系統連系規程
-  category: 技術規格
-  used_in: kaishaku/220 監査
-  used_at: '2026-05-10'
-  rationale: 解釈第220条系の『直流流出防止』の実規定はJEACに集約されている可能性
-- url: https://jeea.or.jp/course/contents/11103/index_small.html
-  title: 日本電気技術者協会 解説〔その3〕電線と高圧・特別高圧機器の施設
-  category: 学習リソース
-  used_in: kaishaku/index.md 第3〜12条・第21/22条タイトル監査
-  used_at: '2026-06-08'
-  rationale: 解釈第5条=絶縁電線・第12条=電線の接続・第21/22条=高圧/特別高圧機器施設を条番号付きで明記。条見出し監査の二次照合に有用
-- url: https://denki-no-shinzui.com/wp-content/uploads/2019/02/%E9%9B%BB%E6%B0%97%E8%A8%AD%E5%82%99%E6%8A%80%E8%A1%93%E5%9F%BA%E6%BA%96%E3%83%BB%E8%A7%A3%E9%87%88_%E4%BB%A4%E5%92%8C2%E5%B9%B4%E5%BA%A6%E7%89%88.pdf
-  title: 電気設備技術基準・解釈 目次（令和2年度版・電気の真髄）
-  category: 学習リソース
-  used_in: kaishaku/index.md 章節構成の確認
-  used_at: '2026-06-08'
-  rationale: 省令と解釈の目次を一覧化。解釈の第3節=電路の絶縁及び接地(13〜19条)・第4節=電気機械器具の保安原則(20〜31条)の節構成確認に有用（ただし解釈1〜12条は省略されている点に注意）
+pending: []
 merged:
 - url: https://laws.e-gov.go.jp/law/345AC0000000096
   title: 電気工事業の業務の適正化に関する法律
@@ -76,3 +58,27 @@ merged:
     houkih{N}-{問} が実在する実証例（将来のbuild_url拡張候補）
   merged_at: '2026-06-11'
   merged_into_section: 4. 試験情報・過去問
+- url: https://www.denki.or.jp/JEAC9701
+  title: JEAC 9701 系統連系規程
+  category: 技術規格
+  used_in: kaishaku/220 監査
+  used_at: '2026-05-10'
+  rationale: 解釈第220条系の『直流流出防止』の実規定はJEACに集約されている可能性
+  merged_at: '2026-06-11'
+  merged_into_section: 3. 民間規程・技術規格（解釈で参照される）
+- url: https://jeea.or.jp/course/contents/11103/index_small.html
+  title: 日本電気技術者協会 解説〔その3〕電線と高圧・特別高圧機器の施設
+  category: 学習リソース
+  used_in: kaishaku/index.md 第3〜12条・第21/22条タイトル監査
+  used_at: '2026-06-08'
+  rationale: 解釈第5条=絶縁電線・第12条=電線の接続・第21/22条=高圧/特別高圧機器施設を条番号付きで明記。条見出し監査の二次照合に有用
+  merged_at: '2026-06-11'
+  merged_into_section: 4. 試験情報・過去問・学習リソース
+- url: https://denki-no-shinzui.com/wp-content/uploads/2019/02/%E9%9B%BB%E6%B0%97%E8%A8%AD%E5%82%99%E6%8A%80%E8%A1%93%E5%9F%BA%E6%BA%96%E3%83%BB%E8%A7%A3%E9%87%88_%E4%BB%A4%E5%92%8C2%E5%B9%B4%E5%BA%A6%E7%89%88.pdf
+  title: 電気設備技術基準・解釈 目次（令和2年度版・電気の真髄）
+  category: 学習リソース
+  used_in: kaishaku/index.md 章節構成の確認
+  used_at: '2026-06-08'
+  rationale: 省令と解釈の目次を一覧化。解釈の第3節=電路の絶縁及び接地(13〜19条)・第4節=電気機械器具の保安原則(20〜31条)の節構成確認に有用（ただし解釈1〜12条は省略されている点に注意）
+  merged_at: '2026-06-11'
+  merged_into_section: 4. 試験情報・過去問・学習リソース
