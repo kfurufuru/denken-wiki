@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python \"$CLAUDE_PROJECT_DIR/.claude/hooks/task_retrospective_check.py\"",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  },
+  "_comment": "denken-wiki 共有 hook 設定（git tracked・全 worktree に伝播）。個人 permissions は settings.local.json (untracked) に。",
+  "_hooks_purpose": {
+    "Stop:task_retrospective_check": "完了マーカー（今回の学び/完了レビュー見出し、または v1.1: 「残作業はありません」「すべて完了」「完全クリーン」等の残件ゼロ宣言フレーズ）検出時に『完了レビュー:』ブロック(改善点・再発防止・水平展開・残件の4ラベル)を必須化し、不足なら exit 2 でブロック。2026-06-11 事案（残件があるのに「残作業はありません」と完了宣言→翌ターンの『残件はないか？』で残件5件露呈）の再発防止。.secretary 版 v1 の移植＋宣言フレーズ・トリガ拡張。task-retrospective skill 連動・完了マーカー不在の応答はパス(nag回避)・fail-open"
+  }
+}
