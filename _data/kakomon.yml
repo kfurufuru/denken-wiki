@@ -338,7 +338,7 @@ problems:
     topic: "高圧屋側電線路を施設する場合"
     theme: "kachiku-densen"
     form: "穴埋"
-    article: "解釈§110"
+    article: "解釈§111"
   - year: "H26"
     year_label: "平成26年（2014年）"
     num: 10
@@ -464,21 +464,21 @@ problems:
     topic: "自家用電気工作物に係る事業場"
     theme: "jigyoho-taikei"
     form: "論説"
-    article: "事業法§38"
+    article: "事業法§43, 施行規則§52"
   - year: "H28"
     year_label: "平成28年（2016年）"
     num: 2
     topic: "接地工事"
     theme: "setsuchi"
     form: "穴埋"
-    article: "解釈§17"
+    article: "解釈§19, §24, §28"
   - year: "H28"
     year_label: "平成28年（2016年）"
     num: 3
     topic: "高圧の機械器具の施設の好事例"
     theme: "setsuchi"
     form: "論説"
-    article: "解釈§29"
+    article: "解釈§21"
   - year: "H28"
     year_label: "平成28年（2016年）"
     num: 4
@@ -499,7 +499,7 @@ problems:
     topic: "太陽電池モジュールの絶縁性能及び太陽光発電所の電線"
     theme: "zetsuen"
     form: "穴埋"
-    article: "解釈§200, §46"
+    article: "解釈§16, §46"
   - year: "H28"
     year_label: "平成28年（2016年）"
     num: 7
@@ -660,14 +660,14 @@ problems:
     topic: "地中電線の危険防止及び保護"
     theme: "chichuu-densen"
     form: "穴埋"
-    article: "省令§26, 解釈§120"
+    article: "省令§30, §47"
   - year: "H30"
     year_label: "平成30年（2018年）"
     num: 4
     topic: "電気使用場所における異常時の保護対策"
     theme: "hogo-sochi"
     form: "論説"
-    article: "省令§14, §15"
+    article: "省令§63〜§66"
   - year: "H30"
     year_label: "平成30年（2018年）"
     num: 5
@@ -1213,7 +1213,7 @@ problems:
     topic: "太陽電池モジュールの絶縁性能"
     theme: "zetsuen"
     form: "穴埋"
-    article: "解釈§200"
+    article: "解釈§16"
   - year: "R05上"
     year_label: "令和5年上期（2023年）"
     num: 5
