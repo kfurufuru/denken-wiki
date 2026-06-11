@@ -100,7 +100,7 @@ problems:
     topic: "電気事業法における電気の使用制限等"
     theme: "jigyoho-taikei"
     form: "穴埋"
-    article: "事業法§34"
+    article: "事業法§34の2"
   - year: "H24"
     year_label: "平成24年（2012年）"
     num: 2
@@ -247,7 +247,7 @@ problems:
     topic: "電気設備の技術基準への国際規格の取り入れ"
     theme: "other"
     form: "穴埋"
-    article: "−"
+    article: "解釈§218"
   - year: "H25"
     year_label: "平成25年（2013年）"
     num: 10
@@ -625,7 +625,7 @@ problems:
     topic: "電気使用場所の配線"
     theme: "shiyo-basho"
     form: "計算"
-    article: "省令§56,§57,§62, 解釈§148"
+    article: "省令§56,§57,§62, 解釈§146"
   - year: "H29"
     year_label: "平成29年（2017年）"
     num: 12
@@ -825,10 +825,10 @@ problems:
   - year: "R02"
     year_label: "令和2年（2020年）"
     num: 1
-    topic: "電気事業法における電気の使用制限等"
-    theme: "jigyoho-taikei"
+    topic: "電気主任技術者の職務と監督範囲（第三種の適用範囲）"
+    theme: "shunin-gijutsusha"
     form: "穴埋"
-    article: "事業法§34"
+    article: "事業法§43, 施行規則§56"
   - year: "R02"
     year_label: "令和2年（2020年）"
     num: 2
