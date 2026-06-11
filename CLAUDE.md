@@ -29,13 +29,15 @@ CLAUDE.md・他ドキュメントの記述は補助情報であり、`--rank --v
 
 ## 条文ページ作成ワークフロー（必須）
 
-新規条文ページ作成・全面改修の前に必ず `.claude/rules/denken-page-creation.md` を Read し、5ステップのチェックリスト（kakomon.yml確認 → denken-ou.com照合 → e-Gov照合 → 信頼度自己評価）を実行する。
+新規条文ページ作成・全面改修の前に必ず `.claude/docs/denken-page-creation.md` を Read し、5ステップのチェックリスト（kakomon.yml確認 → denken-ou.com照合 → e-Gov照合 → 信頼度自己評価）を実行する。
+
+**⚠️ 同ファイルは自動読込されない**（2026-06-11 トークン節約のため `.claude/rules/` → `.claude/docs/` へ移動・毎セッション21k chars削減）。**条文ページ（articles/配下）に触る作業を始める瞬間に、必ず最初の手順として Read すること**。読まずに書き始めるのは過去事故（2026-05-02 §224 改正前論点で全面書き直し）の再発要因。戦略ページ用 `.claude/docs/strategy-page-3-layer.md` も同様にオンデマンド参照。
 
 **禁止**: kakomon.yml の `topic` 文字列だけ信じて書き始めること（過去事例: 2026-05-02 §224 改正前の論点で書いてしまい全面書き直し）。
 
 **外部監査**: `python scripts/audit_kakomon.py --article 解釈§<番号>` で kakomon.yml と denken-ou.com の条番号一致を照合できる。新規ページ作成時・月次定期で実行する。
 
-**pre-commit フック（推奨セットアップ）**: `_data/denken-ou-cache.yml` を `--cache` で生成済み。`.git/hooks/pre-commit` に `python scripts/precommit_kakomon.py` を登録すると、kakomon.yml の article 誤編集を **commit時に0トークンで自動検出** できる。詳細は `.claude/rules/denken-page-creation.md` 参照。
+**pre-commit フック（推奨セットアップ）**: `_data/denken-ou-cache.yml` を `--cache` で生成済み。`.git/hooks/pre-commit` に `python scripts/precommit_kakomon.py` を登録すると、kakomon.yml の article 誤編集を **commit時に0トークンで自動検出** できる。詳細は `.claude/docs/denken-page-creation.md` 参照。
 
 ### リファレンス自動更新ルール（重要）
 
@@ -52,7 +54,7 @@ CLAUDE.md・他ドキュメントの記述は補助情報であり、`--rank --v
 リファレンスを切り替えますか？ (Y/n)
 ```
 
-3. ユーザー承認後、本 CLAUDE.md および `.claude/rules/denken-page-creation.md` の参照記述（あれば）を更新する。なお、運用上の真のゴールド指定は常に `--rank --v3` の出力であり、ファイル中のパス記述は補助情報。
+3. ユーザー承認後、本 CLAUDE.md および `.claude/docs/denken-page-creation.md` の参照記述（あれば）を更新する。なお、運用上の真のゴールド指定は常に `--rank --v3` の出力であり、ファイル中のパス記述は補助情報。
 
 > **月次の自動検知**: `.github/workflows/reference-drift.yml`（月初）が `--rank --v3` 首位と `_data/reference-gold.yml` の記録の乖離を検知して Issue 化する。**新ゴールドを承認したら同ファイルの `gold.path/score/verdict/updated` も更新する**（reference-gold.yml が首位の機械可読な真実・真のゴールドは常に `--rank --v3`）。
 
@@ -133,7 +135,7 @@ mkdocs build              # 静的サイトビルド
 | # | セクション | 必須 | 内容 |
 |---|----------|:----:|------|
 | 冒頭 | タイトル + 出題頻度 + 概要blockquote + 概要テーブル | ✅ | `🔥🔥🔥🔥🔥` 形式 + 直近出題は各出題を**／**で区切る + 概要テーブル（後述） |
-| 冒頭+ | 改正・番号ズレ注記 | 条件付 | 改正/番号誤りがある場合のみ。詳細は `.claude/rules/denken-page-creation.md` 参照 |
+| 冒頭+ | 改正・番号ズレ注記 | 条件付 | 改正/番号誤りがある場合のみ。詳細は `.claude/docs/denken-page-creation.md` 参照 |
 | 1 | 全体像と要点 | ✅ | 「5秒で思い出す」箇条書き3-5項目 + `??? question` セルフチェック |
 | 2 | 条文原文 | 推奨 | 省令条文を引用（eGov未確認は `[要確認]` 付記） |
 | 3 | 原文解析 | 推奨 | ブロック分解テーブル: 原文 \| 意味 \| 試験のポイント |

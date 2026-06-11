@@ -100,7 +100,7 @@ jobs:
           out.append("### 対処")
           out.append("1. 新首位ページの内容を確認し、ゴールド昇格を承認するか判断")
           out.append("2. 承認するなら `_data/reference-gold.yml` の `gold.path / score / verdict / updated` を更新")
-          out.append("3. CLAUDE.md・`.claude/rules/denken-page-creation.md` のパス記述も追従（補助情報）")
+          out.append("3. CLAUDE.md・`.claude/docs/denken-page-creation.md` のパス記述も追従（補助情報）")
           out.append("4. 本 Issue は次回監査（首位が記録と一致）で自動クローズされます")
           out.append("")
           out.append("> 運用上の真のゴールドは常に `--rank --v3` 出力。本ファイルはそれを機械可読に固定したもの。")
