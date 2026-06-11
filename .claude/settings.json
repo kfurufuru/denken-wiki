@@ -8,6 +8,11 @@
             "type": "command",
             "command": "python \"$CLAUDE_PROJECT_DIR/.claude/hooks/task_retrospective_check.py\"",
             "timeout": 10
+          },
+          {
+            "type": "command",
+            "command": "python \"$CLAUDE_PROJECT_DIR/.claude/hooks/destructive_block_check.py\"",
+            "timeout": 10
           }
         ]
       }
@@ -15,6 +20,7 @@
   },
   "_comment": "denken-wiki 共有 hook 設定（git tracked・全 worktree に伝播）。個人 permissions は settings.local.json (untracked) に。",
   "_hooks_purpose": {
-    "Stop:task_retrospective_check": "完了マーカー（今回の学び/完了レビュー見出し、または v1.1: 「残作業はありません」「すべて完了」「完全クリーン」等の残件ゼロ宣言フレーズ）検出時に『完了レビュー:』ブロック(改善点・再発防止・水平展開・残件の4ラベル)を必須化し、不足なら exit 2 でブロック。2026-06-11 事案（残件があるのに「残作業はありません」と完了宣言→翌ターンの『残件はないか？』で残件5件露呈）の再発防止。.secretary 版 v1 の移植＋宣言フレーズ・トリガ拡張。task-retrospective skill 連動・完了マーカー不在の応答はパス(nag回避)・fail-open"
+    "Stop:task_retrospective_check": "完了マーカー（今回の学び/完了レビュー見出し、または v1.1: 「残作業はありません」「すべて完了」「完全クリーン」等の残件ゼロ宣言フレーズ）検出時に『完了レビュー:』ブロック(改善点・再発防止・水平展開・残件の4ラベル)を必須化し、不足なら exit 2 でブロック。2026-06-11 事案（残件があるのに「残作業はありません」と完了宣言→翌ターンの『残件はないか？』で残件5件露呈）の再発防止。.secretary 版 v1 の移植＋宣言フレーズ・トリガ拡張。task-retrospective skill 連動・完了マーカー不在の応答はパス(nag回避)・fail-open",
+    "Stop:destructive_block_check": "応答の実行系 code fence（bash/pwsh等+タグなし）内に破壊コマンド（stash drop/branch -D/reset --hard/clean -f/--force/rm -r/Remove-Item -Recurse）を検出し、同一応答でより前に読み取りblock（消える対象の実測表示）が無ければ exit 2 でブロック＝2分割プロトコルの機械強制。2026-06-11 事案（『中身照合済み』という虚偽の安全主張付き bare 破壊block→untracked 34件消失未遂・ユーザーの▷実行は block-dangerous-git を通らない穴）の再発防止。AI社員諮問全員一致（A3原則=破壊opはin-session実行が主軸・本hookはbackstop）。例示は ```text フェンスへ。fail-open・self-test: .claude/hooks/tests/test_destructive_block_check.py"
   }
 }
