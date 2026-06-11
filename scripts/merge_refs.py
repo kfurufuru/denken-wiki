@@ -5,15 +5,20 @@
 - URL重複はスキップ（人間は重複を気にせず append OK）
 - カテゴリは links.md の H2 見出しと部分一致で照合（柔軟マッチ）
 - マッチしないカテゴリは pending に残す（要セクション作成）
+- ADD 候補の URL は死活確認（HEAD→GET フォールバック）し、4xx/5xx・接続不可は
+  pending に残す（404 の JEAC9701 が links.md にマージされ PR #77 で除去した事案の再発防止）
+- refs-pending.yml の書き戻しは先頭に PENDING_HEADER を必ず付与する
+  （yaml.safe_dump はコメントを保持しないため、ヘッダの運用ルール説明が毎回消えていた）
 
 Exit codes:
     0  正常終了（merged が 0件でもエラーではない）
     1  YAML 構文エラー / links.md 読込失敗 など致命的エラー
 
 CLI:
-    python scripts/merge_refs.py            # 実行（実反映）
-    python scripts/merge_refs.py --dry-run  # 何が追加されるか確認のみ
-    python scripts/merge_refs.py --verbose  # 詳細ログ
+    python scripts/merge_refs.py                  # 実行（実反映）
+    python scripts/merge_refs.py --dry-run        # 何が追加されるか確認のみ（書き込みなし）
+    python scripts/merge_refs.py --verbose        # 詳細ログ（--dry-run なしだと実反映される点に注意）
+    python scripts/merge_refs.py --skip-url-check # URL 死活確認を省略（オフライン環境等）
 """
 from __future__ import annotations
 
@@ -21,6 +26,8 @@ import argparse
 import io
 import re
 import sys
+import urllib.error
+import urllib.request
 from datetime import date
 from pathlib import Path
 
@@ -34,6 +41,27 @@ if sys.stdout.encoding and sys.stdout.encoding.lower() != "utf-8":
 ROOT = Path(__file__).resolve().parent.parent
 PENDING_YML = ROOT / "_data" / "refs-pending.yml"
 LINKS_MD = ROOT / "docs" / "reference" / "links.md"
+
+# refs-pending.yml の先頭ヘッダコメント。yaml.safe_dump はコメントを保持できないため、
+# 書き戻し時に必ずこの定数を先頭へ付与する（2026-06-11 に2回手動復元した消失事案の再発防止）。
+# ヘッダ文言の正本はこの定数。yml 側だけ直接編集しても次回マージで本定数の内容に戻る。
+PENDING_HEADER = """\
+# 役に立った参考文献の追加ログ
+# 編集セッションで新規参照したURLをここに append すること。
+# scripts/merge_refs.py が定期的に docs/reference/links.md にマージする。
+#
+# 運用ルール: .claude/rules/refs-auto-reflect.md
+# - pending は append-only（直接削除しない・merge スクリプトのみが移動可）
+# - カテゴリは links.md のセクション見出し（H2 / `## …`）と部分一致で照合される
+# - 重複URLはスクリプトがスキップするので、人間は重複を気にせず append OK
+
+"""
+
+URL_CHECK_TIMEOUT = 10  # 秒
+URL_CHECK_UA = (
+    "Mozilla/5.0 (compatible; denken-wiki-merge-refs/1.0; "
+    "+https://github.com/kfurufuru/denken-wiki)"
+)
 
 
 def load_pending() -> dict:
@@ -74,6 +102,32 @@ def url_already_in_links(url: str, md_text: str) -> bool:
     比較は前後空白除去のみ（厳密一致）。
     """
     return url in md_text
+
+
+def check_url_alive(url: str) -> tuple[bool, str]:
+    """ADD 候補 URL の死活確認. HEAD → 失敗時 GET フォールバックの2段で試す.
+
+    Returns:
+        (True, detail)  : 2xx/3xx 応答あり（リダイレクトは urllib が自動追従）
+        (False, detail) : 4xx/5xx または接続不可（DNS失敗・タイムアウト等）
+
+    接続不可はネットワーク不通と区別できないが、未検証 URL を links.md に
+    公開しない安全側に倒して False を返す。オフライン環境で実マージしたい場合は
+    --skip-url-check で明示的に省略する。
+    """
+    detail = ""
+    for method in ("HEAD", "GET"):
+        req = urllib.request.Request(url, method=method, headers={"User-Agent": URL_CHECK_UA})
+        try:
+            with urllib.request.urlopen(req, timeout=URL_CHECK_TIMEOUT) as resp:
+                return True, f"{method} {resp.status}"
+        except urllib.error.HTTPError as e:
+            detail = f"{method} HTTP {e.code}"  # HEAD拒否(405等)の可能性があるためGETで再試行
+        except OSError as e:  # URLError / TimeoutError / ConnectionError を包含
+            detail = f"{method} 接続不可 ({getattr(e, 'reason', e)})"
+        except ValueError as e:  # URL 形式不正（scheme 無し等）はリトライ不能
+            return False, f"URL形式不正 ({e})"
+    return False, detail
 
 
 def find_section_end_line(md_text: str, heading_line: int) -> int:
@@ -166,6 +220,11 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--dry-run", action="store_true", help="実反映せずプレビューのみ")
     parser.add_argument("--verbose", "-v", action="store_true", help="詳細ログ")
+    parser.add_argument(
+        "--skip-url-check",
+        action="store_true",
+        help="ADD 候補 URL の死活確認を省略（オフライン環境・bot 拒否サイトの誤検出回避用）",
+    )
     args = parser.parse_args()
 
     doc = load_pending()
@@ -222,6 +281,21 @@ def main() -> int:
             continue
 
         heading_line, heading_text = match
+
+        # URL 死活確認（ADD 候補のみ）。NG はマージせず pending に残す
+        if not args.skip_url_check:
+            alive, detail = check_url_alive(url)
+            if not alive:
+                print(
+                    f"  [WARN-URL] URL死活NG・未マージ: {title}\n"
+                    f"             {url} → {detail}",
+                    file=sys.stderr,
+                )
+                new_pending.append(entry)
+                continue
+            if args.verbose:
+                print(f"  [URL-OK] {detail}: {url}")
+
         end_line = find_section_end_line(md_text, heading_line)
         bullet = build_bullet(entry)
         insertions.append((end_line, bullet))
@@ -244,6 +318,13 @@ def main() -> int:
         print(f"\n[DRY-RUN] 追記予定 {len(insertions)} 件 / pending残 {len(new_pending)} 件")
         return 0
 
+    # --verbose 単独でもここに到達する（実マージ）。書き込み前に必ず可視化する
+    print(
+        "\n[merge_refs] ⚠ 実マージを実行します（links.md / refs-pending.yml に書き込み）。"
+        "確認のみなら --dry-run を付けて再実行してください。",
+        file=sys.stderr,
+    )
+
     if not insertions:
         print("\n[merge_refs] 追記対象なし。pending YML のみ更新します。")
     else:
@@ -255,7 +336,7 @@ def main() -> int:
     doc["pending"] = new_pending
     doc["merged"] = new_merged
     PENDING_YML.write_text(
-        yaml.safe_dump(doc, allow_unicode=True, sort_keys=False, width=100),
+        PENDING_HEADER + yaml.safe_dump(doc, allow_unicode=True, sort_keys=False, width=100),
         encoding="utf-8",
     )
     print(
