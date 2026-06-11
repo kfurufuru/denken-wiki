@@ -133,6 +133,9 @@ def insert_bullets_into_md(
 
     後ろから挿入することで行番号のずれを回避。
     挿入位置の前行が空行でなければ空行を1つ追加してから bullet を入れる。
+    挿入後、bullet が直後の '---'（区切り線）や見出しに密着している箇所には
+    空行を1行補完する。密着すると Python-Markdown が bullet を setext 見出しと
+    誤認し、hr が消えて bullet が <h2> 化するため（2026-06-11 修正）。
     """
     lines = md_text.splitlines()
     # 行番号が大きい順に挿入
@@ -145,6 +148,16 @@ def insert_bullets_into_md(
         to_insert.append(bullet)
         # line_idx の「次」に挿入
         lines[line_idx + 1 : line_idx + 1] = to_insert
+    # list item が直後の '---' / 見出しに密着していたら空行を補完（setext 誤認防止）
+    normalized: list[str] = []
+    for k, line in enumerate(lines):
+        normalized.append(line)
+        nxt = lines[k + 1] if k + 1 < len(lines) else ""
+        if line.lstrip().startswith("- ") and (
+            nxt.strip() == "---" or re.match(r"^#{1,6}\s+", nxt)
+        ):
+            normalized.append("")
+    lines = normalized
     # 末尾の改行を保つ
     return "\n".join(lines) + ("\n" if md_text.endswith("\n") else "")
 

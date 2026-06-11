@@ -23,7 +23,7 @@ problems:
     topic: "電気設備の保安原則"
     theme: "jigyoho-taikei"
     form: "穴埋"
-    article: "省令§1〜§4"
+    article: "省令§10,§11"
   - year: "H23"
     year_label: "平成23年（2011年）"
     num: 4
@@ -128,7 +128,7 @@ problems:
     topic: "電気設備技術基準における電路の絶縁"
     theme: "zetsuen"
     form: "論説"
-    article: "省令§5, §58"
+    article: "省令§5, 解釈§13"
   - year: "H24"
     year_label: "平成24年（2012年）"
     num: 6
@@ -1045,7 +1045,7 @@ problems:
     topic: "無線設備への障害防止（電磁障害）"
     theme: "kachiku-densen"
     form: "穴埋"
-    article: "省令§30"
+    article: "省令§67"
   - year: "R04上"
     year_label: "令和4年上期（2022年）"
     num: 7
@@ -1066,7 +1066,7 @@ problems:
     topic: "電気の需給状況悪化時の対応（供給命令等）"
     theme: "jigyoho-taikei"
     form: "穴埋"
-    article: "事業法§34"
+    article: "事業法§28の44,§31"
   - year: "R04上"
     year_label: "令和4年上期（2022年）"
     num: 10
@@ -1304,7 +1304,7 @@ problems:
     topic: "高圧の機械器具の施設（さく・へいの施設等）"
     theme: "shiyo-basho"
     form: "穴埋"
-    article: "解釈§38"
+    article: "解釈§21"
   - year: "R05下"
     year_label: "令和5年下期（2023年）"
     num: 5
@@ -1389,7 +1389,7 @@ problems:
     topic: "光ファイバケーブルの定義"
     theme: "yogo-teigi"
     form: "穴埋"
-    article: "解釈§1"
+    article: "省令§1"
   - year: "R06上"
     year_label: "令和6年上期（2024年）"
     num: 4
@@ -1403,7 +1403,7 @@ problems:
     topic: "風車の安全な状態の確保"
     theme: "hatsuhendenjo"
     form: "穴埋"
-    article: "省令§15の2"
+    article: "風力省令"
   - year: "R06上"
     year_label: "令和6年上期（2024年）"
     num: 6
@@ -1559,7 +1559,7 @@ problems:
     topic: "電気の需給状況悪化時の対応"
     theme: "jigyoho-taikei"
     form: "穴埋"
-    article: "事業法§34"
+    article: "事業法§28の44,§31"
   - year: "R07上"
     year_label: "令和7年上期（2025年）"
     num: 2
@@ -1587,7 +1587,7 @@ problems:
     topic: "風車を支持する工作物"
     theme: "shijimono"
     form: "穴埋"
-    article: "解釈§58"
+    article: "風力省令"
   - year: "R07上"
     year_label: "令和7年上期（2025年）"
     num: 6
@@ -1651,7 +1651,7 @@ problems:
     topic: "電気事業法における電気の使用制限"
     theme: "jigyoho-taikei"
     form: "穴埋"
-    article: "事業法§34"
+    article: "事業法§34の2"
   - year: "R07下"
     year_label: "令和7年下期（2025年）"
     num: 2
@@ -1665,14 +1665,14 @@ problems:
     topic: "電気設備の保安原則"
     theme: "jigyoho-taikei"
     form: "穴埋"
-    article: "省令§1〜§4"
+    article: "省令§10,§11"
   - year: "R07下"
     year_label: "令和7年下期（2025年）"
     num: 4
     topic: "電気設備の接地"
     theme: "setsuchi"
     form: "穴埋"
-    article: "解釈§17"
+    article: "解釈§17,§29"
   - year: "R07下"
     year_label: "令和7年下期（2025年）"
     num: 5
@@ -1693,14 +1693,14 @@ problems:
     topic: "国際規格の取り入れ"
     theme: "jigyoho-taikei"
     form: "穴埋"
-    article: "省令§4の2"
+    article: "解釈§218"
   - year: "R07下"
     year_label: "令和7年下期（2025年）"
     num: 8
     topic: "感電・火災等の防止"
     theme: "jigyoho-taikei"
     form: "穴埋"
-    article: "省令§56,§57"
+    article: "省令§21,§56,§59,§61"
   - year: "R07下"
     year_label: "令和7年下期（2025年）"
     num: 9
