@@ -149,7 +149,7 @@ problems:
     topic: "高圧保安工事"
     theme: "kachiku-densen"
     form: "穴埋"
-    article: "解釈§82"
+    article: "解釈§70"
   - year: "H24"
     year_label: "平成24年（2012年）"
     num: 9
@@ -373,7 +373,7 @@ problems:
     topic: "電気事業法に規定される自家用電気工作物"
     theme: "jigyoho-taikei"
     form: "穴埋"
-    article: "事業法§38"
+    article: "事業法§38, 施行規則§48"
   - year: "H27"
     year_label: "平成27年（2015年）"
     num: 2
@@ -394,7 +394,7 @@ problems:
     topic: "高圧及び特別高圧の電路の避雷器等の施設"
     theme: "hogo-sochi"
     form: "穴埋"
-    article: "解釈§37"
+    article: "省令§49, 解釈§37"
   - year: "H27"
     year_label: "平成27年（2015年）"
     num: 5
@@ -604,7 +604,7 @@ problems:
     topic: "架空弱電流電線路への誘導作用による通信障害の防止"
     theme: "kachiku-densen"
     form: "穴埋"
-    article: "省令§30"
+    article: "省令§42, 解釈§52"
   - year: "H29"
     year_label: "平成29年（2017年）"
     num: 9
@@ -625,7 +625,7 @@ problems:
     topic: "電気使用場所の配線"
     theme: "shiyo-basho"
     form: "計算"
-    article: "解釈§148"
+    article: "省令§56,§57,§62, 解釈§148"
   - year: "H29"
     year_label: "平成29年（2017年）"
     num: 12
