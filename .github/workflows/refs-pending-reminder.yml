@@ -32,8 +32,8 @@ jobs:
           # 0/0 の緑＋issue自動クローズに落としていた。ツール自壊は job 赤で可視化する
           set -o pipefail
           # dry-run のみ。links.md には一切書き込まない（実反映は人間が手動で）
-          # 2>&1: [WARN] カテゴリ未マッチ は stderr 出力のため、stdout だけ tee すると
-          # warn_count が恒久 0 になり「未マッチのみの月」が無音化する
+          # 2>&1: [WARN] カテゴリ未マッチ / [WARN-URL] URL死活NG は stderr 出力のため、
+          # stdout だけ tee すると warn/urlng が恒久 0 になり「未マッチのみの月」が無音化する
           python scripts/merge_refs.py --dry-run 2>&1 | tee inbox/refs-pending-report.txt
           # 形式drift ガード: サマリ行が無い＝出力形式が変わって下の grep カウントが信頼できない
           if ! grep -qE '\[DRY-RUN\]|pending が空' inbox/refs-pending-report.txt; then
@@ -42,9 +42,13 @@ jobs:
           fi
           ADD=$(grep -cE '^[[:space:]]*\[ADD\]' inbox/refs-pending-report.txt || true)
           WARN=$(grep -c 'カテゴリ未マッチ' inbox/refs-pending-report.txt || true)
+          # URL死活NG は [ADD] にも「カテゴリ未マッチ」にも乗らないため、独立カウントしないと
+          # 「リンク切れ pending だけが残る月」が actionable=0 → issue 自動クローズで無音死する
+          URLNG=$(grep -c '\[WARN-URL\]' inbox/refs-pending-report.txt || true)
           echo "add_count=${ADD:-0}" >> "$GITHUB_OUTPUT"
           echo "warn_count=${WARN:-0}" >> "$GITHUB_OUTPUT"
-          echo "actionable=$(( ${ADD:-0} + ${WARN:-0} ))" >> "$GITHUB_OUTPUT"
+          echo "urlng_count=${URLNG:-0}" >> "$GITHUB_OUTPUT"
+          echo "actionable=$(( ${ADD:-0} + ${WARN:-0} + ${URLNG:-0} ))" >> "$GITHUB_OUTPUT"
 
       - name: Ensure refs label exists
         if: steps.refs.outputs.actionable != '0'
@@ -66,7 +70,7 @@ jobs:
             exit 0
           fi
           {
-            echo "## 未反映の参考文献あり（即マージ可 ${{ steps.refs.outputs.add_count }}件／カテゴリ未マッチ ${{ steps.refs.outputs.warn_count }}件）"
+            echo "## 未反映の参考文献あり（即マージ可 ${{ steps.refs.outputs.add_count }}件／カテゴリ未マッチ ${{ steps.refs.outputs.warn_count }}件／URL死活NG ${{ steps.refs.outputs.urlng_count }}件）"
             echo ""
             echo "\`_data/refs-pending.yml\` に未処理の参考文献があります（\`.claude/rules/refs-auto-reflect.md\` の月次マージ運用）。"
             echo "本ワークフローは **dry-run のみ**。実反映は下記コマンドを手動実行してください。"
@@ -82,6 +86,9 @@ jobs:
             echo "### カテゴリ未マッチ（先に links.md にセクション追加が必要）"
             echo "category がどの H2 見出しにもマッチしないため保留中。\`docs/reference/links.md\` に該当セクションを作ってから再マージしてください。"
             echo ""
+            echo "### URL 死活NG（リンク切れの可能性）"
+            echo "ADD 候補の URL が 4xx/5xx または接続不可のため保留中（dry-run 全文の \`[WARN-URL]\` 行参照）。リンク先を確認し、URL を修正するか別ソースに差し替えてから再マージしてください。"
+            echo ""
             echo "<details><summary>dry-run 全文（実行時点）</summary>"
             echo ""
             echo '```'
@@ -93,7 +100,7 @@ jobs:
             echo "> 件数は Issue 作成時点のもの。最新は \`workflow_dispatch\` 再実行か手元の \`--dry-run\` で確認。"
           } > inbox/refs-issue-body.md
           gh issue create \
-            --title "[refs] 未反映の参考文献 即マージ可${{ steps.refs.outputs.add_count }}件＋未マッチ${{ steps.refs.outputs.warn_count }}件" \
+            --title "[refs] 未反映の参考文献 即マージ可${{ steps.refs.outputs.add_count }}件＋未マッチ${{ steps.refs.outputs.warn_count }}件＋URL死活NG${{ steps.refs.outputs.urlng_count }}件" \
             --body-file inbox/refs-issue-body.md \
             --label refs
 

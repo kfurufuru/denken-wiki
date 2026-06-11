@@ -39,10 +39,14 @@
 
 ## CLI
 ```bash
-python scripts/merge_refs.py            # 実行（実反映）
-python scripts/merge_refs.py --dry-run  # 何が追加されるか確認のみ
-python scripts/merge_refs.py --verbose  # 詳細ログ（H2見出し一覧も表示）
+python scripts/merge_refs.py                  # 実行（実反映）
+python scripts/merge_refs.py --dry-run        # 何が追加されるか確認のみ（書き込みなし）
+python scripts/merge_refs.py --verbose        # 詳細ログ（H2見出し一覧も表示。--dry-run なしだと実反映される）
+python scripts/merge_refs.py --skip-url-check # URL死活確認を省略（オフライン環境・bot拒否の誤検出回避）
 ```
+
+- ADD 候補の URL は死活確認（HEAD→GET フォールバック・timeout 10s）され、4xx/5xx・接続不可は `[WARN-URL]` 警告とともに pending に残る（リンク切れを links.md に公開しない・JEAC9701 404 事案の再発防止）
+- 実マージ時、refs-pending.yml 先頭のヘッダコメントはスクリプトが自動付与する（文言の正本は merge_refs.py 内 `PENDING_HEADER` 定数）
 
 ## 関連ファイル
 - `_data/refs-pending.yml` — append-only ログ
