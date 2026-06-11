@@ -7,6 +7,7 @@
 # - check_law_citations.py: 法令引用整合性（電気事業法第N条＋認可/届出/対象 の検証・NG件あればブロック）
 # - check_law_facts.py: 法令数値ハルシネーション類型検出（H01-H05・ERRORあればブロック / H03-H05はWARNING）
 # - check_value_consistency.py: 数値クロス整合（V01 MΩ太字=ERRORブロック / plain Ω・V02三段値=WARNING report）
+# - check_mojibake.py: U+FFFD 置換文字・不正バイト列の混入検出（docs/_data 変更時・NG件あればブロック）
 # - [先頭ガード] master/main への直接コミットを禁止（feature→PR を強制）
 
 # === master 直コミット禁止ガード（feedback-denken-wiki-master-branch-workflow）===
@@ -44,6 +45,28 @@ if [ -n "$NEED_PAGES_SYNC" ] && [ -f scripts/check_kakomon_pages_sync.py ]; then
         echo "→ by-year.md 再生成: python scripts/gen_kakomon_by_year.py"
         echo "  年度ページは kakomon.yml に合わせて topic/article を是正してください。"
         echo "  緊急時は --no-verify でスキップ可能。"
+        exit 1
+    fi
+fi
+
+# 0.5 文字化け（U+FFFD・不正バイト列）混入ゲート（docs/_data の md/yml 変更時・NG件あればブロック）
+#     by-field.md の問番号セル破損 3 行が全監査の正規表現から不可視になった事故（PR #74）の再発防止。
+#     NEED_CHECK 早期 exit より前に置く（themes/ 等 articles 以外の md でも発火させる）。
+#     -f ガードで旧worktree（スクリプト未配置）での誤ブロックを回避する。
+NEED_MOJIBAKE_CHECK=$(echo "$CHANGED" | grep -E '^(docs/.+\.(md|yml|yaml)|_data/.+\.(yml|yaml)|scripts/check_mojibake\.py)$' || true)
+if [ -n "$NEED_MOJIBAKE_CHECK" ] && [ -f scripts/check_mojibake.py ]; then
+    set +e
+    MOJIBAKE_RESULT=$(PYTHONIOENCODING=utf-8 python scripts/check_mojibake.py 2>&1)
+    MOJIBAKE_EXIT=$?
+    set -e
+    if [ "$MOJIBAKE_EXIT" -ne "0" ]; then
+        echo "❌ [pre-commit] U+FFFD 置換文字（文字化け）または不正な UTF-8 バイト列を検出しました。"
+        echo "$MOJIBAKE_RESULT" | tail -30
+        echo ""
+        echo "→ 化け前の文字を前後の文脈・git 履歴から特定して復元してください。"
+        echo "  検出: python scripts/check_mojibake.py"
+        echo "  rule: memory project-by-field-corruption-and-refs-merge-gotchas / PR #74"
+        echo "  緊急時は --no-verify でスキップ可能（非推奨）。"
         exit 1
     fi
 fi
