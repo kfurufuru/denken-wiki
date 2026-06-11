@@ -1,7 +1,7 @@
 # リファレンス（ゴールドスタンダード）の現行記録 — 機械可読版
 #
 # wiki_quality_check.py --rank --v3 の「首位」を記録する単一の真実。
-# CLAUDE.md / .claude/rules/denken-page-creation.md のパス記述は補助情報であり、
+# CLAUDE.md / .claude/docs/denken-page-creation.md のパス記述は補助情報であり、
 # 運用上の真のゴールドは常に --rank --v3 出力。本ファイルはその出力を機械可読に固定したもの。
 #
 # 月次ワークフロー .github/workflows/reference-drift.yml が

@@ -201,7 +201,7 @@ mkdocs Material の `loading="lazy"` 属性で遅延読み込みされるため�
 
 - [安全率マスタリファレンス](safety-factors.md) — 混同論点をマスタ集約する姉妹アプローチ
 - [解釈第66条 v2.3.3](../articles/kaishaku/66.md) — 本ポリシーの初回適用例（硬銅線・CC BY-SA 3.0）
-- denken-wiki の `.claude/rules/denken-page-creation.md` — ページ作成全体ルール
+- denken-wiki の `.claude/docs/denken-page-creation.md` — ページ作成全体ルール
 - denken-wiki の `.claude/rules/work-rules.md` — Claude Code 作業ルール
 
 ---
