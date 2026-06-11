@@ -8,7 +8,8 @@ denken-ou.com（信頼できる過去問解説サイト）と一致するかチ�
     python scripts/audit_kakomon.py --article 解釈§224         # 特定条文の全出題を照合
     python scripts/audit_kakomon.py --recent 10                # 最新10件をスポット監査
     python scripts/audit_kakomon.py --year R06下               # 特定年度の全問を照合
-    python scripts/audit_kakomon.py --all                      # 全件（247件・約8分）
+    python scripts/audit_kakomon.py --year H28                 # 平成年度も照合可
+    python scripts/audit_kakomon.py --all                      # 全件（247件・約14分）
     python scripts/audit_kakomon.py --recent 10 --json out.json  # JSON出力
 
 出力:
@@ -17,7 +18,8 @@ denken-ou.com（信頼できる過去問解説サイト）と一致するかチ�
 
 注意:
     - denken-ou.com への礼儀として --delay (default 2秒) 間隔でリクエスト
-    - 平成年度はURL構造が異なる場合があり対応外（令和のみ確実）
+    - 平成年度は houkih{N}-{問} 形式で照合（houkih23-3 / houkih23-4 で実在確認済み）。
+      該当ページが無い問は「取得失敗」として安全に skip される
     - HTMLパースは簡易版。誤検出時は手動で URL を開いて確認すること
     - 「根拠条文（法）＋記載事項（施行規則）」の 2 層構造ページ（保安規程等）は
       denken-ou が施行規則条番号や定義条番号を主表示するため、KNOWN_OK_MISMATCH に
@@ -58,7 +60,7 @@ def parse_year(y: str):
 
 
 def build_url(year: str, num: int) -> str | None:
-    """denken-ou.com の URL を構築。令和のみ確実対応."""
+    """denken-ou.com の URL を構築。令和・平成とも対応."""
     parsed = parse_year(year)
     if not parsed:
         return None
@@ -69,7 +71,10 @@ def build_url(year: str, num: int) -> str | None:
     if era == "R" and not period:
         # R01〜R03（上下期制以前）
         return f"https://denken-ou.com/houkir{ynum}-{num}/"
-    # 平成は URL 構造が複数パターンあり未対応
+    if era == "H":
+        # 平成（上下期制以前・単一日程）。houkih23-3 / houkih23-4 で実在確認済み。
+        # 該当ページが無い問は fetch_page が None を返し「取得失敗」として skip される。
+        return f"https://denken-ou.com/houkih{ynum}-{num}/"
     return None
 
 
@@ -168,6 +173,15 @@ KNOWN_OK_MISMATCH: dict = {
             "記載事項の列挙は施行規則第50条第3項（自家用）だが代表条文は法 §42。"
         ),
     },
+    ("H28", 10): {
+        "recorded_num": "42",
+        "reason": (
+            "自家用電気工作物を設置する際の保安規程（R05下問1 と同型の出題）。"
+            "根拠は電気事業法第42条（作成・届出義務）だが、denken-ou の解説は記載事項を"
+            "列挙する施行規則第50条を主表示する（実測: 抽出=施行規則第50条）。"
+            "2 層構造（法§42 + 施行規則§50）の誤検出であり代表条文は §42。"
+        ),
+    },
 }
 
 
@@ -225,7 +239,7 @@ def main():
         url = build_url(p["year"], p["num"])
         if not url:
             skipped += 1
-            print(f"[{i}/{len(target)}] - {p['year']}問{p['num']} | URL構築不可（平成等）")
+            print(f"[{i}/{len(target)}] - {p['year']}問{p['num']} | URL構築不可（年度書式不明）")
             continue
 
         time.sleep(args.delay)
