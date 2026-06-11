@@ -340,6 +340,7 @@ nav:
     - 直前3日チェックリスト: strategy/last-3days-checklist.md
     - 再出題傾向と最適学習戦略: strategy/reissue-patterns-and-regulations.md
   - 実務ガイド:
+    - jitsumu/index.md
     - 制御盤撤去工事ガイドライン: jitsumu/seigyoban-tekkyo-guideline.md
   - リファレンス:
     - reference/index.md
