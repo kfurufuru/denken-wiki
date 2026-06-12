@@ -125,12 +125,17 @@ def gh_json(repo: str, number: int, fields: str) -> dict:
     return json.loads(out)
 
 
-def watch_ci(repo: str, number: int, timeout: int, interval: int = 15) -> None:
+def watch_ci(
+    repo: str, number: int, timeout: int, interval: int = 15, allow_no_ci: bool = False
+) -> None:
     """PR の CI checks をポーリング。全 pass で return・fail/timeout で exit 1.
 
     - pending/queued/in_progress は再ポーリング。
     - checks が 1 つも無い状態が 90 秒続いたら「CI 未トリガー」warning を
       出して exit 1（後段マージへ進めない安全弁）。
+    - quality-check.yml は paths フィルタ（docs/**・_data/** 等）のため scripts
+      のみ等の PR は CI 対象外で正当に未トリガーになる。その場合は --allow-no-ci
+      で WARN 表示のうえ watch をスキップして続行できる。
     """
     print(f"watch  = CI checks をポーリング (PR #{number} / timeout {timeout}s)")
     deadline = time.time() + timeout
@@ -144,9 +149,17 @@ def watch_ci(repo: str, number: int, timeout: int, interval: int = 15) -> None:
             if no_checks_since is None:
                 no_checks_since = now
             elif now - no_checks_since >= 90:
+                if allow_no_ci:
+                    print(
+                        "  WARN: 90 秒間 checks 未トリガー。--allow-no-ci 指定のため"
+                        " CI 対象外 PR（paths フィルタ）と判定し watch をスキップ"
+                    )
+                    return
                 sys.exit(
                     "FATAL: CI が 90 秒間 1 つもトリガーされていない（未トリガー疑い）。"
-                    "ワークフロー設定 / branch protection を確認すること。"
+                    "ワークフロー設定 / branch protection を確認すること。scripts のみ等の"
+                    " CI 対象外 PR（quality-check.yml の paths フィルタ）なら"
+                    " --allow-no-ci を付けて再実行。"
                 )
             print("  checks: 未トリガー（待機中）...")
         else:
@@ -262,6 +275,12 @@ def main() -> None:
         help="既存 PR の後半のみ実行（--pr 必須・watch-ci→merge→close-issue）",
     )
     ap.add_argument("--pr", type=int, help="--finish 時に対象とする既存 PR 番号")
+    ap.add_argument(
+        "--allow-no-ci",
+        action="store_true",
+        help="checks 未トリガー90秒でも FATAL にせず watch をスキップ"
+        "（scripts のみ等 paths フィルタで CI 対象外の PR 用）",
+    )
     args = ap.parse_args()
 
     # 引数検証（ネットワークに出る前に止める）
@@ -287,7 +306,7 @@ def main() -> None:
 
     # --finish: 既存 PR の後半工程のみ実行して終了（watch-ci → merge → close-issue）
     if args.finish:
-        watch_ci(args.repo, args.pr, args.watch_timeout)
+        watch_ci(args.repo, args.pr, args.watch_timeout, allow_no_ci=args.allow_no_ci)
         merge_pr(args.repo, args.pr)
         if args.close_issue is not None:
             close_issue(args.repo, args.close_issue, args.pr)
@@ -402,7 +421,7 @@ def main() -> None:
 
     # 9. 後半工程（指定時）: CI 待機 → squash マージ → issue close
     if args.watch_ci or args.merge:
-        watch_ci(args.repo, number, args.watch_timeout)
+        watch_ci(args.repo, number, args.watch_timeout, allow_no_ci=args.allow_no_ci)
     if args.merge:
         merge_pr(args.repo, number)
         if args.close_issue is not None:
