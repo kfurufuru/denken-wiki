@@ -156,7 +156,11 @@ def main() -> None:
         sha = guard_sha(blob.get("sha", ""), f"blob {repo_path}")
         # ベースと同一内容（=変更なし）の登録は事故の兆候なので止める
         try:
-            base_blob = run(["git", "rev-parse", f"origin/{args.base}:{repo_path}"])
+            # 新規ファイルでは rev-parse が fatal を stderr に吐くが想定内のため抑止
+            base_blob = run(
+                ["git", "rev-parse", f"origin/{args.base}:{repo_path}"],
+                stderr=subprocess.DEVNULL,
+            )
         except subprocess.CalledProcessError:
             base_blob = ""  # 新規ファイル
         if base_blob == sha:
