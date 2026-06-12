@@ -15,6 +15,30 @@ pending:
   used_at: '2026-06-11'
   rationale: 停電作業の措置（第339条）・作業指揮者（第350条）・検電器具等の使用前点検（第352条）・電気取扱業務特別教育（第36条第4号）の一次ソース。実務ガイド新設で安衛則を初参照したが
     links.md に未収載だった（URL死活 200 確認済 2026-06-11）
+- url: https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.147AppA
+  title: OSHA 1910.147 Appendix A — Typical Minimal Lockout Procedure
+  category: 技術規格
+  used_in: jitsumu/seigyoban-tekkyo-guideline.md v2.0（起動試行tryステップの根拠）
+  used_at: '2026-06-12'
+  rationale: 制御盤撤去ガイドラインの国際標準整合（v2.0）で参照。LOTO最小手順のtry stepの一次ソース。HTTP 200確認済
+- url: https://www.osha.gov/etools/lockout-tagout/hot-topics/group-lockout-tagout/procedures
+  title: OSHA eTool — Group Lockout/Tagout Procedures
+  category: 技術規格
+  used_in: jitsumu/seigyoban-tekkyo-guideline.md v2.0（1人1錠・グループロックボックス）
+  used_at: '2026-06-12'
+  rationale: グループLOTO（各自施錠）の運用根拠。HTTP 200確認済
+- url: https://www.hse.gov.uk/pubns/books/hsg85.htm
+  title: HSE HSG85 — Electricity at work Safe working practices
+  category: 技術規格
+  used_in: jitsumu/seigyoban-tekkyo-guideline.md v2.0（safe isolation・PTW）
+  used_at: '2026-06-12'
+  rationale: 英国の安全隔離・作業許可書のベストプラクティス書誌。HTTP 200確認済
+- url: https://anzeninfo.mhlw.go.jp/yougo/yougo74_1.html
+  title: 厚生労働省 職場のあんぜんサイト — 感電（安全衛生キーワード）
+  category: 学習リソース
+  used_in: jitsumu/seigyoban-tekkyo-guideline.md v2.0（緊急時対応・感電救急）
+  used_at: '2026-06-12'
+  rationale: 感電災害事例と救急処置の公的解説。緊急時対応節（5-6）の裏付け。HTTP 200確認済
 merged:
 - url: https://laws.e-gov.go.jp/law/345AC0000000096
   title: 電気工事業の業務の適正化に関する法律
