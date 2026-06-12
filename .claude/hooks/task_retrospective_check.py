@@ -1,9 +1,14 @@
 #!/usr/bin/env python
-"""Stop hook: 完了宣言レビュー（5点）強制 — denken-wiki 版 (v1.1).
+"""Stop hook: 完了宣言レビュー強制 — denken-wiki 版 (v1.2).
 
 完了マーカー検出時のみ作動し、`完了レビュー:` ブロックに
-改善点 / 再発防止 / 水平展開 / 残件 の4ラベルが揃っているか検証。
+改善点 / 再発防止 / 水平展開 / 残件 / トークン の5ラベルが揃っているか検証。
 不足なら exit 2 で完了報告をブロック（stderr に違反通知）。
+
+v1.2 (2026-06-13): 「トークン」ラベル追加 — トークン消費を抑える改善を
+  実施したか（実施内容 or 検討の上「対象なし」+理由）を完了時に必ず棚卸す。
+  典拠: memory feedback-token-economy-always（節約検討は事後でなく常時・
+  完了レビューを最終チェックポイントに昇格）。
 
 完了マーカー（いずれか）:
   1. 「今回の学び:」見出し（task-retrospective skill スキーマ）
@@ -40,7 +45,7 @@ if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8")
     sys.stderr.reconfigure(encoding="utf-8")
 
-SECTION_LINE_LIMIT = 18
+SECTION_LINE_LIMIT = 20
 
 # 完了マーカー1・2（heading 形・prose 誤検出回避）
 LEARNING_HEADING_RE = re.compile(
@@ -58,12 +63,13 @@ COMPLETION_DECLARATION_RE = re.compile(
 )
 CODE_FENCE_RE = re.compile(r"```.*?```", re.DOTALL)
 
-# 完了レビュー ブロックに必須の4ラベル
+# 完了レビュー ブロックに必須の5ラベル
 REQUIRED_LABELS = {
     "改善点": re.compile(r"改善点\s*[:：]"),
     "再発防止": re.compile(r"再発防止\s*[:：]"),
     "水平展開": re.compile(r"水平展開\s*[:：]"),
     "残件": re.compile(r"残件\s*[:：]"),
+    "トークン": re.compile(r"トークン\s*[:：]"),
 }
 
 
@@ -151,6 +157,7 @@ def main() -> None:
             "    再発防止: <... or 該当なし>\n"
             "    水平展開: <... or 該当なし>\n"
             "    残件: <実測 or なし>\n"
+            "    トークン: <消費を抑える改善の実施内容 or 検討の上「対象なし」+理由>\n"
         )
         sys.exit(2)
 
@@ -159,8 +166,9 @@ def main() -> None:
         sys.stderr.write(
             "ERROR: 完了レビュー規律違反（典拠=task-retrospective skill）— `完了レビュー:` ブロックに不足ラベル: "
             + " / ".join(missing) + "\n"
-            "4ラベル（改善点・再発防止・水平展開・残件）すべて必須。\n"
+            "5ラベル（改善点・再発防止・水平展開・残件・トークン）すべて必須。\n"
             "該当なしは「なし」「該当なし」と明示（空欄＝Check未実施は禁止）。\n"
+            "トークン: 消費を抑える改善を実施したか（実施内容 or 検討の上「対象なし」+理由）。\n"
         )
         sys.exit(2)
 
