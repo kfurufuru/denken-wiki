@@ -54,7 +54,7 @@
 | **1位: Wikimedia Commons** | CC BY-SA 3.0 / 4.0 ／ Public Domain | 標準ソース。クレジット必須 |
 | 2位: Unsplash | Unsplash License（CC0相当） | Wikimedia に該当画像がない場合の代替 |
 | 3位: Pexels | Pexels License（CC0相当） | 同上 |
-| 4位: 古舘氏オリジナル | 自著作物 | 三菱ケミカル鶴見の実設備写真は社内承認後 |
+| 4位: 編者オリジナル | 自著作物 | 自社設備の実写真は社内承認後 |
 
 ### 🚫 禁止事項
 
@@ -105,7 +105,7 @@
 ```markdown
 <figure markdown>
   ![代替テキスト](../../assets/images/ファイル名.jpg){ width="500" loading="lazy" }
-  <figcaption>キャプション本文。撮影: 古舘氏（三菱ケミカル鶴見・YYYY-MM-DD・社内承認済）</figcaption>
+  <figcaption>キャプション本文。撮影: 編者（自社設備・YYYY-MM-DD・社内承認済）</figcaption>
 </figure>
 ```
 
@@ -213,7 +213,7 @@ mkdocs Material の `loading="lazy"` 属性で遅延読み込みされるため�
     - **既存事例の参照**: kaishaku/66.md v2.3.3 で確立した「**SVG構造対比＋CC BY-SA 3.0実物写真**」の組合せパターンを wiki 全体の標準として明文化
     - **ライセンスソース確定**: Wikimedia Commons（CC BY-SA / Public Domain）を1位ソースとし、Unsplash/Pexels（CC0）を補完ソースに位置付け
     - **混同罠教材化**: 用語混同サイト（`industry.haleoahu001.com` 等のタイトル/本文矛盾事例）を pre-flight 確認の対象として明示
-    - **未確認領域**: 古舘氏オリジナル写真（三菱ケミカル鶴見の実設備）の社内承認手続きフローは別途確認待ち
+    - **未確認領域**: 編者オリジナル写真（自社設備）の社内承認手続きフローは別途確認待ち
 - **L6 システム学び**: 数値暗記の罠（feedback_law_article_number_verification・safety-factors.md）と同じ構造で、**用語混同の罠** も「視覚化（写真・SVG）＋ 一次ソース確認」で防ぐ。両者を統合した「**混同罠対策マスタ**」が今後の wiki 整備の中核
 
 ---
