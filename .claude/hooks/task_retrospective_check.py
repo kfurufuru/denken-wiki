@@ -1,9 +1,16 @@
 #!/usr/bin/env python
-"""Stop hook: 完了宣言レビュー強制 — denken-wiki 版 (v1.2).
+"""Stop hook: 完了宣言レビュー強制 — denken-wiki 版 (v1.3).
 
 完了マーカー検出時のみ作動し、`完了レビュー:` ブロックに
 改善点 / 再発防止 / 水平展開 / 残件 / トークン の5ラベルが揃っているか検証。
 不足なら exit 2 で完了報告をブロック（stderr に違反通知）。
+
+v1.3 (2026-06-13): 空虚な「なし」手抜き検出を .secretary 版から逆移植。
+  反省3ラベル（改善点・再発防止・水平展開）が全て bare「なし」かつ
+  adversarial 証跡フレーズ（「adversarial 3問確認済」等）が無い場合 exit 2。
+  残件・トークンは実測クリーン/対象なしで正当に「なし」がありうるため対象外。
+  ※版番号が .secretary 版（4ラベル+bareなし）と独立進化し v1.2 で衝突して
+    いたため v1.3 へ。両版とも bareなしガードを保持（機能収斂・SoT再同期）。
 
 v1.2 (2026-06-13): 「トークン」ラベル追加 — トークン消費を抑える改善を
   実施したか（実施内容 or 検討の上「対象なし」+理由）を完了時に必ず棚卸す。
@@ -71,6 +78,20 @@ REQUIRED_LABELS = {
     "残件": re.compile(r"残件\s*[:：]"),
     "トークン": re.compile(r"トークン\s*[:：]"),
 }
+
+# v1.3: 空虚な「なし」手抜き検出（2026-06-13・.secretary 版から逆移植）。
+# 改善点/再発防止/水平展開 が3つとも bare「なし」= Check を回さず label を
+# 埋めただけの手抜き。adversarial 3問を回した証跡フレーズがあれば escape。
+# 残件・トークン は実測クリーン/対象なしで正当に「なし」がありうるため対象外。
+REFLECT_LABELS = ("改善点", "再発防止", "水平展開")
+BARE_NASHI_RE = re.compile(r"^[\s　]*(?:なし|無し|該当なし|特になし)[\s　。.、]*$")
+ADVERSARIAL_CERT_RE = re.compile(r"adversarial|3問|３問|三問", re.IGNORECASE)
+
+
+def get_label_inline_value(section: str, label: str) -> str:
+    """ラベル行の `:` 以降（同一行）の値を返す。次行継続値は空扱い（=bare判定しない）。"""
+    m = re.search(label + r"\s*[:：][ \t　]*(.*)", section)
+    return m.group(1).strip() if m else ""
 
 
 def normalize_path(p: str) -> str:
@@ -169,6 +190,23 @@ def main() -> None:
             "5ラベル（改善点・再発防止・水平展開・残件・トークン）すべて必須。\n"
             "該当なしは「なし」「該当なし」と明示（空欄＝Check未実施は禁止）。\n"
             "トークン: 消費を抑える改善を実施したか（実施内容 or 検討の上「対象なし」+理由）。\n"
+        )
+        sys.exit(2)
+
+    # v1.3: 反省3ラベルが全て bare「なし」かつ adversarial 証跡なし → 手抜き block
+    bare = [
+        lbl for lbl in REFLECT_LABELS
+        if BARE_NASHI_RE.match(get_label_inline_value(section, lbl))
+    ]
+    if len(bare) == len(REFLECT_LABELS) and not ADVERSARIAL_CERT_RE.search(section):
+        sys.stderr.write(
+            "ERROR: 完了レビュー規律違反 — 改善点・再発防止・水平展開 が3つとも「なし」。\n"
+            "label を埋めただけの空虚な「なし」＝Check 手抜きの疑い。adversarial 3問を実測で回すこと:\n"
+            "  1. 仕組みの死角（CI/既存機構で防げない経路は？＝履歴・メタデータ・他リポ等）\n"
+            "  2. 成果物の未検出露出（grep/status で実測したか）\n"
+            "  3. 自分の進め方の抜け（段階発見・後追い・指摘で気づいた点）\n"
+            "→ 1つでも出たら該当ラベルに書く。3問とも真に該当なしなら、その旨と\n"
+            "  「adversarial 3問確認済」を完了レビュー内に明記して再提出（証跡で escape）。\n"
         )
         sys.exit(2)
 
