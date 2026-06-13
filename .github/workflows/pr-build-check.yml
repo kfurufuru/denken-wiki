@@ -1,0 +1,29 @@
+name: PR Build Check
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+      - run: pip install mkdocs-material mkdocs-macros-plugin
+      - run: mkdocs build
+        env:
+          PYTHONUTF8: "1"
+      # 漏えい検査: 先に --self-test（正対照）で検出器の生存を証明してから
+      # site/ を走査（vacuous pass 防止。検出器故障も漏えいも PR を RED にする）
+      - name: Public-leak scan — detector self-test
+        run: python scripts/check_public_leak.py --self-test
+      - name: Public-leak scan — site/
+        run: python scripts/check_public_leak.py --quiet
+        env:
+          PYTHONUTF8: "1"

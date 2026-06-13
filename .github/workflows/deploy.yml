@@ -30,6 +30,14 @@ jobs:
       - run: mkdocs build
         env:
           PYTHONUTF8: "1"
+      # deploy ゲート: 検出器の生存証明（--self-test）→ site/ 漏えい検査。
+      # どちらか失敗で build job が落ち、deploy job まで到達しない（fail-closed）
+      - name: Public-leak scan — detector self-test
+        run: python scripts/check_public_leak.py --self-test
+      - name: Public-leak scan — site/
+        run: python scripts/check_public_leak.py --quiet
+        env:
+          PYTHONUTF8: "1"
       - uses: actions/upload-pages-artifact@v3
         with:
           path: site

@@ -1,10 +1,10 @@
 site_name: "電験3種 法規Wiki"
 site_description: "電験3種 法規 — 条文×過去問クロスリファレンス"
 site_url: "https://kfurufuru.github.io/denken-wiki/"
-site_author: "Furutachi"
+site_author: "kfurufuru"
 repo_url: "https://github.com/kfurufuru/denken-wiki"
 repo_name: "denken-wiki"
-copyright: "&copy; 2026 Furutachi — 個人学習用"
+copyright: "&copy; 2026 kfurufuru — 個人学習用"
 
 theme:
   name: material
