@@ -11,7 +11,7 @@
 
 ### 1. 場所の確認
 
-- [ ] 作成先は **`C:\Users\kfuru\Projects\denken-wiki\docs\articles\<カテゴリ>\<番号>.md`** か？
+- [ ] 作成先は **`docs\articles\<カテゴリ>\<番号>.md`** か？
 - [ ] 似た名前のリポジトリ（denken3-wiki 等）に作っていないか？
 - [ ] `git remote -v` で `kfurufuru/denken-wiki` を確認したか？
 

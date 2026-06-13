@@ -255,7 +255,7 @@ https://laws.e-gov.go.jp/api/1/lawdata/<LawId>
 
 | 項目 | 内容 |
 |------|------|
-| 管理者 | Furutachi |
+| 管理者 | kfurufuru |
 | リポジトリ | [GitHub](https://github.com/kfurufuru/denken-wiki) |
 | ライセンス | 個人学習用 |
 | ビルド | MkDocs Material + GitHub Pages |
