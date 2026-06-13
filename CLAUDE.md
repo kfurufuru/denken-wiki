@@ -259,4 +259,4 @@ MkDocs環境で太字内のΩ（U+03A9/U+2126）がフォント依存でキリ�
 | 誤答パターン | `.secretary/denken-study/e-log/` | → 弱点ログへ昇格 |
 | 知識整理 | `.secretary/knowledge/` | → wikiページへ昇格 |
 
-- 編集セッションで新規参照したURL・参考文献は `_data/refs-pending.yml` に append（自動反映運用・詳細は `.claude/rules/refs-auto-reflect.md`）
+- 編集セッションで新規参照したURL・参考文献は `_data/refs-pending.yml` に append（自動反映運用・詳細は `.claude/docs/refs-auto-reflect.md` ※トークン節約のためオンデマンド化 2026-06-13）
