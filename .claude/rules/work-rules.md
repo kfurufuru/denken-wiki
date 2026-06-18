@@ -81,15 +81,15 @@ ChatGPTからレビュー・改善提案・指摘がある場合は、以下の�
 - 確認が必要な点
 - build/test結果
 - 次に対応した方がよい提案
-- **今回の学び**（下記スキーマ・どちらか必須・Stop hook は secretary repo 側で稼働中・本 repo セッションでも自主準拠）
+- **今回の学び**（下記スキーマ・どちらか必須）
 
-### 「今回の学び」スキーマ（v2.1・必須フォーマット）
+### 「今回の学び」スキーマ（v3・必須フォーマット）
 
 以下2フィールドのいずれか一方を必ず出力。両方なしは禁止、両方併記も禁止、自由文形式は禁止。
 
 ```
 今回の学び:
-  memory_created: <absolute/path/to/memory/file.md>
+  memory_created: <作成した memory の slug 名（例: feedback_xxx）。絶対パス・保存先は不要>
 ```
 
 または
@@ -101,9 +101,9 @@ ChatGPTからレビュー・改善提案・指摘がある場合は、以下の�
 
 #### memory_created の場合
 
-- path は **絶対パス**、`~` 展開や相対パスは NG
-- 学びの L4/L5/L6 区分・本文・関連 link は memory ファイル本体に書く（§7 では path だけ）
-- secretary repo 側 Stop hook (`learning_memory_check.py`) が path 実在を grep 検証 → 不在なら完了報告ブロック。本 repo セッションでも自主準拠
+- 値は **memory の slug 名** で十分。絶対パス・保存先は記載不要（古舘さん「保存先不問」・2026-06-18）
+- 学びの L4/L5/L6 区分・本文・関連 link は memory ファイル本体に書く（§7 では slug だけ）
+- 機械的な path 検証 hook は **無い**（v2.1 が前提とした `learning_memory_check.py` は実機に未配線と判明・2026-06-18）。古舘さん事後 review が担保
 
 #### memory_skipped の場合
 
@@ -112,7 +112,7 @@ ChatGPTからレビュー・改善提案・指摘がある場合は、以下の�
 
 ### 禁止語彙（先送り表現・即 §7 違反）
 
-以下を §7「今回の学び」で使用した時点で work-rules §7 違反。secretary repo 側 hook が opt-out 検出（v2.1）。
+以下を §7「今回の学び」で使用した時点で work-rules §7 違反（機械検出 hook は無い・古舘さん事後 review が担保）。
 
 - ❌ 「Rule of Three N/3 で保留」「2回目発生時に memory 化判定」
 - ❌ 「候補として後で memory 化」「次回検討」「次回類似時」「将来 Skill 化」
@@ -133,6 +133,8 @@ Rule of Three は [feedback_rule_of_three_skill_trigger]（**Skill 化** 三回�
 ユーザーに「学びは？」と聞かれた時点で PDCA の Check を Claude 側で能動的に回せていない状態。2026-05-23 セッションで 4-5 回繰り返した Rule of Three 超過事案を契機に §7 必須項目に追加。
 
 v2.1 改訂（2026-05-31）：自由文「今回の学び」では「Rule of Three 1/3 で保留」等の先送り語彙で実質スキップする事案が発生。AI社員諮問で B+C ハイブリッド統合エスカレ採用 → スキーマ強制 + hook 検証で機械化。同日 hot-fix で opt-out 化（§7 セクション検出時に schema 不使用も block）。詳細：[memory: feedback_learning_auto_apply v2.1]
+
+v3 改訂（2026-06-18）：path 記載必須を撤廃＝slug 表示に簡素化（古舘さん「保存先不問」）。あわせて v2.1 が「hook 検証で機械化」と記した Stop hook `learning_memory_check.py` は実機（secretary repo の settings.json）に未配線と判明したため記述訂正（実 Stop hook は cc-notify / secretary-session-capture / secretary-auto-commit の3本のみ）。二択必須・先送り語彙禁止・L4-L6 区分は維持。
 
 > 詳細プロトコル: [memory: feedback_pdca_completion_default]（テンプレ・トリガー条件・関連 memory）
 > 詳細実装: [memory: feedback_learning_auto_apply v2.1]（禁止語彙・hook 仕様・自己復元事例）
