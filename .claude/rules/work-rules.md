@@ -103,7 +103,7 @@ ChatGPTからレビュー・改善提案・指摘がある場合は、以下の�
 
 - 値は **memory の slug 名** で十分。絶対パス・保存先は記載不要（古舘さん「保存先不問」・2026-06-18）
 - 学びの L4/L5/L6 区分・本文・関連 link は memory ファイル本体に書く（§7 では slug だけ）
-- 機械的な path 検証 hook は **無い**（v2.1 が前提とした `learning_memory_check.py` は実機に未配線と判明・2026-06-18）。古舘さん事後 review が担保
+- secretary repo 側 project Stop hook `learning_memory_check.py`（`.secretary/.claude/settings.json` 配線）が値を実在検証する：memory dir の `<slug>.md`（または絶対 path）が無ければ exit 2（v3 で slug 許容に改修）。本 repo セッションでは hook 非配線のため自主準拠＋古舘さん事後 review
 
 #### memory_skipped の場合
 
@@ -134,7 +134,7 @@ Rule of Three は [feedback_rule_of_three_skill_trigger]（**Skill 化** 三回�
 
 v2.1 改訂（2026-05-31）：自由文「今回の学び」では「Rule of Three 1/3 で保留」等の先送り語彙で実質スキップする事案が発生。AI社員諮問で B+C ハイブリッド統合エスカレ採用 → スキーマ強制 + hook 検証で機械化。同日 hot-fix で opt-out 化（§7 セクション検出時に schema 不使用も block）。詳細：[memory: feedback_learning_auto_apply v2.1]
 
-v3 改訂（2026-06-18）：path 記載必須を撤廃＝slug 表示に簡素化（古舘さん「保存先不問」）。あわせて v2.1 が「hook 検証で機械化」と記した Stop hook `learning_memory_check.py` は実機（secretary repo の settings.json）に未配線と判明したため記述訂正（実 Stop hook は cc-notify / secretary-session-capture / secretary-auto-commit の3本のみ）。二択必須・先送り語彙禁止・L4-L6 区分は維持。
+v3 改訂（2026-06-18）：path 記載必須を撤廃＝slug 表示に簡素化（古舘さん「保存先不問」）し、secretary 側検証 hook `learning_memory_check.py` を slug 許容に改修して整合。※当初 v3 で「`learning_memory_check.py` は未配線」と誤記したが、これは user スコープ `~/.claude/settings.json` だけ見た誤断定で、当該 hook は **project スコープ** `.secretary/.claude/settings.json` に実在・配線済み（v2.1 の記述が正しかった）。hook 有無は user/project 両スコープ確認が必要（[memory: feedback_hook_existence_both_settings_scopes]）。二択必須・先送り語彙禁止・L4-L6 区分は維持。
 
 > 詳細プロトコル: [memory: feedback_pdca_completion_default]（テンプレ・トリガー条件・関連 memory）
 > 詳細実装: [memory: feedback_learning_auto_apply v2.1]（禁止語彙・hook 仕様・自己復元事例）
