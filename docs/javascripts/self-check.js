@@ -262,7 +262,9 @@
       const titleEl = el.querySelector(':scope > .admonition-title, :scope > p.admonition-title');
       if (!titleEl) return;
       const titleText = titleEl.textContent.trim();
-      if (!/問題/.test(titleText)) return;
+      // 「問題N」形式に加え、過去問チャレンジの「R0X / H2X / 令和 / 平成 … 問N」形式の
+      // abstract（例: 「R01 問9（論説・誤り選択）…」）も解答記録の対象にする
+      if (!/問題/.test(titleText) && !/(R\d+|H\d+|令和|平成).{0,8}問\s*\d+/.test(titleText)) return;
 
       const hash = djb2Hash('kakomon::' + titleText);
       const buttons = buildButtons(hash, titleText, 'kakomon', el);
