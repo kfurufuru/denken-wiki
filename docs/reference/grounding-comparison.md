@@ -3,7 +3,7 @@
 > A/B/C/D種の一覧比較。数値の違いと適用対象を横断整理。
 
 !!! tip "🧭 SOTはこちら"
-    **試験3日前に開く・暗記する用** → [法規Wiki Hub「接地工事一覧表」](https://kfurufuru.github.io/secretary-portal/denken-hoki-wiki.html#/sec02/setsuchi-ichiran)（暗記カードUI・ひっかけ機能つき）
+    **試験3日前に開く・暗記する用** → [法規Wiki Hub「接地工事一覧表」](https://kfurufuru.github.io/secretary-portal-public/denken-hoki-wiki.html#/sec02/setsuchi-ichiran)（暗記カードUI・ひっかけ機能つき）
 
     本ページは**じっくり理解する用**（条文ベース解説・ELB緩和・省略条件）
 

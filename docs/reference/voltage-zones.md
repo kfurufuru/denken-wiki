@@ -3,7 +3,7 @@
 > 低圧・高圧・特別高圧の境界値。電験3種 法規の出発点となる基礎知識。
 
 !!! tip "🧭 SOTはこちら"
-    **試験3日前に開く・暗記する用** → [法規Wiki Hub「電圧区分一覧表」](https://kfurufuru.github.io/secretary-portal/denken-hoki-wiki.html#/sec02/den-atsu-kubun)（暗記カードUI・ひっかけ機能つき）
+    **試験3日前に開く・暗記する用** → [法規Wiki Hub「電圧区分一覧表」](https://kfurufuru.github.io/secretary-portal-public/denken-hoki-wiki.html#/sec02/den-atsu-kubun)（暗記カードUI・ひっかけ機能つき）
 
     本ページは**じっくり理解する用**（条文ベース解説・出題文脈）
 
