@@ -5,7 +5,7 @@ GitHub Pages deployment and merges them into MkDocs Material's lunr.js
 search index, so denken-wiki users can search hoki-wiki content from this
 site (Phase 2 of bidirectional cross-search).
 
-Source: https://kfurufuru.github.io/secretary-portal/data/hoki-search-index.json
+Source: https://kfurufuru.github.io/secretary-portal-public/data/hoki-search-index.json
 Target: site/search/search_index.json (lunr.js index built by mkdocs-material)
 
 Failure policy:
@@ -23,10 +23,10 @@ from urllib import error as urlerror
 from urllib import request as urlrequest
 
 HOKI_INDEX_URL = (
-    "https://kfurufuru.github.io/secretary-portal/data/hoki-search-index.json"
+    "https://kfurufuru.github.io/secretary-portal-public/data/hoki-search-index.json"
 )
 HOKI_PAGE_URL = (
-    "https://kfurufuru.github.io/secretary-portal/denken-hoki-wiki.html"
+    "https://kfurufuru.github.io/secretary-portal-public/denken-hoki-wiki.html"
 )
 EXPECTED_MIN_ENTRIES = 1  # 0件はビルド失敗
 TIMEOUT_SEC = 15
