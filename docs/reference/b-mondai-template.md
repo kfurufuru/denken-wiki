@@ -4,7 +4,7 @@
 > 手順に沿って数値を代入するだけで解ける「再現性のある解法」を目指す。
 
 !!! tip "🧭 SOTはこちら"
-    **演習・タイマー付き・進捗管理用** → [法規Wiki Hub「B問題対策」](https://kfurufuru.github.io/secretary-portal/denken-hoki-wiki.html#/sec01/zetsuen-tairyoku)（65分タイマー・章立て進捗）
+    **演習・タイマー付き・進捗管理用** → [法規Wiki Hub「B問題対策」](https://kfurufuru.github.io/secretary-portal-public/denken-hoki-wiki.html#/sec01/zetsuen-tairyoku)（65分タイマー・章立て進捗）
 
     本ページは**解法の理屈を理解する用**（テンプレート定義・なぜそう解くか）
 
