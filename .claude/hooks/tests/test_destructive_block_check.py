@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-"""destructive_block_check.py の self-test（8ケース・回帰ガード）.
+"""destructive_block_check.py の self-test（9ケース・回帰ガード）.
 
 Stop hook の偽陽性は全セッションの送信をブロックする事故になるため、
 hook 変更時は必ず本テストを実行する:
@@ -16,10 +16,12 @@ HOOK = os.path.join(os.path.dirname(__file__), "..", "destructive_block_check.py
 FENCE = "```"
 
 
-def run_case(name, assistant_text, expect_rc, stop_hook_active=False):
+def run_case(name, assistant_text, expect_rc, stop_hook_active=False, raw_lines=None):
     with tempfile.NamedTemporaryFile(
         "w", suffix=".jsonl", delete=False, encoding="utf-8"
     ) as f:
+        for line in (raw_lines or []):
+            f.write(line + "\n")
         f.write(
             json.dumps(
                 {
@@ -110,6 +112,15 @@ def main() -> int:
         "powershell Remove-Item -Recurse bare",
         f"{FENCE}powershell\nRemove-Item -Recurse -Force C:\\repo\\dir\n{FENCE}\n",
         2,
+    ))
+
+    # 9. adversarial: valid JSON だが非dict行 ["x"] / message 非dict が混在しても
+    #    クラッシュせず（fail-open）破壊 block を検出→ブロック（PR #506/#509 同ガード）
+    results.append(run_case(
+        "non-dict transcript lines do not crash (fail-open)",
+        f"{FENCE}\ngit stash drop\n{FENCE}\n",
+        2,
+        raw_lines=['["unexpected","shape"]', '{"type":"assistant","message":"not-a-dict"}'],
     ))
 
     total, passed = len(results), sum(results)

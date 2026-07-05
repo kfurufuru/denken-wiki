@@ -89,9 +89,13 @@ def get_last_assistant_text(transcript_path: str) -> str:
                     d = json.loads(line)
                 except json.JSONDecodeError:
                     continue
-                if d.get("type") != "assistant":
+                # 行が valid JSON でも dict とは限らない（["x"] 等）。d.get() の
+                # AttributeError で hook 全体が exit 1 する fail-open 違反を防ぐ
+                # （.secretary 版 PR #506/#509・task_retrospective_check v1.4 と同ガード）。
+                if not isinstance(d, dict) or d.get("type") != "assistant":
                     continue
-                content = d.get("message", {}).get("content", [])
+                msg = d.get("message", {})
+                content = msg.get("content", []) if isinstance(msg, dict) else []
                 if isinstance(content, str):
                     last_text = content
                 elif isinstance(content, list):
