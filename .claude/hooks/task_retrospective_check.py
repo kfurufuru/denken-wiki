@@ -1,9 +1,24 @@
 #!/usr/bin/env python
-"""Stop hook: 完了宣言レビュー強制 — denken-wiki 版 (v1.3).
+"""Stop hook: 完了宣言レビュー強制 — denken-wiki 版 (v1.4).
 
 完了マーカー検出時のみ作動し、`完了レビュー:` ブロックに
 改善点 / 再発防止 / 水平展開 / 残件 / トークン の5ラベルが揃っているか検証。
 不足なら exit 2 で完了報告をブロック（stderr に違反通知）。
+
+v1.4 (2026-07-05): 完了マーカー3（宣言語彙）の偽陽性修正 ＋ fail-open 強化。
+  .secretary 版 PR #504/#506/#509 の横展開（同原則）:
+  (a) 宣言語彙の偽陽性: マーカー3（「残作業はありません」「すべて完了」等）は
+      会話語彙のみで発火していたため、前セッション成果の状況報告や、hook 監査で
+      宣言フレーズを散文言及しただけ（本ファイル点検セッション等）でも実測レビューを
+      強制する偽陽性があった。→ マーカー3 **単独**トリガ時は「このセッションで実際に
+      ファイルを編集した」事実を transcript の編集系 tool_use（EDIT_TOOLS）の存在で
+      確認し、編集ゼロなら exit 0。見出しマーカー1・2（学び:/完了レビュー:）は
+      自己申告 opt-in なのでゲートせず従来どおり schema 検証する（真陽性維持）。
+      既知の残ギャップ: Bash 経由の書換（sed -i / python / git）は編集系 tool_use に
+      現れないため宣言単独では素通りしうる（マーカー1・learning_memory_check で縦深補完）。
+  (b) fail-open 強化: transcript 行が valid JSON でも dict とは限らない（["x"] 等）。
+      d.get() の AttributeError で hook が exit 1 する fail-open 違反があった。
+      → transcript を読む全関数に isinstance(d, dict) ＋ message 非dict ガードを追加。
 
 v1.3 (2026-06-13): 空虚な「なし」手抜き検出を .secretary 版から逆移植。
   反省3ラベル（改善点・再発防止・水平展開）が全て bare「なし」かつ
@@ -87,6 +102,11 @@ REFLECT_LABELS = ("改善点", "再発防止", "水平展開")
 BARE_NASHI_RE = re.compile(r"^[\s　]*(?:なし|無し|該当なし|特になし)[\s　。.、]*$")
 ADVERSARIAL_CERT_RE = re.compile(r"adversarial|3問|３問|三問", re.IGNORECASE)
 
+# v1.4: マーカー3（宣言語彙）の前提条件ゲート用 — 実際にファイルを書き換える編集系
+# ツールのみ。Read/Grep/Bash 等は「話題にする」だけで編集事実の証拠にならない
+# （.secretary 版 PR #504 と同じ判定原則）。
+EDIT_TOOLS = {"Edit", "Write", "MultiEdit", "NotebookEdit"}
+
 
 def get_label_inline_value(section: str, label: str) -> str:
     """ラベル行の `:` 以降（同一行）の値を返す。次行継続値は空扱い（=bare判定しない）。"""
@@ -98,6 +118,39 @@ def normalize_path(p: str) -> str:
     if sys.platform == "win32" and re.match(r"^/[a-zA-Z]/", p):
         return p[1].upper() + ":" + p[2:]
     return p
+
+
+def has_edit_tool_use(transcript_path: str) -> bool:
+    """transcript に編集系 tool_use（EDIT_TOOLS）が1つでもあるか（v1.4）。
+    「このセッションで実際にファイルを編集した」事実の判定に使う。
+    読めない/壊れた行は無視する fail-open（判定不能→False＝宣言単独では発火しない側に
+    倒す。見出しマーカー1・2の検証には影響しない）。"""
+    transcript_path = normalize_path(transcript_path)
+    if not transcript_path or not os.path.isfile(transcript_path):
+        return False
+    try:
+        with open(transcript_path, encoding="utf-8") as f:
+            for line in f:
+                try:
+                    d = json.loads(line)
+                except (json.JSONDecodeError, ValueError):
+                    continue
+                if not isinstance(d, dict) or d.get("type") != "assistant":
+                    continue
+                msg = d.get("message", {})
+                content = msg.get("content", []) if isinstance(msg, dict) else []
+                if not isinstance(content, list):
+                    continue
+                for c in content:
+                    if (
+                        isinstance(c, dict)
+                        and c.get("type") == "tool_use"
+                        and c.get("name") in EDIT_TOOLS
+                    ):
+                        return True
+    except (OSError, UnicodeDecodeError):
+        return False
+    return False
 
 
 def get_last_assistant_text(transcript_path: str) -> str:
@@ -112,9 +165,13 @@ def get_last_assistant_text(transcript_path: str) -> str:
                     d = json.loads(line)
                 except json.JSONDecodeError:
                     continue
-                if d.get("type") != "assistant":
+                # 行が valid JSON でも dict とは限らない（["x"] 等）。d.get() の
+                # AttributeError で hook が exit 1 する fail-open 違反を防ぐ
+                # （.secretary 版 PR #506/#509 と同ガード）。
+                if not isinstance(d, dict) or d.get("type") != "assistant":
                     continue
-                content = d.get("message", {}).get("content", [])
+                msg = d.get("message", {})
+                content = msg.get("content", []) if isinstance(msg, dict) else []
                 if isinstance(content, str):
                     last_text = content
                 elif isinstance(content, list):
@@ -158,11 +215,21 @@ def main() -> None:
     cleaned = strip_code_fences(last_text)
 
     decl = COMPLETION_DECLARATION_RE.search(cleaned)
+    has_heading = bool(
+        LEARNING_HEADING_RE.search(cleaned) or REVIEW_HEADING_RE.search(cleaned)
+    )
     # 完了マーカー不在 → mid-task / 軽微応答 → パス（nag しない）
-    if not (
-        LEARNING_HEADING_RE.search(cleaned)
-        or REVIEW_HEADING_RE.search(cleaned)
-        or decl
+    if not (has_heading or decl):
+        sys.exit(0)
+
+    # v1.4: マーカー3（宣言語彙）単独トリガは、このセッションに編集系 tool_use が
+    # ある時だけ有効。会話語彙だけ（状況報告・宣言フレーズの散文言及）では発火させない
+    # （前提条件は transcript の編集事実で判定＝.secretary 版 PR #504 と同原則）。
+    # 見出し（マーカー1・2）は自己申告 opt-in なのでゲートしない。
+    if (
+        decl
+        and not has_heading
+        and not has_edit_tool_use(payload.get("transcript_path", ""))
     ):
         sys.exit(0)
 
