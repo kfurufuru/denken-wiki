@@ -3,6 +3,8 @@
 このプロジェクトは、電験3種学習者向けのWikiを作成・改善するためのものです。
 目的は、正確で、試験対策に役立ち、初学者にも読みやすいページを作ることです。
 
+> 本書は規範（何をすべきか・何を禁止するか）だけを載せる。各節の制定経緯・事案詳細は「> 関連 memory」先に全文がある。経緯を本書に書き足さないこと。
+
 ## 1. 基本方針
 
 - 回答は前置きせず、結論から始めること。
@@ -83,13 +85,20 @@ ChatGPTからレビュー・改善提案・指摘がある場合は、以下の�
 - 次に対応した方がよい提案
 - **今回の学び**（下記スキーマ・どちらか必須）
 
-### 「今回の学び」スキーマ（v3・必須フォーマット）
+### 「今回の学び」スキーマ（v4・必須フォーマット）
 
-以下2フィールドのいずれか一方を必ず出力。両方なしは禁止、両方併記も禁止、自由文形式は禁止。
+以下3フィールドのいずれか一方を必ず出力。複数併記・全部なしは禁止、自由文形式は禁止。
 
 ```
 今回の学び:
-  memory_created: <作成した memory の slug 名（例: feedback_xxx）。絶対パス・保存先は不要>
+  memory_updated: <既存 memory の slug>     ← 第一候補（update-first）
+```
+
+または
+
+```
+今回の学び:
+  memory_created: <新規 memory の slug>      ← 既存照合して該当なしの時だけ
 ```
 
 または
@@ -99,27 +108,32 @@ ChatGPTからレビュー・改善提案・指摘がある場合は、以下の�
   memory_skipped: <理由>
 ```
 
-#### memory_created の場合
+> **完了報告での §7 はコードフェンスで囲まない**：上の囲みは表示用テンプレート。実際の宣言は素のテキストで書く。secretary 側検証 hook `learning_memory_check.py` はコードフェンス内を strip するため、fence 内に書いた §7 は検証されない。
 
-- 値は **memory の slug 名** で十分。絶対パス・保存先は記載不要（古舘さん「保存先不問」・2026-06-18）
-- 学びの L4/L5/L6 区分・本文・関連 link は memory ファイル本体に書く（§7 では slug だけ）
-- secretary repo 側 project Stop hook `learning_memory_check.py`（`.secretary/.claude/settings.json` 配線）が値を実在検証する：memory dir の `<slug>.md`（または絶対 path）が無ければ exit 2（v3 で slug 許容に改修）。本 repo セッションでは hook 非配線のため自主準拠＋古舘さん事後 review
+#### 優先順位（update-first・v4 の核心）
 
-#### memory_skipped の場合
+重複 memory の真因は「書く前に既存を探さない」こと。優良 memory は追記で育つ。だから **skip 既定ではなく update 既定**。
 
-- 理由は **具体的に1行**。許容例：「既存パターン反復・新規抽象化なし」「`[既存 memory name]` でカバー済」「軽微作業で学び抽出対象外」
-- 「学び無し」「特になし」だけは NG（PDCA Check 証明にならない）
+1. **memory_updated が既定**。学びを書く前に必ず `grep -il "<核心キーワード2-3個>" memory/*.md` で既存照合し、同クラスの memory があれば **新規作成せず追記**する（再発事例・第2機序・訂正・再確認カウント）。
+2. **memory_created は「照合して該当なし」の時だけ**。§7 に「既存照合: <grep語> → 該当なし」を1行添える。並列セッションの同日重複（同じ指示を2ファイル化）は照合漏れの典型。
+3. **memory_skipped の許容理由**：「既存パターン反復・新規抽象化なし」「`[既存 memory]` でカバー済」「軽微作業で学び抽出対象外」。「学び無し」「特になし」だけは NG（PDCA Check を回した証明にならない）。
+
+#### memory_updated / memory_created の検証
+
+- 値は **memory の slug 名** で十分（絶対パス・保存先は記載不要）。学びの L4/L5/L6 区分・本文・関連 link は memory ファイル本体に書く（§7 では slug だけ）。
+- secretary repo 側 project Stop hook `learning_memory_check.py`（`.secretary/.claude/settings.json` 配線）が値を実在検証する。**本 repo セッションでは hook 非配線のため自主準拠＋古舘さん事後 review**。
+- MEMORY.md・`index/feedback-*.md` の「N 件」手動カウンタは **廃止**（並列書込でドリフトするため）。件数は必要時に `grep -c` で都度計算する。
 
 ### 禁止語彙（先送り表現・即 §7 違反）
 
-以下を §7「今回の学び」で使用した時点で work-rules §7 違反（機械検出 hook は無い・古舘さん事後 review が担保）。
+以下を §7「今回の学び」で使用した時点で work-rules §7 違反（本 repo では機械検出 hook 無し・古舘さん事後 review が担保）。
 
 - ❌ 「Rule of Three N/3 で保留」「2回目発生時に memory 化判定」
 - ❌ 「候補として後で memory 化」「次回検討」「次回類似時」「将来 Skill 化」
 - ❌ 「次回からは X する」「次回は Y を意識する」
 - ❌ 「memory 化検討」「memory 化保留」「memory 候補」「あとで memory」
 
-Rule of Three は [feedback_rule_of_three_skill_trigger]（**Skill 化** 三回則）であって memory 化判定ではない。混同事例：2026-05-31 セッション。学びが「即 memory 化レベルでない」と判断するなら memory_skipped に書く。
+Rule of Three は [feedback_rule_of_three_skill_trigger]（**Skill 化** 三回則）であって memory 化判定ではない。学びが「即 memory 化レベルでない」と判断するなら memory_skipped に書く。
 
 ### 「次の提案」と「今回の学び」の境界
 
@@ -128,16 +142,7 @@ Rule of Three は [feedback_rule_of_three_skill_trigger]（**Skill 化** 三回�
 | 6. 次に対応した方がよい提案 | **未来向け・行動** | TODO候補・punch list・実装せず提案のみ |
 | 7. 今回の学び | **過去向け・認知** | 抽象化された原則／プロセス改善／横展可能パターン → 即 memory 化 |
 
-### 背景
-
-ユーザーに「学びは？」と聞かれた時点で PDCA の Check を Claude 側で能動的に回せていない状態。2026-05-23 セッションで 4-5 回繰り返した Rule of Three 超過事案を契機に §7 必須項目に追加。
-
-v2.1 改訂（2026-05-31）：自由文「今回の学び」では「Rule of Three 1/3 で保留」等の先送り語彙で実質スキップする事案が発生。AI社員諮問で B+C ハイブリッド統合エスカレ採用 → スキーマ強制 + hook 検証で機械化。同日 hot-fix で opt-out 化（§7 セクション検出時に schema 不使用も block）。詳細：[memory: feedback_learning_auto_apply v2.1]
-
-v3 改訂（2026-06-18）：path 記載必須を撤廃＝slug 表示に簡素化（古舘さん「保存先不問」）し、secretary 側検証 hook `learning_memory_check.py` を slug 許容に改修して整合。※当初 v3 で「`learning_memory_check.py` は未配線」と誤記したが、これは user スコープ `~/.claude/settings.json` だけ見た誤断定で、当該 hook は **project スコープ** `.secretary/.claude/settings.json` に実在・配線済み（v2.1 の記述が正しかった）。hook 有無は user/project 両スコープ確認が必要（[memory: feedback_hook_existence_both_settings_scopes]）。二択必須・先送り語彙禁止・L4-L6 区分は維持。
-
-> 詳細プロトコル: [memory: feedback_pdca_completion_default]（テンプレ・トリガー条件・関連 memory）
-> 詳細実装: [memory: feedback_learning_auto_apply v2.1]（禁止語彙・hook 仕様・自己復元事例）
+> 関連 memory: [feedback_pdca_completion_default]（詳細プロトコル）／[feedback_learning_auto_apply]（禁止語彙・hook 仕様・v1〜v4 経緯）／[feedback_hook_existence_both_settings_scopes]（hook 有無は user/project 両スコープ確認）
 
 ## 8. MEMORY.md 運用
 
@@ -176,7 +181,7 @@ v3 改訂（2026-06-18）：path 記載必須を撤廃＝slug 表示に簡素化
 ## 11. タスク完了宣言の前の L4-L6 セルフチェック（必須）
 
 「完了報告」「タスク完了」「以上です」を書こうとした瞬間に、以下4問を必ず自問する。
-1つでも空欄なら、完了ではなく **「次層への昇格判定」段階** に戻る。
+1つでも空欄なら、完了ではなく **「次層への昇格判定」段階** に戻る。完了宣言は「タスク終了」ではなく **「L1-L3 から L4 への昇格判定」**。4問すべてに具体的な回答が書けるまで完了宣言は禁止。
 
 ### 4問セルフチェック
 
@@ -206,16 +211,6 @@ adversarial:
   パターン3: 同上
 ```
 
-3つすべてに具体回答が書けない時点で完了宣言禁止。詳細プロトコル: [memory: feedback_adversarial_verification_default]
+3つすべてに具体回答が書けない時点で完了宣言禁止。
 
-### 完了 ≠ 終わり
-
-完了宣言は「タスク終了」ではなく **「L1-L3 から L4 への昇格判定」**。4問すべてに具体的な回答が書けるまで完了宣言は禁止。
-
-### 背景
-
-フィードバック深化階段 L1-L6（[memory: feedback_feedback_depth_ladder.md]）において、私（Claude）は L4「概念」以降に自走で到達できない構造的バイアスを持つ。この欠陥を補うため、本条で「完了の再定義」を明文化する。
-
-L4.5「adversarial」追加（2026-05-31）：work-rules §7 v2 改訂 + Stop hook 実装で「success path test 8/9 PASS」で完了宣言したが、古舘さん指示で adversarial test を実施したところ重大バグ3件（false positive 自己ブロック含む）が発覚。「規律 → 機械化」を実装しながら機械化ロジック自体を未検証で出す自己矛盾事案 → 本層を追加。
-
-> 関連 memory: `feedback_feedback_depth_ladder.md` ／ `feedback_correct_answer_stop_bias.md` ／ `feedback_law_clause_essence_check.md` ／ `feedback_adversarial_verification_default.md` ／ `feedback_phase_completion_audit_loop.md`
+> 関連 memory: [feedback_feedback_depth_ladder]（L1-L6 階段・本条の制定根拠）／[feedback_adversarial_verification_default]（詳細プロトコル・L4.5 追加事案）／[feedback_correct_answer_stop_bias]／[feedback_law_clause_essence_check]／[feedback_phase_completion_audit_loop]
