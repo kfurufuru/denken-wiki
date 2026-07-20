@@ -85,16 +85,16 @@
 
 ## 2. 経産省告示・通達
 
-> このセクションでは、eGov に登録されない告示・通達のうち電験3種で参照頻度が高いものを掲載する。
+> このセクションでは、eGov に登録されない解釈・告示・通達のうち電験3種で参照頻度が高いものを掲載する。
 
 | 文書名 | リンク | 備考 |
 |--------|--------|------|
-| 電気設備の技術基準の解釈（最新PDF） | [経産省PDF](https://www.meti.go.jp/policy/safety_security/industrial_safety/law/files/dengikaishaku.pdf) | 第1条〜第218条＋220条系。告示扱いのため eGov 未収載 |
+| 電気設備の技術基準の解釈（最新PDF） | [経産省PDF](https://www.meti.go.jp/policy/safety_security/industrial_safety/law/files/dengikaishaku.pdf) | 第1条〜第218条＋220条系。経産省が省令の解釈として示すもの（法令・告示ではない）のため eGov 未収載 |
 | 電気設備技術基準・解釈の最新改正情報 | [経産省お知らせ](https://www.meti.go.jp/policy/safety_security/industrial_safety/oshirase/2025/11/20251120-2.html) | 令和6年11月改正 |
 | 産業保安・電力安全 トップ | [経産省](https://www.meti.go.jp/policy/safety_security/industrial_safety/) | 全告示・通達のハブ |
 
-!!! warning "告示は eGov に登録されない → ローカルPDFキャッシュ必須"
-    電技解釈は経済産業省告示扱いで eGov 法令データベースには登録されていない。**経産省PDFを scripts/cache/ にダウンロードして照合に使う運用が必須**。PDFのURL（`dengikaishaku.pdf`）は同一URLで上書き更新されるため、改正の都度 `wget` し直す。
+!!! warning "電技解釈は eGov に登録されない → ローカルPDFキャッシュ必須"
+    電技解釈は法令・告示ではなく経済産業省が省令の解釈として示すもので、eGov 法令データベースには登録されていない。**経産省PDFを scripts/cache/ にダウンロードして照合に使う運用が必須**。PDFのURL（`dengikaishaku.pdf`）は同一URLで上書き更新されるため、改正の都度 `wget` し直す。
 
 ---
 
