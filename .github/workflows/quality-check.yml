@@ -10,6 +10,7 @@ on:
       - 'scripts/gen_kakomon_by_year.py'
       - 'scripts/check_stale_evidence.py'
       - 'scripts/check_mojibake.py'
+      - 'scripts/check_theme_article_numbers.py'
       - 'scripts/tests/check_stale_evidence/**'
       - 'wiki_check.py'
       - '.github/workflows/quality-check.yml'
@@ -23,6 +24,7 @@ on:
       - 'scripts/gen_kakomon_by_year.py'
       - 'scripts/check_stale_evidence.py'
       - 'scripts/check_mojibake.py'
+      - 'scripts/check_theme_article_numbers.py'
       - 'scripts/tests/check_stale_evidence/**'
       - 'wiki_check.py'
       - '.github/workflows/quality-check.yml'
@@ -44,6 +46,13 @@ jobs:
         run: python scripts/check_mojibake.py
       - name: Run wiki_check.py
         run: python wiki_check.py docs/
+      # themes/strategy 等（記事以外）が書く「省令第N条（見出し）」を articles/ の正本と突合。
+      # 事故: hoan-gensoku.md が「保安原則=省令第1条〜第4条」と教えていた（正しくは第4条〜第18条・PR #154）。
+      # 記事側は audit_titles.py が原典照合済みだが、記事**以外**のページは誰も検査していなかった。
+      - name: theme/strategy 条番号↔見出し整合 self-test
+        run: python scripts/check_theme_article_numbers.py --self-test
+      - name: theme/strategy 条番号↔見出し整合ゲート
+        run: python scripts/check_theme_article_numbers.py --strict
       - name: kakomon dual-file sync guard (_data/ == docs/_data/)
         run: python scripts/check_kakomon_dual_sync.py
       - name: kakomon by-year + year-page sync guard (yml ↔ 派生md)
