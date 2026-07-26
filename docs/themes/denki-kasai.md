@@ -228,7 +228,7 @@
 | 条文 | 内容 | リンク |
 |------|------|-------|
 | 電気設備技術基準 第14条 | 過電流保護（電線・機器の保護義務） | [../articles/kijun/14.md](../articles/kijun/14.md) |
-| 電技解釈 第33条 | 過電流遮断器の施設（動作特性・設置場所） | [../articles/kaishaku/33.md](../articles/kaishaku/33.md) |
+| 電技解釈 第33条 | 低圧電路に施設する過電流遮断器の性能等（時間電流特性） | [../articles/kaishaku/33.md](../articles/kaishaku/33.md) |
 | 電技解釈 第36条 | 地絡遮断装置の施設（ELB設置義務） | [../articles/kaishaku/36.md](../articles/kaishaku/36.md) |
 
 ---
