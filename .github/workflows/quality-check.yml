@@ -12,6 +12,10 @@ on:
       - 'scripts/check_mojibake.py'
       - 'scripts/check_theme_article_numbers.py'
       - 'scripts/audit_kaishaku_titles.py'
+      - 'scripts/audit_titles.py'
+      - 'scripts/audit_jigyoho_titles.py'
+      - 'scripts/article_title_match.py'
+      - 'scripts/cache/**'
       - 'mkdocs.yml'
       - 'scripts/tests/check_stale_evidence/**'
       - 'wiki_check.py'
@@ -28,6 +32,10 @@ on:
       - 'scripts/check_mojibake.py'
       - 'scripts/check_theme_article_numbers.py'
       - 'scripts/audit_kaishaku_titles.py'
+      - 'scripts/audit_titles.py'
+      - 'scripts/audit_jigyoho_titles.py'
+      - 'scripts/article_title_match.py'
+      - 'scripts/cache/**'
       - 'mkdocs.yml'
       - 'scripts/tests/check_stale_evidence/**'
       - 'wiki_check.py'
@@ -68,6 +76,17 @@ jobs:
         run: python scripts/audit_kaishaku_titles.py --self-test
       - name: 解釈 条番号↔条見出し 外部照合ゲート（原典マスタ突合）
         run: python scripts/audit_kaishaku_titles.py --external --strict
+      # 省令・事業法も同じ判定ロジック（scripts/article_title_match.py）で突合する。
+      # 事故: 解釈側にだけ入れた「他条の見出しと逐語一致なら ERROR」規則が省令側に無く、
+      # kijun/index.md に第7条・第39条・第47条の見出しがそのまま別の条に付いている誤りが
+      # 3件残っていた（PR #161 で解釈側を直した時点では気づけなかった）。
+      # 判定を1箇所に集約し、法令ごとに正本 dict だけ差し替える構成にした。
+      - name: 省令 条番号↔条見出し ゲート（e-Gov 突合・記事H1 + index + nav）
+        run: python scripts/audit_titles.py --strict
+      - name: 事業法 条番号↔条見出し self-test
+        run: python scripts/audit_jigyoho_titles.py --self-test
+      - name: 事業法 条番号↔条見出し ゲート（e-Gov 本則突合）
+        run: python scripts/audit_jigyoho_titles.py --strict
       - name: kakomon dual-file sync guard (_data/ == docs/_data/)
         run: python scripts/check_kakomon_dual_sync.py
       - name: kakomon by-year + year-page sync guard (yml ↔ 派生md)

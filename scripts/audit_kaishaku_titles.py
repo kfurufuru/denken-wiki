@@ -60,8 +60,19 @@ import io
 import json
 import re
 import sys
-from difflib import SequenceMatcher
 from pathlib import Path
+
+import article_title_match as M
+from article_title_match import (  # noqa: F401  （self-test から参照）
+    classify as _classify,
+    norm_exact,
+    parse_index_titles as _parse_index,
+    parse_nav_titles as _parse_nav,
+    nav_number_mismatches as _nav_mismatch,
+    strip_supplement,
+)
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 if sys.stdout.encoding and sys.stdout.encoding.lower() != "utf-8":
     sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8")
@@ -73,9 +84,6 @@ INDEX_MD = KAISHAKU / "index.md"
 MKDOCS_YML = ROOT / "mkdocs.yml"
 MASTER_PATH = ROOT / "_data" / "kaishaku_article_titles.json"
 
-# --- 類似度しきい値（check_theme_article_numbers.py / check_hoki_law_titles.py と同思想）
-SIM_OK = 0.60      # これ以上なら「その条の見出しの言い換え」とみなす
-SIM_MARGIN = 0.45  # ERROR に必要な「他条の方が近い」差
 
 # ---------------------------------------------------------------------------
 # 既知の未是正箇所（段階導入の allowlist / ratchet）
@@ -129,37 +137,21 @@ def parse_index_titles(text: str | None = None) -> dict[int, str]:
         if not INDEX_MD.exists():
             return {}
         text = INDEX_MD.read_text(encoding="utf-8")
-    titles: dict[int, str] = {}
-    # | 第NN条 | [タイトル](NN.md) | ... |  または  | 第NN条 | タイトル | ...
-    for m in re.finditer(r"\|\s*第(\d+)条\s*\|\s*(?:\[([^\]]+)\]\([^)]+\)|([^|]+?))\s*\|", text):
-        n = int(m.group(1))
-        t = (m.group(2) or m.group(3) or "").strip()
-        titles[n] = t
-    return titles
-
-
-# mkdocs.yml の nav ラベル「- 第N条（ラベル）: articles/kaishaku/N.md」
-# サイドバーに出る表示名で、学習者が最初に見る「条番号↔主題」の対応。
-# ここが誤っていると記事本文が正しくても誤った紐付けを覚えてしまう
-# （実例: 第71条 nav が「高圧架空電線の施設」のまま＝PR #157 の記事是正が nav に未反映だった）。
-NAV_ENTRY = re.compile(
-    r"^\s*-\s*第(\d+)条[（(]([^）)]*)[）)]\s*:\s*articles/kaishaku/(\d+)\.md\s*$",
-    re.MULTILINE,
-)
+    return _parse_index(text)
 
 
 def parse_nav_titles(text: str | None = None) -> dict[int, str]:
-    """mkdocs.yml から 条番号→nav ラベル のマップを抽出"""
+    """mkdocs.yml から 条番号→nav ラベル のマップを抽出
+
+    nav ラベルはサイドバーに出る表示名で、学習者が最初に見る「条番号↔主題」の対応。
+    ここが誤っていると記事本文が正しくても誤った紐付けを覚えてしまう
+    （実例: 第71条 nav が「高圧架空電線の施設」のまま＝PR #157 の記事是正が nav に未反映だった）。
+    """
     if text is None:
         if not MKDOCS_YML.exists():
             return {}
         text = MKDOCS_YML.read_text(encoding="utf-8")
-    titles: dict[int, str] = {}
-    for m in NAV_ENTRY.finditer(text):
-        if m.group(1) != m.group(3):
-            continue  # ラベルの条番号とリンク先ファイルの不一致は別途 NAV_NUM_MISMATCH
-        titles[int(m.group(1))] = m.group(2).strip()
-    return titles
+    return _parse_nav(text, "kaishaku")
 
 
 def nav_number_mismatches(text: str | None = None) -> list[tuple[int, int, str]]:
@@ -168,59 +160,12 @@ def nav_number_mismatches(text: str | None = None) -> list[tuple[int, int, str]]
         if not MKDOCS_YML.exists():
             return []
         text = MKDOCS_YML.read_text(encoding="utf-8")
-    out = []
-    for m in NAV_ENTRY.finditer(text):
-        if m.group(1) != m.group(3):
-            out.append((int(m.group(1)), int(m.group(3)), m.group(2).strip()))
-    return out
+    return _nav_mismatch(text, "kaishaku")
 
 
 # ---------------------------------------------------------------------------
 # 外部照合
 # ---------------------------------------------------------------------------
-# 末尾の補足括弧を落とす。
-#   「電路の対地電圧の制限（住宅の屋内電路 150V）」→「電路の対地電圧の制限」
-# 見出しの**途中**にある括弧は原典見出しの一部でありうるので触らない。
-TRAILING_PAREN = re.compile(r"(?:[（(][^（()）]*[）)])+\s*$")
-
-
-def strip_supplement(title: str) -> str:
-    """末尾の補足「（…）」を除去（連続していれば全部）。"""
-    prev = None
-    s = title.strip()
-    while prev != s:
-        prev = s
-        s = TRAILING_PAREN.sub("", s).strip()
-        if not s:  # 括弧だけのタイトルは元に戻す（除去しすぎない）
-            return title.strip()
-    return s
-
-
-def norm_exact(s: str) -> str:
-    """逐語一致の判定用。空白のみ吸収し、字句は変えない。"""
-    return re.sub(r"[\s　]", "", s)
-
-
-def norm_fuzzy(s: str) -> str:
-    """類似度計算用の正規化（記号・定型語尾を落とす）。"""
-    s = re.sub(r"[\s　、，,・（）()「」【】]", "", s)
-    return s.replace("等", "").replace("の防止", "").replace("防止", "")
-
-
-def sim(a: str, b: str) -> float:
-    """0..1 の類似度。包含は 1.0 にせず長さ比で減点する。
-
-    「電路の絶縁」は「電路の絶縁性能」の部分文字列だが別概念（絶縁の原則 vs 絶縁性能）で、
-    1.0 にすると第13条↔第14条のような隣接条を誤って同一視する。
-    """
-    na, nb = norm_fuzzy(a), norm_fuzzy(b)
-    if not na or not nb:
-        return 0.0
-    if na in nb or nb in na:
-        return 0.6 + 0.4 * (min(len(na), len(nb)) / max(len(na), len(nb)))
-    return SequenceMatcher(None, na, nb).ratio()
-
-
 def load_master(path: Path | None = None) -> dict[int, str]:
     p = path or MASTER_PATH
     if not p.exists():
@@ -231,47 +176,8 @@ def load_master(path: Path | None = None) -> dict[int, str]:
 
 
 def classify(kind: str, num: int, claimed: str, master: dict[int, str]) -> tuple[str, str] | None:
-    """(status, detail) を返す。一致していれば None。
-
-    status: "ERROR"（他条の見出しに強く一致＝誤帰属） / "WARN"（単なる乖離）
-            / "MASTER_MISSING"（マスタに当該条が無い＝判定不能）
-    """
-    truth = master.get(num)
-    if truth is None:
-        return ("MASTER_MISSING", f"第{num}条 はマスタに無い（判定不能・fail-open）: 「{claimed}」")
-
-    base = strip_supplement(claimed)
-    if norm_exact(base) == norm_exact(truth):
-        return None
-
-    # **他の条の見出しと逐語一致**したら、margin を問わず ERROR。
-    # 類似度＋margin だけに頼ると、隣接条どうしで語彙が重なる事案を取り逃す
-    # （実測: 第68条の nav ラベルを第65条の見出しに差し替えても margin 0.45 に届かず WARN 止まりだった）。
-    # 公式見出しと1文字違わず一致するのは偶然ではないので、cry-wolf の心配はない。
-    for n2, t2 in master.items():
-        if n2 != num and norm_exact(base) == norm_exact(t2):
-            return (
-                "ERROR",
-                f"第{num}条「{base}」… 原典は「{truth}」"
-                f" → その表記は**第{n2}条**の見出しと逐語一致（条番号の取り違え）",
-            )
-
-    truth_s = sim(base, truth)
-    best_n, best_s = None, 0.0
-    for n2, t2 in master.items():
-        if n2 == num:
-            continue
-        s2 = sim(base, t2)
-        if s2 > best_s:
-            best_n, best_s = n2, s2
-
-    if best_n is not None and best_s >= SIM_OK and (best_s - truth_s) >= SIM_MARGIN:
-        return (
-            "ERROR",
-            f"第{num}条「{base}」… 原典は「{truth}」"
-            f" → **第{best_n}条**（{master[best_n]}）では？",
-        )
-    return ("WARN", f"第{num}条「{base}」… 原典は「{truth}」（短縮表記・改正前見出し等なら問題なし）")
+    """共有ロジック（article_title_match）へ委譲。kind は呼び出し元の分類用で判定には使わない。"""
+    return M.classify(num, claimed, master)
 
 
 def external_scan(master: dict[int, str]) -> tuple[list[tuple[str, str, str]], set[tuple[str, int]]]:
@@ -363,6 +269,9 @@ def internal_scan() -> list[tuple[str, str, str]]:
 # self-test
 # ---------------------------------------------------------------------------
 def self_test() -> int:
+    print("--- 共有判定ロジック (article_title_match) ---")
+    shared_rc = M.self_test()
+    print("--- kaishaku 固有 ---")
     cases: list[tuple[str, bool]] = []
 
     master = {
@@ -488,6 +397,7 @@ def self_test() -> int:
     for name, passed in cases:
         print(("  PASS " if passed else "  FAIL ") + name)
         ok = ok and passed
+    ok = ok and shared_rc == 0
     print("self-test:", "ALL PASS" if ok else "FAILED")
     return 0 if ok else 1
 

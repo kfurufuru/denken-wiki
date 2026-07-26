@@ -6,8 +6,15 @@
 
 denken-hoki-style.md §7.3 R6「条文番号・タイトル・本文の三点照合」の機械化版。
 
+検査対象は記事 H1 だけでなく、**一覧表 kijun/index.md と mkdocs.yml の nav ラベル**も含む
+（2026-07-26 追加）。記事本文が正しくても、一覧・サイドバーが誤った条番号↔主題を教えて
+いれば学習者はそちらを覚える。実際 index.md には第7条・第39条・第47条の見出しがそのまま
+別の条に付いている誤りが3件残っていた（解釈側 PR #159/#161 と同型）。
+判定ロジックは `scripts/article_title_match.py` に集約している（法令ごとの規則ドリフト防止）。
+
 使い方：
   python scripts/audit_titles.py                       # 全 kijun/*.md スキャン
+  python scripts/audit_titles.py --self-test           # 判定ロジックの退行テスト
   python scripts/audit_titles.py --strict              # MISMATCH があれば exit 2（pre-commit用）
   python scripts/audit_titles.py --json                # JSON出力
   python scripts/audit_titles.py --refresh             # e-Gov XML を再取得（キャッシュ無視）
@@ -29,8 +36,13 @@ import urllib.request
 from dataclasses import dataclass, asdict
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import article_title_match as M  # noqa: E402
+
 REPO_ROOT = Path(__file__).resolve().parent.parent
 WIKI_KIJUN = REPO_ROOT / "docs" / "articles" / "kijun"
+KIJUN_INDEX = WIKI_KIJUN / "index.md"
+MKDOCS_YML = REPO_ROOT / "mkdocs.yml"
 CACHE_PATH = REPO_ROOT / "scripts" / "cache" / "egov-409M50000400052.xml"
 EGOV_URL = "https://laws.e-gov.go.jp/api/1/lawdata/409M50000400052"
 
@@ -165,12 +177,48 @@ def format_human(findings: list[Finding]) -> str:
     return "\n".join(out)
 
 
+def scan_index_and_nav(official: dict[int, str]) -> list[tuple[str, str, str]]:
+    """kijun/index.md と mkdocs.yml nav を e-Gov 正本と突合する。"""
+    out: list[tuple[str, str, str]] = []
+
+    if KIJUN_INDEX.exists():
+        for num, title in sorted(
+            M.parse_index_titles(KIJUN_INDEX.read_text(encoding="utf-8")).items()
+        ):
+            v = M.classify(num, title, official)
+            if v:
+                out.append((v[0], "kijun/index.md", v[1]))
+
+    if MKDOCS_YML.exists():
+        nav = MKDOCS_YML.read_text(encoding="utf-8")
+        for num, label in sorted(M.parse_nav_titles(nav, "kijun").items()):
+            v = M.classify(num, label, official)
+            if v:
+                out.append((v[0], "mkdocs.yml", v[1]))
+        for label_n, file_n, label in M.nav_number_mismatches(nav, "kijun"):
+            out.append((
+                "ERROR", "mkdocs.yml",
+                f"nav ラベル「第{label_n}条（{label}）」のリンク先が articles/kijun/{file_n}.md",
+            ))
+    return out
+
+
+def self_test() -> int:
+    print("--- 共有判定ロジック (article_title_match) ---")
+    rc = M.self_test()
+    print("self-test:", "ALL PASS" if rc == 0 else "FAILED")
+    return rc
+
+
 def main(argv: list[str]) -> int:
     if sys.stdout.encoding and sys.stdout.encoding.lower() != "utf-8":
         try:
             sys.stdout.reconfigure(encoding="utf-8")
         except AttributeError:
             pass
+
+    if "--self-test" in argv:
+        return self_test()
 
     output_json = "--json" in argv
     strict = "--strict" in argv
@@ -197,11 +245,33 @@ def main(argv: list[str]) -> int:
     else:
         print(format_human(findings))
 
-    if strict:
-        mismatch = sum(1 for f in findings if f.status == "MISMATCH")
-        if mismatch > 0:
-            return 2
-    return 0
+    rc = 0
+    if strict and sum(1 for f in findings if f.status == "MISMATCH") > 0:
+        rc = 2
+
+    # staged モードは記事ファイル限定の高速パスなので index/nav は見ない
+    if staged_only or output_json:
+        return rc
+
+    ext = scan_index_and_nav(official_map)
+    errors = [x for x in ext if x[0] == "ERROR"]
+    warns = [x for x in ext if x[0] == "WARN"]
+    print()
+    print("=== 一覧・nav の条番号↔条見出し（e-Gov 正本と突合）===")
+    if errors:
+        print(f"NG ERROR {len(errors)} 件（条番号の取り違えの疑い）")
+        for s, where, detail in errors:
+            print(f"  [ERROR] {where} - {detail}")
+    else:
+        print("OK ERROR 0 件")
+    if warns:
+        print(f"  （WARN {len(warns)} 件 — 短縮表記・言い換えなら問題なし。--all で表示）")
+        if "--all" in argv:
+            for s, where, detail in warns:
+                print(f"  [WARN] {where} - {detail}")
+    if strict and errors:
+        rc = 2
+    return rc
 
 
 if __name__ == "__main__":
