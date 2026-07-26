@@ -11,6 +11,7 @@ on:
       - 'scripts/check_stale_evidence.py'
       - 'scripts/check_mojibake.py'
       - 'scripts/check_theme_article_numbers.py'
+      - 'scripts/audit_kaishaku_titles.py'
       - 'scripts/tests/check_stale_evidence/**'
       - 'wiki_check.py'
       - '.github/workflows/quality-check.yml'
@@ -25,6 +26,7 @@ on:
       - 'scripts/check_stale_evidence.py'
       - 'scripts/check_mojibake.py'
       - 'scripts/check_theme_article_numbers.py'
+      - 'scripts/audit_kaishaku_titles.py'
       - 'scripts/tests/check_stale_evidence/**'
       - 'wiki_check.py'
       - '.github/workflows/quality-check.yml'
@@ -53,6 +55,17 @@ jobs:
         run: python scripts/check_theme_article_numbers.py --self-test
       - name: theme/strategy 条番号↔見出し整合ゲート
         run: python scripts/check_theme_article_numbers.py --strict
+      # 電技解釈の 条番号↔条見出し を**原典由来マスタ**（_data/kaishaku_article_titles.json・
+      # 経産省公表PDF 令和7年11月版から機械抽出）と逐語照合する。
+      # 事故: 解釈は e-Gov 法令API に無く「外部正本と照合できない」前提で内部整合しか
+      # 見ていなかったため、誤帰属が CI 全緑のまま残存した（PR #156 漏電遮断器=第37条→正は第36条／
+      # PR #157 第71条に第65条の内容／PR #158 第133条の中身が第135条）。
+      # 上の check_theme_article_numbers.py は articles/ の H1 を正本にするので、
+      # 本ステップがその正本自体を原典と突合する（＝正本の正本）。
+      - name: 解釈 条番号↔条見出し 外部照合 self-test
+        run: python scripts/audit_kaishaku_titles.py --self-test
+      - name: 解釈 条番号↔条見出し 外部照合ゲート（原典マスタ突合）
+        run: python scripts/audit_kaishaku_titles.py --external --strict
       - name: kakomon dual-file sync guard (_data/ == docs/_data/)
         run: python scripts/check_kakomon_dual_sync.py
       - name: kakomon by-year + year-page sync guard (yml ↔ 派生md)
