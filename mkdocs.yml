@@ -224,12 +224,12 @@ nav:
       - 第21条（高圧の機械器具の施設）: articles/kaishaku/21.md
       - 第22条（特別高圧の機械器具の施設）: articles/kaishaku/22.md
       - 第29条（金属製外箱の接地）: articles/kaishaku/29.md
-      - 第33条（過電流保護対策）: articles/kaishaku/33.md
+      - 第33条（低圧電路に施設する過電流遮断器の性能等）: articles/kaishaku/33.md
       - 第36条（地絡保護対策）: articles/kaishaku/36.md
       - 第37条（避雷器等の施設）: articles/kaishaku/37.md
       - 第38条（発電所等への取扱者以外の者の立入の防止）: articles/kaishaku/38.md
       - 第45条（燃料電池等の施設）: articles/kaishaku/45.md
-      - 第46条（太陽電池発電所等の電線等の施設）: articles/kaishaku/46.md
+      - 第46条（太陽電池発電設備用直流ケーブルの施設）: articles/kaishaku/46.md
       - 第53条（架空電線路の支持物の昇塔防止）: articles/kaishaku/53.md
       - 第59条（架空電線路の支持物の強度等）: articles/kaishaku/59.md
       - 第61条（支線の施設方法及び支柱による代用）: articles/kaishaku/61.md
@@ -245,7 +245,7 @@ nav:
       - 第125条（地中電線と他の地中電線等との接近又は交差）: articles/kaishaku/125.md
       - 第135条（電力保安通信用電話設備）: articles/kaishaku/135.md
       - 第143条（電路の対地電圧の制限）: articles/kaishaku/143.md
-      - 第147条（引込口の施設）: articles/kaishaku/147.md
+      - 第147条（低圧屋内電路の引込口における開閉器の施設）: articles/kaishaku/147.md
       - 第148条（低圧幹線の施設）: articles/kaishaku/148.md
       - 第149条（低圧分岐回路等の施設）: articles/kaishaku/149.md
       - 第150条（配線器具の施設）: articles/kaishaku/150.md
