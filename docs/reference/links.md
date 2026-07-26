@@ -81,6 +81,8 @@
 - [電気設備の技術基準の解釈の解説（令和6年10月22日改正・最新版）](https://www.meti.go.jp/policy/safety_security/industrial_safety/sangyo/electric/files/20241022-3.pdf) — 上記H30版の最新差し替え。解釈条番号・条見出しの現行確認はこの令和6年版を優先する
 - [電気設備の技術基準の解釈の解説（平成30年10月1日改正）第1章 総則](https://www.meti.go.jp/policy/safety_security/industrial_safety/oshirase/2018/09/300928-5.pdf) — 解釈の各条 条見出し【】と解説本文が一次ソース。第2節「電線」3〜12条（裸電線等/絶縁電線/多心型電線/コード/キャブタイヤケーブル/各ケーブル）の現行タイトル照合に必須。経産省告示PDF本体は重く取得困難だが、本『解説』は条見出しを明示しており条番号監査に有用
 
+- [労働安全衛生規則（昭和47年労働省令第32号）](https://laws.e-gov.go.jp/law/347M50002000032) — 停電作業の措置（第339条）・作業指揮者（第350条）・検電器具等の使用前点検（第352条）・電気取扱業務特別教育（第36条第4号）の一次ソース。実務ガイド新設で安衛則を初参照したが links.md に未収載だった（URL死活 200 確認済 2026-06-11）
+
 ---
 
 ## 2. 経産省告示・通達
@@ -111,6 +113,10 @@
 | JIS C 60364 | 日本産業規格 | 低圧電気設備の設計・施工 | 接地方式（TT/TN/IT）の出題あり |
 | JIS A 4201 | 日本産業規格 | 建築物等の雷保護 | 避雷器関連で参照 |
 | JIS C 4620 | 日本産業規格 | キュービクル式高圧受電設備 | 施設管理の出題で登場 |
+
+- [HSE HSG85 — Electricity at work Safe working practices](https://www.hse.gov.uk/pubns/books/hsg85.htm) — 英国の安全隔離・作業許可書のベストプラクティス書誌。HTTP 200確認済
+- [OSHA eTool — Group Lockout/Tagout Procedures](https://www.osha.gov/etools/lockout-tagout/hot-topics/group-lockout-tagout/procedures) — グループLOTO（各自施錠）の運用根拠。HTTP 200確認済
+- [OSHA 1910.147 Appendix A — Typical Minimal Lockout Procedure](https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.147AppA) — 制御盤撤去ガイドラインの国際標準整合（v2.0）で参照。LOTO最小手順のtry stepの一次ソース。HTTP 200確認済
 
 ---
 
@@ -147,6 +153,8 @@
 - [電気設備技術基準・解釈 目次（令和2年度版・電気の真髄）](https://denki-no-shinzui.com/wp-content/uploads/2019/02/%E9%9B%BB%E6%B0%97%E8%A8%AD%E5%82%99%E6%8A%80%E8%A1%93%E5%9F%BA%E6%BA%96%E3%83%BB%E8%A7%A3%E9%87%88_%E4%BB%A4%E5%92%8C2%E5%B9%B4%E5%BA%A6%E7%89%88.pdf) — 省令と解釈の目次を一覧化。解釈の第3節=電路の絶縁及び接地(13〜19条)・第4節=電気機械器具の保安原則(20〜31条)の節構成確認に有用（ただし解釈1〜12条は省略されている点に注意）
 
 - [日本電気技術者協会 解説〔その3〕電線と高圧・特別高圧機器の施設](https://jeea.or.jp/course/contents/11103/index_small.html) — 解釈第5条=絶縁電線・第12条=電線の接続・第21/22条=高圧/特別高圧機器施設を条番号付きで明記。条見出し監査の二次照合に有用
+
+- [厚生労働省 職場のあんぜんサイト — 感電（安全衛生キーワード）](https://anzeninfo.mhlw.go.jp/yougo/yougo74_1.html) — 感電災害事例と救急処置の公的解説。緊急時対応節（5-6）の裏付け。HTTP 200確認済
 
 ---
 
