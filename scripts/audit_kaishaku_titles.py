@@ -25,9 +25,17 @@ KAISHAKU = ROOT / "docs" / "articles" / "kaishaku"
 INDEX_MD = KAISHAKU / "index.md"
 
 
+def strip_front_matter(text: str) -> str:
+    """先頭の YAML front matter を除去する（無ければそのまま返す）"""
+    if not text.startswith("---\n"):
+        return text
+    end = text.find("\n---\n", 3)
+    return text if end == -1 else text[end + len("\n---\n"):]
+
+
 def parse_h1(path: Path) -> tuple[int | None, str | None]:
-    text = path.read_text(encoding="utf-8")
-    first_line = text.split("\n", 1)[0]
+    text = strip_front_matter(path.read_text(encoding="utf-8"))
+    first_line = next((ln for ln in text.split("\n") if ln.startswith("# ")), "")
     m = re.match(r"^#\s*電技解釈\s*第(\d+)条\s*[—\-‐–]\s*(.+?)\s*$", first_line)
     if not m:
         return None, None
