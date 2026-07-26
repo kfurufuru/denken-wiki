@@ -227,19 +227,20 @@ nav:
       - 第33条（過電流保護対策）: articles/kaishaku/33.md
       - 第36条（地絡保護対策）: articles/kaishaku/36.md
       - 第37条（避雷器等の施設）: articles/kaishaku/37.md
-      - 第38条（発変電所等の避雷器）: articles/kaishaku/38.md
+      - 第38条（発電所等への取扱者以外の者の立入の防止）: articles/kaishaku/38.md
       - 第45条（燃料電池等の施設）: articles/kaishaku/45.md
       - 第46条（太陽電池発電所等の電線等の施設）: articles/kaishaku/46.md
       - 第53条（架空電線路の支持物の昇塔防止）: articles/kaishaku/53.md
       - 第59条（架空電線路の支持物の強度等）: articles/kaishaku/59.md
       - 第61条（支線の施設方法及び支柱による代用）: articles/kaishaku/61.md
-      - 第65条（架空電線の高さ）: articles/kaishaku/65.md
+      - 第65条（低高圧架空電線路に使用する電線）: articles/kaishaku/65.md
       - 第66条（低高圧架空電線の引張強さに対する安全率）: articles/kaishaku/66.md
-      - 第68条（低圧架空電線の施設）: articles/kaishaku/68.md
-      - 第71条（高圧架空電線の施設）: articles/kaishaku/71.md
+      - 第68条（低高圧架空電線の高さ）: articles/kaishaku/68.md
+      - 第71条（低高圧架空電線と建造物との接近）: articles/kaishaku/71.md
       - 第75条（低高圧架空電線と電車線等又は電車線等の支持物との接近又は交差）: articles/kaishaku/75.md
-      - 第79条（架空電線と建造物の離隔）: articles/kaishaku/79.md
-      - 第81条（架空電線路相互の離隔）: articles/kaishaku/81.md
+      - 第79条（低高圧架空電線と植物との接近）: articles/kaishaku/79.md
+      - 第81条（低高圧架空電線と架空弱電流電線等との共架）: articles/kaishaku/81.md
+      - 第117条（高圧架空引込線等の施設）: articles/kaishaku/117.md
       - 第120条（地中電線路の施設）: articles/kaishaku/120.md
       - 第125条（地中電線と他の地中電線等との接近又は交差）: articles/kaishaku/125.md
       - 第135条（電力保安通信用電話設備）: articles/kaishaku/135.md
@@ -248,7 +249,7 @@ nav:
       - 第148条（低圧幹線の施設）: articles/kaishaku/148.md
       - 第149条（低圧分岐回路等の施設）: articles/kaishaku/149.md
       - 第150条（配線器具の施設）: articles/kaishaku/150.md
-      - 第156条（合成樹脂管工事）: articles/kaishaku/156.md
+      - 第156条（低圧屋内配線の施設場所による工事の種類）: articles/kaishaku/156.md
       - 第159条（金属管工事）: articles/kaishaku/159.md
       - 第164条（ケーブル工事）: articles/kaishaku/164.md
       - 第165条（特殊な低圧屋内配線工事・ライティングダクト等）: articles/kaishaku/165.md
@@ -256,7 +257,7 @@ nav:
       - 第176条（可燃性ガス危険場所）: articles/kaishaku/176.md
       - 第192条（電気さくの施設）: articles/kaishaku/192.md
       - 第200条（小規模発電設備の施設）: articles/kaishaku/200.md
-      - 第220条（用語の定義）: articles/kaishaku/220.md
+      - 第220条（分散型電源の系統連系設備に係る用語の定義）: articles/kaishaku/220.md
       - 第221条（直流流出防止変圧器）: articles/kaishaku/221.md
       - 第222条（限流リアクトル等の施設）: articles/kaishaku/222.md
       - 第223条（自動負荷制限の実施）: articles/kaishaku/223.md

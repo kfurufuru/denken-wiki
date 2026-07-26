@@ -10,6 +10,8 @@
    - H1 タイトル（末尾の補足「（…）」を除去したもの）が、原典由来の条見出しマスタ
      `_data/kaishaku_article_titles.json` と**逐語一致**するか
    - kaishaku/index.md の各行タイトルも同じマスタと照合する
+   - mkdocs.yml の nav ラベル「第N条（…）」も同じマスタと照合する（2026-07-26 追加）
+     ＋ nav ラベルの条番号とリンク先 `N.md` のズレを ERROR で検出する
 
 ## なぜ外部照合を足したか（前提が変わった）
 
@@ -68,6 +70,7 @@ if sys.stdout.encoding and sys.stdout.encoding.lower() != "utf-8":
 ROOT = Path(__file__).resolve().parent.parent
 KAISHAKU = ROOT / "docs" / "articles" / "kaishaku"
 INDEX_MD = KAISHAKU / "index.md"
+MKDOCS_YML = ROOT / "mkdocs.yml"
 MASTER_PATH = ROOT / "_data" / "kaishaku_article_titles.json"
 
 # --- 類似度しきい値（check_theme_article_numbers.py / check_hoki_law_titles.py と同思想）
@@ -84,69 +87,10 @@ SIM_MARGIN = 0.45  # ERROR に必要な「他条の方が近い」差
 # ここに載っているのは「正しい」という保証ではなく「既知・是正待ち」の意味。
 # 是正したら登録を削除すること（削除し忘れは STALE_ALLOWLIST で検出される）。
 # ---------------------------------------------------------------------------
-# 2026-07-26 導入時点で ERROR 判定になった既存箇所は**すべて kaishaku/index.md の
-# 「📝 作成予定」行**（記事本体は未作成で、表に置かれた仮タイトルが誤っている）。
-# 記事本体（articles/kaishaku/*.md の H1）の ERROR は 0 件だった。
-# → index.md の是正は本ゲート導入とは別 PR で行う（punch list は
-#   .claude/docs/kaishaku-title-punchlist.md）。
 KNOWN_DIVERGENCES: dict[tuple[str, int], dict[str, str]] = {
-    ("index", 2): {
-        "claimed": "その他の用語の定義",
-        "reason": "作成予定行の仮タイトル。原典 第2条＝適用除外（用語の定義は第1条）",
-    },
-    ("index", 23): {
-        "claimed": "発電所等への取扱者以外の者の立入の防止",
-        "reason": "作成予定行の仮タイトル。原典 第23条＝アークを生じる器具の施設（立入の防止は第38条）",
-    },
-    ("index", 24): {
-        "claimed": "さく・へいの施設",
-        "reason": "作成予定行の仮タイトル。原典 第24条＝高圧又は特別高圧と低圧との混触による危険防止施設",
-    },
-    ("index", 25): {
-        "claimed": "発電所等の電線及び移動電線の施設",
-        "reason": "作成予定行の仮タイトル。原典 第25条＝特別高圧と高圧との混触等による危険防止施設",
-    },
-    ("index", 35): {
-        "claimed": "高圧電路に施設する過電流遮断器の性能",
-        "reason": "作成予定行の仮タイトル。原典 第35条＝過電流遮断器の施設の例外（高圧・特別高圧の性能は第34条）",
-    },
-    ("index", 42): {
-        "claimed": "特別高圧用変圧器の施設",
-        "reason": "作成予定行の仮タイトル。原典 第42条＝発電機の保護装置（特別高圧配電用変圧器の施設は第26条）",
-    },
-    ("index", 65): {
-        "claimed": "架空電線の高さ",
-        "reason": "作成予定行の仮タイトル。原典 第65条＝低高圧架空電線路に使用する電線（高さは第68条）。65.md は PR #157 で作成済みなのでステータス表記も要更新",
-    },
-    ("index", 67): {
-        "claimed": "高圧架空電線の高さ",
-        "reason": "作成予定行の仮タイトル。原典 第67条＝低高圧架空電線路の架空ケーブルによる施設（高さは第68条）",
-    },
-    ("index", 125): {
-        "claimed": "地中箱の施設",
-        "reason": "作成予定行の仮タイトル。原典 第125条＝地中電線と他の地中電線等との接近又は交差（地中箱の施設は第121条）",
-    },
-    # ("index", 149) は PR #160 で是正済み（STALE_ALLOWLIST が発火したので登録削除）
-    ("index", 156): {
-        "claimed": "合成樹脂管工事",
-        "reason": "作成予定行の仮タイトル。原典 第156条＝低圧屋内配線の施設場所による工事の種類（合成樹脂管工事は第158条）",
-    },
-    ("index", 157): {
-        "claimed": "金属可とう電線管工事",
-        "reason": "作成予定行の仮タイトル。原典 第157条＝がいし引き工事（金属可とう電線管工事は第160条）",
-    },
-    ("index", 96): {
-        "claimed": "架空電線と架空弱電流電線等との共架",
-        "reason": "作成予定行の仮タイトル。原典 第96条＝特別高圧架空電線が建造物等と接近又は交差する場合の支線の施設（共架は第81条）",
-    },
-    ("index", 172): {
-        "claimed": "バスダクト工事",
-        "reason": "作成予定行の仮タイトル。原典 第172条＝特殊な配線等の施設（バスダクト工事は第163条）",
-    },
-    ("index", 182): {
-        "claimed": "臨時配線の施設",
-        "reason": "作成予定行の仮タイトル。原典 第182条＝出退表示灯回路の施設（臨時配線は第180条）",
-    },
+    # 空。2026-07-26 導入時点の 15 件はすべて kaishaku/index.md の仮タイトルで、
+    # PR #160（第149条）と本 PR（残り14件）で是正済み。
+    # 新たに ERROR を allowlist する時は claimed/reason を必ず書くこと（self-test が検査する）。
 }
 
 
@@ -192,6 +136,43 @@ def parse_index_titles(text: str | None = None) -> dict[int, str]:
         t = (m.group(2) or m.group(3) or "").strip()
         titles[n] = t
     return titles
+
+
+# mkdocs.yml の nav ラベル「- 第N条（ラベル）: articles/kaishaku/N.md」
+# サイドバーに出る表示名で、学習者が最初に見る「条番号↔主題」の対応。
+# ここが誤っていると記事本文が正しくても誤った紐付けを覚えてしまう
+# （実例: 第71条 nav が「高圧架空電線の施設」のまま＝PR #157 の記事是正が nav に未反映だった）。
+NAV_ENTRY = re.compile(
+    r"^\s*-\s*第(\d+)条[（(]([^）)]*)[）)]\s*:\s*articles/kaishaku/(\d+)\.md\s*$",
+    re.MULTILINE,
+)
+
+
+def parse_nav_titles(text: str | None = None) -> dict[int, str]:
+    """mkdocs.yml から 条番号→nav ラベル のマップを抽出"""
+    if text is None:
+        if not MKDOCS_YML.exists():
+            return {}
+        text = MKDOCS_YML.read_text(encoding="utf-8")
+    titles: dict[int, str] = {}
+    for m in NAV_ENTRY.finditer(text):
+        if m.group(1) != m.group(3):
+            continue  # ラベルの条番号とリンク先ファイルの不一致は別途 NAV_NUM_MISMATCH
+        titles[int(m.group(1))] = m.group(2).strip()
+    return titles
+
+
+def nav_number_mismatches(text: str | None = None) -> list[tuple[int, int, str]]:
+    """nav ラベルの条番号とリンク先 N.md が食い違う行を返す。"""
+    if text is None:
+        if not MKDOCS_YML.exists():
+            return []
+        text = MKDOCS_YML.read_text(encoding="utf-8")
+    out = []
+    for m in NAV_ENTRY.finditer(text):
+        if m.group(1) != m.group(3):
+            out.append((int(m.group(1)), int(m.group(3)), m.group(2).strip()))
+    return out
 
 
 # ---------------------------------------------------------------------------
@@ -263,6 +244,18 @@ def classify(kind: str, num: int, claimed: str, master: dict[int, str]) -> tuple
     if norm_exact(base) == norm_exact(truth):
         return None
 
+    # **他の条の見出しと逐語一致**したら、margin を問わず ERROR。
+    # 類似度＋margin だけに頼ると、隣接条どうしで語彙が重なる事案を取り逃す
+    # （実測: 第68条の nav ラベルを第65条の見出しに差し替えても margin 0.45 に届かず WARN 止まりだった）。
+    # 公式見出しと1文字違わず一致するのは偶然ではないので、cry-wolf の心配はない。
+    for n2, t2 in master.items():
+        if n2 != num and norm_exact(base) == norm_exact(t2):
+            return (
+                "ERROR",
+                f"第{num}条「{base}」… 原典は「{truth}」"
+                f" → その表記は**第{n2}条**の見出しと逐語一致（条番号の取り違え）",
+            )
+
     truth_s = sim(base, truth)
     best_n, best_s = None, 0.0
     for n2, t2 in master.items():
@@ -311,6 +304,18 @@ def external_scan(master: dict[int, str]) -> tuple[list[tuple[str, str, str]], s
         if not title:
             continue
         handle("index", num, title, "index.md")
+
+    for num, label in sorted(parse_nav_titles().items()):
+        if not label:
+            continue
+        handle("nav", num, label, "mkdocs.yml")
+
+    for label_n, file_n, label in nav_number_mismatches():
+        results.append((
+            "ERROR",
+            "mkdocs.yml",
+            f"nav ラベル「第{label_n}条（{label}）」のリンク先が articles/kaishaku/{file_n}.md",
+        ))
 
     return results, fired
 
@@ -367,10 +372,12 @@ def self_test() -> int:
         37: "避雷器等の施設",
         53: "架空電線路の支持物の昇塔防止",
         65: "低高圧架空電線路に使用する電線",
+        68: "低高圧架空電線の高さ",
         71: "低高圧架空電線と建造物との接近",
         133: "臨時電線路の施設",
         135: "電力保安通信用電話設備の施設",
         143: "電路の対地電圧の制限",
+        220: "分散型電源の系統連系設備に係る用語の定義",
         226: "低圧連系時の施設要件",
     }
 
@@ -439,6 +446,31 @@ def self_test() -> int:
     cases.append(("index のリンク付き/なし両方を抽出",
                   parse_index_titles(idx) == {226: "低圧連系時の施設要件",
                                               135: "電力保安通信用電話設備の施設"}))
+
+    # --- nav パーサ ---
+    nav = (
+        "nav:\n"
+        "  - 解釈:\n"
+        "      - 第37条（避雷器等の施設）: articles/kaishaku/37.md\n"
+        "      - 第65条（架空電線の高さ）: articles/kaishaku/65.md\n"
+        "      - 一覧: articles/kaishaku/index.md\n"
+        "      - 第99条（ずれ）: articles/kaishaku/98.md\n"
+    )
+    cases.append(("nav ラベルを抽出（index.md 等の非条項目は無視）",
+                  parse_nav_titles(nav) == {37: "避雷器等の施設", 65: "架空電線の高さ"}))
+    cases.append(("nav の条番号↔リンク先ズレを検出",
+                  nav_number_mismatches(nav) == [(99, 98, "ずれ")]))
+    r = c("nav", 65, "架空電線の高さ")
+    cases.append(("nav の誤帰属を ERROR 検出（第65条 実事案）",
+                  r is not None and r[0] == "ERROR"))
+    # 隣接条どうしで語彙が重なり margin に届かない事案（実測で取り逃した）
+    r = c("nav", 68, "低高圧架空電線路に使用する電線")
+    cases.append(("他条見出しと逐語一致なら margin を問わず ERROR（第68条↔第65条）",
+                  r is not None and r[0] == "ERROR" and "第65条" in r[1]))
+    r = c("nav", 220, "低圧連系時の施設要件")
+    cases.append(("逐語一致 ERROR は法令番号違いでも効く（第220条↔第226条）",
+                  r is not None and r[0] == "ERROR" and "第226条" in r[1]))
+    cases.append(("nav の正しいラベルは PASS", c("nav", 37, "避雷器等の施設") is None))
 
     # --- strip_supplement の境界 ---
     cases.append(("括弧だけのタイトルは strip しすぎない",
