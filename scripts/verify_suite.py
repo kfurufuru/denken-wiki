@@ -87,6 +87,11 @@ def _detail_wiki(out: str) -> str:
     return f"({total} findings/{files} files)"
 
 
+def _detail_law_facts(out: str) -> str:
+    n = extract(r"check_law_facts:\s*(\d+)件", out, "?")
+    return f"({n}件)"
+
+
 GATES = [
     ("dual_sync", [sys.executable, "scripts/check_kakomon_dual_sync.py"], None),
     ("pages_sync", [sys.executable, "scripts/check_kakomon_pages_sync.py"], None),
@@ -97,6 +102,19 @@ GATES = [
         _detail_value,
     ),
     ("wiki_check", [sys.executable, "wiki_check.py"], _detail_wiki),
+    # 法令事実・法令引用の2ゲートは実装済みだが verify_suite にも CI にも
+    # 配線されておらず孤児化していた（両方とも実測 0 件 clean）。緑のうちに
+    # 固定して、以後の退行を検出できるようにする。
+    (
+        "law_facts",
+        [sys.executable, "scripts/check_law_facts.py", "docs"],
+        _detail_law_facts,
+    ),
+    (
+        "law_citations",
+        [sys.executable, "scripts/check_law_citations.py", "docs"],
+        None,
+    ),
 ]
 
 # 非ゲート（WARN 扱い・exit に影響させない）
