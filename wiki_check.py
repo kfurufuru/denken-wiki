@@ -43,12 +43,10 @@ PLACEHOLDER_PATTERN = re.compile(r"\[要確認[^\]]*\]?")
 # 最終的に空 dict にするのがゴール。プレースホルダを本文で「言及」したいときは
 # バックティックで囲む（`[要確認: …]`）— コードスパンは検査対象外になる。
 PLACEHOLDER_ALLOWLIST = {
-    "docs/articles/kaishaku/22.md": 1,
+    # 解消済み（原典から逐語転記・2026-07-28）: kaishaku/22.md・kaishaku/224.md・
+    # kijun/7.md・kijun/63.md の4件（16 → 11 件）。
     "docs/articles/kaishaku/45.md": 1,
-    "docs/articles/kaishaku/224.md": 1,
-    "docs/articles/kijun/7.md": 2,
     "docs/articles/kijun/11.md": 2,
-    "docs/articles/kijun/63.md": 1,
     "docs/articles/other/pse-2.md": 1,
     "docs/articles/other/pse-10.md": 1,
     "docs/themes/hatsuhendenjo.md": 3,
