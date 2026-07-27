@@ -72,4 +72,4 @@
 - 解釈条番号を引用する場合、未確認なら `[要確認]` フラグ付きで併記する慣用フォーマット：
   - `電技解釈第N条 — タイトル [要確認: 旧§M（kakomon.yml由来）/ kaishaku/index.md は§N と記載で食い違いあり。e-Gov公式で照合のこと]`
 - kakomon.yml と kaishaku/index.md で食い違う場合、**両方記載+[要確認]フラグ**で残す。早合点で片方に決め打ちしない
-- e-Gov公式（https://elaws.e-gov.go.jp/document?lawid=337M50000400052）で確定したらフラグ解除
+- e-Gov公式（https://elaws.e-gov.go.jp/document?lawid=409M50000400052）で確定したらフラグ解除
