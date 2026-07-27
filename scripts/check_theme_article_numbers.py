@@ -43,7 +43,7 @@ ROOT = Path(__file__).resolve().parent.parent
 DOCS = ROOT / "docs"
 
 # 「省令第5条（電路の絶縁）」「省令 第5条（…）」「解釈第218条（…）」
-CITE = re.compile(r"(省令|解釈)\s*第\s*(\d+)\s*条(?:の\d+)?\s*[（(]([^）)]{2,40})[）)]")
+CITE = re.compile(r"(省令|解釈)\s*第\s*(\d+)\s*条(の\d+)?\s*[（(]([^）)]{2,40})[）)]")
 
 # 括弧内がタイトルでない（説明・注記）と分かるものは対象外
 NON_TITLE_HINTS = ("参照", "抜粋", "再掲", "後述", "前述", "詳細", "以下", "上記", "同上",
@@ -99,7 +99,29 @@ def load_master() -> dict[tuple[str, int], str]:
             if int(m.group(1)) != int(f.stem):
                 continue  # ファイル名と H1 の条番号が不一致＝audit_*_titles.py の担当
             master[(law, int(f.stem))] = m.group(2).strip()
+
+    # 記事ファイルが無い解釈条は、原典由来マスタ（令和7年11月版告示PDFから抽出した
+    # 233条の条番号↔条見出し）で埋める。
+    # 事故: 正本を「存在する記事の H1」だけに頼っていたため、記事が無い条（第34条・
+    # 第61条・第153条・第181条 等）を引用した誤りが truth is None で fail-open になり、
+    # CI 全緑のまま残っていた（2026-07-28 監査で4件検出）。
+    # 記事 H1 は audit_kaishaku_titles.py --external が原典照合済みなので優先する。
+    for num_s, title in _load_kaishaku_master().items():
+        if not num_s.isdigit() or not title:
+            continue
+        master.setdefault(("解釈", int(num_s)), title)
     return master
+
+
+def _load_kaishaku_master() -> dict[str, str]:
+    """_data/kaishaku_article_titles.json の {条番号: 条見出し}（読めなければ空）。"""
+    path = ROOT / "_data" / "kaishaku_article_titles.json"
+    try:
+        import json
+
+        return json.loads(path.read_text(encoding="utf-8")).get("解釈", {}) or {}
+    except Exception:
+        return {}  # fail-open（従来どおり記事 H1 だけで判定）
 
 
 def scan(master: dict[tuple[str, int], str], targets: list[Path]) -> list[str]:
@@ -110,17 +132,38 @@ def scan(master: dict[tuple[str, int], str], targets: list[Path]) -> list[str]:
             lines = f.read_text(encoding="utf-8").splitlines()
         except Exception:
             continue
+        # フェンスの扱い: 言語タグ付き（```python / ```mermaid 等）は本物のコードなので
+        # 従来どおりスキップする。一方、**タグ無しの ``` フェンス**は本 repo では
+        # 「法的根拠ピラミッド」等の**学習コンテンツ**（学習者にはそのまま表示される）
+        # なので検査対象にする。
+        # 事故: themes/hogo-sochi.md・shijimono.md・shiyo-basho.md のピラミッドが
+        # タグ無しフェンス内にあり、条番号の誤帰属が丸ごと検査対象外になっていた
+        # （2026-07-28 監査で検出）。
         fence = False
+        fence_is_code = False
         for ln, line in enumerate(lines, 1):
-            if line.strip().startswith("```"):
-                fence = not fence
+            stripped = line.strip()
+            if stripped.startswith("```"):
+                if not fence:
+                    fence = True
+                    fence_is_code = bool(stripped[3:].strip())  # 言語タグの有無
+                else:
+                    fence = False
+                    fence_is_code = False
                 continue
-            if fence:
+            if fence and fence_is_code:
                 continue
             if any(h in line for h in CORRECTION_HINTS):
                 continue  # 是正記録の行（旧誤記の引用）
             for m in CITE.finditer(line):
-                law, num_s, claimed = m.group(1), m.group(2), m.group(3).strip()
+                law, num_s, branch, claimed = (
+                    m.group(1), m.group(2), m.group(3), m.group(4).strip()
+                )
+                # 枝番（第34条の2 等）は正本マスタに見出しが無く、本条の見出しと
+                # 突合すると必ず誤検出になる（例: 解釈第34条の2「高圧受電設備の保護装置」を
+                # 第34条「…過電流遮断器の性能等」と比較）。判定不能として skip（fail-open）。
+                if branch:
+                    continue
                 if any(h in claimed for h in NON_TITLE_HINTS):
                     continue
                 num = int(num_s)
@@ -210,9 +253,22 @@ def self_test() -> int:
     # 4) 略称・省略は許容（誤検出しない）
     cases.append(("略称はPASS", run("省令第18条（供給支障の防止）") == []))
 
-    # 5) コードブロック内は対象外
-    cases.append(("コードブロック内は無視",
-                  run("```\n省令第1条（電路の絶縁）\n```") == []))
+    # 5) 言語タグ付きフェンス（本物のコード）は対象外
+    cases.append(("タグ付きフェンスは無視",
+                  run("```python\n# 省令第1条（電路の絶縁）\n```") == []))
+
+    # 6) タグ無しフェンス（法的根拠ピラミッド等の学習コンテンツ）は検査する
+    #    2026-07-28: themes の条番号誤帰属がここに隠れて CI 全緑だった事案
+    cases.append(("タグ無しフェンスは検査する",
+                  len(run("```\n🟩 省令第1条（電路の絶縁）\n```")) == 1))
+
+    # 7) タグ無しフェンスを抜けた後も検査が継続する（状態リークしない）
+    cases.append(("フェンス閉じ後も検査継続",
+                  len(run("```\nx\n```\n省令第1条（電路の絶縁）")) == 1))
+
+    # 8) 枝番（第N条のM）は正本に見出しが無いので判定しない（誤検出防止）
+    cases.append(("枝番は判定しない",
+                  run("解釈第218条の2（何らかの見出し）") == []))
 
     # 6) 注記系の括弧は対象外
     cases.append(("注記括弧は無視", run("省令第1条（詳細は後述）") == []))
