@@ -4,9 +4,10 @@
 検出項目:
   [§]  §X記号残存（CLAUDE.mdで明示禁止、「第X条」推奨）
   [簡]  簡体字混入（風→风 のような誤字）
-  [?]  [要確認] プレースホルダー残存
+  [?]  [要確認] / [要確認: 理由] プレースホルダー残存（PLACEHOLDER_ALLOWLIST 超過分）
+  [許]  allowlist 登録済みプレースホルダ（WARN・exit code に影響しない）
   [空]  空タグ・空リンク・空 admonition
-  [壊]  壊れた相対 .md リンク
+  [壊]  壊れた相対 .md リンク／停滞TODO（「未作成」と書いた先が既に存在）
 
 Usage:
   python wiki_check.py                       # docs/ 全体（検出のみ）
@@ -26,7 +27,39 @@ from pathlib import Path
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8")
 
 SECTION_PATTERN = re.compile(r"§(\d+)")
-PLACEHOLDER_PATTERN = re.compile(r"\[要確認\]")
+# [要確認] だけでなく [要確認: 理由] / [要確認：理由] 形式も検出する。
+# 事故: 旧パターン r"\[要確認\]" は閉じ括弧が直後に来る形しか拾わず、実際に残存していた
+# `> [要確認: e-Gov公式の本文をここに転記]`（条文原文の未転記）を1件も検出できていなかった。
+# その結果、条文原文が空のページが採点器で 100 点超（kaishaku/224.md=107点・全体3位）を
+# 取り、「ゲート緑＝安全」という誤った信号を出していた。
+# 閉じ括弧を任意にしているのは意図的: `[要確認: 理由` と書き掛けで閉じ忘れた行を
+# 素通りさせないため。本文中で「言及」したい場合はバックティックで囲む
+# （コードスパン／コードフェンス内は検査対象外なので誤検知しない）。
+PLACEHOLDER_PATTERN = re.compile(r"\[要確認[^\]]*\]?")
+
+# 未解消の [要確認:…] プレースホルダの既知残存数（docs/ からの相対パス → 件数）。
+# ここに載っている件数ちょうどなら WARN（exit 0）、増えたら ERROR、減ったら
+# 「allowlist が古い」として ERROR にする（ratchet: 潰したら必ずここも減らす）。
+# 最終的に空 dict にするのがゴール。プレースホルダを本文で「言及」したいときは
+# バックティックで囲む（`[要確認: …]`）— コードスパンは検査対象外になる。
+PLACEHOLDER_ALLOWLIST = {
+    "docs/articles/kaishaku/22.md": 1,
+    "docs/articles/kaishaku/45.md": 1,
+    "docs/articles/kaishaku/224.md": 1,
+    "docs/articles/kijun/7.md": 2,
+    "docs/articles/kijun/11.md": 2,
+    "docs/articles/kijun/63.md": 1,
+    "docs/articles/other/pse-2.md": 1,
+    "docs/articles/other/pse-10.md": 1,
+    "docs/themes/hatsuhendenjo.md": 3,
+    "docs/themes/pse-anzen-ho.md": 1,
+    "docs/themes/setsuchi.md": 1,
+    "docs/themes/shiyo-basho.md": 1,
+}
+
+# 停滞 TODO: <!-- TODO: 148.md は未作成 --> と書いてあるがリンク先が既に存在するもの。
+# HTML コメントなので壊れリンク検査にも掛からず、機械的に見えない欠落になっていた。
+STALE_TODO_PATTERN = re.compile(r"<!--\s*TODO:\s*(\S+\.md)\s+は未作成")
 
 # 空タグ（中身が空白のみも対象）
 EMPTY_TAG_PATTERN = re.compile(
@@ -58,6 +91,22 @@ SIMP_TO_JP = {
 EXCLUDE_DIRS = {"_data", "site", "overrides", "includes", ".git"}
 
 
+def _repo_rel(path: Path) -> str:
+    """リポジトリルート起点の posix パス（allowlist 照合キー）。"""
+    try:
+        return path.resolve().relative_to(Path.cwd().resolve()).as_posix()
+    except ValueError:
+        return path.as_posix()
+
+
+def _docs_root(path: Path):
+    """path が含む docs/ ディレクトリ。見つからなければ None。"""
+    parts = path.parts
+    if "docs" in parts:
+        return Path(*parts[: parts.index("docs") + 1])
+    return None
+
+
 def _strip_code_spans(line: str) -> str:
     """インラインコードスパン（`...`）を非空白プレースホルダに置換し、リンタの誤検知を防ぐ。
     空白で埋めると `[`x`](y)` のリンクが「空ラベル」と誤検知されるため X 埋めにする。"""
@@ -72,6 +121,7 @@ def check_file(path: Path):
         return [(path, 0, "?", f"読込失敗: {e}")]
 
     lines = text.splitlines()
+    placeholder_hits = []  # (lineno, 検出文字列)
     in_fence = False
     for lineno, line in enumerate(lines, 1):
         # コードフェンス（``` または ~~~）内はリンタ対象外
@@ -87,8 +137,25 @@ def check_file(path: Path):
         for ch in line:
             if ch in SIMP_TO_JP:
                 issues.append((path, lineno, "簡", f"{ch} → 「{SIMP_TO_JP[ch]}」を推奨"))
-        if PLACEHOLDER_PATTERN.search(line):
-            issues.append((path, lineno, "?", "[要確認] が残存"))
+        for m in PLACEHOLDER_PATTERN.finditer(line):
+            placeholder_hits.append((lineno, m.group(0)))
+
+        # E. 停滞 TODO: 「未作成」と書いてあるがリンク先が既に存在する
+        for m in STALE_TODO_PATTERN.finditer(line):
+            target = m.group(1)
+            candidates = [path.parent / target]
+            droot = _docs_root(path)
+            if droot is not None:
+                candidates.append(droot / target)
+            if any(c.exists() for c in candidates):
+                issues.append(
+                    (
+                        path,
+                        lineno,
+                        "壊",
+                        f"停滞TODO: {target} は既に存在する（TODOを消してリンクに置き換える）",
+                    )
+                )
 
         # A. 空タグ
         for m in EMPTY_TAG_PATTERN.finditer(line):
@@ -138,6 +205,29 @@ def check_file(path: Path):
                     (path, idx + 1, "空", "空 admonition （本文を追加）")
                 )
 
+    # プレースホルダは allowlist と件数突合（ratchet）
+    allowed = PLACEHOLDER_ALLOWLIST.get(_repo_rel(path), 0)
+    found = len(placeholder_hits)
+    if found > allowed:
+        note = f"（allowlist 登録{allowed}件 → 実残存{found}件に増加）" if allowed else ""
+        for lineno, hit in placeholder_hits:
+            issues.append((path, lineno, "?", f"{hit} が残存{note}"))
+    elif found < allowed:
+        issues.append(
+            (
+                path,
+                0,
+                "?",
+                f"allowlist が古い: 登録{allowed}件に対し実残存{found}件。"
+                f"PLACEHOLDER_ALLOWLIST を {found} に減らす（0なら行ごと削除）",
+            )
+        )
+    else:
+        for lineno, hit in placeholder_hits:
+            issues.append(
+                (path, lineno, "許", f"{hit} が残存（allowlist 登録済み・要解消）")
+            )
+
     return issues
 
 
@@ -163,12 +253,57 @@ def fix_section_in_file(path: Path, dry_run: bool):
     return n, True
 
 
+# --self-test: 正規表現の回帰ガード。
+# 旧パターン r"\[要確認\]" は「コロン+理由」形式を1件も拾えず、条文原文が未転記の
+# ページを CI 全緑のまま通していた。同じ壊れ方を再発させないため、検出すべき形と
+# 検出してはいけない形の両方を固定する。
+PLACEHOLDER_SELF_TEST = [
+    ("[要確認]", True),                      # 旧形式（裸）
+    ("[要確認: e-Gov公式の本文をここに転記]", True),  # 半角コロン
+    ("[要確認：全角コロンの理由]", True),          # 全角コロン
+    ("> [要確認: 引用ブロック内]", True),          # blockquote
+    ("[要確認: 閉じ括弧を書き忘れた", True),        # 閉じ忘れ
+    ("A [要確認: 甲] と B [要確認: 乙]", True),    # 1行2件
+    ("`[要確認: これは言及]`", False),            # コードスパン＝検査対象外
+    ("要確認事項をまとめる", False),               # 角括弧なしの通常文
+]
+
+STALE_TODO_SELF_TEST = [
+    ("<!-- TODO: 148.md は未作成 -->", "148.md"),
+    ("<!-- TODO: ../kijun/12.md は未作成 -->", "../kijun/12.md"),
+    ("<!-- TODO: 158.md は未作成・優先度高 -->", "158.md"),
+    ("<!-- TODO: kijun/56.md に本条への言及を追加検討 -->", None),  # 別動詞は対象外
+]
+
+
+def self_test() -> int:
+    failures = []
+    for text, expected in PLACEHOLDER_SELF_TEST:
+        got = bool(PLACEHOLDER_PATTERN.search(_strip_code_spans(text)))
+        if got != expected:
+            failures.append(f"placeholder: {text!r} → 期待 {expected} / 実測 {got}")
+    for text, expected in STALE_TODO_SELF_TEST:
+        m = STALE_TODO_PATTERN.search(text)
+        got = m.group(1) if m else None
+        if got != expected:
+            failures.append(f"stale-todo: {text!r} → 期待 {expected!r} / 実測 {got!r}")
+    for line in failures:
+        print(f"[FAIL] {line}")
+    total = len(PLACEHOLDER_SELF_TEST) + len(STALE_TODO_SELF_TEST)
+    print(f"self-test: {total - len(failures)}/{total} passed")
+    return 1 if failures else 0
+
+
 def main():
     parser = argparse.ArgumentParser(description="denken-wiki Markdown 品質チェッカ")
     parser.add_argument("target", nargs="?", default="docs", help="対象パス（省略時 docs/）")
     parser.add_argument("--fix-section", action="store_true", help="§記号を「第X条」に自動置換")
     parser.add_argument("--dry-run", action="store_true", help="--fix-section と併用で変更内容のみ表示")
+    parser.add_argument("--self-test", action="store_true", help="検出パターンの回帰テスト")
     args = parser.parse_args()
+
+    if args.self_test:
+        sys.exit(self_test())
 
     target = Path(args.target)
     if not target.exists():
@@ -200,9 +335,13 @@ def main():
     for f in files:
         all_issues.extend(check_file(f))
 
+    # 「許」= allowlist 登録済みプレースホルダ。表示するが exit code には影響させない。
+    errors = [i for i in all_issues if i[2] != "許"]
+    allowlisted = [i for i in all_issues if i[2] == "許"]
+
     counts = {"§": 0, "簡": 0, "?": 0, "空": 0, "壊": 0}
     affected_files = set()
-    for path, lineno, kind, msg in all_issues:
+    for path, lineno, kind, msg in errors:
         try:
             rel = path.relative_to(Path.cwd())
         except ValueError:
@@ -212,6 +351,13 @@ def main():
             counts[kind] += 1
         affected_files.add(path)
 
+    for path, lineno, kind, msg in allowlisted:
+        try:
+            rel = path.relative_to(Path.cwd())
+        except ValueError:
+            rel = path
+        print(f"[許] {rel}:{lineno} {msg}")
+
     print()
     print(
         f"Found: {counts['§']} § symbols, {counts['簡']} simplified chars, "
@@ -219,7 +365,9 @@ def main():
         f"{counts['壊']} broken relative links"
     )
     print(f"across {len(affected_files)}/{len(files)} files")
-    sys.exit(1 if all_issues else 0)
+    # 件数合算（verify_suite の _detail_wiki）に混ざらないよう別行に出す
+    print(f"Allowlisted placeholders (WARN, not counted): {len(allowlisted)}")
+    sys.exit(1 if errors else 0)
 
 
 if __name__ == "__main__":

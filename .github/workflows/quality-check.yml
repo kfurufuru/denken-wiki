@@ -56,6 +56,10 @@ jobs:
       # 根本原因を先に赤くする。
       - name: mojibake gate (U+FFFD 置換文字・不正バイト列の混入検出)
         run: python scripts/check_mojibake.py
+      # 検出パターン自体の回帰ガード。旧 PLACEHOLDER_PATTERN は「[要確認: 理由]」形式を
+      # 1件も拾えず、条文原文が未転記のページを CI 全緑のまま通していた（本 self-test の制定事案）。
+      - name: wiki_check 検出パターン self-test
+        run: python wiki_check.py --self-test
       - name: Run wiki_check.py
         run: python wiki_check.py docs/
       # themes/strategy 等（記事以外）が書く「省令第N条（見出し）」を articles/ の正本と突合。
