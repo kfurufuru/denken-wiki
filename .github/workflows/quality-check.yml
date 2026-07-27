@@ -10,6 +10,8 @@ on:
       - 'scripts/gen_kakomon_by_year.py'
       - 'scripts/check_stale_evidence.py'
       - 'scripts/check_mojibake.py'
+      - 'scripts/check_law_facts.py'
+      - 'scripts/check_law_citations.py'
       - 'scripts/check_theme_article_numbers.py'
       - 'scripts/audit_kaishaku_titles.py'
       - 'scripts/audit_titles.py'
@@ -30,6 +32,8 @@ on:
       - 'scripts/gen_kakomon_by_year.py'
       - 'scripts/check_stale_evidence.py'
       - 'scripts/check_mojibake.py'
+      - 'scripts/check_law_facts.py'
+      - 'scripts/check_law_citations.py'
       - 'scripts/check_theme_article_numbers.py'
       - 'scripts/audit_kaishaku_titles.py'
       - 'scripts/audit_titles.py'
@@ -62,6 +66,12 @@ jobs:
         run: python wiki_check.py --self-test
       - name: Run wiki_check.py
         run: python wiki_check.py docs/
+      # 実装済みなのに verify_suite にも CI にも配線されていなかった2ゲート（孤児）。
+      # 両方とも実測 0 件 clean のため、緑のうちに固定して以後の退行を検出する。
+      - name: 法令事実ゲート（数値ハルシネーション3類型）
+        run: python scripts/check_law_facts.py docs
+      - name: 法令引用ゲート（_data/law_articles.yml 突合）
+        run: python scripts/check_law_citations.py docs
       # themes/strategy 等（記事以外）が書く「省令第N条（見出し）」を articles/ の正本と突合。
       # 事故: hoan-gensoku.md が「保安原則=省令第1条〜第4条」と教えていた（正しくは第4条〜第18条・PR #154）。
       # 記事側は audit_titles.py が原典照合済みだが、記事**以外**のページは誰も検査していなかった。

@@ -948,6 +948,24 @@ def _check_caps_v3(content: str, path: Path, items: dict) -> list:
         if bias_suspect:
             caps.append(("C07", 89, "改正前後対比mermaidに差分マトリクス特徴語なし（左右対称形バイアスの疑い）"))
 
+    # C08: 「条文原文」節を持つのに中身が [要確認…] プレースホルダ（2026-07-28）
+    # 事案: 採点器は「条文原文セクションがあるか」しか見ておらず「中身が実体か」を見て
+    # いなかったため、逐語原文が空のページが kaishaku/224.md=107点（全体3位）、
+    # kijun/7.md・kijun/63.md=各100点 を取っていた。wiki_check.py 側の
+    # PLACEHOLDER_PATTERN も同時期まで [要確認: 理由] 形式を拾えず（PR #167 で是正）、
+    # 二重に「緑＝安全」の誤信号を出していた。柱1（正確性第一）の観点では、
+    # 原文が無いことより「有ると見せかけて高得点」の方が危険。
+    m_genbun = re.search(r"^##.*条文原文.*$", content, re.M)
+    if m_genbun:
+        body = content[m_genbun.end():]
+        nxt = re.search(r"^##\s", body, re.M)
+        if nxt:
+            body = body[: nxt.start()]
+        # 「言及」（バックティック内）で誤発火させない。wiki_check.py と同じ扱い。
+        body = re.sub(r"`[^`]*`", "", body)
+        if "[要確認" in body:
+            caps.append(("C08", 59, "条文原文セクションが未転記（[要確認]プレースホルダのまま）"))
+
     return caps
 
 
