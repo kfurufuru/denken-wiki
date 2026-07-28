@@ -146,5 +146,58 @@ def main():
     return result, all_files
 
 
+# 「📊 試験対策メタ」の自動注入値（例: "**出題頻度**: 🔥🔥（過去14年で 2 回出題）"）
+META_FREQ = re.compile(r"過去14年で\s*(\d+)\s*回出題")
+
+
+def audit_meta_drift():
+    """注入済みメタの出題回数が kakomon.yml の現集計と食い違う条文を列挙する。
+
+    なぜ必要か（2026-07-28 制定）:
+      `inject_frequency_meta.py` は「既に『試験対策メタ』admonition があれば skip」する
+      **一度きりの注入**なので、`_data/kakomon.yml` に問題が追加されてもメタの数字は
+      更新されない。結果、記事が学習者に示す「過去14年で N 回出題」（＝優先度の判断材料）が
+      静かに古くなる。CI もこれを検査していなかった。
+
+    注意:
+      この差分は**そのまま自動修正してはいけない**。再帰属（H30問3 を省令第30条＋第47条へ
+      戻した PR 等）で手作業により訂正されたメタもあり、どちらが正かは個別に一次照合が要る。
+      本関数は**検出のみ**（非ゲート WARN）。
+    """
+    data = yaml.safe_load(KAKOMON.read_text(encoding="utf-8"))
+    counter = Counter()
+    for p in data.get("problems", []):
+        for law, num in parse_article_field(p.get("article", "") or ""):
+            path = to_filepath(law, num)
+            if path is not None:
+                counter[path] += 1
+
+    rows = []
+    for sub in ("kijun", "kaishaku", "jigyoho", "other"):
+        d = ARTICLES / sub
+        if not d.is_dir():
+            continue
+        for f in sorted(d.glob("*.md")):
+            if f.name == "index.md":
+                continue
+            m = META_FREQ.search(f.read_text(encoding="utf-8"))
+            if not m:
+                continue
+            claimed, actual = int(m.group(1)), counter.get(f, 0)
+            if claimed != actual:
+                rows.append((f.relative_to(ROOT).as_posix(), claimed, actual))
+    return rows
+
+
+def main_audit_meta() -> int:
+    rows = audit_meta_drift()
+    for rel, claimed, actual in rows:
+        print(f"  WARN {rel}: メタ「{claimed} 回出題」 vs kakomon.yml 集計 {actual} 回")
+    print(f"[SUMMARY] 頻度メタのドリフト: {len(rows)}件")
+    return 0  # 非ゲート（exit には影響させない）
+
+
 if __name__ == "__main__":
+    if "--audit-meta" in sys.argv:
+        sys.exit(main_audit_meta())
     main()
