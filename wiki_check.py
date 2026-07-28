@@ -121,13 +121,30 @@ def check_file(path: Path):
     lines = text.splitlines()
     placeholder_hits = []  # (lineno, 検出文字列)
     in_fence = False
+    fence_is_code = False
     for lineno, line in enumerate(lines, 1):
-        # コードフェンス（``` または ~~~）内はリンタ対象外
-        if re.match(r"^\s*(```|~~~)", line):
-            in_fence = not in_fence
+        # フェンスの扱い:
+        #   言語タグ付き（```python / ```mermaid 等）＝本物のコード → 全検査をスキップ
+        #   タグ無しの ``` ＝「法的根拠ピラミッド」等の**学習コンテンツ**（学習者にはそのまま
+        #     表示される）→ **本文系の検査（§記号・簡体字・プレースホルダ・停滞TODO）は行う**。
+        #     一方、空タグ／空リンク／壊れ相対リンクは**マークアップの検査**であり、
+        #     フェンス内はリンクとして描画されないので適用しない。
+        # 事案: check_theme_article_numbers.py が同じフェンススキップで条番号誤帰属10件を
+        #   見逃していた（2026-07-28 監査・PR #173）。同型の穴を本スクリプトでも塞ぐ。
+        #   本 PR 時点でのタグ無しフェンス内の検出は §0 / 簡0 / プレースホルダ0 / 停滞TODO0
+        #   ＝実害ゼロのうちに構造だけ固定する。
+        m_fence = re.match(r"^\s*(```|~~~)(.*)$", line)
+        if m_fence:
+            if not in_fence:
+                in_fence = True
+                fence_is_code = bool(m_fence.group(2).strip())
+            else:
+                in_fence = False
+                fence_is_code = False
             continue
-        if in_fence:
+        if in_fence and fence_is_code:
             continue
+        in_prose_fence = in_fence  # タグ無しフェンス内（本文系の検査だけ行う）
         # インラインコードスパン内の文字列は誤検知の元なので空白化
         line = _strip_code_spans(line)
         for m in SECTION_PATTERN.finditer(line):
@@ -154,6 +171,11 @@ def check_file(path: Path):
                         f"停滞TODO: {target} は既に存在する（TODOを消してリンクに置き換える）",
                     )
                 )
+
+        # 以下 A/B/D は**マークアップの検査**。フェンス内はリンク・タグとして描画されない
+        # （リテラル文字として表示される）ので適用しない。
+        if in_prose_fence:
+            continue
 
         # A. 空タグ
         for m in EMPTY_TAG_PATTERN.finditer(line):
@@ -266,6 +288,21 @@ PLACEHOLDER_SELF_TEST = [
     ("要確認事項をまとめる", False),               # 角括弧なしの通常文
 ]
 
+# フェンスの扱いの回帰ガード（2026-07-28・PR #173 と同型の穴を塞いだ際に制定）。
+# (本文, 期待する検出種別の集合) — 空集合なら「何も検出しない」ことを固定する。
+FENCE_SELF_TEST = [
+    # 言語タグ付き＝本物のコード → 全検査スキップ
+    ("```python\n# §5 と [要確認: x]\n```", set()),
+    # タグ無し＝学習コンテンツ → 本文系（§・プレースホルダ）は検出する
+    ("```\n🟩 解釈§5（電路の絶縁）\n```", {"§"}),
+    ("```\n[要確認: ピラミッド内の宿題]\n```", {"?"}),
+    # タグ無しでも**マークアップ検査**は適用しない（リンクとして描画されないため）
+    ("```\n[ラベル]()\n```", set()),
+    ("```\n<div></div>\n```", set()),
+    # フェンスを閉じた後は通常どおり全検査に戻る（状態リークしない）
+    ("```python\nx\n```\n§5 は本文", {"§"}),
+]
+
 STALE_TODO_SELF_TEST = [
     ("<!-- TODO: 148.md は未作成 -->", "148.md"),
     ("<!-- TODO: ../kijun/12.md は未作成 -->", "../kijun/12.md"),
@@ -285,9 +322,24 @@ def self_test() -> int:
         got = m.group(1) if m else None
         if got != expected:
             failures.append(f"stale-todo: {text!r} → 期待 {expected!r} / 実測 {got!r}")
+    # フェンス扱いの回帰テスト（実ファイルに書き出して check_file を通す）
+    import tempfile
+
+    for body, expected in FENCE_SELF_TEST:
+        with tempfile.TemporaryDirectory() as td:
+            f = Path(td) / "t.md"
+            f.write_text(body, encoding="utf-8")
+            kinds = {k for _, _, k, _ in check_file(f)}
+        if kinds != expected:
+            failures.append(
+                f"fence: {body!r} → 期待 {sorted(expected)} / 実測 {sorted(kinds)}"
+            )
+
     for line in failures:
         print(f"[FAIL] {line}")
-    total = len(PLACEHOLDER_SELF_TEST) + len(STALE_TODO_SELF_TEST)
+    total = (
+        len(PLACEHOLDER_SELF_TEST) + len(STALE_TODO_SELF_TEST) + len(FENCE_SELF_TEST)
+    )
     print(f"self-test: {total - len(failures)}/{total} passed")
     return 1 if failures else 0
 
