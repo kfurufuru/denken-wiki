@@ -120,6 +120,15 @@ GATES = [
 # 非ゲート（WARN 扱い・exit に影響させない）
 AUDIT = ("audit_freq", [sys.executable, "scripts/audit_frequency.py"])
 
+# 非ゲート2: 注入済み「試験対策メタ」の出題回数 vs kakomon.yml 現集計のドリフト。
+# inject_frequency_meta.py は既存メタを skip する一度きりの注入なので、kakomon.yml が
+# 増えてもメタは更新されない（＝学習者に見える優先度が静かに古くなる）。
+# どちらが正かは再帰属の経緯を個別に見ないと決まらないため、**検出のみ**に留める。
+AUDIT_META = (
+    "freq_meta_drift",
+    [sys.executable, "scripts/compute_frequency.py", "--audit-meta"],
+)
+
 
 def tail(text: str, n: int = 5) -> str:
     lines = [ln for ln in text.splitlines() if ln.strip()]
@@ -140,7 +149,7 @@ def main() -> None:
     )
     args = ap.parse_args()
 
-    total = len(GATES) + 1  # ゲート + audit_freq
+    total = len(GATES) + 2  # ゲート + audit_freq + freq_meta_drift
     failures: list[tuple[str, str]] = []  # (ラベル, 末尾出力)
     gates_passed = 0
 
@@ -159,11 +168,20 @@ def main() -> None:
     rc, out = run_step(AUDIT[1])
     cnt = extract(r"頻度不整合:\s*(\d+)件", out, "?")
     if cnt == "0":
-        print(f"[{total}/{total}] {AUDIT[0]:<13} PASS (0件)")
+        print(f"[{total - 1}/{total}] {AUDIT[0]:<13} PASS (0件)")
         warnings = 0
     else:
-        print(f"[{total}/{total}] {AUDIT[0]:<13} WARN {cnt}件（非ゲート）")
+        print(f"[{total - 1}/{total}] {AUDIT[0]:<13} WARN {cnt}件（非ゲート）")
         warnings = 1
+
+    # 頻度メタのドリフト（非ゲート＝WARN）
+    rc, out = run_step(AUDIT_META[1])
+    dcnt = extract(r"頻度メタのドリフト:\s*(\d+)件", out, "?")
+    if dcnt == "0":
+        print(f"[{total}/{total}] {AUDIT_META[0]:<13} PASS (0件)")
+    else:
+        print(f"[{total}/{total}] {AUDIT_META[0]:<13} WARN {dcnt}件（非ゲート・要個別照合）")
+        warnings += 1
 
     # --v3 情報行（ゲート扱いしない）
     for path in args.v3_paths:
