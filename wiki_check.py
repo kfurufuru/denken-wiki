@@ -47,7 +47,8 @@ PLACEHOLDER_ALLOWLIST = {
     # kijun/7.md・kijun/63.md の4件（16 → 11 件）。
     # 解消済み（令和7年11月版と逐語一致確認・2026-07-30）: kaishaku/45.md（11 → 10 件）。
     "docs/articles/kijun/11.md": 2,
-    "docs/articles/other/pse-2.md": 1,
+    # 解消済み（2026-08-28 監査是正）: pse-2.md の「[要確認: …H28問6…]」は、
+    # kakomon.yml 突合で当該2件が電気用品安全法の出題でないと確定したため実績行ごと撤去。
     "docs/articles/other/pse-10.md": 1,
     "docs/themes/hatsuhendenjo.md": 3,
     "docs/themes/pse-anzen-ho.md": 1,
