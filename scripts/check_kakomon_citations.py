@@ -22,6 +22,14 @@ SoT である `_data/kakomon.yml` と突き合わせる。
   MISATTRIBUTED  引用は実在するが、SoT の article がそのページの条を指していない
                  （「過去問実績」節と「直近出題」メタ行に限って適用）
 
+重複行の検出（DUPLICATE）:
+  出題実績テーブルの中に同じ (年度, 問番号) の行が2つ出ると、学習者には「2回出題された」
+  ように見える。**監査前コミットでは 0件**（この repo は元々きれいだった）だが、
+  2026-08-29 の是正作業で **自分が1件作った**——「SoT に無い R05問6」を R02問6 に差し替えた際、
+  同じ表に既にあった R02問6 と重複させた。値の差し替えは重複を生む操作なので、
+  ratchet として置く。**base で fire しない代わりに、self-test に陽性対照**
+  （当該欠陥を再現した入力で必ず検出する）を持たせて検出力を毎回証明する。
+
 採らなかった検査:
   テーマページで「kakomon.yml の theme スラグ ≠ ページのスラグ」を誤帰属とする案は**却下**した。
   試作して 14件検出したが、その大半が正当な相互参照だった（例: R04上問1「受電電圧7000V以下の
@@ -106,6 +114,13 @@ KAKOMON_SECTION = re.compile(r"^#{1,6}\s*.*(?:過去問実績|出題実績)")
 RECENT_LINE = re.compile(r"\*\*直近出題\*\*")
 TABLE_ROW = re.compile(r"^\s*\|")
 
+# 出題実績テーブルのヘッダ（「| 年度 | 問 | 形式 | …」）。
+# 同一テーブル内に同じ (年度, 問番号) の行が2つ出るのを検出するために、
+# **この形のテーブルだけ**を対象にする。
+# 対象を絞らないと、空欄別の内訳表（同じ問の (ア)(イ) を別行で書く）や、
+# 表の行と R08予測の散文が同じ問に触れるだけで誤爆する（実測 47件中ほぼ全部）。
+KAKOMON_TABLE_HEADER = re.compile(r"^\|\s*年度\s*\|\s*問[^|]*\|\s*形式")
+
 # 記事ディレクトリ → kakomon.yml の article フィールドで使われる法令トークン
 GROUP_LAW = {"kijun": "省令", "jigyoho": "事業法", "kaishaku": "解釈"}
 
@@ -180,6 +195,35 @@ def scan(paths: list[Path], sot: dict) -> tuple[list[Finding], int]:
         group = path.parent.name
         law = GROUP_LAW.get(group) if rel.startswith("docs/articles/") else None
         art_num = path.stem if law else None
+
+        # --- 出題実績テーブル内の重複行
+        lines = path.read_text(encoding="utf-8").splitlines()
+        k = 0
+        dup_hist = False
+        while k < len(lines):
+            if re.match(r"^#{1,6}\s", lines[k]):
+                dup_hist = bool(HISTORY_HEAD.match(lines[k]))
+            if not dup_hist and KAKOMON_TABLE_HEADER.match(norm(lines[k].strip())):
+                seen: dict[tuple[str, int], int] = {}
+                j = k + 1
+                while j < len(lines) and lines[j].strip().startswith("|"):
+                    tm2 = TABLE_CITE.match(norm(lines[j].strip()))
+                    if tm2:
+                        key = (tm2.group("year"), int(tm2.group("num")))
+                        if key in seen:
+                            findings.append(
+                                Finding(
+                                    "DUPLICATE", rel, j + 1, f"{key[0]}問{key[1]}",
+                                    f"同じ出題実績テーブルの {seen[key]} 行目と同じ問。"
+                                    f"学習者には2回出題されたように見える",
+                                )
+                            )
+                        else:
+                            seen[key] = j + 1
+                    j += 1
+                k = j
+                continue
+            k += 1
 
         in_history = False
         in_kakomon = False
@@ -335,6 +379,24 @@ def self_test(sot: dict) -> int:
     # 陽性対照: SoT に実在する引用は見つかること（SoT 読み込みの故障検出）
     hit = ("R05上", 12) in sot
     print(f"  [{'PASS' if hit else 'FAIL'}] 陽性対照: (R05上 問12) が SoT に実在する")
+    ok &= hit
+
+    # DUPLICATE の陽性対照: 同じ表に同じ問の行が2つあれば必ず検出する
+    tbl = [
+        "| 年度 | 問 | 形式 | 何が問われたか | 条文 |",
+        "|------|----|------|--------------|------|",
+        "| R02 | 問6 | 択一 | 低圧屋内配線の施設場所による工事の種類 | 解釈第156条 |",
+        "| R02 | 問6 | 択一 | 屋内配線の工事種類と施設場所の組合せ | 解釈第156条 |",
+    ]
+    hit_header = bool(KAKOMON_TABLE_HEADER.match(norm(tbl[0])))
+    keys = [TABLE_CITE.match(norm(r)) for r in tbl[2:]]
+    hit = hit_header and all(keys) and keys[0].group("num") == keys[1].group("num")
+    print(f"  [{'PASS' if hit else 'FAIL'}] DUPLICATE 陽性対照: 同一表に同じ問の行が2つ")
+    ok &= hit
+    # 陰性対照: 空欄別の内訳表（同じ問の (ア)(イ) を別行で書く）は対象外
+    neg = "| ==職務及び組織== | R05下 問1 | 穴埋 | (ア) |"
+    hit = not KAKOMON_TABLE_HEADER.match(norm("| 空欄 | 出題 | 形式 | 記号 |")) and not TABLE_CITE.match(norm(neg))
+    print(f"  [{'PASS' if hit else 'FAIL'}] DUPLICATE 陰性対照: 空欄別の内訳表を対象にしない")
     ok &= hit
 
     # H18〜H22 は収録範囲外として除外されること
