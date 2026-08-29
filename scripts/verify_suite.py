@@ -99,6 +99,12 @@ def _detail_facts(out: str) -> str:
     return f"({n}件/{k}事実)"
 
 
+def _detail_cites(out: str) -> str:
+    n = extract(r"check_kakomon_citations:\s*(\d+)件", out, "?")
+    q = extract(r"・(\d+)引用を照合", out, "?")
+    return f"({n}件/{q}引用)"
+
+
 def _detail_law_facts(out: str) -> str:
     n = extract(r"check_law_facts:\s*(\d+)件", out, "?")
     return f"({n}件)"
@@ -143,6 +149,14 @@ GATES = [
         "verified_facts",
         [sys.executable, "scripts/check_verified_facts.py"],
         _detail_facts,
+    ),
+    # docs/kakomon/ の外が書く個々の過去問引用を SoT と突合する。
+    # 既存の kakomon 系ゲートは docs/kakomon/ しか見ておらず、条文ページ・テーマページの
+    # 「過去問実績」は誰も検査していなかった（監査前コミットに当てると 27件）。
+    (
+        "kakomon_cites",
+        [sys.executable, "scripts/check_kakomon_citations.py"],
+        _detail_cites,
     ),
 ]
 

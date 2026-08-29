@@ -14,6 +14,7 @@ on:
       - 'scripts/check_law_citations.py'
       - 'scripts/check_law_verbatim.py'
       - 'scripts/check_verified_facts.py'
+      - 'scripts/check_kakomon_citations.py'
       - 'scripts/check_theme_article_numbers.py'
       - 'scripts/audit_kaishaku_titles.py'
       - 'scripts/audit_titles.py'
@@ -38,6 +39,7 @@ on:
       - 'scripts/check_law_citations.py'
       - 'scripts/check_law_verbatim.py'
       - 'scripts/check_verified_facts.py'
+      - 'scripts/check_kakomon_citations.py'
       - 'scripts/check_theme_article_numbers.py'
       - 'scripts/audit_kaishaku_titles.py'
       - 'scripts/audit_titles.py'
@@ -92,6 +94,13 @@ jobs:
         run: python scripts/check_verified_facts.py --self-test
       - name: 一次照合済み事実ゲート（_data/verified-facts.yml 突合）
         run: python scripts/check_verified_facts.py
+      # docs/kakomon/ の**外**が書く個々の過去問引用を kakomon.yml と突合する。
+      # 既存の kakomon 系ゲートは docs/kakomon/ しか見ておらず、条文ページ・テーマページの
+      # 「過去問実績」「直近出題」は誰も検査していなかった（監査前コミットに当てると 27件）。
+      - name: 過去問引用ゲート self-test（引用形式パーサ＋SoT 読込の生存証明）
+        run: python scripts/check_kakomon_citations.py --self-test
+      - name: 過去問引用ゲート（実在・帰属の kakomon.yml 突合）
+        run: python scripts/check_kakomon_citations.py
       # themes/strategy 等（記事以外）が書く「省令第N条（見出し）」を articles/ の正本と突合。
       # 事故: hoan-gensoku.md が「保安原則=省令第1条〜第4条」と教えていた（正しくは第4条〜第18条・PR #154）。
       # 記事側は audit_titles.py が原典照合済みだが、記事**以外**のページは誰も検査していなかった。
