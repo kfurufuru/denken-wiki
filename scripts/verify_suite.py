@@ -93,6 +93,12 @@ def _detail_verbatim(out: str) -> str:
     return f"({n}件/{q}引用)"
 
 
+def _detail_facts(out: str) -> str:
+    n = extract(r"check_verified_facts:\s*(\d+)件", out, "?")
+    k = extract(r"・(\d+)事実を照合", out, "?")
+    return f"({n}件/{k}事実)"
+
+
 def _detail_law_facts(out: str) -> str:
     n = extract(r"check_law_facts:\s*(\d+)件", out, "?")
     return f"({n}件)"
@@ -128,6 +134,15 @@ GATES = [
         "law_verbatim",
         [sys.executable, "scripts/check_law_verbatim.py"],
         _detail_verbatim,
+    ),
+    # 解説・要約・暗記表に書かれた数値と判定軸を _data/verified-facts.yml に固定する。
+    # 条文原文が正しくても、その下の表が別の値を書いていれば学習者はそちらを覚える。
+    # 監査前コミットに当てると 29件（B種の 50/Ig・支持物の安全率1.5・第131条の罰則・
+    # 径間60/120m・低圧耐圧1分間・「発生から24時間」・60点満点 など）。
+    (
+        "verified_facts",
+        [sys.executable, "scripts/check_verified_facts.py"],
+        _detail_facts,
     ),
 ]
 
