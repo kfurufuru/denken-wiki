@@ -116,6 +116,24 @@ def _detail_law_facts(out: str) -> str:
     return f"({n}件)"
 
 
+# CI が回す検出器の生存証明。verify_suite が self-test を回していなかったため、
+# 「ゲートは 0件で緑・CI の self-test だけ赤」という乖離が起きた（実測 2026-08-29:
+# verified-facts に事実を1件足して self-test の陽性サンプルを付け忘れ、
+# ローカル gates 11/11 PASS のまま CI の wiki-check が落ちた）。
+# ローカルで CI と同じ検査を通すため、ゲート本体より先に走らせる。
+SELF_TESTS = [
+    ("wiki_check", [sys.executable, "wiki_check.py", "--self-test"]),
+    ("law_verbatim", [sys.executable, "scripts/check_law_verbatim.py", "--self-test"]),
+    ("verified_facts", [sys.executable, "scripts/check_verified_facts.py", "--self-test"]),
+    ("kakomon_cites", [sys.executable, "scripts/check_kakomon_citations.py", "--self-test"]),
+    ("verif_claims", [sys.executable, "scripts/check_verification_claims.py", "--self-test"]),
+    ("public_leak", [sys.executable, "scripts/check_public_leak.py", "--self-test"]),
+    ("theme_article_no", [sys.executable, "scripts/check_theme_article_numbers.py", "--self-test"]),
+    ("kaishaku_titles", [sys.executable, "scripts/audit_kaishaku_titles.py", "--self-test"]),
+    ("jigyoho_titles", [sys.executable, "scripts/audit_jigyoho_titles.py", "--self-test"]),
+    ("stale_evidence", [sys.executable, "scripts/tests/check_stale_evidence/test_check_stale_evidence.py"]),
+]
+
 GATES = [
     ("dual_sync", [sys.executable, "scripts/check_kakomon_dual_sync.py"], None),
     ("pages_sync", [sys.executable, "scripts/check_kakomon_pages_sync.py"], None),
@@ -206,6 +224,21 @@ def main() -> None:
         help="wiki_quality_check.py <PATH> --v3 を実行（情報のみ・複数指定可）",
     )
     args = ap.parse_args()
+
+    # 検出器の生存証明を先に回す（vacuous pass 防止・CI と同じ検査をローカルでも通す）
+    st_failed: list[str] = []
+    for label, cmd in SELF_TESTS:
+        rc, out = run_step(cmd)
+        if rc != 0:
+            st_failed.append(label)
+            print(f"[self-test] {label:<17} FAIL (exit {rc})\n{tail(out)}")
+    if st_failed:
+        print(f"\n==== RESULT: FAIL (self-test {len(st_failed)}件: {', '.join(st_failed)}) ====")
+        print("検出器が壊れている状態でゲートを回しても「0件で緑」は意味を持たない。")
+        # 本ファイルは main() の戻り値を捨てる（末尾が `main()`）。既存の失敗パスと
+        # 同じく sys.exit で抜ける。return 1 だと FAIL 表示のまま exit 0 になる。
+        sys.exit(1)
+    print(f"[self-test] {len(SELF_TESTS)}件 ALL PASS")
 
     total = len(GATES) + 2  # ゲート + audit_freq + freq_meta_drift
     failures: list[tuple[str, str]] = []  # (ラベル, 末尾出力)
