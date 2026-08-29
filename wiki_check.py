@@ -46,13 +46,14 @@ PLACEHOLDER_ALLOWLIST = {
     # 解消済み（原典から逐語転記・2026-07-28）: kaishaku/22.md・kaishaku/224.md・
     # kijun/7.md・kijun/63.md の4件（16 → 11 件）。
     # 解消済み（令和7年11月版と逐語一致確認・2026-07-30）: kaishaku/45.md（11 → 10 件）。
+    # 解消済み（出題実績を kakomon.yml へ再同期し、同定できない R04 問8 行を削除・2026-08-29）:
+    #   themes/shiyo-basho.md（10 → 9 件）。
     "docs/articles/kijun/11.md": 2,
     "docs/articles/other/pse-2.md": 1,
     "docs/articles/other/pse-10.md": 1,
     "docs/themes/hatsuhendenjo.md": 3,
     "docs/themes/pse-anzen-ho.md": 1,
     "docs/themes/setsuchi.md": 1,
-    "docs/themes/shiyo-basho.md": 1,
 }
 
 # 停滞 TODO: <!-- TODO: 148.md は未作成 --> と書いてあるがリンク先が既に存在するもの。
