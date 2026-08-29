@@ -87,6 +87,12 @@ def _detail_wiki(out: str) -> str:
     return f"({total} findings/{files} files)"
 
 
+def _detail_verbatim(out: str) -> str:
+    n = extract(r"check_law_verbatim:\s*(\d+)件", out, "?")
+    q = extract(r"・(\d+)引用を照合", out, "?")
+    return f"({n}件/{q}引用)"
+
+
 def _detail_law_facts(out: str) -> str:
     n = extract(r"check_law_facts:\s*(\d+)件", out, "?")
     return f"({n}件)"
@@ -114,6 +120,14 @@ GATES = [
         "law_citations",
         [sys.executable, "scripts/check_law_citations.py", "docs"],
         None,
+    ),
+    # 条文原文 blockquote と原典（e-Gov XML / 解釈PDF抽出）の逐語 diff。
+    # 2026-08-28 の全数監査で、既存ゲート 7/7 PASS のまま条文原文の逐語ズレが
+    # 29 箇所残っていたのが制定事案（本ゲートを監査前コミットに当てて実測）。
+    (
+        "law_verbatim",
+        [sys.executable, "scripts/check_law_verbatim.py"],
+        _detail_verbatim,
     ),
 ]
 
