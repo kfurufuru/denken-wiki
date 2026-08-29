@@ -105,6 +105,12 @@ def _detail_cites(out: str) -> str:
     return f"({n}件/{q}引用)"
 
 
+def _detail_claims(out: str) -> str:
+    n = extract(r"check_verification_claims:\s*(\d+)件", out, "?")
+    debt = extract(r"allowlist (\d+)件（債務）", out, "0")
+    return f"({n}件/債務 {debt}件)"
+
+
 def _detail_law_facts(out: str) -> str:
     n = extract(r"check_law_facts:\s*(\d+)件", out, "?")
     return f"({n}件)"
@@ -157,6 +163,15 @@ GATES = [
         "kakomon_cites",
         [sys.executable, "scripts/check_kakomon_citations.py"],
         _detail_cites,
+    ),
+    # 「照合済」と書いてあるページに、機械が逐語照合できる条文原文があるか。
+    # 宣言はコストゼロで書ける。kijun/11・23・32 はいずれも監修ログに
+    # 「解釈第17/38/59条と照合済・公式値と一致」と書いてあったが、
+    # その数値は条文に存在しなかった（2026-08-28 監査）。
+    (
+        "verif_claims",
+        [sys.executable, "scripts/check_verification_claims.py"],
+        _detail_claims,
     ),
 ]
 
