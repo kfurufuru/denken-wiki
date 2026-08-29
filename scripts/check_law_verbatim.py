@@ -179,6 +179,12 @@ ABBREV_TAIL = re.compile(r"[（(][^（()）]{0,40}(?:省略|詳細|以下略|抜
 # **原文のあとに注を足す**書き方を許すための規則。
 EDITORIAL_TAIL = re.compile(r"[※].*$")
 
+# 「※ N-M表 は本ページの解説表を参照」は、原文の表を落とした代わりに
+# 学習者を同ページの解説表へ誘導する注記。誘導先が実在しないまま残ると
+# 存在しない表を指す（実例: 16-6〜16-10表・231-2表。表を引用する原文の
+# 規定ごと転記から落ちていたのに、表番号にだけ注記が付いていた）。
+TABLE_PTR = re.compile(r"※\s*([0-9]+-[0-9]+表)\s*は本ページの解説表を参照")
+
 
 def genbun_quotes(path: Path) -> list[tuple[int, str]]:
     """「条文原文」セクション内の blockquote 行を (行番号, 本文) で返す.
@@ -242,6 +248,12 @@ class Finding:
             if self.tail:
                 s += f"\n         ↳ 不一致開始: {self.tail}"
             return s
+        if self.kind == "DANGLE":
+            return (
+                f"{head} 解説表への参照が空振り\n"
+                f"         注記: {self.quote[:100]}\n"
+                f"         ↳ この表番号は同ファイルの他の場所に1度も現れない"
+            )
         return f"{head} 他条の文\n         引用: {self.quote[:100]}"
 
 
@@ -296,6 +308,20 @@ def scan(targets: list[Path]) -> tuple[list[Finding], list[str], int]:
                 if 0 < lo < len(nq):
                     tail = f"…{nq[max(0, lo - 12):lo]}【{nq[lo:lo + 28]}】"
                 findings.append(Finding("MISS", rel, line, quote, lo, len(nq), tail))
+
+        # 解説表への参照が空振りしていないか（誘導先の実在確認）
+        lines = path.read_text(encoding="utf-8").splitlines()
+        for i, raw in enumerate(lines, start=1):
+            m = TABLE_PTR.search(raw)
+            if not m:
+                continue
+            tbl = m.group(1)
+            # 注記行そのものを除いて、同じ表番号がページ内に現れるか
+            elsewhere = sum(
+                1 for L in lines if tbl in L and not TABLE_PTR.search(L)
+            )
+            if elsewhere == 0:
+                findings.append(Finding("DANGLE", rel, i, raw.strip(), 0, 0, ""))
     return findings, errors, checked
 
 
@@ -406,9 +432,10 @@ def main() -> int:
 
     miss = sum(1 for f in shown if f.kind == "MISS")
     other = sum(1 for f in shown if f.kind == "OTHER")
+    dangle = sum(1 for f in shown if f.kind == "DANGLE")
     print(
         f"\ncheck_law_verbatim: {len(shown)}件"
-        f"（MISS {miss} / OTHER {other}）"
+        f"（MISS {miss} / OTHER {other} / DANGLE {dangle}）"
         f" — {len(targets)}ファイル・{checked}引用を照合"
         + (f"・allowlist {allowed}件" if allowed else "")
     )
