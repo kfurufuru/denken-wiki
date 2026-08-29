@@ -161,6 +161,8 @@ nav:
     - 電線・ケーブルの選定: themes/densen-cable.md
     - 支持物・架空電線路の強度: themes/shijimono.md
     - 発変電所の施設: themes/hatsuhendenjo.md
+    - 電磁誘導・電磁障害の防止: themes/denzi-yudo.md
+    - 風車の安全（風技省令第5条）: themes/fusha.md
     - 電気使用場所の施設: themes/shiyo-basho.md
     - 用語の定義: themes/yogo-teigi.md
     - 電気工作物の分類: themes/kosakubutsu-bunrui.md
@@ -177,7 +179,7 @@ nav:
     - 電気工事業者の登録: themes/denki-koji-gyo.md
     - PCB機器の取り扱い: themes/pcb-kiki.md
     - 保安の基本原則: themes/hoan-gensoku.md
-    - 国際規格の取り入れ（§4の2）: themes/kokusai-kikaku.md
+    - 国際規格の取り入れ（第4条の2）: themes/kokusai-kikaku.md
     - 公害防止・環境保護: themes/kankyo-boushi.md
   - 条文別:
     - articles/index.md
@@ -197,8 +199,10 @@ nav:
       - 第15条（地絡保護）: articles/kijun/15.md
       - 第20条（電線路等の感電又は火災の防止）: articles/kijun/20.md
       - 第21条（架空電線及び地中電線の感電の防止）: articles/kijun/21.md
+      - 第22条（低圧電線路の絶縁性能）: articles/kijun/22.md
       - 第23条（発電所等への立入防止）: articles/kijun/23.md
       - 第24条（支持物の昇塔防止）: articles/kijun/24.md
+      - 第30条（地中電線等による他の電線及び工作物への危険の防止）: articles/kijun/30.md
       - 第32条（支持物の倒壊防止）: articles/kijun/32.md
       - 第56条（配線の感電防止）: articles/kijun/56.md
       - 第57条（配線の使用電線）: articles/kijun/57.md
@@ -272,6 +276,7 @@ nav:
       - 第232条（高圧・特別高圧連系における例外）: articles/kaishaku/232.md
     - 電気事業法:
       - articles/jigyoho/index.md
+      - 第1条（目的）: articles/jigyoho/1.md
       - 第2条（定義）: articles/jigyoho/2.md
       - 第38条（事業用電気工作物の定義）: articles/jigyoho/38.md
       - 第39条（事業用電気工作物の維持（技術基準適合義務））: articles/jigyoho/39.md
@@ -333,11 +338,18 @@ nav:
       - 平成25年（2013）: kakomon/H25.md
       - 平成24年（2012）: kakomon/H24.md
       - 平成23年（2011）: kakomon/H23.md
+      - 平成22年（2010）: kakomon/H22.md
+      - 平成21年（2009）: kakomon/H21.md
+      - 平成20年（2008）: kakomon/H20.md
+      - 平成19年（2007）: kakomon/H19.md
+      - 平成18年（2006）: kakomon/H18.md
   - 攻略戦略:
     - strategy/index.md
     - 法令マスタ: strategy/hourei-master.md
     - B問題メソッド化: strategy/b-mondai-method.md
     - B問題得点戦略: strategy/b-mondai-strategy.md
+    - B種接地150/Ig パターン（B問題）: strategy/b-shu-setsuchi-pattern.md
+    - 非接地テブナンパターン（B問題）: strategy/hiseichi-thevenin-pattern.md
     - 弱点ログ: strategy/jakuten-log.md
     - 引っかけパターン集: strategy/trap-patterns.md
     - 直前3日チェックリスト: strategy/last-3days-checklist.md
@@ -374,4 +386,5 @@ nav:
       - 学習システム全体マップ: reference/system-map.md
       - バージョニング基準: reference/versioning.md
       - 新規記事作成チェックリスト: reference/article-creation-checklist.md
+      - 条文解説ページ テンプレート v2.4 仕様書: reference/template-v24.md
       - 写真導入ポリシー（ライセンス・クレジット）: reference/photo-policy.md
