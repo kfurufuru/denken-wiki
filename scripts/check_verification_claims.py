@@ -122,6 +122,34 @@ def scan(paths: list[Path], verbatim) -> list[Finding]:
     return findings
 
 
+def unbacked_outside_articles() -> list[tuple[str, int]]:
+    """articles/ の外で照合宣言を持つが、条文原文セクションが無いページ。
+
+    **ブロックしない（情報提供のみ）。** themes/reference/strategy は条文原文を持たない
+    のが正常で、本ゲートの UNBACKED をそのまま適用すると誤爆になる（要約ページに
+    条文原文の重複転記を強いることになる）。
+
+    それでも数えて出すのは、この債務が実害と相関しているため。2026-08-30 の実測では
+    22ページが該当し、**そのうち4ページ（reference/insulation-resistance・
+    reference/numbers・strategy/trap-patterns・themes/jigyoho-taikei）から同日に
+    実在の誤りが見つかっている**（試験電圧9,900V・条文に無い「対地電圧100V」・
+    1mA代替の条番号・兼任の手続語）。「照合済」はコストゼロで書けるという本監査の
+    中心命題そのもの。
+
+    解消は条文原文の転記ではなく **_data/verified-facts.yml への事実登録**で行う
+    （表・要約に書かれた値を機械照合の射程に入れる既存パターン）。
+    """
+    out = []
+    for q in sorted((ROOT / "docs").rglob("*.md")):
+        rel = q.relative_to(ROOT / "docs").as_posix()
+        if rel.startswith("articles/"):
+            continue
+        text = q.read_text(encoding="utf-8")
+        if CLAIM.search(text) and not GENBUN_HEAD.search(text):
+            out.append((f"docs/{rel}", len(CLAIM.findall(text))))
+    return out
+
+
 def collect(paths: list[str]) -> list[Path]:
     if not paths:
         return sorted(
@@ -197,6 +225,15 @@ def main() -> int:
         f" — {len(targets)}ファイルを検査"
         + (f"・allowlist {allowed}件（債務）" if allowed else "")
     )
+    outside = unbacked_outside_articles()
+    if outside:
+        print(
+            f"  参考（非ブロッキング）: articles/ の外で照合宣言を持つが条文原文が無いページ"
+            f" {len(outside)}件。解消は verified-facts.yml への事実登録で行う"
+        )
+        if args.no_allowlist:
+            for rel, n in outside:
+                print(f"    {rel}（宣言{n}回）")
     return 1 if shown else 0
 
 
