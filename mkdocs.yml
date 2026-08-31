@@ -145,9 +145,6 @@ nav:
     - 電位・電界・磁界（ローレンツ力）: theory/deni-denkai-jikai.md
     - 電界・磁界・電位（性質対比）: theory/denkai-jikai-deni.md
     - NPN・PNPトランジスタ: theory/transistor.md
-  - 機械:
-    - kikai/index.md
-    - 変圧器の試験と等価回路: kikai/transformer-test.md
   - テーマ別:
     - themes/index.md
     - 接地工事: themes/setsuchi.md
