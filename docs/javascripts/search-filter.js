@@ -11,6 +11,7 @@
     { label: 'テーマ別', pattern: 'themes/' },
     { label: '過去問',   pattern: 'kakomon/' },
     { label: '理論',     pattern: 'theory/' },
+    { label: '機械',     pattern: 'kikai/' },
   ];
 
   let activePattern = null;
