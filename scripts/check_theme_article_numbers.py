@@ -45,6 +45,13 @@ DOCS = ROOT / "docs"
 # 「省令第5条（電路の絶縁）」「省令 第5条（…）」「解釈第218条（…）」
 CITE = re.compile(r"(省令|解釈)\s*第\s*(\d+)\s*条(の\d+)?\s*[（(]([^）)]{2,40})[）)]")
 
+# 「省令」「解釈」の直前に別法令の名が付いているものは、電技省令／電技解釈ではないので
+# 突合対象から外す。CITE の「省令」は部分一致するため、そのままだと
+# 「風技省令第5条（自動停止）」を電技省令第5条「電路の絶縁」と比べて必ず WARN になる
+# （実測: themes/fusha.md:82,89・kakomon/wave-analysis.md:112 の3件。うち fusha.md:89 は
+# 「電技省令第15条 vs 風技省令第5条 の区別」と、まさに両者を区別する正しい記述だった）。
+OTHER_LAW_PREFIX = ("風技", "風力", "施行", "工事士", "用品", "報告", "内線", "太陽電池")
+
 # 括弧内がタイトルでない（説明・注記）と分かるものは対象外
 NON_TITLE_HINTS = ("参照", "抜粋", "再掲", "後述", "前述", "詳細", "以下", "上記", "同上",
                    "根拠", "関連", "旧", "新", "例", "注", "実在せず", "のみ")
@@ -166,6 +173,10 @@ def scan(master: dict[tuple[str, int], str], targets: list[Path]) -> list[str]:
                     continue
                 if any(h in claimed for h in NON_TITLE_HINTS):
                     continue
+                # 直前が別法令名なら電技省令／電技解釈ではない（他法令混同の誤検出を防ぐ）
+                if any(line[max(0, m.start() - len(x)):m.start()] == x
+                       for x in OTHER_LAW_PREFIX):
+                    continue
                 num = int(num_s)
                 truth = master.get((law, num))
                 if truth is None:
@@ -192,6 +203,8 @@ def scan(master: dict[tuple[str, int], str], targets: list[Path]) -> list[str]:
                     )
                 elif sim(claimed, truth) < SIM_ERROR:
                     # 括弧内が内容説明（例: 解釈第14条（絶縁抵抗））のことも多い＝WARN 止まり
+                    if warn_suppressed(rel):
+                        continue
                     findings.append(
                         f"WARN  {rel}:{ln}: {law}第{num}条（{claimed}）… 正本は「{truth}」"
                         f"（見出しでなく内容説明なら問題なし）"
@@ -200,13 +213,24 @@ def scan(master: dict[tuple[str, int], str], targets: list[Path]) -> list[str]:
 
 
 def targets_under_docs() -> list[Path]:
-    """articles/ 以外の md（themes/strategy/reference/kakomon/ほか）。"""
-    out = []
-    for f in DOCS.rglob("*.md"):
-        if "articles" in f.relative_to(DOCS).parts:
-            continue
-        out.append(f)
-    return sorted(out)
+    """docs/ 全体。articles/ も含む。
+
+    当初は articles/ を除外していた（「記事側の H1 は audit_titles.py が原典と照合済み
+    だから正本として信頼できる」）。しかしそれが守るのは**そのページ自身の見出し**だけで、
+    **記事ページが他の条を引用する記述**は誰も検査していなかった。実測 2026-08-30 で
+    ERROR 11件が出た（省令第4条を「電気設備の損傷防止」と書く4箇所・解釈第65条を
+    「架空電線の高さ」と書く3箇所・解釈第220条を「低圧/高圧の定義」とする2箇所ほか）。
+
+    ただし articles/ を入れると WARN は 13→108 に増え、実害のある1件が埋もれる。
+    WARN は「括弧内が内容説明なら問題なし」の弱い信号なので、**articles/ では
+    ERROR だけを出す**（下記 emit 側で抑制）。
+    """
+    return sorted(DOCS.rglob("*.md"))
+
+
+def warn_suppressed(rel: str) -> bool:
+    """articles/ の WARN は出さない（ERROR は出す）。上記 docstring の理由による。"""
+    return rel.startswith("articles/") or "/articles/" in rel
 
 
 # ---------------------------------------------------------------- self-test

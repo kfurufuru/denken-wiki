@@ -49,7 +49,8 @@ PLACEHOLDER_ALLOWLIST = {
     # 解消済み（出題実績を kakomon.yml へ再同期し、同定できない R04 問8 行を削除・2026-08-29）:
     #   themes/shiyo-basho.md（10 → 9 件）。
     "docs/articles/kijun/11.md": 2,
-    "docs/articles/other/pse-2.md": 1,
+    # 解消済み（2026-08-28 監査是正）: pse-2.md の「[要確認: …H28問6…]」は、
+    # kakomon.yml 突合で当該2件が電気用品安全法の出題でないと確定したため実績行ごと撤去。
     "docs/articles/other/pse-10.md": 1,
     "docs/themes/hatsuhendenjo.md": 3,
     "docs/themes/pse-anzen-ho.md": 1,

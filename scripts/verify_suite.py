@@ -87,10 +87,52 @@ def _detail_wiki(out: str) -> str:
     return f"({total} findings/{files} files)"
 
 
+def _detail_verbatim(out: str) -> str:
+    n = extract(r"check_law_verbatim:\s*(\d+)件", out, "?")
+    q = extract(r"・(\d+)引用を照合", out, "?")
+    return f"({n}件/{q}引用)"
+
+
+def _detail_facts(out: str) -> str:
+    n = extract(r"check_verified_facts:\s*(\d+)件", out, "?")
+    k = extract(r"・(\d+)事実を照合", out, "?")
+    return f"({n}件/{k}事実)"
+
+
+def _detail_cites(out: str) -> str:
+    n = extract(r"check_kakomon_citations:\s*(\d+)件", out, "?")
+    q = extract(r"・(\d+)引用を照合", out, "?")
+    return f"({n}件/{q}引用)"
+
+
+def _detail_claims(out: str) -> str:
+    n = extract(r"check_verification_claims:\s*(\d+)件", out, "?")
+    debt = extract(r"allowlist (\d+)件（債務）", out, "0")
+    return f"({n}件/債務 {debt}件)"
+
+
 def _detail_law_facts(out: str) -> str:
     n = extract(r"check_law_facts:\s*(\d+)件", out, "?")
     return f"({n}件)"
 
+
+# CI が回す検出器の生存証明。verify_suite が self-test を回していなかったため、
+# 「ゲートは 0件で緑・CI の self-test だけ赤」という乖離が起きた（実測 2026-08-29:
+# verified-facts に事実を1件足して self-test の陽性サンプルを付け忘れ、
+# ローカル gates 11/11 PASS のまま CI の wiki-check が落ちた）。
+# ローカルで CI と同じ検査を通すため、ゲート本体より先に走らせる。
+SELF_TESTS = [
+    ("wiki_check", [sys.executable, "wiki_check.py", "--self-test"]),
+    ("law_verbatim", [sys.executable, "scripts/check_law_verbatim.py", "--self-test"]),
+    ("verified_facts", [sys.executable, "scripts/check_verified_facts.py", "--self-test"]),
+    ("kakomon_cites", [sys.executable, "scripts/check_kakomon_citations.py", "--self-test"]),
+    ("verif_claims", [sys.executable, "scripts/check_verification_claims.py", "--self-test"]),
+    ("public_leak", [sys.executable, "scripts/check_public_leak.py", "--self-test"]),
+    ("theme_article_no", [sys.executable, "scripts/check_theme_article_numbers.py", "--self-test"]),
+    ("kaishaku_titles", [sys.executable, "scripts/audit_kaishaku_titles.py", "--self-test"]),
+    ("jigyoho_titles", [sys.executable, "scripts/audit_jigyoho_titles.py", "--self-test"]),
+    ("stale_evidence", [sys.executable, "scripts/tests/check_stale_evidence/test_check_stale_evidence.py"]),
+]
 
 GATES = [
     ("dual_sync", [sys.executable, "scripts/check_kakomon_dual_sync.py"], None),
@@ -114,6 +156,40 @@ GATES = [
         "law_citations",
         [sys.executable, "scripts/check_law_citations.py", "docs"],
         None,
+    ),
+    # 条文原文 blockquote と原典（e-Gov XML / 解釈PDF抽出）の逐語 diff。
+    # 2026-08-28 の全数監査で、既存ゲート 7/7 PASS のまま条文原文の逐語ズレが
+    # 29 箇所残っていたのが制定事案（本ゲートを監査前コミットに当てて実測）。
+    (
+        "law_verbatim",
+        [sys.executable, "scripts/check_law_verbatim.py"],
+        _detail_verbatim,
+    ),
+    # 解説・要約・暗記表に書かれた数値と判定軸を _data/verified-facts.yml に固定する。
+    # 条文原文が正しくても、その下の表が別の値を書いていれば学習者はそちらを覚える。
+    # 監査前コミットに当てると 29件（B種の 50/Ig・支持物の安全率1.5・第131条の罰則・
+    # 径間60/120m・低圧耐圧1分間・「発生から24時間」・60点満点 など）。
+    (
+        "verified_facts",
+        [sys.executable, "scripts/check_verified_facts.py"],
+        _detail_facts,
+    ),
+    # docs/kakomon/ の外が書く個々の過去問引用を SoT と突合する。
+    # 既存の kakomon 系ゲートは docs/kakomon/ しか見ておらず、条文ページ・テーマページの
+    # 「過去問実績」は誰も検査していなかった（監査前コミットに当てると 27件）。
+    (
+        "kakomon_cites",
+        [sys.executable, "scripts/check_kakomon_citations.py"],
+        _detail_cites,
+    ),
+    # 「照合済」と書いてあるページに、機械が逐語照合できる条文原文があるか。
+    # 宣言はコストゼロで書ける。kijun/11・23・32 はいずれも監修ログに
+    # 「解釈第17/38/59条と照合済・公式値と一致」と書いてあったが、
+    # その数値は条文に存在しなかった（2026-08-28 監査）。
+    (
+        "verif_claims",
+        [sys.executable, "scripts/check_verification_claims.py"],
+        _detail_claims,
     ),
 ]
 
@@ -148,6 +224,21 @@ def main() -> None:
         help="wiki_quality_check.py <PATH> --v3 を実行（情報のみ・複数指定可）",
     )
     args = ap.parse_args()
+
+    # 検出器の生存証明を先に回す（vacuous pass 防止・CI と同じ検査をローカルでも通す）
+    st_failed: list[str] = []
+    for label, cmd in SELF_TESTS:
+        rc, out = run_step(cmd)
+        if rc != 0:
+            st_failed.append(label)
+            print(f"[self-test] {label:<17} FAIL (exit {rc})\n{tail(out)}")
+    if st_failed:
+        print(f"\n==== RESULT: FAIL (self-test {len(st_failed)}件: {', '.join(st_failed)}) ====")
+        print("検出器が壊れている状態でゲートを回しても「0件で緑」は意味を持たない。")
+        # 本ファイルは main() の戻り値を捨てる（末尾が `main()`）。既存の失敗パスと
+        # 同じく sys.exit で抜ける。return 1 だと FAIL 表示のまま exit 0 になる。
+        sys.exit(1)
+    print(f"[self-test] {len(SELF_TESTS)}件 ALL PASS")
 
     total = len(GATES) + 2  # ゲート + audit_freq + freq_meta_drift
     failures: list[tuple[str, str]] = []  # (ラベル, 末尾出力)
