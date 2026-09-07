@@ -118,6 +118,13 @@ def _detail_omission(out: str) -> str:
     return f"({n}件/主張{claim}p・漏れ{omit}p)"
 
 
+def _detail_hyou_pointer(out: str) -> str:
+    n = extract(r"check_hyou_pointer:\s*(\d+)件", out, "?")
+    mk = extract(r"マーカー (\d+)件", out, "?")
+    pg = extract(r"／(\d+)ページを照合", out, "?")
+    return f"({n}件/マーカー{mk}件・{pg}p)"
+
+
 def _detail_law_facts(out: str) -> str:
     n = extract(r"check_law_facts:\s*(\d+)件", out, "?")
     return f"({n}件)"
@@ -135,6 +142,7 @@ SELF_TESTS = [
     ("kakomon_cites", [sys.executable, "scripts/check_kakomon_citations.py", "--self-test"]),
     ("verif_claims", [sys.executable, "scripts/check_verification_claims.py", "--self-test"]),
     ("genbun_omission", [sys.executable, "scripts/check_genbun_omission.py", "--self-test"]),
+    ("hyou_pointer", [sys.executable, "scripts/check_hyou_pointer.py", "--self-test"]),
     ("public_leak", [sys.executable, "scripts/check_public_leak.py", "--self-test"]),
     ("theme_article_no", [sys.executable, "scripts/check_theme_article_numbers.py", "--self-test"]),
     ("kaishaku_titles", [sys.executable, "scripts/audit_kaishaku_titles.py", "--self-test"]),
@@ -207,6 +215,14 @@ GATES = [
         "genbun_omission",
         [sys.executable, "scripts/check_genbun_omission.py"],
         _detail_omission,
+    ),
+    # 条文原文の「※ N-M表 は本ページの解説表を参照」が、実在しない解説表を指していた
+    # もの。読者は原文で「表を見よ」と言われたまま値に到達できない（2026-09-07 監査。
+    # 是正前コミット 460356e に当てると 15件／マーカー41件、HEAD 0件）。
+    (
+        "hyou_pointer",
+        [sys.executable, "scripts/check_hyou_pointer.py"],
+        _detail_hyou_pointer,
     ),
 ]
 

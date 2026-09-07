@@ -17,6 +17,7 @@ on:
       - 'scripts/check_kakomon_citations.py'
       - 'scripts/check_verification_claims.py'
       - 'scripts/check_genbun_omission.py'
+      - 'scripts/check_hyou_pointer.py'
       - 'scripts/check_theme_article_numbers.py'
       - 'scripts/audit_kaishaku_titles.py'
       - 'scripts/audit_titles.py'
@@ -44,6 +45,7 @@ on:
       - 'scripts/check_kakomon_citations.py'
       - 'scripts/check_verification_claims.py'
       - 'scripts/check_genbun_omission.py'
+      - 'scripts/check_hyou_pointer.py'
       - 'scripts/check_theme_article_numbers.py'
       - 'scripts/audit_kaishaku_titles.py'
       - 'scripts/audit_titles.py'
@@ -121,6 +123,16 @@ jobs:
         run: python scripts/check_genbun_omission.py --self-test
       - name: 条文原文 引用漏れ・号数主張ゲート（原典の項・号構造との突合）
         run: python scripts/check_genbun_omission.py
+      # 条文原文の「※ N-M表 は本ページの解説表を参照」が、実在しない解説表を指していた。
+      # 原典の表は罫線つきで markdown に落とせないためマーカーで本文へ送る運用だが、
+      # 送り先が無いページが 15件あり、読者は「表を見よ」と言われたまま値に到達できない
+      # （kaishaku 10/16/59/65/231）。是正前コミット 460356e に当てると 15件 fire
+      # （ゲート採否の合格条件）。解消は「転記」「マーカー行に内容を書く」「解説表は無いと
+      # 明示する」の3通りいずれも可。
+      - name: 解説表ポインタ self-test（発火・書式違いの陰性対照・部分一致の陰性対照）
+        run: python scripts/check_hyou_pointer.py --self-test
+      - name: 解説表ポインタゲート（原文マーカーの送り先が実在するか）
+        run: python scripts/check_hyou_pointer.py
       # themes/strategy 等（記事以外）が書く「省令第N条（見出し）」を articles/ の正本と突合。
       # 事故: hoan-gensoku.md が「保安原則=省令第1条〜第4条」と教えていた（正しくは第4条〜第18条・PR #154）。
       # 記事側は audit_titles.py が原典照合済みだが、記事**以外**のページは誰も検査していなかった。
