@@ -16,6 +16,7 @@ on:
       - 'scripts/check_verified_facts.py'
       - 'scripts/check_kakomon_citations.py'
       - 'scripts/check_verification_claims.py'
+      - 'scripts/check_genbun_omission.py'
       - 'scripts/check_theme_article_numbers.py'
       - 'scripts/audit_kaishaku_titles.py'
       - 'scripts/audit_titles.py'
@@ -42,6 +43,7 @@ on:
       - 'scripts/check_verified_facts.py'
       - 'scripts/check_kakomon_citations.py'
       - 'scripts/check_verification_claims.py'
+      - 'scripts/check_genbun_omission.py'
       - 'scripts/check_theme_article_numbers.py'
       - 'scripts/audit_kaishaku_titles.py'
       - 'scripts/audit_titles.py'
@@ -110,6 +112,15 @@ jobs:
         run: python scripts/check_verification_claims.py --self-test
       - name: 照合宣言の裏付けゲート（宣言 × 条文原文ブロックの突合）
         run: python scripts/check_verification_claims.py
+      # 条文原文の**引用漏れ**。逐語ゲートは「引用した文が原典と一致するか」しか見ず、
+      # 引用しなかった項・号は誰も見ていなかった（PR #184: 117 第五号／150 第2項／
+      # 227 第2項・第四号／229 第四号が逐語 0件のまま欠落。149 は本文が「3つの号」と
+      # 書いていたが第1項は四号構成）。原典の構造（項・号の集合）と突合する。
+      # 是正前コミット ada8467 に当てると 6件 fire（ゲート採否の合格条件）。
+      - name: 条文原文 引用漏れゲート self-test（構造抽出＋OMIT/CLAIM の発火と陰性対照）
+        run: python scripts/check_genbun_omission.py --self-test
+      - name: 条文原文 引用漏れ・号数主張ゲート（原典の項・号構造との突合）
+        run: python scripts/check_genbun_omission.py
       # themes/strategy 等（記事以外）が書く「省令第N条（見出し）」を articles/ の正本と突合。
       # 事故: hoan-gensoku.md が「保安原則=省令第1条〜第4条」と教えていた（正しくは第4条〜第18条・PR #154）。
       # 記事側は audit_titles.py が原典照合済みだが、記事**以外**のページは誰も検査していなかった。

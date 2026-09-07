@@ -111,6 +111,12 @@ def _detail_claims(out: str) -> str:
     return f"({n}件/債務 {debt}件)"
 
 
+def _detail_omission(out: str) -> str:
+    n = extract(r"check_genbun_omission:\s*(\d+)件", out, "?")
+    pages = extract(r"（(\d+)ページを照合", out, "?")
+    return f"({n}件/{pages}ページ)"
+
+
 def _detail_law_facts(out: str) -> str:
     n = extract(r"check_law_facts:\s*(\d+)件", out, "?")
     return f"({n}件)"
@@ -127,6 +133,7 @@ SELF_TESTS = [
     ("verified_facts", [sys.executable, "scripts/check_verified_facts.py", "--self-test"]),
     ("kakomon_cites", [sys.executable, "scripts/check_kakomon_citations.py", "--self-test"]),
     ("verif_claims", [sys.executable, "scripts/check_verification_claims.py", "--self-test"]),
+    ("genbun_omission", [sys.executable, "scripts/check_genbun_omission.py", "--self-test"]),
     ("public_leak", [sys.executable, "scripts/check_public_leak.py", "--self-test"]),
     ("theme_article_no", [sys.executable, "scripts/check_theme_article_numbers.py", "--self-test"]),
     ("kaishaku_titles", [sys.executable, "scripts/audit_kaishaku_titles.py", "--self-test"]),
@@ -190,6 +197,15 @@ GATES = [
         "verif_claims",
         [sys.executable, "scripts/check_verification_claims.py"],
         _detail_claims,
+    ),
+    # 条文原文の**引用漏れ**（原典にある項・号をページが持たない）と、本文の号数主張
+    # （「3つの号」）が第1項の号数と食い違うもの。逐語ゲートは引用した文しか見ないので、
+    # 引用しなかった項・号は素通りしていた（PR #184 13〜15章: 117/150/227/229/149。
+    # 是正前コミット ada8467 に当てると 6件、HEAD 0件・allowlist 1件）。
+    (
+        "genbun_omission",
+        [sys.executable, "scripts/check_genbun_omission.py"],
+        _detail_omission,
     ),
 ]
 
