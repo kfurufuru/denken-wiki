@@ -113,8 +113,9 @@ def _detail_claims(out: str) -> str:
 
 def _detail_omission(out: str) -> str:
     n = extract(r"check_genbun_omission:\s*(\d+)件", out, "?")
-    pages = extract(r"（(\d+)ページを照合", out, "?")
-    return f"({n}件/{pages}ページ)"
+    claim = extract(r"件数主張 (\d+)ページ", out, "?")
+    omit = extract(r"引用漏れ (\d+)ページ", out, "?")
+    return f"({n}件/主張{claim}p・漏れ{omit}p)"
 
 
 def _detail_law_facts(out: str) -> str:

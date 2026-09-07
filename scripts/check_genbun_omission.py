@@ -18,16 +18,22 @@
 2つの検査を持つ。
 
   OMIT   原典にある 項（第2項以降）・号 のうち、ページの条文原文が持たないもの
-  CLAIM  本文の「Nつの号」「N号構成」等の件数主張が、第1項の号数と一致しないもの
+  CLAIM  本文の件数主張が原典と一致しないもの。**号**（「Nつの号」「N号構成」）は第1項の
+         号数と、**項**（「全N項」「N項構成」）は条全体の項数と突合する
 
 射程の限界（広げない。誤爆するゲートは入れない）:
   - OMIT の項判定はページ全文の「第N項」の出現で満たす（原文引用でなく本文の言及でも可）。
     「項があることを知っているページ」を通し、「項の存在ごと落としたページ」だけを止める。
   - OMIT の号は 項をまたいだ集合で比較する（第2項一号を第1項一号で満たしてしまう）。
     項の脱落は上の項判定が別に拾う。
-  - CLAIM は**第1項の号数**とだけ比べる。「4つの号」が条全体を指すのか第1項を指すのかは
+  - CLAIM(号) は**第1項の号数**とだけ比べる。「4つの号」が条全体を指すのか第1項を指すのかは
     文からは決まらない（150.md 型）ので、第2項以降に言及する行と「にまとめ」は検査しない。
     対象は articles/ のみ（themes 等は法令の帰属が行単位で決まらない）。
+  - CLAIM は**監修ログ節より前の本文だけ**を見る。ログは「全6項→全5項に是正した」という
+    **過去の記録**で、旧値をそのまま引用するのが正しい書き方だから（実測: master の 5件は
+    すべてログ・旧版の記録）。同じ理由で本文中でも訂正・旧版を語る行は検査しない。
+  - CLAIM(項) の制定事案は `jigyoho/43.md:282`「## 条文の構造（全6項）」。電気事業法第43条は
+    **5項**で、存在しない第6項を前提に本文が組まれていた（2026-08-28 に是正済み）。
   - 原典の解釈PDF抽出テキストは約50字で折り返されるため、項・号の**先頭行**だけを
     番号で認識する。項は 2,3,4… と連続するものだけを採る（表の数値行を項と誤認しない）。
 
@@ -46,7 +52,7 @@ from dataclasses import dataclass
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from check_law_verbatim import SOURCES, genbun_quotes, load_kaishaku  # noqa: E402
+from check_law_verbatim import SOURCES, genbun_quotes, load_kaishaku  # noqa: E402  (genbun_quotes は self-test でも使う)
 
 ROOT = Path(__file__).resolve().parent.parent
 
@@ -81,6 +87,13 @@ KOU_MENTION = re.compile(r"第(\d+)項")
 # 本文の件数主張。「3つの号」「4号構成」等。漢数字の主張は取らない（「一号」等と衝突する）。
 # 数字と語の間に空白を許さない（「2026-08-31 号構成の…」の日付末尾を主張と誤認した実測）。
 CLAIM = re.compile(r"(?<![-/.\d])(\d+)(?:つの号|号構成|号で構成|号立て|つの施設方法)")
+# 項数の主張。「全N項」「N項構成」等。「項目」は別語なので必ず除外する
+# （実測: 除外しないと jigyoho/42.md の「全9項目」＝施行規則第50条の記載事項を17件誤検出した）。
+KOU_CLAIM = re.compile(r"(?<![-/.\d])(?:全\s*(\d+)\s*項(?!目)|(\d+)\s*(?:項構成|つの項|項立て|項で構成)(?!目))")
+# 監修ログ節。ここから後ろは過去の記録なので件数主張として読まない
+LOG_SECTION = re.compile(r"^#{1,6}\s*.*監修ログ", re.M)
+# 本文中でも「訂正した／旧版はこうだった」を語る行は、旧値を引用するのが正しい
+CLAIM_RECORD = re.compile(r"訂正|是正|誤り|旧版|旧 ?v\d|繰り下げ|降格|に改め")
 # 主張のスコープが第1項と決まらない行は検査しない（150.md 型は原理的に取れない）
 CLAIM_SKIP = re.compile(r"にまとめ|第[2-9]項|第[1-9][0-9]項")
 # 行内に真の号数が「全7号」「7号のうち」の形で書かれていれば、部分の言及は主張ではない
@@ -237,10 +250,32 @@ def check_omission(path: Path, num: str, st: Structure) -> list[Finding]:
     return out
 
 
+def claim_body(path: Path) -> list[tuple[int, str]]:
+    """件数主張の検査対象＝監修ログ節より前の本文（行番号つき）."""
+    text = path.read_text(encoding="utf-8")
+    m = LOG_SECTION.search(text)
+    body = text[: m.start()] if m else text
+    return list(enumerate(body.splitlines(), start=1))
+
+
+def check_kou_claims(path: Path, num: str, st: Structure) -> list[Finding]:
+    """「全N項」等の項数主張を、その条の**項数**と突合する."""
+    real = len(st)
+    out: list[Finding] = []
+    for i, raw in claim_body(path):
+        if CLAIM_RECORD.search(raw):
+            continue
+        for m in KOU_CLAIM.finditer(raw):
+            n = int(m.group(1) or m.group(2))
+            if n != real:
+                out.append(Finding("CLAIM", rel(path), i, num, f"項{n}(原典={real}項)"))
+    return out
+
+
 def check_claims(path: Path, num: str, arts: dict[str, Structure]) -> list[Finding]:
     out: list[Finding] = []
-    for i, raw in enumerate(path.read_text(encoding="utf-8").splitlines(), start=1):
-        if CLAIM_SKIP.search(raw):
+    for i, raw in claim_body(path):
+        if CLAIM_SKIP.search(raw) or CLAIM_RECORD.search(raw):
             continue
         claims = [int(m.group(1)) for m in CLAIM.finditer(raw)]
         if not claims:
@@ -257,14 +292,15 @@ def check_claims(path: Path, num: str, arts: dict[str, Structure]) -> list[Findi
             if n in counts.values():
                 continue
             shown = "・".join(f"第{a}条={c}" for a, c in counts.items())
-            out.append(Finding("CLAIM", rel(path), i, num, f"{n}({shown})"))
+            out.append(Finding("CLAIM", rel(path), i, num, f"号{n}({shown})"))
     return out
 
 
-def scan(targets: list[Path]) -> tuple[list[Finding], list[str], int]:
+def scan(targets: list[Path]) -> tuple[list[Finding], list[str], int, int]:
     loaded, errors = load_all()
     findings: list[Finding] = []
     checked = 0
+    omit_checked = 0
     for path in targets:
         group = path.parent.name
         if group not in loaded:
@@ -273,12 +309,17 @@ def scan(targets: list[Path]) -> tuple[list[Finding], list[str], int]:
         num = path.stem
         if num not in arts:
             continue
-        if not genbun_quotes(path):
-            continue
         checked += 1
-        findings.extend(check_omission(path, num, arts[num]))
+        # OMIT は「引用と原典の差」なので条文原文が無いページでは成立しない。
+        # CLAIM は逆に、**原文を引用していないページほど件数を誤りやすい**。
+        # 制定事案 jigyoho/43.md:282「条文の構造（全6項）」は、条文原文節を持たないページの
+        # 見出しに書かれており、原文の有無でゲートを絞ると素通りしていた（監査前で実測）。
+        if genbun_quotes(path):
+            omit_checked += 1
+            findings.extend(check_omission(path, num, arts[num]))
         findings.extend(check_claims(path, num, arts))
-    return findings, errors, checked
+        findings.extend(check_kou_claims(path, num, arts[num]))
+    return findings, errors, checked, omit_checked
 
 
 def collect(paths: list[str]) -> list[Path]:
@@ -370,7 +411,7 @@ def self_test() -> int:
     # 件数主張（149.md 型）
     wrong = full.replace("3つの号で構成", "4つの号で構成")
     f = check_claims(page(wrong), "999", {"999": st})
-    report(len(f) == 1 and f[0].detail.startswith("4("), f"CLAIM 検出: 4つの号 vs 第1項=3 {[x.detail for x in f]}")
+    report(len(f) == 1 and f[0].detail.startswith("号4("), f"CLAIM(号) 検出: 4つの号 vs 第1項=3 {[x.detail for x in f]}")
 
     # 第2項以降に言及する行は検査しない（150.md 型は取れないと明示）
     scoped = full.replace("本条第1項は3つの号で構成される。", "本条は第1項・第2項合わせて5つの号で構成される。")
@@ -398,6 +439,30 @@ def self_test() -> int:
     f = check_claims(page(other), "999", {"999": st, "998": {1: [1, 2, 3, 4, 5]}})
     report(not f, "CLAIM: 行内の他条の号数と一致すれば通す")
 
+    # ---- 項数主張（CLAIM 項）
+    kou_page = (
+        "# 第999条\n\n## 条文の構造（全6項）\n\n本条は6項構成である。\n\n"
+        "## 監修ログ\n\n- **2026-08-28**: 「全6項」→「全5項」に是正した（存在しない第6項）。\n"
+    )
+    st2 = {1: [], 2: [], 3: [], 4: [], 5: []}          # 5項の条
+    f = check_kou_claims(page(kou_page), "999", st2)
+    report(len(f) == 2 and all(x.detail.startswith("項6") for x in f),
+           f"CLAIM(項) 検出: 全6項 vs 原典5項＝本文2箇所のみ（ログ節は不検査） {[x.detail for x in f]}")
+    f = check_kou_claims(page(kou_page.replace("全6項", "全5項").replace("6項構成", "5項構成")), "999", st2)
+    report(not f, f"CLAIM(項) 陰性: 正しい項数 {[x.detail for x in f]}")
+    # 「項目」は別語（jigyoho/42.md の「全9項目」で17件誤検出した実測）
+    f = check_kou_claims(page("# x\n\n記載事項は**全9項目**（施行規則第50条第3項）。\n"), "999", st2)
+    report(not f, f"CLAIM(項) 陰性: 「全9項目」は項数主張ではない {[x.detail for x in f]}")
+    # 本文中の訂正記録も旧値を引用するのが正しい
+    f = check_kou_claims(page("# x\n\n旧版は全6項としていたが誤り。\n"), "999", st2)
+    report(not f, f"CLAIM(項) 陰性: 訂正・旧版を語る行 {[x.detail for x in f]}")
+
+    # CLAIM は条文原文が無いページでも走る（制定事案 jigyoho/43.md:282 は原文節を持たなかった）
+    no_genbun = page("# 第999条\n\n## 条文の構造（全6項）\n\n解説のみで条文原文節は無い。\n")
+    report(not genbun_quotes(no_genbun), "前提: 合成ページに条文原文節が無い")
+    report(len(check_kou_claims(no_genbun, "999", st2)) == 1,
+           "CLAIM は条文原文を持たないページでも検査する")
+
     # 実データ側の生存証明: 原典キャッシュから既知の構造が取れること
     loaded, errors = load_all()
     report(not errors, f"原典キャッシュの読込 {errors}")
@@ -422,7 +487,7 @@ def main() -> int:
     if args.self_test:
         return self_test()
 
-    findings, errors, checked = scan(collect(args.paths))
+    findings, errors, checked, omit_checked = scan(collect(args.paths))
     if errors:
         for e in errors:
             print(f"ERROR: {e}", file=sys.stderr)
@@ -441,12 +506,15 @@ def main() -> int:
         if f.kind == "OMIT":
             print(f"[OMIT]  {where}  第{f.article}条  原典にあるがページの条文原文に無い: {f.detail}")
         else:
-            n, _, rest = f.detail.partition("(")
-            print(f"[CLAIM] {where}  第{f.article}条  本文の号数主張 {n} が第1項の号数と不一致 ({rest[:-1]})")
+            kind = "項数" if f.detail.startswith("項") else "号数"
+            axis = "その条の項数" if kind == "項数" else "第1項の号数"
+            n, _, rest = f.detail[1:].partition("(")
+            print(f"[CLAIM] {where}  第{f.article}条  本文の{kind}主張 {n} が{axis}と不一致 ({rest[:-1]})")
 
     print(
         f"\ncheck_genbun_omission: {len(shown)}件"
-        f"（{checked}ページを照合・allowlist {allowed}件）"
+        f"（件数主張 {checked}ページ／引用漏れ {omit_checked}ページを照合"
+        f"・allowlist {allowed}件）"
     )
     return 1 if shown else 0
 
