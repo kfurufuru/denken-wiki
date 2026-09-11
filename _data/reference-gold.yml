@@ -14,7 +14,14 @@
 #   3. CLAUDE.md・denken-page-creation.md のパス記述も追従（任意・補助情報）
 #   4. 旧 Issue は次回監査（首位が記録と一致）で自動クローズされる
 gold:
-  path: docs/articles/kaishaku/226.md
-  score: 99
+  path: docs/articles/jigyoho/47.md
+  score: 100
   verdict: S
-updated: "2026-06-09"
+updated: "2026-09-11"
+
+# 記事タイプ別の参照先（補助情報）。総合首位は上の gold、タイプ別はこちらを見る。
+by_type:
+  手続規定: docs/articles/jigyoho/47.md   # 100点。認可/届出の対比・委任先省令の逐語引用まで含む
+  施設規定: docs/articles/kaishaku/226.md # 99点。2026-06-09〜2026-09-10 の総合首位
+  数値規定: docs/articles/kijun/58.md
+  定義条文: docs/articles/other/jiko-1.md

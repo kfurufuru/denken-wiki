@@ -22,6 +22,14 @@
 原典:
   docs/articles/kijun/N.md     → scripts/cache/egov-409M50000400052.xml（電技省令）
   docs/articles/jigyoho/N.md   → scripts/cache/egov-339AC0000000170.xml（電気事業法）
+                               + scripts/cache/egov-407M50000400077.xml.gz（電気事業法施行規則・補助原典）
+      ※ 施行規則は 2026-09-11 に追加。工事計画の認可/届出の閾値は法本文ではなく
+        施行規則 別表第二が本体であり、法本文しか照合していなかったため、
+        jigyoho/47 の「変電所・送電線路 17万V以上＝認可」「汽力火力 2,000kW以上＝認可」
+        「需要設備の最大電力1,000kW要件」という3件の誤りが 13ゲート PASS のまま
+        公開され続けていた（2026-09-10 発見・是正）。
+        補助原典に一致した引用は、その記事の条でなくても OTHER としない。
+        キャッシュは本則 Article と AppdxTable のみを抜き出した最小XML（gzip）。
   docs/articles/kaishaku/N.md  → scripts/cache/kaishaku-r07-11.txt.gz（電技解釈PDF抽出）
       ※ 電技解釈は e-Gov 法令API に存在しないため PDF が唯一の原典。
         キャッシュは scripts/extract_kaishaku_text.py が生成し、
@@ -118,7 +126,11 @@ def load_egov(path: Path) -> tuple[dict[str, str], str]:
     附則（SupplProvision）の Article は本則と Num が重複するため除外する。
     除外しないと本則の条文が附則で上書きされ、正しい引用が MISS 判定になる。
     """
-    root = ET.parse(path).getroot()
+    if path.suffix == ".gz":
+        with gzip.open(path, "rb") as fh:
+            root = ET.fromstring(fh.read())
+    else:
+        root = ET.parse(path).getroot()
     supp_ids = set()
     for sp in root.iter("SupplProvision"):
         for art in sp.iter("Article"):
@@ -167,6 +179,15 @@ SOURCES = {
     "kijun": ("電技省令", CACHE / "egov-409M50000400052.xml", "egov"),
     "jigyoho": ("電気事業法", CACHE / "egov-339AC0000000170.xml", "egov"),
     "kaishaku": ("電技解釈", CACHE / "kaishaku-r07-11.txt.gz", "kaishaku"),
+}
+
+# 補助原典。委任先の省令など、条文の閾値の本体が別法令にある場合に足す。
+# ここに一致した引用は「そのページの条ではない」ことを理由に OTHER としない
+# （委任先の条文を引くのは誤帰属ではなく正しい記述であるため）。
+EXTRA_SOURCES = {
+    "jigyoho": [
+        ("電気事業法施行規則", CACHE / "egov-407M50000400077.xml.gz", "egov"),
+    ],
 }
 
 
@@ -307,6 +328,26 @@ def scan(targets: list[Path]) -> tuple[list[Finding], list[str], int]:
             continue
         loaded[group] = ({k: norm(v) for k, v in arts.items()}, norm(full))
 
+    # 補助原典（委任先の省令等）。全文のみ持てばよく、条単位の帰属は問わない。
+    extras: dict[str, str] = {}
+    for group, srcs in EXTRA_SOURCES.items():
+        parts: list[str] = []
+        for label, path, kind in srcs:
+            if not path.exists():
+                errors.append(f"補助原典キャッシュがありません: {path.relative_to(ROOT)}（{label}）")
+                continue
+            if kind != "egov":
+                errors.append(f"補助原典は egov のみ対応です: {path.name}（{label}）")
+                continue
+            _, full = load_egov(path)
+            nf = norm(full)
+            if not nf:
+                errors.append(f"補助原典から本文を抽出できませんでした: {path.name}（{label}）")
+                continue
+            parts.append(nf)
+        if parts:
+            extras[group] = "".join(parts)
+
     findings: list[Finding] = []
     checked = 0
     for path in targets:
@@ -325,6 +366,10 @@ def scan(targets: list[Path]) -> tuple[list[Finding], list[str], int]:
                 continue
             checked += 1
             if own and nq in own:
+                continue
+            extra_full = extras.get(group, "")
+            if extra_full and nq in extra_full:
+                # 委任先の省令等の逐語引用。原典に実在するので誤りではない。
                 continue
             if nq in full:
                 findings.append(Finding("OTHER", rel, line, quote, len(nq), len(nq), ""))
